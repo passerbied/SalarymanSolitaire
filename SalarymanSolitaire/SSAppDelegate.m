@@ -2,16 +2,46 @@
 //  SSAppDelegate.m
 //  SalarymanSolitaire
 //
-//  Created by Many on 14-3-8.
+//  Created by WU on 14-3-8.
 //  Copyright (c) 2014年 IfelseGo.Inc. All rights reserved.
 //
 
 #import "SSAppDelegate.h"
+#import "StartViewController.h"
+#import <iAd/iAd.h>
+
+@interface SSAppDelegate ()
+{
+    // 共有広告ビュー
+    ADBannerView                        *_sharedADBannerView;
+}
+
+
+@end
 
 @implementation SSAppDelegate
 
+// 広告表示／隠しの切り替え
+- (void)setADBannerViewHidden:(BOOL)hidden;
+{
+    if (!_sharedADBannerView && !hidden) {
+        _sharedADBannerView = [[ADBannerView alloc] initWithFrame:CGRectZero];
+        [self.window addSubview:_sharedADBannerView];
+    }
+
+    _sharedADBannerView.hidden = hidden;
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    // Override point for customization after application launch.
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    StartViewController *controller = [[StartViewController alloc] initWithNibName:nil bundle:nil];
+    UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController:controller];
+    self.window.rootViewController = navigation;
+    [self.window makeKeyAndVisible];
+    
     // Override point for customization after application launch.
     return YES;
 }
@@ -30,7 +60,7 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    // Called as part of the transition from the background to the inactive state; here you can undo WU of the changes made on entering the background.
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
