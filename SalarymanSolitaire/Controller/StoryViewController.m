@@ -21,12 +21,15 @@
 // ステージタイトル
 @property (nonatomic, weak) IBOutlet UILabel *labelStageTitle;
 
-// スクロールビュー
-@property (nonatomic, strong) IBOutlet UIView *storyView;
-@property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
+// ツールバー
+@property (nonatomic, weak) IBOutlet UIView *topBar;
 
-// ストーリービュー
-@property (nonatomic, weak) IBOutlet UIImageView *storyImageView;
+// スクロールビュー
+//@property (nonatomic, strong) UIView *storyView;
+//@property (nonatomic, strong) UIScrollView *scrollView;
+//
+//// ストーリービュー
+//@property (nonatomic, strong) UIImageView *storyImageView;
 
 // ストーリー表示
 - (IBAction)presentStoryAction:(id)sender;
@@ -56,6 +59,15 @@
     self.labelStageTitle.text = self.stage.title;
 }
 
+- (void)updateView
+{
+    [super updateView];
+    
+    // バナー広告非表示
+    ADBannerView *bannerAD = [[SolitaireManager sharedManager] sharedBannerAD];
+    [self.view sendSubviewToBack:bannerAD];
+}
+
 // プレイ画面表示
 - (void)presentPlayView
 {
@@ -67,19 +79,31 @@
 // ストーリー表示
 - (IBAction)presentStoryAction:(id)sender;
 {
+    // ツールバー表示
+    self.topBar.hidden = NO;
+    
+    // ストーリー表示
+    UIScrollView *scrollView = [[UIScrollView alloc] init];
+    UIImageView *imageView = [[UIImageView alloc] init];
     NSString *imageName = [NSString stringWithFormat:@"stage_%03d_story.png", self.stage.stageID];
     NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:imageName];
     UIImage *storyImage = [UIImage imageWithContentsOfFile:path];
-    [self.storyImageView setImage:storyImage];
-    CGRect rect = self.storyImageView.frame;
-    self.storyImageView.frame = CGRectMake(0.0f, rect.origin.y, storyImage.size.width, storyImage.size.height);
-    self.scrollView.contentSize = storyImage.size;
-    NSLog(@"size [%@]",NSStringFromCGSize(self.storyImageView.frame.size));
+    [imageView setImage:storyImage];
+    [scrollView addSubview:imageView];
+    [self.view addSubview:scrollView];
     
-    [self.view addSubview:self.storyView];
-    self.scrollView.frame = CGRectMake(0, 0, 320, 480);
-    self.scrollView.contentSize = storyImage.size;
-    [self.scrollView setContentSize:CGSizeMake(1280, 480)];
+    // 画面約束設定
+    scrollView.translatesAutoresizingMaskIntoConstraints  = NO;
+    imageView.translatesAutoresizingMaskIntoConstraints = NO;
+    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(scrollView, imageView);
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[scrollView]|" options:0 metrics: 0 views:viewsDictionary]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-50-[scrollView]-50-|" options:0 metrics: 0 views:viewsDictionary]];
+    [scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[imageView]|" options:0 metrics: 0 views:viewsDictionary]];
+    [scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[imageView]|" options:0 metrics: 0 views:viewsDictionary]];
+    
+    // バナー広告表示
+    ADBannerView *bannerAD = [[SolitaireManager sharedManager] sharedBannerAD];
+    [self.view bringSubviewToFront:bannerAD];
 }
 
 // 戻る処理
