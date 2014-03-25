@@ -8,14 +8,24 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SSViewController : UIViewController<ADBannerViewDelegate>
+@interface SSViewController : UIViewController
 {
     
 }
 
-// 画面初期設定
-- (void)setup;
+// 初期化方法
++ (instancetype)controller;
 
-// 広告表示可否
-- (BOOL)shouldShowADBanner;
+// 画面初期設定
+- (void)initView;
+
+// 画面表示更新
+- (void)updateView;
+
+// バナー広告表示可否
+- (BOOL)shouldShowBannerAD;
+
+// インタースティシャル広告表示
+- (void)presentInterstitialAD;
+
 @end

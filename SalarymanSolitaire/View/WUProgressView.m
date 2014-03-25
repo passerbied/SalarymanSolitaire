@@ -17,26 +17,26 @@ static const CGFloat WUProgressParallaxDepthPoints = 10;
 
 @interface WUProgressView ()
 
-@property (nonatomic, strong, readonly) NSTimer *fadeOutTimer;
+@property (strong, nonatomic, readonly) NSTimer *fadeOutTimer;
 @property (nonatomic, readonly, getter = isClear) BOOL clear;
 
-@property (nonatomic, strong) UIControl *overlayView;
-@property (nonatomic, strong) UIView *hudView;
-@property (nonatomic, strong) UILabel *stringLabel;
-@property (nonatomic, strong) UIImageView *imageView;
-@property (nonatomic, strong) CALayer *indefiniteAnimatedLayer;
-@property (nonatomic, strong) UIActivityIndicatorView *indicator;
+@property (strong, nonatomic) UIControl *overlayView;
+@property (strong, nonatomic) UIView *hudView;
+@property (strong, nonatomic) UILabel *stringLabel;
+@property (strong, nonatomic) UIImageView *imageView;
+@property (strong, nonatomic) CALayer *indefiniteAnimatedLayer;
+@property (strong, nonatomic) UIActivityIndicatorView *indicator;
 
 @property (nonatomic, readwrite) CGFloat progress;
-@property (nonatomic, strong) CAShapeLayer *backgroundRingLayer;
-@property (nonatomic, strong) CAShapeLayer *ringLayer;
+@property (strong, nonatomic) CAShapeLayer *backgroundRingLayer;
+@property (strong, nonatomic) CAShapeLayer *ringLayer;
 
 @property (nonatomic, readonly) CGFloat visibleKeyboardHeight;
 @property (nonatomic, assign) UIOffset offsetFromCenter;
 @property (nonatomic, assign) BOOL dimBackground;
 @property (nonatomic, assign) BOOL allowUserInteraction;
-@property (nonatomic, strong) NSDate *showStarted;
-@property (nonatomic, strong) NSTimer *minShowTimer;
+@property (strong, nonatomic) NSDate *showStarted;
+@property (strong, nonatomic) NSTimer *minShowTimer;
 
 - (void)dismiss;
 

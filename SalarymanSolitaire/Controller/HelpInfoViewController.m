@@ -8,11 +8,12 @@
 
 #import "HelpInfoViewController.h"
 #import "WUProgressView.h"
-
-// ヘルプ情報を示すWebサイトURL定義
-#define __HELP_INFO_URL                 @"http://www.yahoo.co.jp"
+#import "GetSystemInfoService.h"
 
 @interface HelpInfoViewController ()
+{
+
+}
 
 // ヘルプ情報表示
 - (void)loadHelpInfo;
@@ -20,9 +21,9 @@
 
 @implementation HelpInfoViewController
 
-- (void)setup
+- (void)initView
 {
-    [super setup];
+    [super initView];
     
     // タイトル設定
     self.title = @"使い方";
@@ -31,23 +32,34 @@
     [self loadHelpInfo];
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)updateView
 {
-    [super viewWillAppear:animated];
+    [super updateView];
     
     // ナビゲートバー非表示
     self.navigationController.navigationBarHidden = NO;
 }
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+}
+
 // ヘルプ情報表示
 - (void)loadHelpInfo;
 {
-    NSURL *url = [NSURL URLWithString:__HELP_INFO_URL];
+    NSURL *url = [[SolitaireManager sharedManager] helpURL];
     UIWebView *webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:webView];
     
     webView.delegate = self;
     [webView loadRequest:[NSURLRequest requestWithURL:url]];
+}
+
+// 広告表示可否
+- (BOOL)shouldShowBannerAD;
+{
+    return NO;
 }
 
 #pragma mark - UIWebViewDelegate
@@ -62,12 +74,14 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView;
 {
     [WUProgressView dismiss];
+    webView.delegate = nil;
 }
 
 // ヘルプ情報ロード失敗
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error;
 {
-    
+    [WUProgressView dismiss];
+    webView.delegate = nil;
 }
 
 @end

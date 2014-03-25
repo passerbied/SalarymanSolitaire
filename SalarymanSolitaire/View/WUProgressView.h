@@ -20,12 +20,12 @@
 /**
  * @brief 设置活动指示器标题的字体.
  */
-@property (nonatomic, strong) UIFont *statusFont;
+@property (strong, nonatomic) UIFont *statusFont;
 
 /**
  * @brief 设置活动指示器的背景颜色,默认为白色.
  */
-@property (nonatomic, strong) UIColor *backgroundColor;
+@property (strong, nonatomic) UIColor *backgroundColor;
 
 /**
  * @brief 设置活动指示器显示的最短时间,默认为<i> 0秒 </i>.

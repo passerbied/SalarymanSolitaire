@@ -15,9 +15,9 @@
 @implementation StageViewController
 
 
-- (void)setup
+- (void)initView
 {
-    [super setup];
+    [super initView];
 }
 
 @end

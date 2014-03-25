@@ -7,13 +7,11 @@
 //
 
 #import "SSAppDelegate.h"
-#import "StartViewController.h"
+#import "TopViewController.h"
 #import <iAd/iAd.h>
 
 @interface SSAppDelegate ()
 {
-    // 共有広告ビュー
-    ADBannerView                        *_sharedADBannerView;
 }
 
 
@@ -21,23 +19,12 @@
 
 @implementation SSAppDelegate
 
-// 広告表示／隠しの切り替え
-- (void)setADBannerViewHidden:(BOOL)hidden;
-{
-    if (!_sharedADBannerView && !hidden) {
-        _sharedADBannerView = [[ADBannerView alloc] initWithFrame:CGRectZero];
-        [self.window addSubview:_sharedADBannerView];
-    }
-
-    _sharedADBannerView.hidden = hidden;
-}
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    StartViewController *controller = [[StartViewController alloc] initWithNibName:nil bundle:nil];
+    TopViewController *controller = [TopViewController controller];
     UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController:controller];
     self.window.rootViewController = navigation;
     [self.window makeKeyAndVisible];

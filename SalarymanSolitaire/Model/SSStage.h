@@ -8,39 +8,35 @@
 
 #import <Foundation/Foundation.h>
 
+typedef enum
+{
+    SSStageStateLocked,
+    SSStageStatePlaying,
+    SSStageStateCleared
+} SSStageState;
+
 @interface SSStage : NSObject
 
 // ステージID
 @property (nonatomic) NSInteger stageID;
 
-// キャラクターID
-@property (nonatomic) NSInteger character;
+// 敵ID
+@property (nonatomic) NSInteger enemyID;
 
-// ストーリー(画像ファイル)
-@property (nonatomic, strong) UIImage *storyImage;
+// クリア回数
+@property (nonatomic) NSInteger minClearTimes;
+@property (nonatomic) NSInteger clearTimes;
 
 // カード枚数
 @property (nonatomic) NSInteger numberOfCards;
 
 // 山札戻し回数
-//@property (nonatomic) NSInteger numberOfCards;
+@property (nonatomic) NSInteger returnTimes;
 
-// クリア回数
-@property (nonatomic) NSInteger clearTimes;
+// タイトル
+@property (nonatomic, strong) NSString *title;
 
-// クリア標識
-@property (nonatomic, getter = isFinished) BOOL finished;
-
-// キャラクターID
-@property (nonatomic) NSInteger characterID;
-
-// 名前
-@property (nonatomic, strong) NSString *name;
-
-// 所属部署
-@property (nonatomic, strong) NSString *department;
-
-// 画像
-@property (nonatomic, strong) UIImage *photo;
+// 状態
+@property (nonatomic) SSStageState stage;
 
 @end

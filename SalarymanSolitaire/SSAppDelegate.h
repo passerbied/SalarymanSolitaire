@@ -12,7 +12,4 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
-// 広告表示／隠しの切り替え
-- (void)setADBannerViewHidden:(BOOL)hidden;
-
 @end

@@ -7,16 +7,13 @@
 //
 
 #import "TutorialViewController.h"
-#import "StageListViewController.h"
+#import "SelectStageViewController.h"
 
 // チュートリアルファイル定義
 #define __TUTORIAL_FILE_NAME            @"Tutorial"
 
 // コンテンツ定義
 #define __TUTORIAL_CONTENT_KEY          @"Contents"
-
-// ボタンイメージ「次へ」
-#define __IMG_NEXT_STEP_NORMAL          @"btn_next_step_normal"
 
 @interface TutorialViewController ()
 {
@@ -28,9 +25,6 @@
 }
 // ラベル「コンテンツ」
 @property (nonatomic, weak) IBOutlet UILabel *labelContent;
-
-// ボタン「次へ」
-@property (nonatomic, weak) IBOutlet UIButton *btnNext;
 
 // ボタン「次へ」タップ処理
 - (IBAction)nextAction:(id)sender;
@@ -45,30 +39,23 @@
 
 @implementation TutorialViewController
 
-
-- (void)setup
+- (void)initView
 {
-    [super setup];
+    [super initView];
     
-    // ボタン「次へ」
-    UIImage *image;
-    image = [UIImage imageNamed:__IMG_NEXT_STEP_NORMAL];
-    [_btnNext setImage:image forState:UIControlStateNormal];
+
     
     // チュートリアル読み込み処理
     [self loadTutorial];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-
-    // チュートリアル表示
-    if (![_labelContent.text length]) {
-        _currentIdex = 0;
-        [self showTutorialAtIndex:_currentIdex];
-    }
-}
+//- (void)viewWillLayoutSubviews
+//{
+//    [super viewWillLayoutSubviews];
+//    
+//    [_labelContent sizeToFit];
+//    [_labelContent setNeedsLayout];
+//}
 
 // チュートリアル読み込み処理
 - (void)loadTutorial;
@@ -80,6 +67,12 @@
     _contents = [dict objectForKey:__TUTORIAL_CONTENT_KEY];
     if (![_contents count]) {
         return;
+    }
+    
+    // チュートリアル表示
+    if (![_labelContent.text length]) {
+        _currentIdex = 0;
+        [self showTutorialAtIndex:_currentIdex];
     }
 }
 
@@ -93,7 +86,19 @@
     
     // コンテンツ表示
     NSString *content = [_contents objectAtIndex:index];
-    _labelContent.text = content;
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:content];
+    
+    float spacing;
+    if (index == 0) {
+        spacing = 1.0f;
+    } else {
+        spacing = 3.6f;
+    }
+    [attributedString addAttribute:NSKernAttributeName
+                             value:@(spacing)
+                             range:NSMakeRange(0, [content length])];
+    
+    _labelContent.attributedText = attributedString;
     [_labelContent sizeToFit];
     
     // アニメーション
@@ -111,11 +116,6 @@
                          }
                          completion:^(BOOL finished){}];
     }
-    
-    // ボタン画像変更
-    if ([_contents count] == (index + 1)) {
-//        _btnNext.userInteractionEnabled = NO;
-    }
 }
 
 #pragma mark - 画面操作
@@ -127,7 +127,8 @@
         [[SolitaireManager sharedManager] setFirstTimePlay];
         
         // ステージ選択画面に遷移する。
-        StageListViewController *controller = [[StageListViewController alloc] initWithNibName:nil bundle:nil];
+        SelectStageViewController *controller = [SelectStageViewController controller];
+        [controller setFirstRun:YES];
         [self.navigationController pushViewController:controller animated:YES];
         
     } else {

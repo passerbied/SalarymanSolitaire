@@ -17,7 +17,7 @@
     self = [super init];
     if (self) {
         // 画面初期化
-        [self setup];
+        [self initView];
     }
     return self;
 }
@@ -27,11 +27,11 @@
     [super awakeFromNib];
     
     // 画面初期化
-    [self setup];
+    [self initView];
 }
 
 // 画面初期化
-- (void)setup
+- (void)initView
 {
 
 }

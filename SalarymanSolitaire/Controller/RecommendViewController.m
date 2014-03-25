@@ -14,9 +14,9 @@
 
 @implementation RecommendViewController
 
-- (void)setup
+- (void)initView
 {
-    [super setup];
+    [super initView];
 }
 
 

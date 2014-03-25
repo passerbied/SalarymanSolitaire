@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <iAd/iAd.h>
+
+@class SSStage;
+
 @interface SolitaireManager : NSObject
 
 // 初期化
@@ -19,8 +22,21 @@
 // 初回起動設定
 - (void)setFirstTimePlay;
 
-// 共有広告ビュー
-- (ADBannerView *)sharedADBannerView;
+// バナー広告
+- (ADBannerView *)sharedBannerAD;
 
+// インタースティシャル広告
+- (ADInterstitialAd *)sharedInterstitialAD;
 
+// ステージ設定情報取得
+- (NSArray *)stageInfos;
+
+// ステージ情報
+@property (strong, nonatomic, readonly) SSStage *selectedStage;
+
+// ステージ選択
+- (void)selectStageWithID:(NSInteger)stageID;
+
+// 最新のステージID
+@property (nonatomic, readonly) NSInteger lastStageID;
 @end

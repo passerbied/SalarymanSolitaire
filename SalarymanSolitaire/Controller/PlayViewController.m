@@ -34,9 +34,9 @@
 
 @implementation PlayViewController
 
-- (void)setup
+- (void)initView
 {
-    [super setup];
+    [super initView];
 }
 
 #pragma mark - 画面操作

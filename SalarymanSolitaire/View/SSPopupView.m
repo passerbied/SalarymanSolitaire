@@ -11,20 +11,20 @@
 #import <Accelerate/Accelerate.h>
 
 // 背景イメージ定義
-#define __POPUP_BG_IMAGE                @"bg_popup"
+#define __POPUP_BG_IMAGE                @"popup_frame.png"
 
 /* 閉じるボタン定義 */
 
 // ボタンイメージ
-#define __POPUP_CLOSE_IMAGE_NORMAL      @"btn_close_normal"
+#define __POPUP_CLOSE_IMAGE_NORMAL      @"popup_btn_close.png"
 
 // 表示位置
-#define __BUTTON_CLOSE_OFFSET_TOP       20.0f
-#define __BUTTON_CLOSE_OFFSET_RIGHT     10.0f
+#define __BUTTON_CLOSE_OFFSET_TOP       15.0f
+#define __BUTTON_CLOSE_SPACE_RIGHT      50.0f
 
 /* コンテンツビュー */
-#define __POPUP_CONTENT_MARGIN          10.0f
-#define __POPUP_CONTENT_OFFSET_TOP      60.0f
+#define __POPUP_CONTENT_MARGIN          6.5f
+#define __POPUP_CONTENT_OFFSET_TOP      72.0f
 
 @implementation UIView (Screenshot)
 
@@ -42,7 +42,6 @@
 }
 
 @end
-
 
 @implementation UIImage (Blur)
 
@@ -181,10 +180,14 @@
 
 @implementation SSPopupView
 
-- (void)setup
+- (void)viewDidLoad
 {
-    [super setup];
+    [super viewDidLoad];
     
+    [self initView];
+}
+- (void)initView
+{
     _blurLevel = 0.3f;
     _animationDuration = 0.25f;
     _backgroundColor = [UIColor colorWithWhite:0 alpha:0.7];
@@ -197,7 +200,10 @@
     CGFloat y = (rect.size.height - bgImage.size.height)/2.0f;
     _popView = [[UIView alloc] initWithFrame:CGRectMake(x, y, bgImage.size.width, bgImage.size.height)];
     UIImageView *bgImageView = [[UIImageView alloc] initWithImage:bgImage];
+    bgImageView.backgroundColor = [UIColor clearColor];
     [_popView addSubview:bgImageView];
+    _popView.backgroundColor = [UIColor clearColor];
+    self.backgroundColor = [UIColor clearColor];
     
     // ボタン「閉じる」作成
     if (!_btnClose) {
@@ -210,33 +216,33 @@
                       action:@selector(closeAction:)
             forControlEvents:UIControlEventTouchUpInside];
         
-        CGFloat x = self.view.bounds.size.width - image.size.width - __BUTTON_CLOSE_OFFSET_RIGHT;
+        CGFloat x = bgImage.size.width - __BUTTON_CLOSE_SPACE_RIGHT;
         CGFloat y = __BUTTON_CLOSE_OFFSET_TOP;
         CGRect frame = CGRectMake(x, y, image.size.width, image.size.height);
         _btnClose.frame = frame;
-        
+        [_btnClose addTarget:self action:@selector(closeAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.popView addSubview:_btnClose];
     }
     
-    // 表題イメージビュー作成
-    if (!_titleImageView) {
-        _titleImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-        [self.popView addSubview:_titleImageView];
-    }
-    
-    // 表題イメージ設定
-    if (_titleImage && !_titleImageView.image) {
-        _titleImageView.image = _titleImage;
-        
-        CGFloat x, y, width, height;
-        width = _titleImage.size.width;
-        height = _titleImage.size.height;
-        
-        x = (self.view.bounds.size.width - _btnClose.bounds.size.width/2.0f - __BUTTON_CLOSE_OFFSET_RIGHT - width)/2.0f;
-        y = __BUTTON_CLOSE_OFFSET_TOP + _btnClose.bounds.size.height/2.0f;
-        
-        _titleImageView.frame = CGRectMake(x, y, width, height);
-    }
+//    // 表題イメージビュー作成
+//    if (!_titleImageView) {
+//        _titleImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+//        [self.popView addSubview:_titleImageView];
+//    }
+//    
+//    // 表題イメージ設定
+//    if (_titleImage && !_titleImageView.image) {
+//        _titleImageView.image = _titleImage;
+//        
+//        CGFloat x, y, width, height;
+//        width = _titleImage.size.width;
+//        height = _titleImage.size.height;
+//        
+//        x = (self.view.bounds.size.width - _btnClose.bounds.size.width/2.0f - __BUTTON_CLOSE_SPACE_RIGHT - width)/2.0f;
+//        y = __BUTTON_CLOSE_OFFSET_TOP + _btnClose.bounds.size.height/2.0f;
+//        
+//        _titleImageView.frame = CGRectMake(x, y, width, height);
+//    }
     
     self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.popView.backgroundColor = self.backgroundColor;
@@ -281,17 +287,17 @@
 
 - (void)closeAction:(id)sender
 {
-    
+    [self dismiss];
 }
 
 // コンテンツサイズ
-- (CGRect)clientFrame;
+- (CGRect)popupContentRect;
 {
     CGFloat x,y,width,height;
     x = __POPUP_CONTENT_MARGIN;
     y = __POPUP_CONTENT_OFFSET_TOP;
-    width = self.view.bounds.size.width - 2*__POPUP_CONTENT_MARGIN;
-    height = self.view.bounds.size.height - __POPUP_CONTENT_MARGIN - __POPUP_CONTENT_OFFSET_TOP;
+    width = self.popView.bounds.size.width - 2*__POPUP_CONTENT_MARGIN;
+    height = self.popView.bounds.size.height - __POPUP_CONTENT_MARGIN - __POPUP_CONTENT_OFFSET_TOP - 10;
     return CGRectMake(x, y, width, height);
 }
 
@@ -355,34 +361,39 @@
     }];
 }
 
-- (void)dismissAnimated:(BOOL)animated
+- (void)dismiss
 {
-    if (animated) {
-        CABasicAnimation *opacityAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
-        opacityAnimation.fromValue = @1.;
-        opacityAnimation.toValue = @0.;
-        opacityAnimation.duration = self.animationDuration;
-        [self.blurView.layer addAnimation:opacityAnimation forKey:nil];
-        
-        CATransform3D transform = CATransform3DScale(self.popView.layer.transform, 0, 0, 0);
-        
-        CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform"];
-        scaleAnimation.fromValue = [NSValue valueWithCATransform3D:self.popView.layer.transform];
-        scaleAnimation.toValue = [NSValue valueWithCATransform3D:transform];
-        scaleAnimation.duration = self.animationDuration;
-        
-        CAAnimationGroup *animationGroup = [CAAnimationGroup animation];
-        animationGroup.animations = @[opacityAnimation, scaleAnimation];
-        animationGroup.duration = self.animationDuration;
-        animationGroup.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-        [self.popView.layer addAnimation:animationGroup forKey:nil];
-        
-        self.blurView.layer.opacity = 0;
-        self.popView.layer.transform = transform;
-    } else {
-        self.view.hidden = YES;
-        [self removeFromParentViewController];
+    CABasicAnimation *opacityAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    opacityAnimation.fromValue = @1.;
+    opacityAnimation.toValue = @0.;
+    opacityAnimation.duration = self.animationDuration;
+    [self.blurView.layer addAnimation:opacityAnimation forKey:nil];
+    
+    CATransform3D transform = CATransform3DScale(self.popView.layer.transform, 0, 0, 0);
+    
+    CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform"];
+    scaleAnimation.fromValue = [NSValue valueWithCATransform3D:self.popView.layer.transform];
+    scaleAnimation.toValue = [NSValue valueWithCATransform3D:transform];
+    scaleAnimation.duration = self.animationDuration;
+    
+    CAAnimationGroup *animationGroup = [CAAnimationGroup animation];
+    animationGroup.animations = @[opacityAnimation, scaleAnimation];
+    animationGroup.duration = self.animationDuration;
+    animationGroup.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    [self.popView.layer addAnimation:animationGroup forKey:nil];
+    
+    self.blurView.layer.opacity = 0;
+    self.popView.layer.transform = transform;
+
+    self.view.hidden = YES;
+    
+    if ([self.parentViewController.view respondsToSelector:@selector(setScrollEnabled:)] && [(UIScrollView *)self.parentViewController.view isScrollEnabled]) {
+        [(UIScrollView *)self.parentViewController.view setScrollEnabled:YES];
     }
+    
+    [self willMoveToParentViewController:nil];
+    [self.view removeFromSuperview];
+    [self removeFromParentViewController];
 }
 
 - (void)addToParentViewController:(UIViewController *)parentViewController
@@ -400,16 +411,16 @@
     }
 }
 
-- (void)removeFromParentViewController
-{
-    if ([self.parentViewController.view respondsToSelector:@selector(setScrollEnabled:)] && [(UIScrollView *)self.parentViewController.view isScrollEnabled]) {
-        [(UIScrollView *)self.parentViewController.view setScrollEnabled:YES];
-    }
-    
-    [self willMoveToParentViewController:nil];
-    [self.view removeFromSuperview];
-    [self removeFromParentViewController];
-}
+//- (void)removeFromParentViewController
+//{
+//    if ([self.parentViewController.view respondsToSelector:@selector(setScrollEnabled:)] && [(UIScrollView *)self.parentViewController.view isScrollEnabled]) {
+//        [(UIScrollView *)self.parentViewController.view setScrollEnabled:YES];
+//    }
+//    
+//    [self willMoveToParentViewController:nil];
+//    [self.view removeFromSuperview];
+//    [self removeFromParentViewController];
+//}
 
 - (void)createScreenshotAndLayoutWithScreenshotCompletion:(dispatch_block_t)screenshotCompletion
 {

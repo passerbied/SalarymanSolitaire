@@ -11,7 +11,7 @@
 
 @protocol SSPopupViewDelegate;
 
-@interface SSPopupView : SSViewController
+@interface SSPopupView : UIViewController
 {
     
 }
@@ -22,25 +22,25 @@
 @property (nonatomic, assign) CGPoint menuCenter;
 @property (nonatomic, assign) CGFloat animationDuration;
 @property (nonatomic, assign) BOOL bounces;
-@property (nonatomic, strong) UIColor *backgroundColor;
+@property (strong, nonatomic) UIColor *backgroundColor;
 
 @property (nonatomic, assign) CGFloat blurLevel;
-@property (nonatomic, strong) UIBezierPath *blurExclusionPath;
+@property (strong, nonatomic) UIBezierPath *blurExclusionPath;
 
 // 表題イメージ
-@property (nonatomic, strong) UIImage *titleImage;
+@property (strong, nonatomic) UIImage *titleImage;
 
 // 委譲対象
 @property (nonatomic, weak) id<SSPopupViewDelegate> delegate;
 
 // コンテンツサイズ
-- (CGRect)clientFrame;
+- (CGRect)popupContentRect;
 
 // 画面表示
 - (void)showInViewController:(UIViewController *)parentViewController center:(CGPoint)center;
 
 // 画面を隠す
-- (void)dismissAnimated:(BOOL)animated;
+- (void)dismiss;
 
 @end
 
