@@ -22,14 +22,17 @@
 @property (nonatomic, weak) IBOutlet UILabel *labelStageTitle;
 
 // ツールバー
-@property (nonatomic, weak) IBOutlet UIView *topBar;
+@property (nonatomic, strong) IBOutlet UIView *topBar;
 
-// スクロールビュー
-//@property (nonatomic, strong) UIView *storyView;
-//@property (nonatomic, strong) UIScrollView *scrollView;
-//
-//// ストーリービュー
-//@property (nonatomic, strong) UIImageView *storyImageView;
+// 条件
+@property (nonatomic, strong) IBOutlet UIView *conditionView;
+
+// 敵名刺
+@property (nonatomic, weak) IBOutlet UIImageView *enemyCardView;
+
+// クリア条件
+@property (nonatomic, weak) IBOutlet UILabel *labelCondition;
+
 
 // ストーリー表示
 - (IBAction)presentStoryAction:(id)sender;
@@ -43,11 +46,12 @@
 // ボタン「次へ」タップ処理
 - (IBAction)nextAction:(id)sender;
 
+// ボタン「プレイ」タップ処理
+- (IBAction)playAction:(id)sender;
+
 @end
 
 @implementation StoryViewController
-
-
 
 - (void)initView
 {
@@ -75,31 +79,59 @@
     [self.navigationController pushViewController:controller animated:YES];
 }
 
+// クリア条件画面表示
+- (void)presentConditionView;
+{
+    [self.view addSubview:self.conditionView];
+    
+    self.labelCondition.text = [self.stage condition];
+    
+    NSString *imageName = [NSString stringWithFormat:@"enemy_%03d_card.png", self.stage.stageID];
+    NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:imageName];
+    UIImage *cardImage = [UIImage imageWithContentsOfFile:path];
+    self.enemyCardView.image = cardImage;
+}
+
 #pragma mark - 画面操作
 // ストーリー表示
 - (IBAction)presentStoryAction:(id)sender;
 {
     // ツールバー表示
-    self.topBar.hidden = NO;
+    self.topBar.frame = CGRectMake(0, 0, 320, 60);
+    [self.view addSubview:self.topBar];
     
     // ストーリー表示
     UIScrollView *scrollView = [[UIScrollView alloc] init];
     UIImageView *imageView = [[UIImageView alloc] init];
+    UIButton *btnNext = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btnNext setBackgroundImage:[UIImage imageNamed:@"btn_story_next.png"] forState:UIControlStateNormal];
+    [btnNext setBackgroundImage:[UIImage imageNamed:@"btn_story_next_on.png"] forState:UIControlStateHighlighted];
+    [btnNext addTarget:self action:@selector(nextAction:) forControlEvents:UIControlEventTouchUpInside];
     NSString *imageName = [NSString stringWithFormat:@"stage_%03d_story.png", self.stage.stageID];
     NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:imageName];
     UIImage *storyImage = [UIImage imageWithContentsOfFile:path];
     [imageView setImage:storyImage];
     [scrollView addSubview:imageView];
+    [scrollView addSubview:btnNext];
     [self.view addSubview:scrollView];
     
     // 画面約束設定
     scrollView.translatesAutoresizingMaskIntoConstraints  = NO;
     imageView.translatesAutoresizingMaskIntoConstraints = NO;
-    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(scrollView, imageView);
+    btnNext.translatesAutoresizingMaskIntoConstraints = NO;
+    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(scrollView, imageView, btnNext);
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[scrollView]|" options:0 metrics: 0 views:viewsDictionary]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-50-[scrollView]-50-|" options:0 metrics: 0 views:viewsDictionary]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-60-[scrollView]-50-|" options:0 metrics: 0 views:viewsDictionary]];
     [scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[imageView]|" options:0 metrics: 0 views:viewsDictionary]];
     [scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[imageView]|" options:0 metrics: 0 views:viewsDictionary]];
+
+    NSDictionary *btnDictionary = NSDictionaryOfVariableBindings(scrollView, btnNext);
+    [scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[btnNext]-20-|" options:0 metrics: 0 views:btnDictionary]];
+    
+    CGFloat height = storyImage.size.height;
+    NSString *constrain = [NSString stringWithFormat:@"V:|-%f-[btnNext(40)]-20-|",height-60];
+    [scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:constrain options:0 metrics: 0 views:btnDictionary]];
+
     
     // バナー広告表示
     ADBannerView *bannerAD = [[SolitaireManager sharedManager] sharedBannerAD];
@@ -121,6 +153,13 @@
 
 // ボタン「次へ」タップ処理
 - (IBAction)nextAction:(id)sender;
+{
+    // クリア条件画面表示
+    [self presentConditionView];
+}
+
+// ボタン「プレイ」タップ処理
+- (IBAction)playAction:(id)sender;
 {
     // プレイ画面表示
     [self presentPlayView];

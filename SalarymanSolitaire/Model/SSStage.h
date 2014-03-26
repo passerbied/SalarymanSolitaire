@@ -39,4 +39,7 @@ typedef enum
 // 状態
 @property (nonatomic) SSStageState stage;
 
+// クリア条件
+- (NSString *)condition;
+
 @end
