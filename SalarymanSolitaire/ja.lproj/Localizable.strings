@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings
+  SalarymanSolitaire
+
+  Created by IfelseGo on 14-3-27.
+  Copyright (c) 2014年 IfelseGo.Inc. All rights reserved.
+*/
+"使い方"="使い方";
+
+"山札が終了しました。"="山札が終了しました。";
+"山札戻しを使いますか？"="山札戻しを使いますか？";
+"山札戻しを購入しますか？"="山札戻しを購入しますか？";
+"個"="個";

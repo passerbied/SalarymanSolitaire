@@ -26,7 +26,7 @@
     [super initView];
     
     // タイトル設定
-    self.title = @"使い方";
+    self.title = LocalizedString(@"使い方");
     
     // ヘルプ情報表示
     [self loadHelpInfo];

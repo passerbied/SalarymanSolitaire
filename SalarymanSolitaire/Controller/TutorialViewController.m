@@ -49,14 +49,6 @@
     [self loadTutorial];
 }
 
-//- (void)viewWillLayoutSubviews
-//{
-//    [super viewWillLayoutSubviews];
-//    
-//    [_labelContent sizeToFit];
-//    [_labelContent setNeedsLayout];
-//}
-
 // チュートリアル読み込み処理
 - (void)loadTutorial;
 {

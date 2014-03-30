@@ -103,9 +103,7 @@
     // ストーリー表示
     UIScrollView *scrollView = [[UIScrollView alloc] init];
     UIImageView *imageView = [[UIImageView alloc] init];
-    UIButton *btnNext = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btnNext setBackgroundImage:[UIImage imageNamed:@"btn_story_next.png"] forState:UIControlStateNormal];
-    [btnNext setBackgroundImage:[UIImage imageNamed:@"btn_story_next_on.png"] forState:UIControlStateHighlighted];
+    UIButton *btnNext = [UIButton buttonWithImage:@"btn_story_next"];
     [btnNext addTarget:self action:@selector(nextAction:) forControlEvents:UIControlEventTouchUpInside];
     NSString *imageName = [NSString stringWithFormat:@"stage_%03d_story.png", self.stage.stageID];
     NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:imageName];

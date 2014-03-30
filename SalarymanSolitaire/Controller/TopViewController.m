@@ -11,6 +11,10 @@
 #import "TutorialViewController.h"
 #import "SelectStageViewController.h"
 #import "NotificationView.h"
+#import "SSItemAlertView.h"
+#import "SSModeAlertView.h"
+#import "SSGiveupAlertView.h"
+#import "SSClearPopupView.h"
 
 @interface TopViewController ()
 {
@@ -62,16 +66,14 @@
 // フリープレイモード
 - (IBAction)freePlayAction:(id)sender;
 {
-    NSArray *famly = [UIFont familyNames];
-    for (NSString *name in famly) {
-        NSArray *ll = [UIFont fontNamesForFamilyName:name];
-        NSLog(@"%@",ll);
-    }
+    [[SSItemAlertView alert] show];
 }
 
 // おすすめ情報表示
 - (IBAction)showRecommendInfoAction:(id)sender;
 {
+    SSClearPopupView *controller = [SSClearPopupView new];
+    [controller show];
 }
 
 // プレイスタート

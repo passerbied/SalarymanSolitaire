@@ -10,4 +10,7 @@
 
 @interface PlayViewController : SSViewController
 
+// ゲームモード
+@property (nonatomic, getter = isFreeMode) BOOL freeMode;
+
 @end

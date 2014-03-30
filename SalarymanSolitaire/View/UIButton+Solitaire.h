@@ -1,13 +1,13 @@
 //
-//  SSAlertView.h
+//  UIButton+Solitaire.h
 //  SalarymanSolitaire
 //
-//  Created by WU on 14-3-9.
+//  Created by IfelseGo on 14-3-30.
 //  Copyright (c) 2014年 IfelseGo.Inc. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface SSAlertView : UIView
+@interface UIButton (Solitaire)
 
 @end

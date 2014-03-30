@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIButton+UIImage.h"
 
 @interface SSViewController : UIViewController
 {

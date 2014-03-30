@@ -16,9 +16,13 @@
 #define __LOG( format , ... )       //
 #endif
 
+#define LocalizedString(key)            NSLocalizedString(key, nil)
+
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
 
     #import "SolitaireManager.h"
+    #import "UIButton+UIImage.h"
+    #import "UIButton+Solitaire.h"
 #endif
