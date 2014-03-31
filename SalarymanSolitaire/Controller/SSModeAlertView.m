@@ -15,8 +15,8 @@
     [self.alertView setCloseButtonHidden:NO];
     self.alertView.backgroundImage = [UIImage imageNamed:@"popup_base.png"];
     
-    [self.alertView addButton:[UIButton buttonWithImage:@"popup_btn_card1"]];
-    [self.alertView addButton:[UIButton buttonWithImage:@"popup_btn_card3"]];
+    [self.alertView addButton:[UIButton buttonWithImage:@"free_btn_one"]];
+    [self.alertView addButton:[UIButton buttonWithImage:@"free_btn_three"]];
     [self.alertView show];
 }
 @end

@@ -23,15 +23,14 @@
 
 @implementation WUPopupView
 
-- (void)viewDidLoad
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    [super viewDidLoad];
-    
-    
-    
-
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        _top = NSIntegerMin;
+    }
+    return self;
 }
-
 // ポップアップ
 - (void)show;
 {
@@ -76,7 +75,11 @@
     CGRect parentRect = _popupWindow.bounds;
     CGFloat dx = (parentRect.size.width - _popupSize.width)/2.0f;
     CGFloat dy = (parentRect.size.height - _popupSize.height)/2.0f;
-    self.view.frame = CGRectInset(parentRect, dx, dy);
+    CGRect rect = CGRectInset(parentRect, dx, dy);
+    if (_top > 0) {
+        rect.origin.y = _top;
+    }
+    self.view.frame = rect;
 }
 
 // 閉じる

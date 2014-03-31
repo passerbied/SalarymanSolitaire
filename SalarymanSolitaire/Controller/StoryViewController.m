@@ -103,7 +103,7 @@
     // ストーリー表示
     UIScrollView *scrollView = [[UIScrollView alloc] init];
     UIImageView *imageView = [[UIImageView alloc] init];
-    UIButton *btnNext = [UIButton buttonWithImage:@"btn_story_next"];
+    UIButton *btnNext = [UIButton buttonWithImage:@"story_next_btn"];
     [btnNext addTarget:self action:@selector(nextAction:) forControlEvents:UIControlEventTouchUpInside];
     NSString *imageName = [NSString stringWithFormat:@"stage_%03d_story.png", self.stage.stageID];
     NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:imageName];
@@ -118,16 +118,16 @@
     imageView.translatesAutoresizingMaskIntoConstraints = NO;
     btnNext.translatesAutoresizingMaskIntoConstraints = NO;
     NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(scrollView, imageView, btnNext);
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[scrollView]|" options:0 metrics: 0 views:viewsDictionary]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-60-[scrollView]-50-|" options:0 metrics: 0 views:viewsDictionary]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[scrollView(320)]|" options:0 metrics: 0 views:viewsDictionary]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-59-[scrollView]-50-|" options:0 metrics: 0 views:viewsDictionary]];
     [scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[imageView]|" options:0 metrics: 0 views:viewsDictionary]];
     [scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[imageView]|" options:0 metrics: 0 views:viewsDictionary]];
 
     NSDictionary *btnDictionary = NSDictionaryOfVariableBindings(scrollView, btnNext);
-    [scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[btnNext]-20-|" options:0 metrics: 0 views:btnDictionary]];
+    [scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-61-[btnNext]-61-|" options:0 metrics: 0 views:btnDictionary]];
     
     CGFloat height = storyImage.size.height;
-    NSString *constrain = [NSString stringWithFormat:@"V:|-%f-[btnNext(40)]-20-|",height-60];
+    NSString *constrain = [NSString stringWithFormat:@"V:|-%f-[btnNext(50)]-10-|",height-60];
     [scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:constrain options:0 metrics: 0 views:btnDictionary]];
 
     

@@ -10,6 +10,9 @@
 
 @interface WUPopupView : UIViewController
 
+// 表示位置
+@property (nonatomic) CGFloat top;
+
 // ポップアップ
 - (void)show;
 

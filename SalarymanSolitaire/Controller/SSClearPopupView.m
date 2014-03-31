@@ -42,6 +42,14 @@
 @end
 
 @implementation SSClearPopupView
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        self.top = 90.0f;
+    }
+    return self;
+}
 
 // 共用メッセージ取得
 - (SharingMessage *)sharingMessage;
