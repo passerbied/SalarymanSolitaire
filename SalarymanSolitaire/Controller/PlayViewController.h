@@ -13,4 +13,6 @@
 // ゲームモード
 @property (nonatomic, getter = isFreeMode) BOOL freeMode;
 
+// カードテーブル
+@property (nonatomic, weak) IBOutlet UIView *tableView;
 @end

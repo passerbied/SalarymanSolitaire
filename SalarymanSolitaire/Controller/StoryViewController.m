@@ -87,8 +87,7 @@
     self.labelCondition.text = [self.stage condition];
     
     NSString *imageName = [NSString stringWithFormat:@"enemy_%03d_card.png", self.stage.stageID];
-    NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:imageName];
-    UIImage *cardImage = [UIImage imageWithContentsOfFile:path];
+    UIImage *cardImage = [UIImage temporaryImageNamed:imageName];
     self.enemyCardView.image = cardImage;
 }
 
@@ -106,8 +105,7 @@
     UIButton *btnNext = [UIButton buttonWithImage:@"story_next_btn"];
     [btnNext addTarget:self action:@selector(nextAction:) forControlEvents:UIControlEventTouchUpInside];
     NSString *imageName = [NSString stringWithFormat:@"stage_%03d_story.png", self.stage.stageID];
-    NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:imageName];
-    UIImage *storyImage = [UIImage imageWithContentsOfFile:path];
+    UIImage *storyImage = [UIImage temporaryImageNamed:imageName];
     [imageView setImage:storyImage];
     [scrollView addSubview:imageView];
     [scrollView addSubview:btnNext];

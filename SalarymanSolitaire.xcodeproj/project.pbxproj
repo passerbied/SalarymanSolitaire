@@ -378,6 +378,12 @@
 		E58F85C918DEACA400C3CDC3 /* enemy_074_clear@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E58F84F418DEACA400C3CDC3 /* enemy_074_clear@2x.png */; };
 		E58F85CA18DEACA500C3CDC3 /* enemy_074_not_clear@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E58F84F518DEACA400C3CDC3 /* enemy_074_not_clear@2x.png */; };
 		E590798818D57D9F008E2274 /* SSNutrientButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E590798718D57D9F008E2274 /* SSNutrientButton.m */; };
+		E5909E1818EB5DB30006EFEF /* SSCardFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = E5909E1718EB5DB30006EFEF /* SSCardFlowLayout.m */; };
+		E5909E1B18EB5DE30006EFEF /* SSCardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E5909E1A18EB5DE30006EFEF /* SSCardCell.m */; };
+		E5909E1D18EB63B40006EFEF /* SSSolitaireView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5909E1C18EB63B40006EFEF /* SSSolitaireView.xib */; };
+		E5909E2018EB70BE0006EFEF /* UIImage+MainBundleImage.m in Sources */ = {isa = PBXBuildFile; fileRef = E5909E1F18EB70BE0006EFEF /* UIImage+MainBundleImage.m */; };
+		E5DAFAD418E9AF5F00CB05F3 /* SSSolitaireView.m in Sources */ = {isa = PBXBuildFile; fileRef = E5DAFAD318E9AF5F00CB05F3 /* SSSolitaireView.m */; };
+		E5DAFAD818E9B17500CB05F3 /* SSCard.m in Sources */ = {isa = PBXBuildFile; fileRef = E5DAFAD718E9B17500CB05F3 /* SSCard.m */; };
 		E5DCE32818E44D7C00B95064 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E5DCE32A18E44D7C00B95064 /* Localizable.strings */; };
 		E5DCE34618E455E900B95064 /* free_btn_one_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5DCE32C18E455E900B95064 /* free_btn_one_on@2x.png */; };
 		E5DCE34718E455E900B95064 /* free_btn_one@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5DCE32D18E455E900B95064 /* free_btn_one@2x.png */; };
@@ -1062,6 +1068,17 @@
 		E58F84F518DEACA400C3CDC3 /* enemy_074_not_clear@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "enemy_074_not_clear@2x.png"; sourceTree = "<group>"; };
 		E590798618D57D9F008E2274 /* SSNutrientButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSNutrientButton.h; sourceTree = "<group>"; };
 		E590798718D57D9F008E2274 /* SSNutrientButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSNutrientButton.m; sourceTree = "<group>"; };
+		E5909E1618EB5DB30006EFEF /* SSCardFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSCardFlowLayout.h; sourceTree = "<group>"; };
+		E5909E1718EB5DB30006EFEF /* SSCardFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSCardFlowLayout.m; sourceTree = "<group>"; };
+		E5909E1918EB5DE30006EFEF /* SSCardCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSCardCell.h; sourceTree = "<group>"; };
+		E5909E1A18EB5DE30006EFEF /* SSCardCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSCardCell.m; sourceTree = "<group>"; };
+		E5909E1C18EB63B40006EFEF /* SSSolitaireView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSSolitaireView.xib; sourceTree = "<group>"; };
+		E5909E1E18EB70BE0006EFEF /* UIImage+MainBundleImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+MainBundleImage.h"; sourceTree = "<group>"; };
+		E5909E1F18EB70BE0006EFEF /* UIImage+MainBundleImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MainBundleImage.m"; sourceTree = "<group>"; };
+		E5DAFAD218E9AF5F00CB05F3 /* SSSolitaireView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSSolitaireView.h; sourceTree = "<group>"; };
+		E5DAFAD318E9AF5F00CB05F3 /* SSSolitaireView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSSolitaireView.m; sourceTree = "<group>"; };
+		E5DAFAD618E9B17500CB05F3 /* SSCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSCard.h; sourceTree = "<group>"; };
+		E5DAFAD718E9B17500CB05F3 /* SSCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSCard.m; sourceTree = "<group>"; };
 		E5DCE32918E44D7C00B95064 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E5DCE32B18E44D8C00B95064 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E5DCE32C18E455E900B95064 /* free_btn_one_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "free_btn_one_on@2x.png"; sourceTree = "<group>"; };
@@ -1599,8 +1616,6 @@
 			children = (
 				E590798618D57D9F008E2274 /* SSNutrientButton.h */,
 				E590798718D57D9F008E2274 /* SSNutrientButton.m */,
-				E521788518D562E80035B628 /* SSPhysicalView.h */,
-				E521788618D562E80035B628 /* SSPhysicalView.m */,
 				3494F42318CC542C00B714F1 /* SSPopupView.h */,
 				3494F42418CC542C00B714F1 /* SSPopupView.m */,
 				3494F42C18CC946300B714F1 /* SSPurchaseView.h */,
@@ -1624,6 +1639,9 @@
 				E5E22E5918E7D11D00897AC7 /* WUPopupView.m */,
 				3493756B18CB3BA300D4BD54 /* WUProgressView.h */,
 				3493756C18CB3BA300D4BD54 /* WUProgressView.m */,
+				E5DAFAD518E9B16400CB05F3 /* カード */,
+				E5909E1E18EB70BE0006EFEF /* UIImage+MainBundleImage.h */,
+				E5909E1F18EB70BE0006EFEF /* UIImage+MainBundleImage.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1789,6 +1807,24 @@
 				E50BD91A18E307690087C170 /* story_skip_btn@2x.png */,
 			);
 			name = 05_Story;
+			sourceTree = "<group>";
+		};
+		E5DAFAD518E9B16400CB05F3 /* カード */ = {
+			isa = PBXGroup;
+			children = (
+				E521788518D562E80035B628 /* SSPhysicalView.h */,
+				E521788618D562E80035B628 /* SSPhysicalView.m */,
+				E5DAFAD218E9AF5F00CB05F3 /* SSSolitaireView.h */,
+				E5DAFAD318E9AF5F00CB05F3 /* SSSolitaireView.m */,
+				E5909E1C18EB63B40006EFEF /* SSSolitaireView.xib */,
+				E5DAFAD618E9B17500CB05F3 /* SSCard.h */,
+				E5DAFAD718E9B17500CB05F3 /* SSCard.m */,
+				E5909E1618EB5DB30006EFEF /* SSCardFlowLayout.h */,
+				E5909E1718EB5DB30006EFEF /* SSCardFlowLayout.m */,
+				E5909E1918EB5DE30006EFEF /* SSCardCell.h */,
+				E5909E1A18EB5DE30006EFEF /* SSCardCell.m */,
+			);
+			name = "カード";
 			sourceTree = "<group>";
 		};
 		E5DCE36318E457E400B95064 /* 警告画面 */ = {
@@ -2598,6 +2634,7 @@
 				E5E737ED18E1BD2900E5A40A /* stage_087_story@2x.png in Resources */,
 				E58F85BC18DEACA400C3CDC3 /* enemy_070_banner@2x.png in Resources */,
 				E5EA754518DCF9F1002E2BAF /* arrow_down_red@2x.png in Resources */,
+				E5909E1D18EB63B40006EFEF /* SSSolitaireView.xib in Resources */,
 				E58D4B3418E87276006CCEEA /* term_play_btn@2x.png in Resources */,
 				E50BD9A418E31C700087C170 /* enemy_028_card@2x.png in Resources */,
 				E5F3D1BB18E71C9900CBD281 /* popup_icon_yamafuda@2x.png in Resources */,
@@ -3129,18 +3166,23 @@
 				349DBE2E18D0A1CC00D7037C /* SSStage.m in Sources */,
 				E5E9411318D8EF57009D71DD /* XmlParserUtil.m in Sources */,
 				E5E22E5D18E7D32E00897AC7 /* UIView+Screenshot.m in Sources */,
+				E5909E2018EB70BE0006EFEF /* UIImage+MainBundleImage.m in Sources */,
 				3494F42E18CC946300B714F1 /* SSPurchaseView.m in Sources */,
 				348D99CC18CB43090079D2EF /* StoryViewController.m in Sources */,
 				E5E9410F18D8EF57009D71DD /* WebResponse.m in Sources */,
+				E5DAFAD818E9B17500CB05F3 /* SSCard.m in Sources */,
 				E5E22E5718E7AAB800897AC7 /* UIButton+Solitaire.m in Sources */,
 				E5E9410C18D8EF57009D71DD /* Reachability.m in Sources */,
 				E5EF2CF818DD52D20029F928 /* NotificationView.m in Sources */,
+				E5DAFAD418E9AF5F00CB05F3 /* SSSolitaireView.m in Sources */,
 				34C750CA18CAC43A00BF3FC6 /* HelpInfoViewController.m in Sources */,
 				34C7509218CAB37F00BF3FC6 /* main.m in Sources */,
+				E5909E1818EB5DB30006EFEF /* SSCardFlowLayout.m in Sources */,
 				E521788718D562E80035B628 /* SSPhysicalView.m in Sources */,
 				E5F3D11918E6CCA700CBD281 /* SSGiveupAlertView.m in Sources */,
 				E5F3D12118E6DC8F00CBD281 /* SSRetryAlertView.m in Sources */,
 				348D99C018CB42810079D2EF /* SelectStageViewController.m in Sources */,
+				E5909E1B18EB5DE30006EFEF /* SSCardCell.m in Sources */,
 				3494F42518CC542C00B714F1 /* SSPopupView.m in Sources */,
 				E5F3D15E18E6F59100CBD281 /* SharingMessage.m in Sources */,
 				E5F3D16B18E7118500CBD281 /* SSFreePlayController.m in Sources */,

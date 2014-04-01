@@ -9,7 +9,7 @@
 #import "SSAppDelegate.h"
 #import "TopViewController.h"
 #import <iAd/iAd.h>
-
+#import "SSChallengeController.h"
 @interface SSAppDelegate ()
 {
 }
@@ -24,7 +24,7 @@
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    TopViewController *controller = [TopViewController controller];
+    SSChallengeController *controller = [SSChallengeController controller];
     UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController:controller];
     self.window.rootViewController = navigation;
     [self.window makeKeyAndVisible];

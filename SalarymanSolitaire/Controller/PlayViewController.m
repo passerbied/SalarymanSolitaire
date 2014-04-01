@@ -39,6 +39,11 @@
     [super initView];
 }
 
+- (BOOL)shouldShowBannerAD
+{
+    return NO;
+}
+
 #pragma mark - 画面操作
 // ギブアップ
 - (IBAction)giveupAction:(id)sender;

@@ -25,4 +25,5 @@
     #import "SolitaireManager.h"
     #import "UIButton+UIImage.h"
     #import "UIButton+Solitaire.h"
+    #import "UIImage+MainBundleImage.h"
 #endif

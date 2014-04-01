@@ -7,6 +7,7 @@
 //
 
 #import "PlayViewController.h"
+#import "SSStage.h"
 
 @interface SSChallengeController : PlayViewController
 

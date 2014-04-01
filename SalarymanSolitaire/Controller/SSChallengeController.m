@@ -7,32 +7,42 @@
 //
 
 #import "SSChallengeController.h"
-
+#import "SSPhysicalView.h"
+#import "SSSolitaireView.h"
 @interface SSChallengeController ()
+{
+    // ステージ情報
+    SSStage                             *_stage;
+}
+
+// 体力ビュー
+@property (nonatomic, weak) IBOutlet SSPhysicalView *physicalView;
+
+// 敵ビュー
+@property (nonatomic, weak) IBOutlet UIImageView *enemyView;
+
+// プレイビュー
+@property (nonatomic, weak) IBOutlet SSSolitaireView *playView;
 
 @end
 
 @implementation SSChallengeController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (void)initView
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+    [super initView];
+    
+    // ステージ情報取得
+    _stage = [[SolitaireManager sharedManager] selectedStage];
+    if (!_stage) {
+        _stage = [[SSStage alloc] init];
     }
-    return self;
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    _stage.stageID = 1;
+    _stage.enemyID = 2;
+    
+    // 敵イメージ設定
+    NSString *name = [NSString stringWithFormat:@"enemy_%03d_banner.png", _stage.enemyID];
+    [self.enemyView setImage:[UIImage temporaryImageNamed:name]];
 }
 
 @end

@@ -15,6 +15,7 @@
 #import "SSModeAlertView.h"
 #import "SSGiveupAlertView.h"
 #import "SSClearPopupView.h"
+#import "SSChallengeController.h"
 
 @interface TopViewController ()
 {

@@ -183,8 +183,7 @@ NSString *const StageDidSelectNotificationADKey = @"StageDidSelectNotificationAD
     } else {
         imageName = [NSString stringWithFormat:@"enemy_%03d_not_clear.png", _enemyID];
     }
-    NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:imageName];
-    UIImage *enemyImage = [UIImage imageWithContentsOfFile:path];
+    UIImage *enemyImage = [UIImage temporaryImageNamed:imageName];
     [_enemyImageView setImage:enemyImage];
     
     // HERE
