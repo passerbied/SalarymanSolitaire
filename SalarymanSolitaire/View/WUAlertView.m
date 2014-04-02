@@ -95,7 +95,6 @@ static const CGFloat AlertViewButtonMarginBottom = 15.0;
         _alertView.center = [self centerWithFrame:frame];
         [self.view addSubview:_alertView];
         
-        UIColor *textColor = [UIColor colorWithRed:136.0f/255.0f green:80.0f/255.0f blue:14.0f/255.0f alpha:1.0];
         // Title
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(AlertViewContentMargin,
                                                                 AlertViewContentMarginTop,
@@ -103,11 +102,11 @@ static const CGFloat AlertViewButtonMarginBottom = 15.0;
                                                                 44)];
         _titleLabel.text = title;
         _titleLabel.backgroundColor = [UIColor clearColor];
-        _titleLabel.textColor = textColor;
         _titleLabel.textAlignment = NSTextAlignmentCenter;
-        _titleLabel.font = [UIFont fontWithName:@"rounded-mplus-2m-bold" size:19];
         _titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
         _titleLabel.numberOfLines = 0;
+        _titleLabel.font = SSGothicProFont(18);
+        _titleLabel.textColor = SSColorText;
         _titleLabel.frame = [self adjustLabelFrameHeight:self.titleLabel];
         [_alertView addSubview:_titleLabel];
         
@@ -120,11 +119,11 @@ static const CGFloat AlertViewButtonMarginBottom = 15.0;
                                                                   44)];
         _messageLabel.text = message;
         _messageLabel.backgroundColor = [UIColor clearColor];
-        _messageLabel.textColor = textColor;
         _messageLabel.textAlignment = NSTextAlignmentCenter;
-        _messageLabel.font = [UIFont fontWithName:@"rounded-mplus-2m-bold" size:16];
         _messageLabel.lineBreakMode = NSLineBreakByWordWrapping;
         _messageLabel.numberOfLines = 0;
+        _titleLabel.font = SSGothicProFont(15);
+        _titleLabel.textColor = SSColorText;
         _messageLabel.frame = [self adjustLabelFrameHeight:self.messageLabel];
         [_alertView addSubview:_messageLabel];        
     }

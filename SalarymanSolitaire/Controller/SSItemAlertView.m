@@ -45,7 +45,7 @@ enum
     CGFloat y = 96.0f;
     CGFloat offset = 8.0f;
     NSString *string = nil;
-    UIFont *font = [UIFont boldSystemFontOfSize:24.0f];
+    UIFont *font = SSGothicProFont(17);
     NSDictionary *attributes = @{NSFontAttributeName:font};
 
     // 残り個数設定
@@ -54,11 +54,12 @@ enum
     if (!_numberLabel) {
         _numberLabel = [[UILabel alloc] initWithFrame:CGRectMake(x, y, size.width, size.height)];
         _numberLabel.backgroundColor = [UIColor clearColor];
-        _numberLabel.textColor = [UIColor redColor];
         _numberLabel.font = font;
+        _numberLabel.textColor = SSColorRed;
         [self.alertView addAccessoryView:_numberLabel];
     }
     [_numberLabel setText:[NSString stringWithFormat:@"%d", _numberOfItems]];
+    
     
     // 単位設定
     if (!_unitLabel) {
@@ -66,6 +67,7 @@ enum
         _unitLabel.backgroundColor = [UIColor clearColor];
         _unitLabel.textColor = [UIColor blackColor];
         _unitLabel.font = font;
+        _unitLabel.textColor = SSColorBlack;
         [self.alertView addAccessoryView:_unitLabel];
     }
     [_unitLabel setText:@"個"];

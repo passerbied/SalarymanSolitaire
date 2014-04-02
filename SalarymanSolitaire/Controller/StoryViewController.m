@@ -27,11 +27,20 @@
 // 条件
 @property (nonatomic, strong) IBOutlet UIView *conditionView;
 
-// 敵名刺
-@property (nonatomic, weak) IBOutlet UIImageView *enemyCardView;
+// 敵の画像
+@property (nonatomic, weak) IBOutlet UIImageView *enemyPhotoView;
+
+// 敵の肩書き
+@property (nonatomic, weak) IBOutlet UILabel *enemyTitleLabel;
+
+// 敵の名前
+@property (nonatomic, weak) IBOutlet UILabel *enemyNameLabel;
+
+// クリア条件タイトル
+@property (nonatomic, weak) IBOutlet UILabel *conditionTitleLabel;
 
 // クリア条件
-@property (nonatomic, weak) IBOutlet UILabel *labelCondition;
+@property (nonatomic, weak) IBOutlet UILabel *conditionLabel;
 
 
 // ストーリー表示
@@ -84,11 +93,27 @@
 {
     [self.view addSubview:self.conditionView];
     
-    self.labelCondition.text = [self.stage condition];
-    
+    // 敵の画像
     NSString *imageName = [NSString stringWithFormat:@"enemy_%03d_card.png", self.stage.stageID];
-    UIImage *cardImage = [UIImage temporaryImageNamed:imageName];
-    self.enemyCardView.image = cardImage;
+    UIImage *photoImage = [UIImage temporaryImageNamed:imageName];
+    self.enemyPhotoView.image = photoImage;
+    
+    // 敵の肩書き
+    self.enemyTitleLabel.font = SSGothicProFont(15.0f);
+    self.enemyTitleLabel.textColor = SSColorWhite;
+    
+    // 敵の名前
+    self.enemyNameLabel.font = SSGothicProFont(24.0f);
+    self.enemyNameLabel.textColor = SSColorWhite;
+    
+    // クリア条件タイトル
+    self.conditionTitleLabel.font = SSGothicProFont(15.0f);
+    self.conditionTitleLabel.textColor = SSColorWhite;
+    
+    // クリア条件
+    self.conditionLabel.font = SSGothicProFont(15.0f);
+    self.conditionLabel.textColor = SSColorBlack;
+    self.conditionLabel.text = [self.stage condition];
 }
 
 #pragma mark - 画面操作
