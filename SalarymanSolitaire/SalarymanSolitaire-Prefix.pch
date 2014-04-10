@@ -17,7 +17,7 @@
 #endif
 
 #define LocalizedString(key)            NSLocalizedString(key, nil)
-#define SSGothicProFont(s)           [UIFont fontWithName:@"Hiragino Kaku Gothic ProN W6" size:s]
+#define SSGothicProFont(s)              [UIFont fontWithName:@"Hiragino Kaku Gothic ProN W6" size:s]
 #define UIColorFromRGB(rgbValue) [UIColor \
 colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 \
@@ -30,11 +30,12 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
-
+    #import "SSViewController.h"
     #import "SolitaireManager.h"
     #import "UIButton+UIImage.h"
     #import "UIButton+Solitaire.h"
     #import "UIImage+MainBundleImage.h"
 #endif
+
 
 

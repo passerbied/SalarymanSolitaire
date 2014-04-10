@@ -203,6 +203,9 @@ NSString *const StageDidSelectNotificationADKey = @"StageDidSelectNotificationAD
 // ステージ選択処理
 - (void)didSelectStageAction:(id)sender
 {
+    // ボタン押下音声再生
+    [AudioEngine playAudioWith:SolitaireAudioIDButtonClicked];
+
     // 選択済みID
     NSNumber *objForStageID = [NSNumber numberWithInteger:_stageID];
     

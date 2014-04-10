@@ -94,7 +94,7 @@
     [self.view addSubview:self.conditionView];
     
     // 敵の画像
-    NSString *imageName = [NSString stringWithFormat:@"enemy_%03d_card.png", self.stage.stageID];
+    NSString *imageName = [NSString stringWithFormat:@"enemy_%03d_poker.png", self.stage.stageID];
     UIImage *photoImage = [UIImage temporaryImageNamed:imageName];
     self.enemyPhotoView.image = photoImage;
     
@@ -120,6 +120,9 @@
 // ストーリー表示
 - (IBAction)presentStoryAction:(id)sender;
 {
+    // ボタン押下音声再生
+    [AudioEngine playAudioWith:SolitaireAudioIDButtonClicked];
+
     // ツールバー表示
     self.topBar.frame = CGRectMake(0, 0, 320, 60);
     [self.view addSubview:self.topBar];
@@ -168,6 +171,9 @@
 // スキップ処理
 - (IBAction)skipAction:(id)sender;
 {
+    // ボタン押下音声再生
+    [AudioEngine playAudioWith:SolitaireAudioIDButtonClicked];
+
     // プレイ画面表示
     [self presentPlayView];
 }
@@ -175,6 +181,9 @@
 // ボタン「次へ」タップ処理
 - (IBAction)nextAction:(id)sender;
 {
+    // ボタン押下音声再生
+    [AudioEngine playAudioWith:SolitaireAudioIDButtonClicked];
+
     // クリア条件画面表示
     [self presentConditionView];
 }
@@ -182,6 +191,9 @@
 // ボタン「プレイ」タップ処理
 - (IBAction)playAction:(id)sender;
 {
+    // ボタン押下音声再生
+    [AudioEngine playAudioWith:SolitaireAudioIDButtonClicked];
+
     // プレイ画面表示
     [self presentPlayView];
 }

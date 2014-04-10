@@ -14,25 +14,11 @@
 
 @implementation SSFreePlayController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
-- (void)viewDidLoad
+// ポーカー位置
+- (CGRect)rectForPoker;
 {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    CGRect rect = self.view.bounds;
+    return CGRectInset(rect, 0.0f, 50.0f);
 }
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 @end

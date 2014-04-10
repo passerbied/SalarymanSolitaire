@@ -10,33 +10,56 @@
 #import "SSPhysicalView.h"
 #import "SSNutrientButton.h"
 
+#define kSolitairePokerColours          4
+#define kSolitairePokerCount            13
+#define kSolitairePokerColumnMax        7
+
 @interface PlayViewController ()
+{
 
-// 体力ビュー
-@property (nonatomic, weak) IBOutlet SSPhysicalView *physicalView;
+}
 
-// 敵ビュー
-@property (nonatomic, weak) IBOutlet UIImageView *enemyView;
 
-// 栄養剤ボタン
-@property (nonatomic, weak) IBOutlet SSNutrientButton *btnNutrient;
 
-// ギブアップ
-- (IBAction)giveupAction:(id)sender;
 
-// 栄養剤使用
-- (IBAction)willUseNutrientAction:(id)sender;
-
-// ショップ
-- (IBAction)presentShopAction:(id)sender;
+#pragma mark - UICollectionViewDelegate
 
 @end
 
 @implementation PlayViewController
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+
+    }
+    return self;
+}
+
 - (void)initView
 {
     [super initView];
+    
+    // 背景イメージビュー
+    UIImage *tableImage = [UIImage imageNamed:@"bg_table.png"];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:tableImage];
+    [self.view insertSubview:imageView atIndex:0];
+    imageView.translatesAutoresizingMaskIntoConstraints  = NO;
+    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(imageView);
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[imageView]|" options:0 metrics: 0 views:viewsDictionary]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[imageView]|" options:0 metrics: 0 views:viewsDictionary]];
+}
+
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+}
+
+- (void)updateView
+{
+    [super updateView];
 }
 
 - (BOOL)shouldShowBannerAD
@@ -44,22 +67,9 @@
     return NO;
 }
 
-#pragma mark - 画面操作
-// ギブアップ
-- (IBAction)giveupAction:(id)sender;
+// ポーカー位置
+- (CGRect)rectForPoker;
 {
-    
-}
-
-// 栄養剤使用
-- (IBAction)willUseNutrientAction:(id)sender;
-{
-    
-}
-
-// ショップ
-- (IBAction)presentShopAction:(id)sender;
-{
-    
+    return CGRectZero;
 }
 @end

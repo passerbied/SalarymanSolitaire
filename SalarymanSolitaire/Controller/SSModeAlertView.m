@@ -11,7 +11,7 @@
 @implementation SSModeAlertView
 - (void)show
 {
-    self.alertView.alertTitle = @"カードの引き枚数を\n選んで下さい。";
+    self.alertView.alertTitle = @"ポーカーの引き枚数を\n選んで下さい。";
     [self.alertView setCloseButtonHidden:NO];
     self.alertView.backgroundImage = [UIImage imageNamed:@"popup_base.png"];
     

@@ -11,4 +11,10 @@
 // 体力ビュー
 @interface SSPhysicalView : UIView
 
+// 体力値
+@property (nonatomic) NSInteger maxPower;
+@property (nonatomic) NSInteger currentPower;
+
+// 体力値変化
+- (void)powerGrowthUp:(BOOL)up;
 @end

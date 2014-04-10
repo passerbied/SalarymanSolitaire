@@ -7,12 +7,14 @@
 //
 
 #import "SSViewController.h"
+#import "SSPokerView.h"
 
 @interface PlayViewController : SSViewController
 
 // ゲームモード
 @property (nonatomic, getter = isFreeMode) BOOL freeMode;
 
-// カードテーブル
-@property (nonatomic, weak) IBOutlet UIView *tableView;
+// ポーカー位置
+- (CGRect)rectForPoker;
+
 @end

@@ -149,6 +149,7 @@
 		E50BD9EC18E31C710087C170 /* enemy_100_card@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E50BD98718E31C700087C170 /* enemy_100_card@2x.png */; };
 		E50BD9ED18E31C710087C170 /* enemy_101_card@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E50BD98818E31C700087C170 /* enemy_101_card@2x.png */; };
 		E521788718D562E80035B628 /* SSPhysicalView.m in Sources */ = {isa = PBXBuildFile; fileRef = E521788618D562E80035B628 /* SSPhysicalView.m */; };
+		E58B01C318F12F89002623CB /* SSPokerViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = E58B01C218F12F89002623CB /* SSPokerViewLayout.m */; };
 		E58D46B018E86BCC006CCEEA /* story_back_btn_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E58D46AE18E86BCC006CCEEA /* story_back_btn_on@2x.png */; };
 		E58D46B118E86BCC006CCEEA /* story_back_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E58D46AF18E86BCC006CCEEA /* story_back_btn@2x.png */; };
 		E58D4B2218E86C19006CCEEA /* story_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E58D4B2118E86C19006CCEEA /* story_bg@2x.png */; };
@@ -378,12 +379,21 @@
 		E58F85C918DEACA400C3CDC3 /* enemy_074_clear@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E58F84F418DEACA400C3CDC3 /* enemy_074_clear@2x.png */; };
 		E58F85CA18DEACA500C3CDC3 /* enemy_074_not_clear@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E58F84F518DEACA400C3CDC3 /* enemy_074_not_clear@2x.png */; };
 		E590798818D57D9F008E2274 /* SSNutrientButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E590798718D57D9F008E2274 /* SSNutrientButton.m */; };
-		E5909E1818EB5DB30006EFEF /* SSCardFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = E5909E1718EB5DB30006EFEF /* SSCardFlowLayout.m */; };
-		E5909E1B18EB5DE30006EFEF /* SSCardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E5909E1A18EB5DE30006EFEF /* SSCardCell.m */; };
-		E5909E1D18EB63B40006EFEF /* SSSolitaireView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5909E1C18EB63B40006EFEF /* SSSolitaireView.xib */; };
+		E5909E1B18EB5DE30006EFEF /* SSPokerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E5909E1A18EB5DE30006EFEF /* SSPokerViewCell.m */; };
 		E5909E2018EB70BE0006EFEF /* UIImage+MainBundleImage.m in Sources */ = {isa = PBXBuildFile; fileRef = E5909E1F18EB70BE0006EFEF /* UIImage+MainBundleImage.m */; };
-		E5DAFAD418E9AF5F00CB05F3 /* SSSolitaireView.m in Sources */ = {isa = PBXBuildFile; fileRef = E5DAFAD318E9AF5F00CB05F3 /* SSSolitaireView.m */; };
-		E5DAFAD818E9B17500CB05F3 /* SSCard.m in Sources */ = {isa = PBXBuildFile; fileRef = E5DAFAD718E9B17500CB05F3 /* SSCard.m */; };
+		E590F6A118F6C5500077E789 /* AudioEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = E590F69A18F6C5500077E789 /* AudioEngine.m */; };
+		E590F6A318F6C5500077E789 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = E590F6A018F6C5500077E789 /* KeychainItemWrapper.m */; };
+		E590F6A518F6C5610077E789 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E590F6A418F6C5610077E789 /* Security.framework */; };
+		E590F6A718F6C5680077E789 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E590F6A618F6C5680077E789 /* AVFoundation.framework */; };
+		E590F6B018F6C6420077E789 /* button.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E590F6A918F6C6420077E789 /* button.mp3 */; };
+		E590F6B118F6C6420077E789 /* clear.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E590F6AA18F6C6420077E789 /* clear.mp3 */; };
+		E590F6B218F6C6420077E789 /* deal_card.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E590F6AB18F6C6420077E789 /* deal_card.mp3 */; };
+		E590F6B318F6C6420077E789 /* move_card.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E590F6AC18F6C6420077E789 /* move_card.mp3 */; };
+		E590F6B418F6C6420077E789 /* opening.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E590F6AD18F6C6420077E789 /* opening.mp3 */; };
+		E590F6B518F6C6420077E789 /* play.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E590F6AE18F6C6420077E789 /* play.mp3 */; };
+		E590F6B618F6C6420077E789 /* put_card.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E590F6AF18F6C6420077E789 /* put_card.mp3 */; };
+		E5DAFAD418E9AF5F00CB05F3 /* SSPokerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E5DAFAD318E9AF5F00CB05F3 /* SSPokerView.m */; };
+		E5DAFAD818E9B17500CB05F3 /* SSPoker.m in Sources */ = {isa = PBXBuildFile; fileRef = E5DAFAD718E9B17500CB05F3 /* SSPoker.m */; };
 		E5DCE32818E44D7C00B95064 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E5DCE32A18E44D7C00B95064 /* Localizable.strings */; };
 		E5DCE34618E455E900B95064 /* free_btn_one_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5DCE32C18E455E900B95064 /* free_btn_one_on@2x.png */; };
 		E5DCE34718E455E900B95064 /* free_btn_one@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5DCE32D18E455E900B95064 /* free_btn_one@2x.png */; };
@@ -838,6 +848,8 @@
 		E50BD98818E31C700087C170 /* enemy_101_card@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "enemy_101_card@2x.png"; sourceTree = "<group>"; };
 		E521788518D562E80035B628 /* SSPhysicalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSPhysicalView.h; sourceTree = "<group>"; };
 		E521788618D562E80035B628 /* SSPhysicalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSPhysicalView.m; sourceTree = "<group>"; };
+		E58B01C118F12F89002623CB /* SSPokerViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSPokerViewLayout.h; sourceTree = "<group>"; };
+		E58B01C218F12F89002623CB /* SSPokerViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSPokerViewLayout.m; sourceTree = "<group>"; };
 		E58D46AE18E86BCC006CCEEA /* story_back_btn_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "story_back_btn_on@2x.png"; sourceTree = "<group>"; };
 		E58D46AF18E86BCC006CCEEA /* story_back_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "story_back_btn@2x.png"; sourceTree = "<group>"; };
 		E58D4B2118E86C19006CCEEA /* story_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "story_bg@2x.png"; sourceTree = "<group>"; };
@@ -1068,17 +1080,27 @@
 		E58F84F518DEACA400C3CDC3 /* enemy_074_not_clear@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "enemy_074_not_clear@2x.png"; sourceTree = "<group>"; };
 		E590798618D57D9F008E2274 /* SSNutrientButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSNutrientButton.h; sourceTree = "<group>"; };
 		E590798718D57D9F008E2274 /* SSNutrientButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSNutrientButton.m; sourceTree = "<group>"; };
-		E5909E1618EB5DB30006EFEF /* SSCardFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSCardFlowLayout.h; sourceTree = "<group>"; };
-		E5909E1718EB5DB30006EFEF /* SSCardFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSCardFlowLayout.m; sourceTree = "<group>"; };
-		E5909E1918EB5DE30006EFEF /* SSCardCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSCardCell.h; sourceTree = "<group>"; };
-		E5909E1A18EB5DE30006EFEF /* SSCardCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSCardCell.m; sourceTree = "<group>"; };
-		E5909E1C18EB63B40006EFEF /* SSSolitaireView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSSolitaireView.xib; sourceTree = "<group>"; };
+		E5909E1918EB5DE30006EFEF /* SSPokerViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSPokerViewCell.h; sourceTree = "<group>"; };
+		E5909E1A18EB5DE30006EFEF /* SSPokerViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSPokerViewCell.m; sourceTree = "<group>"; };
 		E5909E1E18EB70BE0006EFEF /* UIImage+MainBundleImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+MainBundleImage.h"; sourceTree = "<group>"; };
 		E5909E1F18EB70BE0006EFEF /* UIImage+MainBundleImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MainBundleImage.m"; sourceTree = "<group>"; };
-		E5DAFAD218E9AF5F00CB05F3 /* SSSolitaireView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSSolitaireView.h; sourceTree = "<group>"; };
-		E5DAFAD318E9AF5F00CB05F3 /* SSSolitaireView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSSolitaireView.m; sourceTree = "<group>"; };
-		E5DAFAD618E9B17500CB05F3 /* SSCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSCard.h; sourceTree = "<group>"; };
-		E5DAFAD718E9B17500CB05F3 /* SSCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSCard.m; sourceTree = "<group>"; };
+		E590F69918F6C5500077E789 /* AudioEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioEngine.h; sourceTree = "<group>"; };
+		E590F69A18F6C5500077E789 /* AudioEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioEngine.m; sourceTree = "<group>"; };
+		E590F69F18F6C5500077E789 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
+		E590F6A018F6C5500077E789 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
+		E590F6A418F6C5610077E789 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		E590F6A618F6C5680077E789 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		E590F6A918F6C6420077E789 /* button.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = button.mp3; sourceTree = "<group>"; };
+		E590F6AA18F6C6420077E789 /* clear.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = clear.mp3; sourceTree = "<group>"; };
+		E590F6AB18F6C6420077E789 /* deal_card.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = deal_card.mp3; sourceTree = "<group>"; };
+		E590F6AC18F6C6420077E789 /* move_card.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = move_card.mp3; sourceTree = "<group>"; };
+		E590F6AD18F6C6420077E789 /* opening.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = opening.mp3; sourceTree = "<group>"; };
+		E590F6AE18F6C6420077E789 /* play.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = play.mp3; sourceTree = "<group>"; };
+		E590F6AF18F6C6420077E789 /* put_card.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = put_card.mp3; sourceTree = "<group>"; };
+		E5DAFAD218E9AF5F00CB05F3 /* SSPokerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSPokerView.h; sourceTree = "<group>"; };
+		E5DAFAD318E9AF5F00CB05F3 /* SSPokerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSPokerView.m; sourceTree = "<group>"; };
+		E5DAFAD618E9B17500CB05F3 /* SSPoker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSPoker.h; sourceTree = "<group>"; };
+		E5DAFAD718E9B17500CB05F3 /* SSPoker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSPoker.m; sourceTree = "<group>"; };
 		E5DCE32918E44D7C00B95064 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E5DCE32B18E44D8C00B95064 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E5DCE32C18E455E900B95064 /* free_btn_one_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "free_btn_one_on@2x.png"; sourceTree = "<group>"; };
@@ -1389,6 +1411,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E590F6A718F6C5680077E789 /* AVFoundation.framework in Frameworks */,
+				E590F6A518F6C5610077E789 /* Security.framework in Frameworks */,
 				E5F3D16218E7093000CBD281 /* Social.framework in Frameworks */,
 				E5F3D13F18E6ED0E00CBD281 /* MessageUI.framework in Frameworks */,
 				E5E9411518D8F0B9009D71DD /* libxml2.2.dylib in Frameworks */,
@@ -1484,6 +1508,9 @@
 		3493AC9D18CDF2FB0042603C /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				E590F69818F6C5500077E789 /* Audio */,
+				E590F69D18F6C5500077E789 /* IAP */,
+				E590F69E18F6C5500077E789 /* Security */,
 				E5E940F818D8EF57009D71DD /* WebService */,
 			);
 			path = Library;
@@ -1511,6 +1538,8 @@
 		34C7508418CAB37F00BF3FC6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E590F6A618F6C5680077E789 /* AVFoundation.framework */,
+				E590F6A418F6C5610077E789 /* Security.framework */,
 				E5F3D16118E7093000CBD281 /* Social.framework */,
 				E5E9411418D8F0B9009D71DD /* libxml2.2.dylib */,
 				34AB266918CF5D3600CE1598 /* iAd.framework */,
@@ -1530,8 +1559,8 @@
 		34C7508B18CAB37F00BF3FC6 /* SalarymanSolitaire */ = {
 			isa = PBXGroup;
 			children = (
+				E590F6B718F6C64F0077E789 /* Resource */,
 				3493AC9D18CDF2FB0042603C /* Library */,
-				3493756818CB3B4000D4BD54 /* Image */,
 				34C750BB18CAB72F00BF3FC6 /* Model */,
 				34C750BC18CAB72F00BF3FC6 /* View */,
 				34C750BA18CAB72F00BF3FC6 /* Controller */,
@@ -1639,7 +1668,9 @@
 				E5E22E5918E7D11D00897AC7 /* WUPopupView.m */,
 				3493756B18CB3BA300D4BD54 /* WUProgressView.h */,
 				3493756C18CB3BA300D4BD54 /* WUProgressView.m */,
-				E5DAFAD518E9B16400CB05F3 /* カード */,
+				E521788518D562E80035B628 /* SSPhysicalView.h */,
+				E521788618D562E80035B628 /* SSPhysicalView.m */,
+				E5DAFAD518E9B16400CB05F3 /* ポーカー */,
 				E5909E1E18EB70BE0006EFEF /* UIImage+MainBundleImage.h */,
 				E5909E1F18EB70BE0006EFEF /* UIImage+MainBundleImage.m */,
 			);
@@ -1809,22 +1840,75 @@
 			name = 05_Story;
 			sourceTree = "<group>";
 		};
-		E5DAFAD518E9B16400CB05F3 /* カード */ = {
+		E590F69818F6C5500077E789 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
-				E521788518D562E80035B628 /* SSPhysicalView.h */,
-				E521788618D562E80035B628 /* SSPhysicalView.m */,
-				E5DAFAD218E9AF5F00CB05F3 /* SSSolitaireView.h */,
-				E5DAFAD318E9AF5F00CB05F3 /* SSSolitaireView.m */,
-				E5909E1C18EB63B40006EFEF /* SSSolitaireView.xib */,
-				E5DAFAD618E9B17500CB05F3 /* SSCard.h */,
-				E5DAFAD718E9B17500CB05F3 /* SSCard.m */,
-				E5909E1618EB5DB30006EFEF /* SSCardFlowLayout.h */,
-				E5909E1718EB5DB30006EFEF /* SSCardFlowLayout.m */,
-				E5909E1918EB5DE30006EFEF /* SSCardCell.h */,
-				E5909E1A18EB5DE30006EFEF /* SSCardCell.m */,
+				E590F69918F6C5500077E789 /* AudioEngine.h */,
+				E590F69A18F6C5500077E789 /* AudioEngine.m */,
 			);
-			name = "カード";
+			path = Audio;
+			sourceTree = "<group>";
+		};
+		E590F69D18F6C5500077E789 /* IAP */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = IAP;
+			sourceTree = "<group>";
+		};
+		E590F69E18F6C5500077E789 /* Security */ = {
+			isa = PBXGroup;
+			children = (
+				E590F69F18F6C5500077E789 /* KeychainItemWrapper.h */,
+				E590F6A018F6C5500077E789 /* KeychainItemWrapper.m */,
+			);
+			path = Security;
+			sourceTree = "<group>";
+		};
+		E590F6A818F6C6420077E789 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				E590F6B818F6C6900077E789 /* Effect */,
+				E590F6AA18F6C6420077E789 /* clear.mp3 */,
+				E590F6AD18F6C6420077E789 /* opening.mp3 */,
+				E590F6AE18F6C6420077E789 /* play.mp3 */,
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
+		E590F6B718F6C64F0077E789 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				E590F6A818F6C6420077E789 /* Audio */,
+				3493756818CB3B4000D4BD54 /* Image */,
+			);
+			name = Resource;
+			sourceTree = "<group>";
+		};
+		E590F6B818F6C6900077E789 /* Effect */ = {
+			isa = PBXGroup;
+			children = (
+				E590F6A918F6C6420077E789 /* button.mp3 */,
+				E590F6AB18F6C6420077E789 /* deal_card.mp3 */,
+				E590F6AC18F6C6420077E789 /* move_card.mp3 */,
+				E590F6AF18F6C6420077E789 /* put_card.mp3 */,
+			);
+			name = Effect;
+			sourceTree = "<group>";
+		};
+		E5DAFAD518E9B16400CB05F3 /* ポーカー */ = {
+			isa = PBXGroup;
+			children = (
+				E5DAFAD618E9B17500CB05F3 /* SSPoker.h */,
+				E5DAFAD718E9B17500CB05F3 /* SSPoker.m */,
+				E5DAFAD218E9AF5F00CB05F3 /* SSPokerView.h */,
+				E5DAFAD318E9AF5F00CB05F3 /* SSPokerView.m */,
+				E5909E1918EB5DE30006EFEF /* SSPokerViewCell.h */,
+				E5909E1A18EB5DE30006EFEF /* SSPokerViewCell.m */,
+				E58B01C118F12F89002623CB /* SSPokerViewLayout.h */,
+				E58B01C218F12F89002623CB /* SSPokerViewLayout.m */,
+			);
+			name = "ポーカー";
 			sourceTree = "<group>";
 		};
 		E5DCE36318E457E400B95064 /* 警告画面 */ = {
@@ -2577,6 +2661,7 @@
 				E5E0E7BB18D7A0E00047DE80 /* card_1_10@2x.png in Resources */,
 				E58F857718DEACA400C3CDC3 /* enemy_047_banner@2x.png in Resources */,
 				E5E0E7D718D7A0E00047DE80 /* card_3_12@2x.png in Resources */,
+				E590F6B118F6C6420077E789 /* clear.mp3 in Resources */,
 				E58F850918DEACA400C3CDC3 /* enemy_010_clear@2x.png in Resources */,
 				E5E737C318E1BD2900E5A40A /* stage_045_story@2x.png in Resources */,
 				E58F853D18DEACA400C3CDC3 /* enemy_027_not_clear@2x.png in Resources */,
@@ -2593,6 +2678,7 @@
 				E5E0E7C418D7A0E00047DE80 /* card_2_6@2x.png in Resources */,
 				E58F851A18DEACA400C3CDC3 /* enemy_016_banner@2x.png in Resources */,
 				E5EA753918DCF361002E2BAF /* btn_shop_on@2x.png in Resources */,
+				E590F6B418F6C6420077E789 /* opening.mp3 in Resources */,
 				E50BD9D518E31C700087C170 /* enemy_077_card@2x.png in Resources */,
 				E58F854618DEACA400C3CDC3 /* enemy_030_not_clear@2x.png in Resources */,
 				E5E737D018E1BD2900E5A40A /* stage_058_story@2x.png in Resources */,
@@ -2634,7 +2720,6 @@
 				E5E737ED18E1BD2900E5A40A /* stage_087_story@2x.png in Resources */,
 				E58F85BC18DEACA400C3CDC3 /* enemy_070_banner@2x.png in Resources */,
 				E5EA754518DCF9F1002E2BAF /* arrow_down_red@2x.png in Resources */,
-				E5909E1D18EB63B40006EFEF /* SSSolitaireView.xib in Resources */,
 				E58D4B3418E87276006CCEEA /* term_play_btn@2x.png in Resources */,
 				E50BD9A418E31C700087C170 /* enemy_028_card@2x.png in Resources */,
 				E5F3D1BB18E71C9900CBD281 /* popup_icon_yamafuda@2x.png in Resources */,
@@ -2932,12 +3017,14 @@
 				E5EA754B18DCF9F1002E2BAF /* here_check@2x.png in Resources */,
 				E50BD9C418E31C700087C170 /* enemy_060_card@2x.png in Resources */,
 				E50BD9E218E31C700087C170 /* enemy_090_card@2x.png in Resources */,
+				E590F6B518F6C6420077E789 /* play.mp3 in Resources */,
 				E5F3D15818E6F22900CBD281 /* SharingMessage.plist in Resources */,
 				E5E0E7EA18D7A0E00047DE80 /* physical_bar@2x.png in Resources */,
 				E5EA752E18DCF2DA002E2BAF /* btn_recommend@2x.png in Resources */,
 				E58F854918DEACA400C3CDC3 /* enemy_031_not_clear@2x.png in Resources */,
 				E5EA752518DCF271002E2BAF /* btn_freeplay_on@2x.png in Resources */,
 				E58F852518DEACA400C3CDC3 /* enemy_019_not_clear@2x.png in Resources */,
+				E590F6B618F6C6420077E789 /* put_card.mp3 in Resources */,
 				E5E737DB18E1BD2900E5A40A /* stage_069_story@2x.png in Resources */,
 				E5EA754918DCF9F1002E2BAF /* back_text@2x.png in Resources */,
 				E58D4B2F18E86F02006CCEEA /* free_header_timeframe@2x.png in Resources */,
@@ -2978,6 +3065,7 @@
 				E5E7379918E1BD2900E5A40A /* stage_003_story@2x.png in Resources */,
 				E5E737DC18E1BD2900E5A40A /* stage_070_story@2x.png in Resources */,
 				E5DCE34D18E455E900B95064 /* free_btn_mode@2x.png in Resources */,
+				E590F6B318F6C6420077E789 /* move_card.mp3 in Resources */,
 				E5E0E7A818D7A0E00047DE80 /* bg_table@2x.png in Resources */,
 				E5DCE34C18E455E900B95064 /* free_btn_mode_on@2x.png in Resources */,
 				E5E737E318E1BD2900E5A40A /* stage_077_story@2x.png in Resources */,
@@ -3098,6 +3186,7 @@
 				E50BD9CC18E31C700087C170 /* enemy_068_card@2x.png in Resources */,
 				E5E737C218E1BD2900E5A40A /* stage_044_story@2x.png in Resources */,
 				E50BD99D18E31C700087C170 /* enemy_021_card@2x.png in Resources */,
+				E590F6B018F6C6420077E789 /* button.mp3 in Resources */,
 				E5EA755418DCFE63002E2BAF /* enemy_001_not_clear@2x.png in Resources */,
 				E58F853E18DEACA400C3CDC3 /* enemy_028_banner@2x.png in Resources */,
 				E58D4B3818E87293006CCEEA /* stage_001_term@2x.png in Resources */,
@@ -3123,6 +3212,7 @@
 				348D99B518CB41040079D2EF /* RecommendViewController.xib in Resources */,
 				E58F851F18DEACA400C3CDC3 /* enemy_017_not_clear@2x.png in Resources */,
 				E5EA754818DCF9F1002E2BAF /* back_btn@2x.png in Resources */,
+				E590F6B218F6C6420077E789 /* deal_card.mp3 in Resources */,
 				E50BD9B418E31C700087C170 /* enemy_044_card@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3142,6 +3232,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E58B01C318F12F89002623CB /* SSPokerViewLayout.m in Sources */,
 				E5E9411018D8EF57009D71DD /* WebService.m in Sources */,
 				E5F3D16618E7115600CBD281 /* SSChallengeController.m in Sources */,
 				3493756718CB268A00D4BD54 /* SolitaireManager.m in Sources */,
@@ -3165,24 +3256,25 @@
 				348D99B418CB41040079D2EF /* RecommendViewController.m in Sources */,
 				349DBE2E18D0A1CC00D7037C /* SSStage.m in Sources */,
 				E5E9411318D8EF57009D71DD /* XmlParserUtil.m in Sources */,
+				E590F6A118F6C5500077E789 /* AudioEngine.m in Sources */,
 				E5E22E5D18E7D32E00897AC7 /* UIView+Screenshot.m in Sources */,
 				E5909E2018EB70BE0006EFEF /* UIImage+MainBundleImage.m in Sources */,
 				3494F42E18CC946300B714F1 /* SSPurchaseView.m in Sources */,
 				348D99CC18CB43090079D2EF /* StoryViewController.m in Sources */,
 				E5E9410F18D8EF57009D71DD /* WebResponse.m in Sources */,
-				E5DAFAD818E9B17500CB05F3 /* SSCard.m in Sources */,
+				E5DAFAD818E9B17500CB05F3 /* SSPoker.m in Sources */,
 				E5E22E5718E7AAB800897AC7 /* UIButton+Solitaire.m in Sources */,
 				E5E9410C18D8EF57009D71DD /* Reachability.m in Sources */,
 				E5EF2CF818DD52D20029F928 /* NotificationView.m in Sources */,
-				E5DAFAD418E9AF5F00CB05F3 /* SSSolitaireView.m in Sources */,
+				E5DAFAD418E9AF5F00CB05F3 /* SSPokerView.m in Sources */,
 				34C750CA18CAC43A00BF3FC6 /* HelpInfoViewController.m in Sources */,
 				34C7509218CAB37F00BF3FC6 /* main.m in Sources */,
-				E5909E1818EB5DB30006EFEF /* SSCardFlowLayout.m in Sources */,
 				E521788718D562E80035B628 /* SSPhysicalView.m in Sources */,
 				E5F3D11918E6CCA700CBD281 /* SSGiveupAlertView.m in Sources */,
+				E590F6A318F6C5500077E789 /* KeychainItemWrapper.m in Sources */,
 				E5F3D12118E6DC8F00CBD281 /* SSRetryAlertView.m in Sources */,
 				348D99C018CB42810079D2EF /* SelectStageViewController.m in Sources */,
-				E5909E1B18EB5DE30006EFEF /* SSCardCell.m in Sources */,
+				E5909E1B18EB5DE30006EFEF /* SSPokerViewCell.m in Sources */,
 				3494F42518CC542C00B714F1 /* SSPopupView.m in Sources */,
 				E5F3D15E18E6F59100CBD281 /* SharingMessage.m in Sources */,
 				E5F3D16B18E7118500CBD281 /* SSFreePlayController.m in Sources */,

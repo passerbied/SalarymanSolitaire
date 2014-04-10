@@ -62,7 +62,7 @@
             stage.stageID = [[dic objectForKey:@"StageID"] integerValue];
             stage.enemyID = [[dic objectForKey:@"EnemyID"] integerValue];
             stage.minClearTimes = [[dic objectForKey:@"MinClearTimes"] integerValue];
-            stage.numberOfCards = [[dic objectForKey:@"NumberOfCards"] integerValue];
+            stage.numberOfPokers = [[dic objectForKey:@"NumberOfPokers"] integerValue];
             stage.returnTimes = [[dic objectForKey:@"ReturnTimes"] integerValue];
             stage.title = [dic objectForKey:@"StageName"];
             [_stageInfos addObject:stage];

@@ -149,3 +149,81 @@
     NSLog(@"广告关闭, 用户关闭模态窗口时回调");
 }
 @end
+
+
+@implementation UIDevice (iPhone5)
+
++ (BOOL)isPhone5;
+{
+    static dispatch_once_t pred = 0;
+    static BOOL _isPhone5 = NO;
+    dispatch_once(&pred, ^{
+        if (CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size)) {
+            _isPhone5 = YES;
+        }
+    });
+    return _isPhone5;
+}
+@end
+
+
+@implementation AudioEngine (Solitaire)
+
++ (void)playAudioWith:(SolitaireAudioID)audioID;
+{
+    AudioEngineType engine;
+    NSString *audioName = nil;
+    switch (audioID) {
+        case SolitaireAudioIDButtonClicked:
+            // ボタン押下(閉じる、戻るボタン以外)
+            audioName = @"button.mp3";
+            engine = AudioEngineTypeEffect;
+            break;
+            
+        case SolitaireAudioIDMainMusic:
+            // 背景音声（プレイ画面以外）
+            audioName = @"opening.mp3";
+            engine = AudioEngineTypeBackground;
+            break;
+            
+        case SolitaireAudioIDPlayMusic:
+            // プレイ画面の背景音声
+            audioName = @"play.mp3";
+            engine = AudioEngineTypeBackground;
+            break;
+            
+        case SolitaireAudioIDCardPut:
+            // カードを置いた時
+            audioName = @"put_card.mp3";
+            engine = AudioEngineTypeEffect;
+            break;
+            
+        case SolitaireAudioIDCardDeal:
+            // カード配布時
+            audioName = @"deal_card.mp3";
+            engine = AudioEngineTypeEffect;
+            break;
+            
+        case SolitaireAudioIDCardMove:
+            // カードを選択／移動する時
+            audioName = @"move_card.mp3";
+            engine = AudioEngineTypeEffect;
+            break;
+            
+        case SolitaireAudioIDClear:
+            // ゲームクリア時
+            audioName = @"clear.mp3";
+            engine = AudioEngineTypeEffect;
+            break;
+            
+        default:
+            break;
+    }
+    if (!audioName) {
+        return;
+    }
+    
+    [AudioEngine playAudioWithName:audioName engine:engine];
+}
+
+@end

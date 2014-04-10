@@ -74,6 +74,9 @@
 // ボタン「次へ」タップ処理
 - (IBAction)nextAction:(id)sender;
 {
+    // ボタン押下音声再生
+    [AudioEngine playAudioWith:SolitaireAudioIDButtonClicked];
+
     // 初回起動設定
     [[SolitaireManager sharedManager] setFirstTimePlay];
     

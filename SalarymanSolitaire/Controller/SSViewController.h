@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "UIButton+UIImage.h"
+#import "AudioEngine.h"
 
 @interface SSViewController : UIViewController
 {
@@ -29,4 +30,25 @@
 // インタースティシャル広告表示
 - (void)presentInterstitialAD;
 
+@end
+
+@interface UIDevice (iPhone5)
+
++ (BOOL)isPhone5;
+@end
+
+typedef enum
+{
+    SolitaireAudioIDButtonClicked,
+    SolitaireAudioIDMainMusic,
+    SolitaireAudioIDPlayMusic,
+    SolitaireAudioIDCardPut,
+    SolitaireAudioIDCardDeal,
+    SolitaireAudioIDCardMove,
+    SolitaireAudioIDClear
+} SolitaireAudioID;
+
+@interface AudioEngine (Solitaire)
+
++ (void)playAudioWith:(SolitaireAudioID)audioID;
 @end

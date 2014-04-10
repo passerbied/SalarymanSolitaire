@@ -27,8 +27,8 @@ typedef enum
 @property (nonatomic) NSInteger minClearTimes;
 @property (nonatomic) NSInteger clearTimes;
 
-// カード枚数
-@property (nonatomic) NSInteger numberOfCards;
+// ポーカー枚数
+@property (nonatomic) NSInteger numberOfPokers;
 
 // 山札戻し回数
 @property (nonatomic) NSInteger returnTimes;

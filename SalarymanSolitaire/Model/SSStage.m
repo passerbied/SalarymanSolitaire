@@ -22,6 +22,6 @@
     }
     
     // その他条件
-    return [NSString stringWithFormat:@"%d枚めくり・%@\n%d回クリアする。", _numberOfCards, returnCondition, _minClearTimes];
+    return [NSString stringWithFormat:@"%d枚めくり・%@\n%d回クリアする。", _numberOfPokers, returnCondition, _minClearTimes];
 }
 @end

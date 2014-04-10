@@ -60,6 +60,9 @@
 // ヘルプ情報表示
 - (IBAction)showHelpInfoAction:(id)sender;
 {
+    // ボタン押下音声再生
+    [AudioEngine playAudioWith:SolitaireAudioIDButtonClicked];
+    
     HelpInfoViewController *controller = [HelpInfoViewController controller];
     [self.navigationController pushViewController:controller animated:YES];
 }
@@ -67,12 +70,18 @@
 // フリープレイモード
 - (IBAction)freePlayAction:(id)sender;
 {
+    // ボタン押下音声再生
+    [AudioEngine playAudioWith:SolitaireAudioIDButtonClicked];
+
     [[SSItemAlertView alert] show];
 }
 
 // おすすめ情報表示
 - (IBAction)showRecommendInfoAction:(id)sender;
 {
+    // ボタン押下音声再生
+    [AudioEngine playAudioWith:SolitaireAudioIDButtonClicked];
+
     SSClearPopupView *controller = [SSClearPopupView new];
     [controller show];
 }
@@ -80,8 +89,10 @@
 // プレイスタート
 - (IBAction)gameStartAction:(id)sender;
 {
+    // ボタン押下音声再生
+    [AudioEngine playAudioWith:SolitaireAudioIDButtonClicked];
+
     UIViewController *controller = nil;
-    
     if ([[SolitaireManager sharedManager] isFirstTime]) {
         // 初回起動時のみチュートリアル画面に遷移する
         controller = [TutorialViewController controller];

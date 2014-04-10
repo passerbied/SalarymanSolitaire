@@ -10,5 +10,7 @@
 #import "SSStage.h"
 
 @interface SSChallengeController : PlayViewController
+// ポーカービュー
+@property (nonatomic, strong) SSPokerView *pokerView;
 
 @end
