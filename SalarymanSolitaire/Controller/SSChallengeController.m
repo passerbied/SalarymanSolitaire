@@ -7,12 +7,20 @@
 //
 
 #import "SSChallengeController.h"
+#import "WUProgressView.h"
 #import "SSPhysicalView.h"
 #import "SSPokerView.h"
+#import "PurchaseManager.h"
+#import "SSShopView.h"
+
 @interface SSChallengeController ()
 {
     // ステージ情報
     SSStage                             *_stage;
+    PurchaseManager                     *_manager;
+    
+    // 商品リスト
+    NSSet                               *_productIdentifiers;
 }
 
 // 体力ビュー
@@ -67,7 +75,7 @@
     // 敵イメージ設定
     if ([UIDevice isPhone5]) {
         // 敵のイメージを設定する
-        NSString *name = [NSString stringWithFormat:@"enemy_%03d_banner.png", _stage.enemyID];
+        NSString *name = [NSString stringWithFormat:@"enemy_%03d_banner.png", (int)_stage.enemyID];
         [self.enemyView setImage:[UIImage temporaryImageNamed:name]];
     } else {
         // 敵イメージを非表示にする
@@ -139,7 +147,44 @@
 - (IBAction)presentShopAction:(id)sender;
 {
     // ボタン押下音声再生
-    [AudioEngine playAudioWith:SolitaireAudioIDButtonClicked];
-
+    [AudioEngine playAudioWith:SolitaireAudioIDCardDeal];
+    
+    // 待ち画面表示
+    [WUProgressView showWithStatus:@"商品情報取得中..."];
+    
+    // 商品IDセット編集
+    if (!_productIdentifiers) {
+        _productIdentifiers = [NSSet setWithObjects:
+                               kProductIdentifierPowerUp1,
+                               kProductIdentifierPowerUp2,
+                               kProductIdentifierPowerUp3,
+                               kProductIdentifierPowerUp4,
+                               kProductIdentifierPowerUp5,
+                               kProductIdentifierYamafuda5,
+                               kProductIdentifierYamafuda30,
+                               kProductIdentifierYamafuda60,
+                               kProductIdentifierDrink3,
+                               kProductIdentifierDrink20,
+                               kProductIdentifierDrink50,
+                               nil];
+    }
+    if (!_manager) {
+        _manager = [[PurchaseManager alloc ] initWithProductIdentifiers:_productIdentifiers];
+        _manager.sandboxMode = kIAPSandBoxMode;
+    }
+    
+    [_manager requestProductsWithCompletion:^(NSArray *products, PurchaseStatus status) {
+        // ステータスチェック
+        if (status == PurchaseStatusOK) {
+            // 請求成功の場合、取得した商品情報を画面に表示する。
+            SSShopView *popopView = [[SSShopView alloc] init];
+            popopView.products = products;
+            popopView.view.bounds = CGRectMake(0, 0, 280, 400);
+            [popopView showInViewController:self center:self.view.center];
+        }
+        
+        // 待ち画面を隠す
+        [WUProgressView dismiss];
+    }];
 }
 @end

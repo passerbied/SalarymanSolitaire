@@ -166,7 +166,7 @@
 {
     NSInteger minute = _currentTime / kSecondPerMinute;
     NSInteger second = _currentTime % kSecondPerMinute;
-    return [NSString stringWithFormat:@"%02d:%02d", minute, second];
+    return [NSString stringWithFormat:@"%02d:%02d", (int)minute, (int)second];
 }
 
 - (void)showCurrentTimeAction:(NSTimer *)timer

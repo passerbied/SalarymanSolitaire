@@ -87,7 +87,7 @@ static const CGFloat AlertViewButtonMarginBottom = 15.0;
         _alertView.layer.cornerRadius = 12.0;
         _alertView.layer.opacity = .95;
         _alertView.clipsToBounds = YES;
-        UIImage *image = [UIImage imageNamed:@"popup_base.png"];
+        UIImage *image = [UIImage imageNamed:@"popup_alert.png"];
         _backgroundImageView = [[UIImageView alloc] initWithImage:image];
         _backgroundImageView.frame = _alertView.bounds;
         [_alertView insertSubview:_backgroundImageView atIndex:0];

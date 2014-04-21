@@ -41,10 +41,13 @@
                     </subviews>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="none" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="15" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="fN1-b2-NqI">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="15" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="fN1-b2-NqI">
                     <rect key="frame" x="0.0" y="38" width="320" height="530"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="320" id="xLu-Yu-cfQ"/>
+                    </constraints>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="0DJ-18-zfC"/>
@@ -53,6 +56,11 @@
                 </tableView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="fN1-b2-NqI" secondAttribute="bottom" id="0Uv-kr-zjU"/>
+                <constraint firstItem="fN1-b2-NqI" firstAttribute="top" secondItem="1" secondAttribute="top" constant="38" id="Zwd-i1-71o"/>
+                <constraint firstItem="fN1-b2-NqI" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="uh0-tO-GVB"/>
+            </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
     </objects>

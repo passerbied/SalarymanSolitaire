@@ -14,8 +14,10 @@ typedef enum
     AudioEngineTypeEffect               = 1 << 0,
     AudioEngineTypeMusic                = 1 << 1,
     AudioEngineTypeBackground           = 1 << 2,
-    AudioEngineTypeAll                  = (AudioEngineTypeEffect    |
-                                           AudioEngineTypeMusic     |
+    AudioEngineTypeSerial               = 1 << 3,
+    AudioEngineTypeAll                  = (AudioEngineTypeEffect        |
+                                           AudioEngineTypeMusic         |
+                                           AudioEngineTypeSerial        |
                                            AudioEngineTypeBackground)
 } AudioEngineType;
 

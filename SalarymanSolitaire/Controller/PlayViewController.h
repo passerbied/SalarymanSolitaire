@@ -8,6 +8,7 @@
 
 #import "SSViewController.h"
 #import "SSPokerView.h"
+#import "PurchaseManager.h"
 
 @interface PlayViewController : SSViewController
 

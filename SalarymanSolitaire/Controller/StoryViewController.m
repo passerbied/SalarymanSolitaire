@@ -68,7 +68,7 @@
     
     // ステージ番号およびタイトルを設定する
     self.stage = [[SolitaireManager sharedManager] selectedStage];
-    self.labelStageID.text = [NSString stringWithFormat:@"STAGE %d", self.stage.stageID];
+    self.labelStageID.text = [NSString stringWithFormat:@"STAGE %d", (int)self.stage.stageID];
     self.labelStageTitle.text = self.stage.title;
 }
 
@@ -94,7 +94,7 @@
     [self.view addSubview:self.conditionView];
     
     // 敵の画像
-    NSString *imageName = [NSString stringWithFormat:@"enemy_%03d_poker.png", self.stage.stageID];
+    NSString *imageName = [NSString stringWithFormat:@"enemy_%03d_poker.png", (int)self.stage.stageID];
     UIImage *photoImage = [UIImage temporaryImageNamed:imageName];
     self.enemyPhotoView.image = photoImage;
     
@@ -132,7 +132,7 @@
     UIImageView *imageView = [[UIImageView alloc] init];
     UIButton *btnNext = [UIButton buttonWithImage:@"story_next_btn"];
     [btnNext addTarget:self action:@selector(nextAction:) forControlEvents:UIControlEventTouchUpInside];
-    NSString *imageName = [NSString stringWithFormat:@"stage_%03d_story.png", self.stage.stageID];
+    NSString *imageName = [NSString stringWithFormat:@"stage_%03d_story.png", (int)self.stage.stageID];
     UIImage *storyImage = [UIImage temporaryImageNamed:imageName];
     [imageView setImage:storyImage];
     [scrollView addSubview:imageView];

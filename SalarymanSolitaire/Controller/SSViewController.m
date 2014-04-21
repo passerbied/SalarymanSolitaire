@@ -46,7 +46,21 @@
         CGRect rect = CGRectMake(0.0f, y, bannerView.bounds.size.width, bannerView.bounds.size.height);
         bannerView.frame = rect;
         bannerView.delegate = self;
+        bannerView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleWidth;
+        bannerView.translatesAutoresizingMaskIntoConstraints = NO;
         [self.view addSubview:bannerView];
+//        
+////        if (bannerView == nil) {
+//        NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(bannerView);
+//        
+////            [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[bannerView]-0-|"
+////                                                     options:0
+////                                                     metrics:nil
+////                                                       views:viewsDictionary]];
+////
+////            
+////            + (NSArray *)constraintsWithVisualFormat:(NSString *)format options:(NSLayoutFormatOptions)opts metrics:(NSDictionary *)metrics views:(NSDictionary *)views;
+//        }
     } else {
         bannerView.delegate = nil;
         [bannerView removeFromSuperview];
@@ -97,7 +111,7 @@
 
 - (void)bannerViewDidLoadAd:(ADBannerView *)banner
 {
-    NSLog(@"iAd Load");
+    DebugLog(@"iAd Load");
     [UIView animateWithDuration:0.2f animations:^{
         banner.alpha = 1.0f;
     }];
@@ -105,9 +119,9 @@
 
 - (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
 {
-    NSLog(@"iAd Failed");
+    DebugLog(@"iAd Failed");
     [UIView animateWithDuration:0.2f animations:^{
-        banner.alpha = 0.0f;
+        banner.alpha = 1.0f;
     }];
 }
 
@@ -119,34 +133,34 @@
 {
     self.interstitialAD = [[SolitaireManager sharedManager] sharedInterstitialAD];
     self.interstitialAD.delegate = self;
-    NSLog(@"interstitialAD");
+    DebugLog(@"interstitialAD");
 }
 
 -(void)interstitialAdDidLoad:(ADInterstitialAd *)interstitialAd
 {
     [interstitialAd presentInView:self.view];
-    NSLog(@"广告加载成功");
+    DebugLog(@"广告加载成功");
 }
 
 -(void)interstitialAdDidUnload:(ADInterstitialAd *)interstitialAd
 {
-    NSLog(@"广告卸载");
+    DebugLog(@"广告卸载");
 }
 
 -(void)interstitialAd:(ADInterstitialAd *)interstitialAd didFailWithError:(NSError *)error
 {
-    NSLog(@"广告加载失败");
+    DebugLog(@"广告加载失败");
 }
 
 -(BOOL)interstitialAdActionShouldBegin:(ADInterstitialAd *)interstitialAd willLeaveApplication:(BOOL)willLeave
 {
-    NSLog(@"可以执行一个广告动作");
+    DebugLog(@"可以执行一个广告动作");
     return YES;
 }
 
 -(void)interstitialAdActionDidFinish:(ADInterstitialAd *)interstitialAd
 {
-    NSLog(@"广告关闭, 用户关闭模态窗口时回调");
+    DebugLog(@"广告关闭, 用户关闭模态窗口时回调");
 }
 @end
 
@@ -200,8 +214,8 @@
             
         case SolitaireAudioIDCardDeal:
             // カード配布時
-            audioName = @"deal_card.mp3";
-            engine = AudioEngineTypeEffect;
+            audioName = @"deal_card.caf";
+            engine = AudioEngineTypeSerial;
             break;
             
         case SolitaireAudioIDCardMove:

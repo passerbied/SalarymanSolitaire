@@ -12,7 +12,7 @@
 - (void)show
 {
     self.alertView.alertTitle = @"最初からやり直しますか？";
-    self.alertView.backgroundImage = [UIImage imageNamed:@"popup_base.png"];
+    self.alertView.backgroundImage = [UIImage imageNamed:@"popup_alert.png"];
     
     [self.alertView addButton:[UIButton buttonWithImage:@"free_btn_yes"]];
     [self.alertView addButton:[UIButton buttonWithImage:@"free_btn_no"]];

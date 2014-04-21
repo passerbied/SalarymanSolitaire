@@ -13,7 +13,7 @@
 {
     self.alertView.alertTitle = @"ポーカーの引き枚数を\n選んで下さい。";
     [self.alertView setCloseButtonHidden:NO];
-    self.alertView.backgroundImage = [UIImage imageNamed:@"popup_base.png"];
+    self.alertView.backgroundImage = [UIImage imageNamed:@"popup_alert.png"];
     
     [self.alertView addButton:[UIButton buttonWithImage:@"free_btn_one"]];
     [self.alertView addButton:[UIButton buttonWithImage:@"free_btn_three"]];

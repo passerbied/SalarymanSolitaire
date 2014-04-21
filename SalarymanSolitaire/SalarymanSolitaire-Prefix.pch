@@ -11,9 +11,9 @@
 #endif
 
 #ifdef DEBUG
-#define __LOG( format , ...)        NSLog(format, ## __VA_ARGS__);
+#define DebugLog( format , ...)         NSLog(format, ## __VA_ARGS__);
 #else
-#define __LOG( format , ... )       //
+#define DebugLog( format , ... )        //
 #endif
 
 #define LocalizedString(key)            NSLocalizedString(key, nil)
@@ -37,5 +37,24 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     #import "UIImage+MainBundleImage.h"
 #endif
 
+// 商品ID定義
+//
+// 体力＋１
+#define kProductIdentifierPowerUp1      @"SolitaireItemPowerUp1"
+#define kProductIdentifierPowerUp2      @"SolitaireItemPowerUp2"
+#define kProductIdentifierPowerUp3      @"SolitaireItemPowerUp3"
+#define kProductIdentifierPowerUp4      @"SolitaireItemPowerUp4"
+#define kProductIdentifierPowerUp5      @"SolitaireItemPowerUp5"
 
+// 山札戻し
+#define kProductIdentifierYamafuda5     @"SolitaireItemYamafuda5"
+#define kProductIdentifierYamafuda30    @"SolitaireItemYamafuda30"
+#define kProductIdentifierYamafuda60    @"SolitaireItemYamafuda60"
+
+// 栄養剤
+#define kProductIdentifierDrink3        @"SolitaireItemDrink3"
+#define kProductIdentifierDrink20       @"SolitaireItemDrink20"
+#define kProductIdentifierDrink50       @"SolitaireItemDrink50"
+
+#define kIAPSandBoxMode                 YES
 

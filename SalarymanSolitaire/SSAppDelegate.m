@@ -24,7 +24,7 @@
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    SSChallengeController *controller = [SSChallengeController controller];
+    TopViewController *controller = [TopViewController controller];
     UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController:controller];
     self.window.rootViewController = navigation;
     [self.window makeKeyAndVisible];

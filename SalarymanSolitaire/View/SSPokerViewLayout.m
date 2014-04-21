@@ -79,7 +79,7 @@
     if (section == SSPokerSectionDeck) {
         attributes.zIndex = 0;
         CGFloat x = kPokerDeckEdgeInsetLeft + kPokerDeckInteritemSpacing*indexPath.item;
-        attributes.frame = CGRectMake(x, _locationY, self.pokerSize.width, self.pokerSize.height);        
+        attributes.frame = CGRectMake(x, _locationY, self.pokerSize.width, self.pokerSize.height);
     } else if (section <= SSPokerSectionPlaying7) {
         attributes.zIndex = indexPath.item;
         CGFloat x = kPokerPlayingEdgeInsetLeft + (kPokerSizeWidth + kPokerHorizontalSpacing)*(indexPath.section - SSPokerSectionPlaying1);
@@ -89,7 +89,7 @@
         if (item == NSNotFound || item >= indexPath.item) {
             y = kPokerPlayingEdgeInsetTop + kPokerFaceDownVerticalSpacing*indexPath.item;
         } else {
-            y = kPokerPlayingEdgeInsetTop + kPokerFaceDownVerticalSpacing*(indexPath.item - item) + kPokerFaceUpVerticalSpacing*item;
+            y = kPokerPlayingEdgeInsetTop + kPokerFaceDownVerticalSpacing*item + kPokerFaceUpVerticalSpacing*(indexPath.item - item);
         }
         attributes.frame = CGRectMake(x, y, kPokerSizeWidth, kPokerSizeHeight);
     } else if (section == SSPokerSectionUsable) {
@@ -166,10 +166,10 @@
 //            attributes = [self layoutAttributesForItemAtIndexPath:itemIndexPath];
 //        }
 //        
-////        static int level = 100;
+//        static int level = 100;
 ////        // Configure attributes ...
-////        attributes.zIndex = itemIndexPath.item + level;
-////        level--;
+//        attributes.zIndex = itemIndexPath.item + level;
+//        level--;
 //    }
     
     return attributes;

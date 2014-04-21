@@ -27,6 +27,8 @@
 @property (nonatomic, assign) CGFloat blurLevel;
 @property (strong, nonatomic) UIBezierPath *blurExclusionPath;
 
+@property (nonatomic, assign) BOOL blurEffectEnabled;
+
 // 表題イメージ
 @property (strong, nonatomic) UIImage *titleImage;
 
@@ -46,5 +48,18 @@
 
 @protocol SSPopupViewDelegate <NSObject>
 
+
+@end
+
+@interface SSPopupViewController : UIViewController
+
+@property (nonatomic, strong) IBOutlet UIView *popupView;
+@end
+
+
+@interface UIPopupView : NSObject
+
+//
+- (void)showInViewController:(UIViewController *)parentViewController;
 
 @end

@@ -53,7 +53,7 @@
             break;
 
         default:
-            __LOG(@"Section異常")
+            DebugLog(@"Section異常")
             break;
     }
     return section;
@@ -63,7 +63,7 @@
 - (SSPokerName)nameForNextPoker;
 {
     if (_name == SSPokerNameK) {
-        return NSNotFound;
+        return SSPokerNameNone;
     }
     return (_name + 1);
 }
@@ -71,7 +71,7 @@
 - (SSPokerName)nameForPrePoker;
 {
     if (_name == SSPokerNameA) {
-        return NSNotFound;
+        return SSPokerNameNone;
     }
     return (_name - 1);
 }
@@ -86,9 +86,18 @@
 }
 
 // 移動可否チェック
-- (BOOL)canMoveToWithPoker:(SSPoker *)poker;
+- (BOOL)canMoveToWithPoker:(SSPoker *)poker inSection:(SSPokerSection)section;
 {
+    // 仕上げチェック
     if (!poker) {
+        if (section >= SSPokerSectionFinishedHeart && _name == SSPokerNameA) {
+            return YES;
+        }
+        if (section <= SSPokerSectionPlaying7 && _name == SSPokerNameK) {
+            return YES;
+        }
+    }
+    if (!poker && section >= SSPokerSectionFinishedHeart) {
         if (_name == SSPokerNameA) {
             return YES;
         }

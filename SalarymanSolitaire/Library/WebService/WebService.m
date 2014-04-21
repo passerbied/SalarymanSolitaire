@@ -169,11 +169,11 @@ static NSString *_AccessKey = @"NULL";
 {
     // URL編集
     if (!_address || [_address length] == 0) {
-        __LOG(@"アドレス異常");
+        DebugLog(@"アドレス異常");
     }
     NSString *encodingAddress = [_address stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     if (_testMode) {
-        __LOG(@"[URL]%@", encodingAddress);
+        DebugLog(@"[URL]%@", encodingAddress);
     }
     NSURL *url = [NSURL URLWithString:encodingAddress];
     

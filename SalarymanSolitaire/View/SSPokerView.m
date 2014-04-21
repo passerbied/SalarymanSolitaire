@@ -33,6 +33,8 @@
     
     // タッチ
     UITapGestureRecognizer              *_tapGestureRecognizer;
+    
+    BOOL                                _first;
 }
 
 - (id)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout
@@ -126,36 +128,40 @@
         NSMutableArray *pokers = [_allPokers objectAtIndex:section];
         [pokers removeAllObjects];
     }
+    [self reloadData];
 }
 
 // ゲーム開始（シャッフル必要）
 - (void)start;
 {
-    // ポーカークリア
-    [self clear];
-    
-    // シャッフル
-    [self shuffle];
-    
-    //
-    [self playFanAnimation];
-    
-//    [self playShuffleAnimation];
+    [self dealPokerWithShuffle:YES];
 }
 
 // リトライ（シャッフル不要）
 - (void)retry;
 {
-    // ポーカークリア
-//    [self clear];
-
-    //
-    [self playShuffleAnimation];
+    [self dealPokerWithShuffle:NO];
 }
 
-- (void)playFanAnimation;
+- (void)dealPokerWithShuffle:(BOOL)shuffle
+{
+    // ポーカークリア
+    [self clear];
+    
+    if (shuffle) {
+        // シャッフル
+        [self shuffle];
+    }
+    
+    // ポーカー配布アニメーション表示
+    [self playDealPokerAnimation];
+}
+
+- (void)playDealPokerAnimation;
 {
     _currentItem = 0;
+    _currentIndex = 0;
+    _currentSection = 0;
     [self addPokerToDeck];
 }
 
@@ -270,7 +276,7 @@
 {
     NSArray *pokers = [_allPokers objectAtIndex:indexPath.section];
     SSPoker *poker = [pokers objectAtIndex:indexPath.item];;
-//    NSLog(@"%@: [%d-%d]",indexPath,poker.color,poker.name);
+//    DebugLog(@"%@: [%d-%d]",indexPath,poker.color,poker.name);
     
     SSPokerViewCell *pokerCell = (SSPokerViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"SSPokerViewCell" forIndexPath:indexPath];
     pokerCell.poker = poker;
@@ -310,13 +316,18 @@
 - (void)movePokersFromSection:(NSInteger)section
 {
     NSMutableArray *pokers = [_allPokers objectAtIndex:section];
+    if (![pokers count]) {
+        // 空
+        return;
+    }
+    
     SSPoker *poker = (SSPoker *)[pokers lastObject];
     if (section < SSPokerSectionUsable) {
         // 仕上げ可能チェック
         NSInteger targetSection = [poker sectionForCurrentColor];
         NSMutableArray *targetPokers = [_allPokers objectAtIndex:targetSection];
         SSPoker *targetPoker = [targetPokers lastObject];
-        if ([poker canMoveToWithPoker:targetPoker]) {
+        if ([poker canMoveToWithPoker:targetPoker inSection:targetSection]) {
             [self movePokerFromSection:section toSection:targetSection count:1];
             return;
         }
@@ -324,19 +335,42 @@
         BOOL canMove = NO;
         
         // 横へ移動可能チェック
+        NSInteger maxLevel = 0;
+        NSInteger level = 0;
+        NSInteger count = [pokers count];
+        NSInteger bestSection;
+        NSInteger firstPoker = [self firstVisiblePokersInSection:section];
         for (targetSection = SSPokerSectionPlaying1; targetSection <= SSPokerSectionPlaying7; targetSection++) {
             if (targetSection == section) {
                 continue;
             }
             targetPoker = [self lastPokerInSection:targetSection];
-            if ([poker canMoveToWithPoker:targetPoker]) {
+            if ([poker canMoveToWithPoker:targetPoker inSection:targetSection]) {
                 canMove = YES;
                 break;
+            }
+
+            targetPoker = [self lastPokerInSection:targetSection];
+            level = 0;
+            for (NSInteger i = firstPoker; i < count; i++) {
+                poker = [pokers objectAtIndex:i];
+                if ([poker canMoveToWithPoker:targetPoker inSection:targetSection]) {
+                    level = count - i;
+                    if (level > maxLevel) {
+                        maxLevel = level;
+                        bestSection = targetSection;
+                    }
+                    break;
+                }
             }
         }
         if (canMove) {
             [self movePokerFromSection:section toSection:targetSection count:1];
             return;
+        }
+        
+        if (maxLevel) {
+            [self movePokerFromSection:section toSection:bestSection count:maxLevel];
         }
         
         // 空列に移動可能チェック
@@ -378,7 +412,7 @@
     
     [self performBatchUpdates:^{
         for (NSInteger i = 0; i < [fromIndexPaths count]; i++) {
-            NSIndexPath *from = [fromIndexPaths objectAtIndex:i];
+            NSIndexPath *from = [fromIndexPaths objectAtIndex:[fromIndexPaths count] - 1 - i];
             NSIndexPath *to = [toIndexPaths objectAtIndex:i];
             [self moveItemAtIndexPath:from toIndexPath:to];
         }
@@ -396,7 +430,10 @@
 - (SSPoker *)lastPokerInSection:(NSInteger)section
 {
     NSArray *array = [_allPokers objectAtIndex:section];
-    return (SSPoker *)[array objectAtIndex:array.count - 1];
+    if ([array count]) {
+        return (SSPoker *)[array objectAtIndex:array.count - 1];
+    }
+    return nil;
 }
 
 - (NSInteger)firstVisiblePokersInSection:(NSInteger)section;

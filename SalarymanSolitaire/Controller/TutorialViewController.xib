@@ -15,16 +15,21 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="tutorial_howto.png" translatesAutoresizingMaskIntoConstraints="NO" id="Y7N-Ex-lLh" userLabel="背景イメージ">
+                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Y7N-Ex-lLh" userLabel="背景イメージ">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="518"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="320" id="QQq-Ju-JC2"/>
+                    </constraints>
                 </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Y7N-Ex-lLh" firstAttribute="top" secondItem="1" secondAttribute="top" id="DbS-ii-h9r"/>
+                <constraint firstAttribute="bottom" secondItem="Y7N-Ex-lLh" secondAttribute="bottom" constant="50" id="HzQ-5W-ghd"/>
+                <constraint firstItem="Y7N-Ex-lLh" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="Mjd-GC-Wac"/>
+            </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
     </objects>
-    <resources>
-        <image name="tutorial_howto.png" width="320" height="518"/>
-    </resources>
 </document>

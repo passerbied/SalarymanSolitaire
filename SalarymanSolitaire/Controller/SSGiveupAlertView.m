@@ -14,7 +14,7 @@
 {
     self.alertView.alertTitle = @"ギブアップしますか？";
     [self.alertView setCloseButtonHidden:NO];
-    self.alertView.backgroundImage = [UIImage imageNamed:@"popup_base.png"];
+    self.alertView.backgroundImage = [UIImage imageNamed:@"popup_alert.png"];
     
     [self.alertView addButton:[UIButton buttonWithImage:@"popup_btn_end"]];
     [self.alertView addButton:[UIButton buttonWithImage:@"popup_btn_retry"]];

@@ -15,6 +15,8 @@
 
 }
 
+@property (nonatomic, weak) IBOutlet UIWebView *webView;
+
 // ヘルプ情報表示
 - (void)loadHelpInfo;
 @end
@@ -49,11 +51,7 @@
 - (void)loadHelpInfo;
 {
     NSURL *url = [[SolitaireManager sharedManager] helpURL];
-    UIWebView *webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
-    [self.view addSubview:webView];
-    
-    webView.delegate = self;
-    [webView loadRequest:[NSURLRequest requestWithURL:url]];
+    [_webView loadRequest:[NSURLRequest requestWithURL:url]];
 }
 
 // 広告表示可否

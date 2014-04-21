@@ -31,7 +31,7 @@
     parser.testMode = self.testMode;
     NSString *xmlString = [XmlParser XMLWith:self rootNoteName:_rootTagName];
     if (_testMode) {
-        __LOG(@"[POST]%@", xmlString);
+        DebugLog(@"[POST]%@", xmlString);
     }
     
     NSData* data = [xmlString dataUsingEncoding:NSUTF8StringEncoding];

@@ -174,14 +174,14 @@ NSString *const StageDidSelectNotificationADKey = @"StageDidSelectNotificationAD
     }
     
     // タイトル設定
-    _stageLabel.text = [NSString stringWithFormat:@"STAGE %d", _stageID];
+    _stageLabel.text = [NSString stringWithFormat:@"STAGE %d", (int)_stageID];
     
     // 敵イメージ設定
     NSString *imageName = nil;
     if ([self isCleared]) {
-        imageName = [NSString stringWithFormat:@"enemy_%03d_clear.png", _enemyID];
+        imageName = [NSString stringWithFormat:@"enemy_%03d_clear.png", (int)_enemyID];
     } else {
-        imageName = [NSString stringWithFormat:@"enemy_%03d_not_clear.png", _enemyID];
+        imageName = [NSString stringWithFormat:@"enemy_%03d_not_clear.png", (int)_enemyID];
     }
     UIImage *enemyImage = [UIImage temporaryImageNamed:imageName];
     [_enemyImageView setImage:enemyImage];

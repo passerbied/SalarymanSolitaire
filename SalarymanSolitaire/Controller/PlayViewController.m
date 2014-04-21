@@ -10,6 +10,7 @@
 #import "SSPhysicalView.h"
 #import "SSNutrientButton.h"
 
+
 #define kSolitairePokerColours          4
 #define kSolitairePokerCount            13
 #define kSolitairePokerColumnMax        7
@@ -18,9 +19,6 @@
 {
 
 }
-
-
-
 
 #pragma mark - UICollectionViewDelegate
 
@@ -40,6 +38,9 @@
 - (void)initView
 {
     [super initView];
+    
+    // 背景音声音声再生
+    [AudioEngine playAudioWith:SolitaireAudioIDPlayMusic];
     
     // 背景イメージビュー
     UIImage *tableImage = [UIImage imageNamed:@"bg_table.png"];

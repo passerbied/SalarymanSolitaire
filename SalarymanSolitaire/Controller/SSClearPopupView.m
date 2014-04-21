@@ -109,7 +109,7 @@
 {
     // メール送信可否チェック
     if (![MFMailComposeViewController canSendMail]) {
-        NSLog(@"送信不可");
+        DebugLog(@"送信不可");
     }
     
     // 送信画面作成
@@ -150,7 +150,7 @@
             msg = @"";
             break;
     }
-    NSLog(@"%@", msg);
+    DebugLog(@"%@", msg);
 }
 
 - (void)sendTwitter

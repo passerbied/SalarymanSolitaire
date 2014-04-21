@@ -13,6 +13,7 @@
     AVAudioPlayer                       *_effectPlayer;
     AVAudioPlayer                       *_musicPlayer;
     AVAudioPlayer                       *_backgroundPlayer;
+    NSMutableArray                      *_serialPlayerList;
 }
 @end
 
@@ -28,6 +29,7 @@
 
 - (AVAudioPlayer *)playerWithData:(NSData *)data engine:(AudioEngineType)engine
 {
+    return nil;
     [AudioEngine stopEngine:engine];
     
     AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithData:data error:nil];
@@ -54,6 +56,11 @@
     if (data) {
         AVAudioPlayer *player = [sharedEngine playerWithData:data engine:engine];
         if ([player prepareToPlay]) {
+            if (engine == AudioEngineTypeBackground) {
+                player.numberOfLoops = -1;
+            } else {
+                player.numberOfLoops = 0;
+            }
             [player play];
         }
     }

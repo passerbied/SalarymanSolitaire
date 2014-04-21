@@ -107,6 +107,7 @@
 // 初回起動チェック
 - (BOOL)isFirstTime;
 {
+    return YES;
     if ([[NSUserDefaults standardUserDefaults] boolForKey:__USER_FIRST_TIME_KEY]) {
         return NO;
     }
@@ -131,7 +132,8 @@
     static ADBannerView *_sharedBannerAD = nil;
     if (!_sharedBannerAD) {
         _sharedBannerAD = [[ADBannerView alloc] initWithAdType:ADAdTypeBanner];
-        _sharedBannerAD.alpha = 0.0f;
+        _sharedBannerAD.backgroundColor = [UIColor orangeColor];
+        _sharedBannerAD.alpha = 1.0f;
     }
     return _sharedBannerAD;
 }

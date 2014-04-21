@@ -58,15 +58,15 @@
  available for the kSecClassGenericPassword Keychain Item class:
  
  kSecAttrAccessGroup			-		CFStringRef
- kSecAttrCreationDate		-		CFDateRef
- kSecAttrModificationDate    -		CFDateRef
+ kSecAttrCreationDate           -		CFDateRef
+ kSecAttrModificationDate       -		CFDateRef
  kSecAttrDescription			-		CFStringRef
  kSecAttrComment				-		CFStringRef
  kSecAttrCreator				-		CFNumberRef
- kSecAttrType                -		CFNumberRef
- kSecAttrLabel				-		CFStringRef
+ kSecAttrType                   -		CFNumberRef
+ kSecAttrLabel                  -		CFStringRef
  kSecAttrIsInvisible			-		CFBooleanRef
- kSecAttrIsNegative			-		CFBooleanRef
+ kSecAttrIsNegative             -		CFBooleanRef
  kSecAttrAccount				-		CFStringRef
  kSecAttrService				-		CFStringRef
  kSecAttrGeneric				-		CFDataRef

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <iAd/iAd.h>
 
+
 @class SSStage;
 
 @interface SolitaireManager : NSObject

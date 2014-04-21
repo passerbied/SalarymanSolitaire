@@ -90,7 +90,7 @@ NSString* getPropertyType(objc_property_t property)
     GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithXMLString:xmlStr options:0 error:&error];
     if (doc == nil || error) {
         if ([self isTestMode]) {
-            __LOG(@"XML Document 异常[%@]", XML);
+            DebugLog(@"XML Document 异常[%@]", XML);
         }
 		return nil;
 	}
@@ -103,7 +103,7 @@ NSString* getPropertyType(objc_property_t property)
         elements = [doc nodesForXPath:[NSString stringWithFormat:@"//%@", tagName] error:nil];
         
         if (error) {
-            __LOG(@"检索XML文档失败[%@]",searchTagName);
+            DebugLog(@"检索XML文档失败[%@]",searchTagName);
             return nil;
         }
     } else {
@@ -114,7 +114,7 @@ NSString* getPropertyType(objc_property_t property)
     
     // 指定节点不存在
 	if (![elements count]) {
-        __LOG(@"XML节点不存在 [%@]",searchTagName);
+        DebugLog(@"XML节点不存在 [%@]",searchTagName);
 		return nil;
 	}
     

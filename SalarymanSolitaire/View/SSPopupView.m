@@ -24,8 +24,9 @@
 #define __BUTTON_CLOSE_SPACE_RIGHT      50.0f
 
 /* コンテンツビュー */
-#define __POPUP_CONTENT_MARGIN          6.5f
-#define __POPUP_CONTENT_OFFSET_TOP      72.0f
+#define __POPUP_CONTENT_MARGIN          6.0f
+#define __POPUP_CONTENT_OFFSET_TOP      70.0f
+#define __POPUP_CONTENT_OFFSET_BOTTOM   10.0f
 
 @interface SSPopupView ()
 {
@@ -157,7 +158,7 @@
     x = __POPUP_CONTENT_MARGIN;
     y = __POPUP_CONTENT_OFFSET_TOP;
     width = self.popView.bounds.size.width - 2*__POPUP_CONTENT_MARGIN;
-    height = self.popView.bounds.size.height - __POPUP_CONTENT_MARGIN - __POPUP_CONTENT_OFFSET_TOP - 10;
+    height = self.popView.bounds.size.height - __POPUP_CONTENT_OFFSET_TOP - __POPUP_CONTENT_OFFSET_BOTTOM;
     return CGRectMake(x, y, width, height);
 }
 
@@ -175,9 +176,11 @@
 
 - (void)showAnimated:(BOOL)animated
 {
-    self.blurView = [[UIView alloc] initWithFrame:self.parentViewController.view.bounds];
-    self.blurView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    [self.view addSubview:self.blurView];
+    if (_blurEffectEnabled) {
+        self.blurView = [[UIView alloc] initWithFrame:self.parentViewController.view.bounds];
+        self.blurView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        [self.view addSubview:self.blurView];
+    }
     [self.view addSubview:self.popView];
     
     [self createScreenshotAndLayoutWithScreenshotCompletion:^{
@@ -315,6 +318,103 @@
             });
         });
     }
+}
+
+@end
+
+@interface SSPopupViewController ()
+@property (nonatomic, assign) CGFloat animationDuration;
+@end
+@implementation SSPopupViewController
+
+
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    // Do any additional setup after loading the view from its nib.
+    
+    self.view.backgroundColor = [UIColor clearColor];
+    UIToolbar *blurView = [[UIToolbar alloc] initWithFrame:self.view.bounds];
+    [blurView addSubview:self.popupView];
+    [self.view addSubview:blurView];
+}
+- (void)executeAnimation
+{
+    self.animationDuration = 0.25f;
+    CABasicAnimation *opacityAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    opacityAnimation.fromValue = @0.0f;
+    opacityAnimation.toValue = @1.0f;
+    opacityAnimation.duration = self.animationDuration * 0.5f;
+    
+    CAKeyframeAnimation *scaleAnimation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
+    
+    CATransform3D startingScale = CATransform3DScale(self.view.layer.transform, 0, 0, 0);
+    CATransform3D overshootScale = CATransform3DScale(self.view.layer.transform, 1.05, 1.05, 1.0);
+    CATransform3D undershootScale = CATransform3DScale(self.view.layer.transform, 0.98, 0.98, 1.0);
+    CATransform3D endingScale = self.view.layer.transform;
+    
+    NSMutableArray *scaleValues = [NSMutableArray arrayWithObject:[NSValue valueWithCATransform3D:startingScale]];
+    NSMutableArray *keyTimes = [NSMutableArray arrayWithObject:@0.0f];
+    NSMutableArray *timingFunctions = [NSMutableArray arrayWithObject:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut]];
+    
+    //    if (self.bounces) {
+    [scaleValues addObjectsFromArray:@[[NSValue valueWithCATransform3D:overshootScale], [NSValue valueWithCATransform3D:undershootScale]]];
+    [keyTimes addObjectsFromArray:@[@0.5f, @0.85f]];
+    [timingFunctions addObject:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+    //    }
+    
+    [scaleValues addObject:[NSValue valueWithCATransform3D:endingScale]];
+    [keyTimes addObject:@1.0f];
+    [timingFunctions addObject:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+    
+    scaleAnimation.values = scaleValues;
+    scaleAnimation.keyTimes = keyTimes;
+    scaleAnimation.timingFunctions = timingFunctions;
+    
+    CAAnimationGroup *animationGroup = [CAAnimationGroup animation];
+    animationGroup.animations = @[scaleAnimation, opacityAnimation];
+    animationGroup.duration = self.animationDuration;
+    
+    [self.view.layer addAnimation:animationGroup forKey:nil];
+}
+
+- (void)willMoveToParentViewController:(UIViewController *)parent
+{
+    [super willMoveToParentViewController:parent];
+    
+    [self executeAnimation];
+}
+
+@end
+
+
+@interface UIPopupView ()
+
+@property (nonatomic, strong) IBOutlet UIViewController *popupViewController;
+
+@property (nonatomic, strong) IBOutlet UIView *popupView;
+@end
+
+@implementation UIPopupView
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    NSLog(@"Popup View Awake From Nib File.");
+}
+//
+- (void)showInViewController:(UIViewController *)parentViewController;
+{
+    if (!_popupViewController) {
+        _popupViewController = [[UIViewController alloc] initWithNibName:nil bundle:nil];
+    }
+    if (_popupView) {
+        [_popupViewController.view addSubview:_popupView];
+    }
+    
+    [parentViewController addChildViewController:_popupViewController];
+    [parentViewController.view addSubview:_popupViewController.view];
 }
 
 @end

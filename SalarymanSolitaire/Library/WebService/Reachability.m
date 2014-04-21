@@ -225,7 +225,7 @@ static void TMReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
     if (!SCNetworkReachabilitySetCallback(self.reachabilityRef, TMReachabilityCallback, &context))
     {
 #ifdef DEBUG
-        __LOG(@"SCNetworkReachabilitySetCallback() failed: %s", SCErrorString(SCError()));
+        DebugLog(@"SCNetworkReachabilitySetCallback() failed: %s", SCErrorString(SCError()));
 #endif
         
         //clear out the dispatch queue
@@ -246,7 +246,7 @@ static void TMReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
     if(!SCNetworkReachabilitySetDispatchQueue(self.reachabilityRef, self.reachabilitySerialQueue))
     {
 #ifdef DEBUG
-        __LOG(@"SCNetworkReachabilitySetDispatchQueue() failed: %s", SCErrorString(SCError()));
+        DebugLog(@"SCNetworkReachabilitySetDispatchQueue() failed: %s", SCErrorString(SCError()));
 #endif
         
         //UH OH - FAILURE!

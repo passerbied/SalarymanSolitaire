@@ -10,12 +10,12 @@
 #import "HelpInfoViewController.h"
 #import "TutorialViewController.h"
 #import "SelectStageViewController.h"
-#import "NotificationView.h"
 #import "SSItemAlertView.h"
 #import "SSModeAlertView.h"
 #import "SSGiveupAlertView.h"
 #import "SSClearPopupView.h"
 #import "SSChallengeController.h"
+#import "PopupNotificationView.h"
 
 @interface TopViewController ()
 {
@@ -82,8 +82,9 @@
     // ボタン押下音声再生
     [AudioEngine playAudioWith:SolitaireAudioIDButtonClicked];
 
-    SSClearPopupView *controller = [SSClearPopupView new];
-    [controller show];
+    NSURL *url = [NSURL URLWithString:@"http://www.yahoo.co.jp"];
+    PopupNotificationView *popopView = [[PopupNotificationView alloc] initWithURL:url];
+    [popopView popupInViewController:self];
 }
 
 // プレイスタート
@@ -138,9 +139,8 @@
         } else {
             URL = [[SolitaireManager sharedManager] notificationURL];
         }
-        NotificationView *popopView = [[NotificationView alloc] initWithURL:URL];
-        popopView.view.bounds = CGRectMake(0, 0, 280, 400);
-        [popopView showInViewController:self center:self.view.center];
+        PopupNotificationView *popopView = [[PopupNotificationView alloc] initWithURL:URL];
+        [popopView popupInViewController:self];
     }
     _serviceGetSystemInfoExecuting = NO;
 }

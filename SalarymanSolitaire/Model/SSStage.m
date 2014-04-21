@@ -16,12 +16,12 @@
     // 山札戻し条件編集
     NSString *returnCondition;
     if (_returnTimes > 0) {
-        returnCondition = [NSString stringWithFormat:@"山札戻し%d回", _returnTimes];
+        returnCondition = [NSString stringWithFormat:@"山札戻し%d回", (int)_returnTimes];
     } else {
         returnCondition = @"無制限にて";
     }
     
     // その他条件
-    return [NSString stringWithFormat:@"%d枚めくり・%@\n%d回クリアする。", _numberOfPokers, returnCondition, _minClearTimes];
+    return [NSString stringWithFormat:@"%d枚めくり・%@\n%d回クリアする。", (int)_numberOfPokers, returnCondition, (int)_minClearTimes];
 }
 @end

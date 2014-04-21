@@ -9,6 +9,8 @@
 #import "TutorialViewController.h"
 #import "SelectStageViewController.h"
 
+#define kBackgroundImage                @"tutorial_howto.png"
+#define kBackgroundImage568h            @"tutorial_howto-568h.png"
 
 @interface TutorialViewController ()
 {
@@ -28,9 +30,23 @@
 {
     [super initView];
     
+    // 背景イメージ設定
+    UIImage *image = nil;
+    NSString *imageName = nil;
+    if ([UIDevice isPhone5]) {
+        imageName = kBackgroundImage568h;
+    } else {
+        imageName = kBackgroundImage;
+    }
+    image = [UIImage imageNamed:imageName];
+    _backgroundImageView.image = image;
+    NSLog(@"Size is [%@]",NSStringFromCGSize(image.size));
+
+    // タップ処理設定「閉じる」
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                  action:@selector(closeAction:)];
     [_backgroundImageView addGestureRecognizer:tapGesture];
+    
 }
 
 

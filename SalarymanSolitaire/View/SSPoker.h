@@ -21,6 +21,7 @@ typedef enum
 // ポーカー名称
 typedef enum
 {
+    SSPokerNameNone,
     SSPokerNameA = 1,
     SSPokerName2,
     SSPokerName3,
@@ -37,7 +38,7 @@ typedef enum
     SSPokerNameCount = SSPokerNameK
 } SSPokerName;
 
-typedef enum
+typedef NS_ENUM(NSInteger, SSPokerSection)
 {
     SSPokerSectionDeck,
     SSPokerSectionPlaying1,
@@ -53,7 +54,7 @@ typedef enum
     SSPokerSectionFinishedClub,
     SSPokerSectionFinishedSpade,
     SSPokerSectionTotal
-} SSPokerSection;
+};
 
 #define SSPokerTotalCount               SSPokerNameCount * SSPokerColorCount
 
@@ -81,7 +82,7 @@ typedef enum
 - (NSInteger)sectionForCurrentColor;
 
 // 移動可否チェック
-- (BOOL)canMoveToWithPoker:(SSPoker *)poker;
+- (BOOL)canMoveToWithPoker:(SSPoker *)poker inSection:(SSPokerSection)section;
 
 
 

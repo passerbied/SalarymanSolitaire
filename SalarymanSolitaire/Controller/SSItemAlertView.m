@@ -49,7 +49,7 @@ enum
     NSDictionary *attributes = @{NSFontAttributeName:font};
 
     // 残り個数設定
-    string = [NSString stringWithFormat:@"%d", _numberOfItems];
+    string = [NSString stringWithFormat:@"%d", (int)_numberOfItems];
     CGSize size = [string sizeWithAttributes:attributes];
     if (!_numberLabel) {
         _numberLabel = [[UILabel alloc] initWithFrame:CGRectMake(x, y, size.width, size.height)];
@@ -58,7 +58,7 @@ enum
         _numberLabel.textColor = SSColorRed;
         [self.alertView addAccessoryView:_numberLabel];
     }
-    [_numberLabel setText:[NSString stringWithFormat:@"%d", _numberOfItems]];
+    [_numberLabel setText:[NSString stringWithFormat:@"%d", (int)_numberOfItems]];
     
     
     // 単位設定
@@ -80,7 +80,7 @@ enum
 {
     self.alertView.alertTitle = @"体力が不足しています。";
     self.alertView.alertMessage = @"栄養剤を購入しますか？";
-    self.alertView.backgroundImage = [UIImage imageNamed:@"popup_base.png"];
+    self.alertView.backgroundImage = [UIImage imageNamed:@"popup_alert.png"];
     
     [self.alertView addButton:[UIButton buttonWithImage:@"popup_btn_cancel"]];
     if (_numberOfItems) {
@@ -94,7 +94,7 @@ enum
 {
     self.alertView.alertTitle = @"山札が終了しました。";
     self.alertView.alertMessage = @"山札戻しを購入しますか？";
-    self.alertView.backgroundImage = [UIImage imageNamed:@"popup_base.png"];
+    self.alertView.backgroundImage = [UIImage imageNamed:@"popup_alert.png"];
     
     [self.alertView addButton:[UIButton buttonWithImage:@"popup_btn_cancel"]];
     if (_numberOfItems) {
@@ -110,10 +110,10 @@ enum
 {
     if (buttonIndex == SSItemAlertButtonIndexUse) {
         // 商品利用
-        NSLog(@"商品利用");
+        DebugLog(@"商品利用");
     } else if (buttonIndex == SSItemAlertButtonIndexBuy) {
         // 商品購入
-        NSLog(@"商品購入");
+        DebugLog(@"商品購入");
     }
 }
 

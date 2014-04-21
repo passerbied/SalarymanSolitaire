@@ -127,7 +127,7 @@
 {
     const CGFloat EffectColorAlpha = 0.6;
     UIColor *effectColor = tintColor;
-    int componentCount = CGColorGetNumberOfComponents(tintColor.CGColor);
+    NSInteger componentCount = CGColorGetNumberOfComponents(tintColor.CGColor);
     if (componentCount == 2) {
         CGFloat b;
         if ([tintColor getWhite:&b alpha:NULL]) {
@@ -148,15 +148,15 @@
 {
     // Check pre-conditions.
     if (self.size.width < 1 || self.size.height < 1) {
-        NSLog (@"*** error: invalid size: (%.2f x %.2f). Both dimensions must be >= 1: %@", self.size.width, self.size.height, self);
+        DebugLog (@"*** error: invalid size: (%.2f x %.2f). Both dimensions must be >= 1: %@", self.size.width, self.size.height, self);
         return nil;
     }
     if (!self.CGImage) {
-        NSLog (@"*** error: image must be backed by a CGImage: %@", self);
+        DebugLog (@"*** error: image must be backed by a CGImage: %@", self);
         return nil;
     }
     if (maskImage && !maskImage.CGImage) {
-        NSLog (@"*** error: maskImage must be backed by a CGImage: %@", maskImage);
+        DebugLog (@"*** error: maskImage must be backed by a CGImage: %@", maskImage);
         return nil;
     }
 
@@ -200,7 +200,7 @@
             // ... if d is odd, use three box-blurs of size 'd', centered on the output pixel.
             // 
             CGFloat inputRadius = blurRadius * [[UIScreen mainScreen] scale];
-            NSUInteger radius = floor(inputRadius * 3. * sqrt(2 * M_PI) / 4 + 0.5);
+            uint32_t radius = floor(inputRadius * 3. * sqrt(2 * M_PI) / 4 + 0.5);
             if (radius % 2 != 1) {
                 radius += 1; // force radius to be odd so that the three box-blur methodology works.
             }
