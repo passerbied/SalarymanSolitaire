@@ -9,6 +9,7 @@
 #import "SSPokerViewCell.h"
 #import "SSPoker.h"
 
+
 @interface SSPokerViewCell ()
 {
     BOOL                                _faceUp;
@@ -19,12 +20,12 @@
 
 @implementation SSPokerViewCell
 
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor clearColor];
-        self.layer.speed = 30.0f;
         
         if (!_pokerImageView) {
             _pokerImageView = [[UIImageView alloc] initWithFrame:self.bounds];
@@ -35,6 +36,29 @@
     return self;
 }
 
+- (void)setAnimationMode:(SSPokerAnimationMode)mode
+{
+    CGFloat speed;
+    switch (mode) {
+        case SSPokerAnimationModeFan:
+            speed = 15.0f;
+            break;
+        case SSPokerAnimationModeShuffle:
+            speed = 10.0f;
+            break;
+        case SSPokerAnimationModePlay:
+            speed = 0.10f;
+            break;
+        case SSPokerAnimationModeDone:
+            speed = 0.1f;
+            break;
+        default:
+            break;
+    }
+    if (speed > 0) {
+        self.layer.speed = speed;
+    }
+}
 - (void)setPoker:(SSPoker *)poker
 {
     // ポーカー情報退避

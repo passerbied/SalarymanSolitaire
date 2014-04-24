@@ -77,7 +77,7 @@
     
     NSInteger section = indexPath.section;
     if (section == SSPokerSectionDeck) {
-        attributes.zIndex = 0;
+//        attributes.zIndex = indexPath.item;
         CGFloat x = kPokerDeckEdgeInsetLeft + kPokerDeckInteritemSpacing*indexPath.item;
         attributes.frame = CGRectMake(x, _locationY, self.pokerSize.width, self.pokerSize.height);
     } else if (section <= SSPokerSectionPlaying7) {
@@ -95,31 +95,16 @@
     } else if (section == SSPokerSectionUsable) {
         CGFloat x = self.collectionView.bounds.size.width - kPokerTableEdgeInsetLeft - kPokerSizeWidth;
         CGFloat y = kPokerTableEdgeInsetTop;
+//        attributes.zIndex = 100;
         attributes.frame = CGRectMake(x, y, kPokerSizeWidth, kPokerSizeHeight);
     } else {
         CGFloat x = kPokerTableEdgeInsetLeft + (kPokerSizeWidth + kPokerTableInteritemSpacing)*(section - SSPokerSectionFinishedHeart);
         CGFloat y = kPokerTableEdgeInsetTop;
         attributes.frame = CGRectMake(x, y, kPokerSizeWidth, kPokerSizeHeight);
-        attributes.zIndex = 1000 + indexPath.item;
     }
+    attributes.zIndex = indexPath.item;
     return attributes;
 }
-
-//- (UICollectionViewLayoutAttributes *)initialAttributesAtIndexPath:(NSIndexPath *)indexPath;
-//{
-//    UICollectionViewLayoutAttributes *attributes = [super initialAttributesAtIndexPath:indexPath];
-//    CGFloat x = kPokerDeckEdgeInsetLeft;
-//    attributes.frame = CGRectMake(x, _locationY, self.pokerSize.width, self.pokerSize.height);
-//    return attributes;
-//}
-//
-//- (UICollectionViewLayoutAttributes *)attributesAtIndexPath:(NSIndexPath *)indexPath;
-//{
-//    UICollectionViewLayoutAttributes *attributes = [super attributesAtIndexPath:indexPath];
-//    CGFloat x = kPokerDeckEdgeInsetLeft + kPokerDeckInteritemSpacing*indexPath.item;
-//    attributes.frame = CGRectMake(x, _locationY, self.pokerSize.width, self.pokerSize.height);
-//    return attributes;
-//}
 
 - (void)prepareForCollectionViewUpdates:(NSArray *)updateItems
 {
@@ -136,6 +121,7 @@
         } else if (update.updateAction == UICollectionUpdateActionInsert) {
             [self.insertIndexPaths addObject:update.indexPathAfterUpdate];
         } else if (update.updateAction == UICollectionUpdateActionMove) {
+//            [self.deleteIndexPaths addObject:update.indexPathBeforeUpdate];
             [self.moveIndexPaths addObject:update.indexPathAfterUpdate];
         }
     }
@@ -154,45 +140,45 @@
         }
         
         // Configure attributes ...
-        attributes.alpha = 0.0;
+//        attributes.alpha = 0.0;
         CGFloat x = kPokerDeckEdgeInsetLeft;
         attributes.frame = CGRectMake(x, _locationY, self.pokerSize.width, self.pokerSize.height);
     }
     
-//    if ([self.moveIndexPaths containsObject:itemIndexPath])
-//    {
-//        // only change attributes on inserted cells
-//        if (!attributes) {
-//            attributes = [self layoutAttributesForItemAtIndexPath:itemIndexPath];
-//        }
-//        
-//        static int level = 100;
-////        // Configure attributes ...
-//        attributes.zIndex = itemIndexPath.item + level;
-//        level--;
-//    }
+    if ([self.moveIndexPaths containsObject:itemIndexPath])
+    {
+        
+        // only change attributes on inserted cells
+        if (!attributes) {
+            attributes = [self layoutAttributesForItemAtIndexPath:itemIndexPath];
+        }
+        
+        attributes.zIndex = [self zIndexForCellAtIndexPath:itemIndexPath];
+        NSLog(@"Init [%d-%d] zIndex[%d]",itemIndexPath.section, itemIndexPath.item, attributes.zIndex);
+    }
     
     return attributes;
 }
-//
-//- (UICollectionViewLayoutAttributes *)finalLayoutAttributesForDisappearingItemAtIndexPath:(NSIndexPath *)itemIndexPath
-//{
-//    // So far, calling super hasn't been strictly necessary here, but leaving it in
-//    // for good measure
-//    UICollectionViewLayoutAttributes *attributes = [super finalLayoutAttributesForDisappearingItemAtIndexPath:itemIndexPath];
-//    
-//    if ([self.deleteIndexPaths containsObject:itemIndexPath])
-//    {
-//        // only change attributes on deleted cells
-//        if (!attributes)
-//            attributes = [self layoutAttributesForItemAtIndexPath:itemIndexPath];
-//        
-//        // Configure attributes ...
-//        attributes.alpha = 0.0;
-//    }
-//    
-//    return attributes;
-//}
+
+- (UICollectionViewLayoutAttributes *)finalLayoutAttributesForDisappearingItemAtIndexPath:(NSIndexPath *)itemIndexPath
+{
+    // So far, calling super hasn't been strictly necessary here, but leaving it in
+    // for good measure
+    UICollectionViewLayoutAttributes *attributes = [super finalLayoutAttributesForDisappearingItemAtIndexPath:itemIndexPath];
+    
+    if ([self.deleteIndexPaths containsObject:itemIndexPath])
+    {
+        // only change attributes on deleted cells
+        if (!attributes)
+            attributes = [self layoutAttributesForItemAtIndexPath:itemIndexPath];
+        
+        // Configure attributes ...
+        attributes.alpha = 0.0;
+    }
+    
+    
+    return attributes;
+}
 
 - (void)finalizeCollectionViewUpdates
 {
@@ -200,5 +186,35 @@
     self.deleteIndexPaths = nil;
     self.insertIndexPaths = nil;
     self.moveIndexPaths = nil;
+}
+
+- (NSInteger)zIndexForCellAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSInteger zIndex;
+    switch (indexPath.section) {
+        case SSPokerSectionDeck:
+            zIndex = indexPath.item;
+            break;
+        case SSPokerSectionPlaying1:
+        case SSPokerSectionPlaying2:
+        case SSPokerSectionPlaying3:
+        case SSPokerSectionPlaying4:
+        case SSPokerSectionPlaying5:
+        case SSPokerSectionPlaying6:
+        case SSPokerSectionPlaying7:
+            zIndex = indexPath.item + 13;
+            break;
+        case SSPokerSectionFinishedHeart:
+        case SSPokerSectionFinishedDiamond:
+        case SSPokerSectionFinishedClub:
+        case SSPokerSectionFinishedSpade:
+            zIndex = indexPath.item + 13;
+            break;
+            
+        default:
+            zIndex = indexPath.item;
+            break;
+    }
+    return zIndex;
 }
 @end

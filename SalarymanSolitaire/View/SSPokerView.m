@@ -13,6 +13,8 @@
 @interface SSPokerView ()<UICollectionViewDataSource, UICollectionViewDelegate>
 {
     NSInteger                           _pokerMaxCount;
+    SSPokerAnimationMode                _animationMode;
+    BOOL                                _animating;
 }
 
 @property (nonatomic, strong) SSPokerViewLayout *shuffleLayout;
@@ -159,6 +161,7 @@
 
 - (void)playDealPokerAnimation;
 {
+    _animationMode = SSPokerAnimationModeFan;
     _currentItem = 0;
     _currentIndex = 0;
     _currentSection = 0;
@@ -190,6 +193,7 @@
 
 - (void)playShuffleAnimation
 {
+    _animationMode = SSPokerAnimationModeShuffle;
     _currentIndex = _pokerMaxCount - 1;
     _currentItem = 0;
     _currentSection = SSPokerSectionPlaying1;
@@ -217,8 +221,8 @@
         NSIndexPath *toIndexPath = [NSIndexPath indexPathForItem:item inSection:section];
         [self moveItemAtIndexPath:fromIndexPath toIndexPath:toIndexPath];
         SSPokerViewCell * cell = (SSPokerViewCell *)[self cellForItemAtIndexPath:fromIndexPath];
+        [cell setAnimationMode:_animationMode];
         cell.poker = poker;
-        cell.layer.speed = 1.0f;
     } completion:^(BOOL finished) {
         _currentIndex--;
         _currentSection++;
@@ -255,7 +259,7 @@
                 }
                 
             } completion:^(BOOL finished) {
-                
+                _animationMode = SSPokerAnimationModePlay;
             }];
         }
     }];
@@ -280,12 +284,16 @@
     
     SSPokerViewCell *pokerCell = (SSPokerViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"SSPokerViewCell" forIndexPath:indexPath];
     pokerCell.poker = poker;
+    [pokerCell setAnimationMode:_animationMode];
     return pokerCell;
 }
 
 
 - (void)handleTapGesture:(UITapGestureRecognizer *)gestureRecognizer
 {
+    if (_animating) {
+        return;
+    }
     CGPoint location;
     NSIndexPath *currentIndexPath;
     NSInteger section;
@@ -374,18 +382,20 @@
         }
         
         // 空列に移動可能チェック
-        
     }
 }
 
 - (void)movePokerFromSection:(NSInteger)section toSection:(NSInteger)newSection count:(NSInteger)count;
 {
+    _animating = YES;
+    
     // 移動元
     NSMutableArray *fromPokers = [_allPokers objectAtIndex:section];
     NSMutableArray *fromIndexPaths = [NSMutableArray arrayWithCapacity:count];
     
     // 移動先
     NSMutableArray *toPokers = [_allPokers objectAtIndex:newSection];
+    NSMutableArray *pokers = [NSMutableArray arrayWithCapacity:count];
     NSMutableArray *toIndexPaths = [NSMutableArray arrayWithCapacity:count];
     
     // データ編集
@@ -394,7 +404,7 @@
     NSInteger atItem = [toPokers count];
     for (NSInteger item = firstItem; item > lastItem; item--) {
         SSPoker *poker = [fromPokers objectAtIndex:item];
-        [toPokers addObject:poker];
+        [pokers addObject:poker];
         if (newSection > SSPokerSectionUsable) {
             [poker setFinished:YES];
         } else {
@@ -403,27 +413,32 @@
         [fromPokers removeObjectAtIndex:item];
         NSIndexPath *fromIndexPath = [NSIndexPath indexPathForItem:item inSection:section];
         [fromIndexPaths addObject:fromIndexPath];
-        
+
         NSIndexPath *toIndexPath = [NSIndexPath indexPathForItem:atItem inSection:newSection];
         [toIndexPaths addObject:toIndexPath];
         
         atItem++;
+    }
+    for (NSInteger i = count - 1; i >= 0; i--) {
+        SSPoker *poker = [pokers objectAtIndex:i];
+        [toPokers addObject:poker];
     }
     
     [self performBatchUpdates:^{
         for (NSInteger i = 0; i < [fromIndexPaths count]; i++) {
             NSIndexPath *from = [fromIndexPaths objectAtIndex:[fromIndexPaths count] - 1 - i];
             NSIndexPath *to = [toIndexPaths objectAtIndex:i];
+            SSPokerViewCell * cell = (SSPokerViewCell *)[self cellForItemAtIndexPath:from];
+            [cell setAnimationMode:SSPokerAnimationModePlay];
             [self moveItemAtIndexPath:from toIndexPath:to];
         }
     }completion:^(BOOL finished) {
         NSInteger item = [(NSIndexPath *)[fromIndexPaths objectAtIndex:0] item];
-        if (item) {
-            item--;
-            NSIndexPath *lastIndexPath = [NSIndexPath indexPathForItem:item inSection:section];
-            SSPokerViewCell * cell = (SSPokerViewCell *)[self cellForItemAtIndexPath:lastIndexPath];
-            [cell setPokerFaceUp:YES];
-        }
+        item -= [fromIndexPaths count];
+        NSIndexPath *lastIndexPath = [NSIndexPath indexPathForItem:item inSection:section];
+        SSPokerViewCell * cell = (SSPokerViewCell *)[self cellForItemAtIndexPath:lastIndexPath];
+        [cell setPokerFaceUp:YES];
+        _animating = NO;
     }];
 }
 
