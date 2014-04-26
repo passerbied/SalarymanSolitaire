@@ -13,16 +13,26 @@
 
 #define __STAGE_CELL_IDENTIFIER         @"StageCell"
 
-@interface SelectStageViewController ()
+@interface SelectStageViewController ()<ADInterstitialAdDelegate>
 {
+    // ステージ一覧
     NSArray                             *_stageList;
+    
+    // 選択済みステージID
+    NSInteger                           _selectedStageID;
 }
 
 // ステージ一覧
 @property (nonatomic, weak) IBOutlet UITableView *stageListView;
 
+// インタースティシャル広告
+@property (nonatomic, strong) ADInterstitialAd *interstitialAD;
+
 // 閉じる処理
 - (IBAction)closeAction:(id)sender;
+
+// インタースティシャル広告表示
+- (void)presentInterstitialAD;
 @end
 
 @implementation SelectStageViewController
@@ -90,16 +100,33 @@
 - (void)stageDidSelectNotification:(NSNotification *)notification
 {
     NSDictionary *userInfo = notification.userInfo;
-    NSInteger stageID = [[userInfo objectForKey:StageDidSelectNotificationStageIDKey] integerValue];
-    StoryViewController *controller = [StoryViewController controller];
-    [[SolitaireManager sharedManager] selectStageWithID:stageID];
-    [self.navigationController pushViewController:controller animated:YES];
-    return;
-//    SSStageState state = (SSStageState)[[userInfo objectForKey:StageDidSelectNotificationStateKey] integerValue];
+    
+    // ステータスチェック
+    SSStageState state = (SSStageState)[[userInfo objectForKey:StageDidSelectNotificationStateKey] integerValue];
+    if (state == SSStageStateLocked) {
+        // 挑戦不可
+//        return;
+    }
+    
+    // ステージID取得
+    _selectedStageID = [[userInfo objectForKey:StageDidSelectNotificationStageIDKey] integerValue];
+    
+    // 広告表示要否チェック
     BOOL showAD = [[userInfo objectForKey:StageDidSelectNotificationADKey] boolValue];
     if (showAD) {
         [self presentInterstitialAD];
     }
+    
+    // ストーリー画面表示
+    [self presentStoryView];
+}
+
+// ストーリー画面表示
+- (void)presentStoryView;
+{
+    StoryViewController *controller = [StoryViewController controller];
+    [[SolitaireManager sharedManager] selectStageWithID:_selectedStageID];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 #pragma mark - UITableView
@@ -134,6 +161,45 @@
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, SolitaireStageCellHeaderHeight)];
     headerView.backgroundColor = [UIColor clearColor];
     return headerView;
+}
+
+#pragma mark - インタースティシャル広告
+
+// インタースティシャル広告表示
+- (void)presentInterstitialAD;
+{
+    self.interstitialAD = [[SolitaireManager sharedManager] sharedInterstitialAD];
+    self.interstitialAD.delegate = self;
+    DebugLog(@"interstitialAD");
+}
+
+-(void)interstitialAdDidLoad:(ADInterstitialAd *)interstitialAd
+{
+    [interstitialAd presentInView:self.view];
+    DebugLog(@"インタースティシャル型広告請求成功");
+}
+
+-(void)interstitialAdDidUnload:(ADInterstitialAd *)interstitialAd
+{
+    DebugLog(@"广告卸载");
+}
+
+-(void)interstitialAd:(ADInterstitialAd *)interstitialAd didFailWithError:(NSError *)error
+{
+    DebugLog(@"インタースティシャル型広告請求失敗");
+}
+
+-(BOOL)interstitialAdActionShouldBegin:(ADInterstitialAd *)interstitialAd willLeaveApplication:(BOOL)willLeave
+{
+    return YES;
+}
+
+-(void)interstitialAdActionDidFinish:(ADInterstitialAd *)interstitialAd
+{
+    DebugLog(@"インタースティシャル型広告閉じる");
+    
+    // ストーリー画面表示
+    [self presentStoryView];
 }
 @end
 

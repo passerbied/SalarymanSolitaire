@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "UIButton+UIImage.h"
 #import "AudioEngine.h"
+#import "SSAlertView.h"
 
-@interface SSViewController : UIViewController
+@interface SSViewController : UIViewController<SSAlertViewDelegate>
 {
     
 }
@@ -21,14 +22,14 @@
 // 画面初期設定
 - (void)initView;
 
+// レイアウト設定
+- (void)layoutSubviewsForPhone4;
+
 // 画面表示更新
 - (void)updateView;
 
 // バナー広告表示可否
 - (BOOL)shouldShowBannerAD;
-
-// インタースティシャル広告表示
-- (void)presentInterstitialAD;
 
 @end
 

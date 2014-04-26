@@ -103,6 +103,7 @@
         attributes.frame = CGRectMake(x, y, kPokerSizeWidth, kPokerSizeHeight);
     }
     attributes.zIndex = indexPath.item;
+        [self printInfoIfnecessary:attributes];
     return attributes;
 }
 
@@ -147,17 +148,30 @@
     
     if ([self.moveIndexPaths containsObject:itemIndexPath])
     {
-        
         // only change attributes on inserted cells
         if (!attributes) {
             attributes = [self layoutAttributesForItemAtIndexPath:itemIndexPath];
         }
-        
+//        static NSInteger index = 1000;
         attributes.zIndex = [self zIndexForCellAtIndexPath:itemIndexPath];
+//        attributes.zIndex = index;
+//        index++;
         NSLog(@"Init [%d-%d] zIndex[%d]",itemIndexPath.section, itemIndexPath.item, attributes.zIndex);
     }
     
+    [self printInfoIfnecessary:attributes];
+    
     return attributes;
+}
+
+- (void)printInfoIfnecessary:(UICollectionViewLayoutAttributes *)attributes
+{
+    return;
+    if (attributes.indexPath.section == 1 && attributes.indexPath.item == 0) {
+        UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:attributes.indexPath];
+        NSLog(@"%f-%d",cell.alpha,cell.hidden);
+        NSLog(@"%@",attributes);
+    }
 }
 
 - (UICollectionViewLayoutAttributes *)finalLayoutAttributesForDisappearingItemAtIndexPath:(NSIndexPath *)itemIndexPath
@@ -173,10 +187,10 @@
             attributes = [self layoutAttributesForItemAtIndexPath:itemIndexPath];
         
         // Configure attributes ...
-        attributes.alpha = 0.0;
+//        attributes.alpha = 0.0;
     }
     
-    
+    [self printInfoIfnecessary:attributes];
     return attributes;
 }
 
@@ -202,7 +216,7 @@
         case SSPokerSectionPlaying5:
         case SSPokerSectionPlaying6:
         case SSPokerSectionPlaying7:
-            zIndex = indexPath.item + 13;
+            zIndex = indexPath.item;
             break;
         case SSPokerSectionFinishedHeart:
         case SSPokerSectionFinishedDiamond:
@@ -218,3 +232,5 @@
     return zIndex;
 }
 @end
+
+

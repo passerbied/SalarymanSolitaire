@@ -7,7 +7,6 @@
 //
 
 #import "SSGiveupAlertView.h"
-
 @implementation SSGiveupAlertView
 
 - (void)show
@@ -19,5 +18,17 @@
     [self.alertView addButton:[UIButton buttonWithImage:@"popup_btn_end"]];
     [self.alertView addButton:[UIButton buttonWithImage:@"popup_btn_retry"]];
     [self.alertView show];
+}
+
+// ボタンタップ処理
+- (void)alertView:(WUAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
+{
+    if (buttonIndex == SSAlertViewFirstButton) {
+        // ゲーム終了
+        [self.delegate gameWillExit];
+    } else {
+        // ゲームリトライ
+        [self.delegate gameWillRetry];
+    }
 }
 @end

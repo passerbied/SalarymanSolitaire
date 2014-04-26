@@ -7,7 +7,7 @@
 //
 
 #import "StoryViewController.h"
-#import "PlayViewController.h"
+#import "SSChallengeController.h"
 #import "SSStage.h"
 
 @interface StoryViewController ()
@@ -84,7 +84,7 @@
 // プレイ画面表示
 - (void)presentPlayView
 {
-    PlayViewController *controller = [PlayViewController controller];
+    SSChallengeController *controller = [SSChallengeController controller];
     [self.navigationController pushViewController:controller animated:YES];
 }
 

@@ -20,7 +20,7 @@
                     <rect key="frame" x="0.0" y="45" width="320" height="70"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <view contentMode="scaleToFill" id="PnJ-q6-KNM" userLabel="bottomBar">
+                <view contentMode="scaleToFill" id="PnJ-q6-KNM" userLabel="BottomBar">
                     <rect key="frame" x="0.0" y="519" width="320" height="49"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>

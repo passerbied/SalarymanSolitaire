@@ -40,6 +40,9 @@
 // 警告画面表示
 - (void)show;
 
+// 警告画面非表示
+- (void)dismiss;
+
 // アクセサリー追加
 - (void)addAccessoryView:(UIView *)view;
 

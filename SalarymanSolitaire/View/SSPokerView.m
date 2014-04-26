@@ -37,6 +37,8 @@
     UITapGestureRecognizer              *_tapGestureRecognizer;
     
     BOOL                                _first;
+    
+    NSInteger                           _count;
 }
 
 - (id)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout
@@ -73,6 +75,12 @@
     _tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                     action:@selector(handleTapGesture:)];
     [self addGestureRecognizer:_tapGestureRecognizer];
+    
+    UIImage *image = [UIImage imageNamed:@"bg_finished_area"];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+    CGRect rect = CGRectMake(3, 3, image.size.width, image.size.height);
+    imageView.frame = rect;
+    [self addSubview:imageView];
     
     // 初期化
     _pokerMaxCount = SSPokerColorCount * SSPokerNameCount;
@@ -147,6 +155,7 @@
 
 - (void)dealPokerWithShuffle:(BOOL)shuffle
 {
+    _count = 0;
     // ポーカークリア
     [self clear];
     
@@ -202,6 +211,7 @@
 
 - (void)addPoker
 {
+    _count++;
     NSInteger section = _currentSection;
     NSInteger item = _currentItem;
     NSMutableArray *deckPokers = [_allPokers objectAtIndex:SSPokerSectionDeck];
@@ -220,6 +230,7 @@
         NSIndexPath *fromIndexPath = [NSIndexPath indexPathForItem:_currentIndex inSection:SSPokerSectionDeck];
         NSIndexPath *toIndexPath = [NSIndexPath indexPathForItem:item inSection:section];
         [self moveItemAtIndexPath:fromIndexPath toIndexPath:toIndexPath];
+        NSLog(@"Move [%d-%d]",toIndexPath.section,toIndexPath.item);
         SSPokerViewCell * cell = (SSPokerViewCell *)[self cellForItemAtIndexPath:fromIndexPath];
         [cell setAnimationMode:_animationMode];
         cell.poker = poker;
@@ -231,9 +242,10 @@
             _currentSection = SSPokerSectionPlaying1 + _currentItem;
         }
         
-        if (_currentItem <= 6) {
+        if (_currentItem <= 6 && _count <= 1) {
             [self addPoker];
         } else {
+            return ;
             __block NSInteger capacity = [deckPokers count];
             __block NSMutableArray *fromArray = [NSMutableArray arrayWithCapacity:capacity];
             __block NSMutableArray *toArray = [NSMutableArray arrayWithCapacity:capacity];

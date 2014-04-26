@@ -16,6 +16,8 @@
 #import "SSClearPopupView.h"
 #import "SSChallengeController.h"
 #import "PopupNotificationView.h"
+#import "SSFreePlayController.h"
+#import "SSRecommendViewController.h"
 
 @interface TopViewController ()
 {
@@ -72,8 +74,9 @@
 {
     // ボタン押下音声再生
     [AudioEngine playAudioWith:SolitaireAudioIDButtonClicked];
-
-    [[SSItemAlertView alert] show];
+    
+    SSFreePlayController *controller = [SSFreePlayController controller];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 // おすすめ情報表示
@@ -82,9 +85,8 @@
     // ボタン押下音声再生
     [AudioEngine playAudioWith:SolitaireAudioIDButtonClicked];
 
-    NSURL *url = [NSURL URLWithString:@"http://www.yahoo.co.jp"];
-    PopupNotificationView *popopView = [[PopupNotificationView alloc] initWithURL:url];
-    [popopView popupInViewController:self];
+    SSRecommendViewController *controller = [SSRecommendViewController controller];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 // プレイスタート

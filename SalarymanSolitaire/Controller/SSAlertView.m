@@ -10,9 +10,11 @@
 @implementation SSAlertView
 
 // 警告画面表示
-+ (instancetype)alert
++ (instancetype)alertWithDelegate:(id<SSAlertViewDelegate>)delegate;
 {
-    return [[self alloc] init];
+    SSAlertView *alert = [[self alloc] init];
+    alert.delegate = delegate;
+    return alert;
 }
 
 - (instancetype)init
@@ -30,7 +32,11 @@
     
 }
 
-
+// 警告画面を非表示する
+- (void)dismiss;
+{
+    [self.alertView dismiss];
+}
 #pragma mark - ボタンタップ処理
 // ボタンタップ処理
 - (void)alertView:(WUAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;

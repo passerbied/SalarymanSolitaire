@@ -8,6 +8,8 @@
 
 #import "SSExitAlertView.h"
 
+enum { SSAlertExitGameYes = 1, SSAlertExitGameNO };
+
 @implementation SSExitAlertView
 
 - (void)show
@@ -18,5 +20,14 @@
     [self.alertView addButton:[UIButton buttonWithImage:@"free_btn_yes"]];
     [self.alertView addButton:[UIButton buttonWithImage:@"free_btn_no"]];
     [self.alertView show];
+}
+
+// ボタンタップ処理
+- (void)alertView:(WUAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
+{
+    if (buttonIndex == SSAlertViewFirstButton) {
+        // ゲーム終了
+        [self.delegate gameWillExit];
+    }
 }
 @end

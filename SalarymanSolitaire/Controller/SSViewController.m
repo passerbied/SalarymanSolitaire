@@ -9,12 +9,11 @@
 #import "SSViewController.h"
 #import "SSAppDelegate.h"
 
-@interface SSViewController ()<ADBannerViewDelegate, ADInterstitialAdDelegate>
+@interface SSViewController ()<ADBannerViewDelegate>
 {
+    BOOL                                _layouted;
 }
 
-// インタースティシャル広告
-@property (nonatomic, strong) ADInterstitialAd *interstitialAD;
 @end
 
 @implementation SSViewController
@@ -33,6 +32,26 @@
     [self initView];
 }
 
+- (void)viewWillLayoutSubviews
+{
+    [super viewWillLayoutSubviews];
+    
+    if (!_layouted) {
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+            if (![UIDevice isPhone5]) {
+                // レイアウト設定
+                [self layoutSubviewsForPhone4];
+            }
+        }
+        _layouted = YES;
+    }
+}
+
+// レイアウト設定
+- (void)layoutSubviewsForPhone4;
+{
+    
+}
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -49,24 +68,13 @@
         bannerView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleWidth;
         bannerView.translatesAutoresizingMaskIntoConstraints = NO;
         [self.view addSubview:bannerView];
-//        
-////        if (bannerView == nil) {
-//        NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(bannerView);
-//        
-////            [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[bannerView]-0-|"
-////                                                     options:0
-////                                                     metrics:nil
-////                                                       views:viewsDictionary]];
-////
-////            
-////            + (NSArray *)constraintsWithVisualFormat:(NSString *)format options:(NSLayoutFormatOptions)opts metrics:(NSDictionary *)metrics views:(NSDictionary *)views;
-//        }
+
     } else {
         bannerView.delegate = nil;
         [bannerView removeFromSuperview];
     }
     
-    // ナビゲートバー表示
+    // ナビゲートバー非表示
     self.navigationController.navigationBarHidden = YES;
     
     // 画面表示更新
@@ -126,42 +134,7 @@
 }
 
 
-#pragma mark - インタースティシャル広告
 
-// インタースティシャル広告表示
-- (void)presentInterstitialAD;
-{
-    self.interstitialAD = [[SolitaireManager sharedManager] sharedInterstitialAD];
-    self.interstitialAD.delegate = self;
-    DebugLog(@"interstitialAD");
-}
-
--(void)interstitialAdDidLoad:(ADInterstitialAd *)interstitialAd
-{
-    [interstitialAd presentInView:self.view];
-    DebugLog(@"广告加载成功");
-}
-
--(void)interstitialAdDidUnload:(ADInterstitialAd *)interstitialAd
-{
-    DebugLog(@"广告卸载");
-}
-
--(void)interstitialAd:(ADInterstitialAd *)interstitialAd didFailWithError:(NSError *)error
-{
-    DebugLog(@"广告加载失败");
-}
-
--(BOOL)interstitialAdActionShouldBegin:(ADInterstitialAd *)interstitialAd willLeaveApplication:(BOOL)willLeave
-{
-    DebugLog(@"可以执行一个广告动作");
-    return YES;
-}
-
--(void)interstitialAdActionDidFinish:(ADInterstitialAd *)interstitialAd
-{
-    DebugLog(@"广告关闭, 用户关闭模态窗口时回调");
-}
 @end
 
 

@@ -1,5 +1,5 @@
 //
-//  RecommendViewController.h
+//  SSRecommendViewController.h
 //  SalarymanSolitaire
 //
 //  Created by WU on 14-3-8.
@@ -8,6 +8,7 @@
 
 #import "SSViewController.h"
 
-@interface RecommendViewController : SSViewController
+@interface SSRecommendViewController : SSViewController
 
 @end
+

@@ -44,7 +44,7 @@
             speed = 15.0f;
             break;
         case SSPokerAnimationModeShuffle:
-            speed = 10.0f;
+            speed = 1.0f;
             break;
         case SSPokerAnimationModePlay:
             speed = 0.10f;

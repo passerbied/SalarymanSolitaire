@@ -7,7 +7,12 @@
 //
 
 #import "SSAlertView.h"
+@protocol SSExitAlertViewDelegate;
 
 @interface SSExitAlertView : SSAlertView
 
+
+
 @end
+
+

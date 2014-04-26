@@ -18,4 +18,13 @@
     [self.alertView addButton:[UIButton buttonWithImage:@"free_btn_no"]];
     [self.alertView show];
 }
+
+// ボタンタップ処理
+- (void)alertView:(WUAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
+{
+    if (buttonIndex == SSAlertViewFirstButton) {
+        // 新規ゲームにスタートさせる
+        [self.delegate gameWillRetry];
+    }
+}
 @end

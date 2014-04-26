@@ -28,6 +28,9 @@ static const CGFloat AlertViewButtonMargin = 20.0;
 static const CGFloat AlertViewButtonMarginBottom = 15.0;
 
 @interface WUAlertView ()
+{
+
+}
 
 @property (nonatomic) UIWindow *mainWindow;
 @property (nonatomic) UIWindow *alertWindow;
@@ -105,7 +108,7 @@ static const CGFloat AlertViewButtonMarginBottom = 15.0;
         _titleLabel.textAlignment = NSTextAlignmentCenter;
         _titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
         _titleLabel.numberOfLines = 0;
-        _titleLabel.font = SSGothicProFont(18);
+        
         _titleLabel.textColor = SSColorText;
         _titleLabel.frame = [self adjustLabelFrameHeight:self.titleLabel];
         [_alertView addSubview:_titleLabel];
@@ -135,6 +138,16 @@ static const CGFloat AlertViewButtonMarginBottom = 15.0;
     _alertTitle = alertTitle;
     _titleLabel.text = alertTitle;
     _titleLabel.frame = [self adjustLabelFrameHeight:self.titleLabel];
+    if ([_alertTitle length]) {
+        NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:_alertTitle];
+        NSRange range = NSMakeRange(0, [_alertTitle length]);
+        [attrString addAttribute:NSFontAttributeName value:SSGothicProFont(18) range:range];
+        [attrString addAttribute:NSStrokeWidthAttributeName value:[NSNumber numberWithFloat:8.0f] range:range];
+        [attrString addAttribute:NSStrokeColorAttributeName value:SSColorText range:range];
+        _titleLabel.attributedText = attrString;
+    } else {
+        _titleLabel.text = alertTitle;
+    }
 }
 
 - (void)setAlertMessage:(NSString *)alertMessage
@@ -142,6 +155,16 @@ static const CGFloat AlertViewButtonMarginBottom = 15.0;
     _alertMessage = alertMessage;
     _messageLabel.text = alertMessage;
     _messageLabel.frame = [self adjustLabelFrameHeight:self.messageLabel];
+    if ([_alertMessage length]) {
+        NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:_alertMessage];
+        NSRange range = NSMakeRange(0, [_alertMessage length]);
+        [attrString addAttribute:NSFontAttributeName value:SSGothicProFont(15) range:range];
+        [attrString addAttribute:NSStrokeWidthAttributeName value:[NSNumber numberWithFloat:7.0f] range:range];
+        [attrString addAttribute:NSStrokeColorAttributeName value:SSColorText range:range];
+        _messageLabel.attributedText = attrString;
+    } else {
+        _messageLabel.text = _alertMessage;
+    }
 }
 
 - (void)setBackgroundImage:(UIImage *)backgroundImage
@@ -241,6 +264,12 @@ static const CGFloat AlertViewButtonMarginBottom = 15.0;
 - (void)hide
 {
     [self.view removeFromSuperview];
+}
+
+// 警告画面非表示
+- (void)dismiss;
+{
+    [self dismiss:nil animated:YES];
 }
 
 - (void)dismiss:(id)sender

@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SSFreePlayController">
             <connections>
+                <outlet property="bottomBar" destination="nYX-7m-JAO" id="Bob-wV-e3w"/>
+                <outlet property="passedTimeHeader" destination="H6g-mA-az8" id="mG9-NS-uXs"/>
+                <outlet property="passedTimeLabel" destination="sxu-VZ-LwI" id="IuS-gL-UGH"/>
+                <outlet property="passedTitleLabel" destination="ZWT-6d-yrp" id="Y9o-S4-ssC"/>
+                <outlet property="recommandHeader" destination="lmF-cP-BCD" id="JfK-bb-7aw"/>
+                <outlet property="recommandTitleLabel" destination="lz9-bk-z0a" id="gBj-B3-3tb"/>
+                <outlet property="topBar" destination="7xP-po-nbe" id="ZPF-mB-0nS"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -14,14 +21,96 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7xP-po-nbe">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
+                <view contentMode="scaleToFill" id="7xP-po-nbe" userLabel="TopBar">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="free_header_timeframe" id="H6g-mA-az8">
+                            <rect key="frame" x="10" y="3" width="146" height="47"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sxu-VZ-LwI">
+                            <rect key="frame" x="75" y="25" width="60" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="経過時間" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZWT-6d-yrp">
+                            <rect key="frame" x="51" y="14" width="90" height="17"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="8"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="free_header_recomend" id="lmF-cP-BCD">
+                            <rect key="frame" x="206" y="1" width="109" height="49"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="僕のおすすめ アプリはこちらへ" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lz9-bk-z0a">
+                            <rect key="frame" x="247" y="19" width="120" height="24"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="8"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
+                <view contentMode="scaleToFill" id="nYX-7m-JAO" userLabel="BottomBar">
+                    <rect key="frame" x="0.0" y="479" width="320" height="39"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="DKJ-wR-Sun">
+                            <rect key="frame" x="5" y="0.0" width="69" height="34"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" backgroundImage="free_btn_fin.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="highlighted" backgroundImage="free_btn_fin_on.png"/>
+                            <connections>
+                                <action selector="terminateAction:" destination="-1" eventType="touchUpInside" id="BEX-JY-5gd"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Lt5-d9-nP9">
+                            <rect key="frame" x="86" y="0.0" width="69" height="34"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" backgroundImage="free_btn_retry.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="disabled" backgroundImage="nutrient_disabled.png"/>
+                            <state key="highlighted" backgroundImage="free_btn_retry_on.png"/>
+                            <connections>
+                                <action selector="retryAction:" destination="-1" eventType="touchUpInside" id="epZ-nf-b7S"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="uva-vR-w1k">
+                            <rect key="frame" x="167" y="0.0" width="69" height="34"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" backgroundImage="free_btn_mode.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="highlighted" backgroundImage="free_btn_mode_on.png"/>
+                            <connections>
+                                <action selector="selectModeAction:" destination="-1" eventType="touchUpInside" id="rdU-70-Jbt"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
     </objects>
+    <resources>
+        <image name="free_btn_fin.png" width="69" height="34"/>
+        <image name="free_btn_fin_on.png" width="69" height="34"/>
+        <image name="free_btn_mode.png" width="69" height="34"/>
+        <image name="free_btn_mode_on.png" width="69" height="34"/>
+        <image name="free_btn_retry.png" width="69" height="34"/>
+        <image name="free_btn_retry_on.png" width="69" height="34"/>
+        <image name="free_header_recomend" width="109" height="40"/>
+        <image name="free_header_timeframe" width="146" height="40"/>
+        <image name="nutrient_disabled.png" width="71" height="36"/>
+    </resources>
 </document>
