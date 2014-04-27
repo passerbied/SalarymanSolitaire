@@ -49,14 +49,6 @@
 
 @implementation SSFreePlayController
 
-
-// ポーカー位置
-- (CGRect)rectForPoker;
-{
-    CGRect rect = self.view.bounds;
-    return CGRectInset(rect, 0.0f, 50.0f);
-}
-
 - (BOOL)shouldShowBannerAD
 {
     if ([UIDevice isPhone5]) {
@@ -97,6 +89,10 @@
         _startTime = [NSDate new];
         _updateTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(showCurrentTimeAction:) userInfo:nil repeats:YES];;
     }
+    
+    // ゲームスタート
+    self.pokerView.backgroundColor = [UIColor orangeColor];
+    [self.pokerView start];
 }
 
 // レイアウト設定
@@ -104,53 +100,46 @@
 {
     [super layoutSubviewsForPhone4];
     
-    BOOL needLayoutForPhone4 = NO;
-    if (![UIDevice isPhone5]) {
-        needLayoutForPhone4 = YES;
-    }
+    // トップヘッダー
+    CGFloat topHeaderHeight = 40.0f;
+    CGRect rect = self.topBar.frame;
+    rect.size.height = topHeaderHeight;
+    self.topBar.frame = rect;
     
-    if (needLayoutForPhone4) {
-        // トップヘッダー
-        CGFloat topHeaderHeight = 40.0f;
-        CGRect rect = self.topBar.frame;
-        rect.size.height = topHeaderHeight;
-        self.topBar.frame = rect;
-        
-        // 経過時間
-        CGSize size = self.passedTimeHeader.image.size;
-        CGFloat x = 10.0f;
-        CGFloat y = topHeaderHeight - size.height;
-        rect = CGRectMake(x, y, size.width, size.height);
-        self.passedTimeHeader.frame = rect;
-        
-        // おすすめ
-        size = self.recommandHeader.image.size;
-        x = self.view.bounds.size.width - self.recommandHeader.bounds.size.width - 5.0f;
-        y = topHeaderHeight - size.height;
-        rect = CGRectMake(x, y, size.width, size.height);
-        self.recommandHeader.frame = rect;
-        
-        // ラベル
-        CGFloat dx = 0.0f;
-        CGFloat dy = -10.0f;
-        rect = self.passedTitleLabel.frame;
-        rect = CGRectOffset(rect, dx, dy);
-        self.passedTitleLabel.frame = rect;
-        
-        rect = self.passedTimeLabel.frame;
-        rect = CGRectOffset(rect, dx, dy);
-        self.passedTimeLabel.frame = rect;
-
-        rect = self.recommandTitleLabel.frame;
-        rect = CGRectOffset(rect, dx, dy);
-        self.recommandTitleLabel.frame = rect;
-        
-        // ボタン
-        rect = self.bottomBar.frame;
-        y = self.view.bounds.size.height - rect.size.height;
-        rect = CGRectMake(0.0f, y, rect.size.width, rect.size.height);
-        self.bottomBar.frame = rect;
-    }
+    // 経過時間
+    CGSize size = self.passedTimeHeader.image.size;
+    CGFloat x = 10.0f;
+    CGFloat y = topHeaderHeight - size.height;
+    rect = CGRectMake(x, y, size.width, size.height);
+    self.passedTimeHeader.frame = rect;
+    
+    // おすすめ
+    size = self.recommandHeader.image.size;
+    x = self.view.bounds.size.width - self.recommandHeader.bounds.size.width - 5.0f;
+    y = topHeaderHeight - size.height;
+    rect = CGRectMake(x, y, size.width, size.height);
+    self.recommandHeader.frame = rect;
+    
+    // ラベル
+    CGFloat dx = 0.0f;
+    CGFloat dy = -10.0f;
+    rect = self.passedTitleLabel.frame;
+    rect = CGRectOffset(rect, dx, dy);
+    self.passedTitleLabel.frame = rect;
+    
+    rect = self.passedTimeLabel.frame;
+    rect = CGRectOffset(rect, dx, dy);
+    self.passedTimeLabel.frame = rect;
+    
+    rect = self.recommandTitleLabel.frame;
+    rect = CGRectOffset(rect, dx, dy);
+    self.recommandTitleLabel.frame = rect;
+    
+    // ボタン
+    rect = self.bottomBar.frame;
+    y = self.view.bounds.size.height - rect.size.height;
+    rect = CGRectMake(0.0f, y, rect.size.width, rect.size.height);
+    self.bottomBar.frame = rect;
 }
 
 #pragma mark - 経過時間関連

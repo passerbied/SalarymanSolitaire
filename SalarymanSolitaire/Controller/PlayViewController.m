@@ -50,6 +50,9 @@
     NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(imageView);
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[imageView]|" options:0 metrics: 0 views:viewsDictionary]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[imageView]|" options:0 metrics: 0 views:viewsDictionary]];
+    
+    // ポーカービュー
+    self.pokerView.backgroundColor = [UIColor clearColor];
 }
 
 
@@ -68,9 +71,4 @@
     return NO;
 }
 
-// ポーカー位置
-- (CGRect)rectForPoker;
-{
-    return CGRectZero;
-}
 @end

@@ -61,6 +61,7 @@
 {
     [super awakeFromNib];
     
+    self.collectionViewLayout = [[SSPokerViewLayout alloc] init];
     [self setup];
 }
 

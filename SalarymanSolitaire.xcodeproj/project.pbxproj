@@ -490,7 +490,6 @@
 		E5E0E7EA18D7A0E00047DE80 /* physical_bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5E0E7A018D7A0E00047DE80 /* physical_bar@2x.png */; };
 		E5E0E7EB18D7A0E00047DE80 /* physical_gray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5E0E7A118D7A0E00047DE80 /* physical_gray@2x.png */; };
 		E5E0E7EC18D7A0E00047DE80 /* physical_red@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5E0E7A218D7A0E00047DE80 /* physical_red@2x.png */; };
-		E5E22E5418E79BA400897AC7 /* rounded-mplus-2m-bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E5E22E5318E79BA400897AC7 /* rounded-mplus-2m-bold.ttf */; };
 		E5E22E5718E7AAB800897AC7 /* UIButton+Solitaire.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E22E5618E7AAB800897AC7 /* UIButton+Solitaire.m */; };
 		E5E22E5A18E7D11D00897AC7 /* WUPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E22E5918E7D11D00897AC7 /* WUPopupView.m */; };
 		E5E22E5D18E7D32E00897AC7 /* UIView+Screenshot.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E22E5C18E7D32E00897AC7 /* UIView+Screenshot.m */; };
@@ -1213,7 +1212,6 @@
 		E5E0E7A018D7A0E00047DE80 /* physical_bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "physical_bar@2x.png"; sourceTree = "<group>"; };
 		E5E0E7A118D7A0E00047DE80 /* physical_gray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "physical_gray@2x.png"; sourceTree = "<group>"; };
 		E5E0E7A218D7A0E00047DE80 /* physical_red@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "physical_red@2x.png"; sourceTree = "<group>"; };
-		E5E22E5318E79BA400897AC7 /* rounded-mplus-2m-bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "rounded-mplus-2m-bold.ttf"; sourceTree = "<group>"; };
 		E5E22E5518E7AAB800897AC7 /* UIButton+Solitaire.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Solitaire.h"; sourceTree = "<group>"; };
 		E5E22E5618E7AAB800897AC7 /* UIButton+Solitaire.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Solitaire.m"; sourceTree = "<group>"; };
 		E5E22E5818E7D11D00897AC7 /* WUPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUPopupView.h; sourceTree = "<group>"; };
@@ -1680,7 +1678,6 @@
 		34C7508C18CAB37F00BF3FC6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				E5E22E5218E79BA400897AC7 /* Font */,
 				34C7508D18CAB37F00BF3FC6 /* SalarymanSolitaire-Info.plist */,
 				34C7508E18CAB37F00BF3FC6 /* InfoPlist.strings */,
 				34C7509118CAB37F00BF3FC6 /* main.m */,
@@ -2054,14 +2051,6 @@
 				E5DCE36B18E45B1200B95064 /* SSItemAlertView.m */,
 			);
 			name = "01_アイテム警告";
-			sourceTree = "<group>";
-		};
-		E5E22E5218E79BA400897AC7 /* Font */ = {
-			isa = PBXGroup;
-			children = (
-				E5E22E5318E79BA400897AC7 /* rounded-mplus-2m-bold.ttf */,
-			);
-			path = Font;
 			sourceTree = "<group>";
 		};
 		E5E22E6418E7FA9D00897AC7 /* 対戦モード */ = {
@@ -3038,7 +3027,6 @@
 				E5E737E018E1BD2900E5A40A /* stage_074_story@2x.png in Resources */,
 				E5DCE35418E455E900B95064 /* popup_btn_cancel_on@2x.png in Resources */,
 				E58F855E18DEACA400C3CDC3 /* enemy_038_not_clear@2x.png in Resources */,
-				E5E22E5418E79BA400897AC7 /* rounded-mplus-2m-bold.ttf in Resources */,
 				E58F850618DEACA400C3CDC3 /* enemy_009_clear@2x.png in Resources */,
 				E5DCE35818E455E900B95064 /* popup_btn_retry_on@2x.png in Resources */,
 				E58F84F918DEACA400C3CDC3 /* enemy_005_banner@2x.png in Resources */,

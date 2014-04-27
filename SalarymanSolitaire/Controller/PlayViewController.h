@@ -12,10 +12,17 @@
 
 @interface PlayViewController : SSViewController
 
-// ゲームモード
+// フリーモード
 @property (nonatomic, getter = isFreeMode) BOOL freeMode;
 
-// ポーカー位置
-- (CGRect)rectForPoker;
+// カード引き枚数
+@property (nonatomic, getter = isSingleMode) BOOL singleMode;
+
+// 山札戻し利用可能回数
+@property (nonatomic) NSInteger usableYamafudas;
+
+
+// ポーカービュー
+@property (nonatomic, weak) IBOutlet SSPokerView *pokerView;
 
 @end
