@@ -110,7 +110,7 @@ static const CGFloat AlertViewButtonMarginBottom = 15.0;
         _titleLabel.numberOfLines = 0;
         
         _titleLabel.textColor = SSColorText;
-        _titleLabel.frame = [self adjustLabelFrameHeight:self.titleLabel];
+        _titleLabel.frame = [self adjustLabelFrameHeight:self.titleLabel title:YES];
         [_alertView addSubview:_titleLabel];
         
         CGFloat messageLabelY = _titleLabel.frame.origin.y + _titleLabel.frame.size.height + AlertViewVerticalElementSpace;
@@ -127,7 +127,7 @@ static const CGFloat AlertViewButtonMarginBottom = 15.0;
         _messageLabel.numberOfLines = 0;
         _titleLabel.font = SSGothicProFont(15);
         _titleLabel.textColor = SSColorText;
-        _messageLabel.frame = [self adjustLabelFrameHeight:self.messageLabel];
+        _messageLabel.frame = [self adjustLabelFrameHeight:self.messageLabel title:NO];
         [_alertView addSubview:_messageLabel];        
     }
     return self;
@@ -137,7 +137,7 @@ static const CGFloat AlertViewButtonMarginBottom = 15.0;
 {
     _alertTitle = alertTitle;
     _titleLabel.text = alertTitle;
-    _titleLabel.frame = [self adjustLabelFrameHeight:self.titleLabel];
+    _titleLabel.frame = [self adjustLabelFrameHeight:self.titleLabel title:YES];
     if ([_alertTitle length]) {
         NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:_alertTitle];
         NSRange range = NSMakeRange(0, [_alertTitle length]);
@@ -154,7 +154,7 @@ static const CGFloat AlertViewButtonMarginBottom = 15.0;
 {
     _alertMessage = alertMessage;
     _messageLabel.text = alertMessage;
-    _messageLabel.frame = [self adjustLabelFrameHeight:self.messageLabel];
+    _messageLabel.frame = [self adjustLabelFrameHeight:self.messageLabel title:NO];
     if ([_alertMessage length]) {
         NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:_alertMessage];
         NSRange range = NSMakeRange(0, [_alertMessage length]);
@@ -184,28 +184,30 @@ static const CGFloat AlertViewButtonMarginBottom = 15.0;
     return frame;
 }
 
-- (CGRect)adjustLabelFrameHeight:(UILabel *)label
+- (CGRect)adjustLabelFrameHeight:(UILabel *)label title:(BOOL)title
 {
     CGFloat height;
     
-    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-        CGSize size = [label.text sizeWithFont:label.font
-                             constrainedToSize:CGSizeMake(label.frame.size.width, FLT_MAX)
-                                 lineBreakMode:NSLineBreakByWordWrapping];
-        
-        height = size.height;
-#pragma clang diagnostic pop
+    NSStringDrawingContext *context = [[NSStringDrawingContext alloc] init];
+    context.minimumScaleFactor = 1.0;
+    
+    UIFont *font;
+    CGFloat width;
+    
+    if (title) {
+        font = SSGothicProFont(18);
+        width = 8.0f;
     } else {
-        NSStringDrawingContext *context = [[NSStringDrawingContext alloc] init];
-        context.minimumScaleFactor = 1.0;
-        CGRect bounds = [label.text boundingRectWithSize:CGSizeMake(label.frame.size.width, FLT_MAX)
-                                                 options:NSStringDrawingUsesLineFragmentOrigin
-                                              attributes:@{NSFontAttributeName:label.font}
-                                                 context:context];
-        height = bounds.size.height;
+        font = SSGothicProFont(15);
+        width = 7.0f;
     }
+    CGRect bounds = [label.text boundingRectWithSize:CGSizeMake(label.frame.size.width, FLT_MAX)
+                                             options:NSStringDrawingUsesLineFragmentOrigin
+                                          attributes:@{NSFontAttributeName:font,
+                                                       NSStrokeWidthAttributeName:[NSNumber numberWithFloat:width]
+                                                       }
+                                             context:context];
+    height = bounds.size.height;
     
     return CGRectMake(label.frame.origin.x, label.frame.origin.y, label.frame.size.width, height);
 }

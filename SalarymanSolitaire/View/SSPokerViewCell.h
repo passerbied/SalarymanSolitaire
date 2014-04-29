@@ -11,8 +11,7 @@
 
 typedef enum
 {
-    SSPokerAnimationModeFan,
-    SSPokerAnimationModeShuffle,
+    SSPokerAnimationModeDistribute,
     SSPokerAnimationModePlay,
     SSPokerAnimationModeDone
 } SSPokerAnimationMode;
@@ -22,6 +21,7 @@ typedef enum
 // ポーカー情報
 @property (nonatomic, strong) SSPoker *poker;
 
+// アニメーションモード設定
 - (void)setAnimationMode:(SSPokerAnimationMode)mode;
 
 // 表示方向

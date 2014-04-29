@@ -6,9 +6,9 @@
 //  Copyright (c) 2014年 IfelseGo.Inc. All rights reserved.
 //
 
-#import "PlayViewController.h"
+#import "SSPlayViewController.h"
 #import "SSStage.h"
 
-@interface SSChallengeController : PlayViewController
+@interface SSChallengeController : SSPlayViewController
 
 @end

@@ -237,7 +237,7 @@ typedef void (^ProvideContentBlock)(NSString *productIdentifier, BOOL succeed);
     if ([response.invalidProductIdentifiers count]) {
         _status = PurchaseStatusInvalidProduct;
         [response.invalidProductIdentifiers enumerateObjectsUsingBlock:^(NSString *invalidProductIdentifier, NSUInteger idx, BOOL *stop){
-            NSLog(@"無効商品ID:[%@]", invalidProductIdentifier);
+            DebugLog(@"無効商品ID:[%@]", invalidProductIdentifier);
         }];
     }
     
@@ -320,7 +320,7 @@ typedef void (^ProvideContentBlock)(NSString *productIdentifier, BOOL succeed);
     NSData *receiptData = [transaction receipt];
     NSDictionary *receipt = [NSDictionary dictionaryWithAppStoreReceipt:receiptData];
     if (![receipt isValidReceipt]) {
-        NSLog(@"NG");
+        DebugLog(@"NG");
     }
     
     // 退避
@@ -372,7 +372,7 @@ typedef void (^ProvideContentBlock)(NSString *productIdentifier, BOOL succeed);
 {
     // 支払いキャンセル以外の場合、エラー原因を出力する。
     if (transaction.error.code != SKErrorPaymentCancelled) {
-        NSLog(@"Error(%ld): %@",(long)transaction.error.code, transaction.error.localizedDescription);
+        DebugLog(@"Error(%ld): %@",(long)transaction.error.code, transaction.error.localizedDescription);
     }
     
     [[SKPaymentQueue defaultQueue] finishTransaction:transaction];

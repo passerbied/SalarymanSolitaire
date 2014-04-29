@@ -30,11 +30,11 @@
     // 時間
     CGFloat                             _timeLabelFontSize;
     CGPoint                             _timeLabelOriginal;
-    NSTimer                             *_updateTimer;
-    NSInteger                           _currentTime;
     
     // ゲージ
     CGPoint                             _gaugeOriginal;
+    
+    UIImageView                         *_physicalBarView;
 }
 
 // 体力
@@ -43,7 +43,6 @@
 // 時間
 @property (nonatomic, strong) UILabel *timeLabel;
 
-//
 @end
 
 @implementation SSPhysicalView
@@ -77,7 +76,7 @@
         _powerLabelOriginal = CGPointMake(8.0f, 15.0f);
         
         _timeLabelFontSize = 9.0f;
-        _timeLabelOriginal = CGPointMake(4.0f, 15.0f);
+        _timeLabelOriginal = CGPointMake(4.0f, 11.0f);
         
         _gaugeOriginal = CGPointMake(55.0f, 15.0f);
     } else {
@@ -103,14 +102,19 @@
     if (!_powerLabel) {
         UIFont *font = SSGothicProFont(_powerLabelFontSize);
         NSString *text = LocalizedString(@"体力");
-        NSDictionary *attributes = @{ NSFontAttributeName:font };
+        CGFloat strokeWidth = 7.0f;
+        NSDictionary *attributes = @{ NSFontAttributeName:font,
+                                      NSStrokeWidthAttributeName:[NSNumber numberWithFloat:strokeWidth]};
         CGSize size = [text sizeWithAttributes:attributes];
         CGRect powerLabelRect = CGRectMake(_powerLabelOriginal.x, _powerLabelOriginal.y, size.width, size.height);
         _powerLabel = [[UILabel alloc] initWithFrame:powerLabelRect];
         _powerLabel.backgroundColor = [UIColor clearColor];
-        _powerLabel.textColor = SSColorWhite;
-        _powerLabel.font = font;
-        _powerLabel.text = text;
+        NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:text];
+        NSRange range = NSMakeRange(0, [text length]);
+        [attrString addAttribute:NSFontAttributeName value:font range:range];
+        [attrString addAttribute:NSStrokeWidthAttributeName value:[NSNumber numberWithFloat:strokeWidth] range:range];
+        [attrString addAttribute:NSStrokeColorAttributeName value:SSColorWhite range:range];
+        _powerLabel.attributedText = attrString;
         [self addSubview:_powerLabel];
     }
     
@@ -135,11 +139,6 @@
         [self addSubview:_timeLabel];
     }
     
-    // タイマー設定
-    if (!_updateTimer) {
-        _updateTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(showCurrentTimeAction:) userInfo:nil repeats:YES];;
-    }
-    
     // ゲージ
     UIImage *backgroundImage = [UIImage imageNamed:@"physical_gray.png"];
     UIImageView *gagueBackgroundView = [[UIImageView alloc] initWithImage:backgroundImage];
@@ -159,28 +158,46 @@
         gagueView.frame = gagueRect;
         [self addSubview:gagueView];
     }
+    
+    // バー
+    if (!_physicalBarView) {
+        _physicalBarView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"physical_bar.png"]];
+        [self addSubview:_physicalBarView];
+    }
+    [self showCurrentPower];
+}
+
+- (void)setDuration:(NSTimeInterval)duration
+{
+    if (_duration == duration) {
+        return;
+    }
+    
+    _duration = duration;
+    
+    // 時間表示
+    _timeLabel.text = [self currentTime];
+    
+    // 残り体力表示
+    if (_duration >= 60*15) {
+        if (_currentPower < _maxPower) {
+            [self powerUp:YES];
+        }
+    }
     [self showCurrentPower];
 }
 
 - (NSString *)currentTime
 {
-    NSInteger minute = _currentTime / kSecondPerMinute;
-    NSInteger second = _currentTime % kSecondPerMinute;
+    NSInteger duration = (NSInteger)_duration;
+    NSInteger minute = duration / kSecondPerMinute;
+    NSInteger second = duration % kSecondPerMinute;
     return [NSString stringWithFormat:@"%02d:%02d", (int)minute, (int)second];
-}
-
-- (void)showCurrentTimeAction:(NSTimer *)timer
-{
-    _currentTime++;
-    if (_currentTime == kPowerRecoveryTime) {
-        [self powerGrowthUp:YES];
-        _currentTime = 0;
-    }
-    _timeLabel.text = [self currentTime];
 }
 
 - (void)showCurrentPower
 {
+    // ゲージ表示制御
     for (NSInteger tag = kGaugeTag; tag < kGaugeTag + kPowerValueMax; tag++) {
         UIImageView *gagueView = (UIImageView *)[self viewWithTag:tag];
         if (_currentPower >= tag - kGaugeTag + 1 ) {
@@ -189,22 +206,25 @@
             gagueView.hidden = YES;
         }
     }
-}
-
-- (void)layoutSubviews
-{
-    [super layoutSubviews];
-}
-
-- (void)dealloc
-{
-    if ([_updateTimer isValid]) {
-        [_updateTimer invalidate];
-        _updateTimer = nil;
+    
+    // 白いバー位置制御
+    if (_currentPower == kPowerValueMax) {
+        _physicalBarView.hidden = YES;
+    } else {
+        _physicalBarView.hidden = NO;
+        
     }
+    CGRect rect = [[self viewWithTag:kGaugeTag + _currentPower] frame];
+    CGFloat dx = -3.0f;
+    CGFloat dy = -5.0f;
+    CGFloat x = rect.origin.x + kGaugeSizeWidth + dx;
+    CGFloat y = rect.origin.y + dy;
+    rect = _physicalBarView.frame;
+    rect.origin = CGPointMake(x, y);
+    _physicalBarView.frame = rect;
 }
 
-- (void)powerGrowthUp:(BOOL)up;
+- (void)powerUp:(BOOL)up;
 {
     NSInteger power;
     if (up) {

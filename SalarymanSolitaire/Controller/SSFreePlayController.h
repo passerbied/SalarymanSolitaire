@@ -6,8 +6,8 @@
 //  Copyright (c) 2014年 IfelseGo.Inc. All rights reserved.
 //
 
-#import "PlayViewController.h"
+#import "SSPlayViewController.h"
 
-@interface SSFreePlayController : PlayViewController
+@interface SSFreePlayController : SSPlayViewController
 
 @end

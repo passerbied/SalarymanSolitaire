@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SelectStageViewController">
             <connections>
+                <outlet property="headerView" destination="8Ss-jx-Nf0" id="fqk-8A-BMA"/>
                 <outlet property="stageListView" destination="fN1-b2-NqI" id="0Ua-Dj-1BA"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>

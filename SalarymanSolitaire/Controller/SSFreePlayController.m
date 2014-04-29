@@ -14,10 +14,6 @@
 
 @interface SSFreePlayController ()
 {
-    // タイマー
-    NSTimer                             *_updateTimer;
-    NSDate                              *_startTime;
-    
     // カード引き枚数
     BOOL                                _singleMode;
 }
@@ -35,7 +31,6 @@
 // 僕のおすすめ
 @property (nonatomic, weak) IBOutlet UILabel *recommandTitleLabel;
 
-
 // ゲーム終了
 - (IBAction)terminateAction:(id)sender;
 
@@ -44,6 +39,7 @@
 
 // モード選択
 - (IBAction)selectModeAction:(id)sender;
+
 
 @end
 
@@ -58,17 +54,11 @@
     }
 }
 
-- (void)dealloc
-{
-    if ([_updateTimer isValid]) {
-        [_updateTimer invalidate];
-        _updateTimer = nil;
-    }
-}
-
 - (void)initView
 {
     [super initView];
+    
+    [self.pokerView setFreeMode:YES];
     
     // トップヘッダー
     self.topBar.backgroundColor = SSColorBarBackground;
@@ -83,16 +73,6 @@
                                                                                  action:@selector(handleRecommendGesture:)];
     self.recommandHeader.userInteractionEnabled = YES;
     [self.recommandHeader addGestureRecognizer:tapGesture];
-    
-    // タイマー設定
-    if (!_updateTimer) {
-        _startTime = [NSDate new];
-        _updateTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(showCurrentTimeAction:) userInfo:nil repeats:YES];;
-    }
-    
-    // ゲームスタート
-    self.pokerView.backgroundColor = [UIColor orangeColor];
-    [self.pokerView start];
 }
 
 // レイアウト設定
@@ -144,10 +124,10 @@
 
 #pragma mark - 経過時間関連
 // 経過時間タイマー
-- (void)showCurrentTimeAction:(NSTimer *)timer
+- (void)handleUpdateTimer:(NSTimer *)timer;
 {
-    NSTimeInterval timeInterval = [[NSDate new] timeIntervalSinceDate:_startTime];
-    [self setPassedTimeWith:timeInterval];
+    [super handleUpdateTimer:timer];
+    [self setPassedTimeWith:self.duration];
 }
 
 // 経過時間表示
@@ -204,13 +184,15 @@
 // ゲーム終了
 - (void)gameWillExit;
 {
-    _startTime = [NSDate new];
+    // ゲームを終了して前画面へ遷移する
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 // リトライ
 - (void)gameWillRetry;
 {
-    
+    // ゲームを新規にスタートさせる
+    [self.pokerView start];
 }
 
 // モード選択

@@ -22,6 +22,9 @@
     NSInteger                           _selectedStageID;
 }
 
+// ヘッダー
+@property (nonatomic, weak) IBOutlet UIView *headerView;
+
 // ステージ一覧
 @property (nonatomic, weak) IBOutlet UITableView *stageListView;
 
@@ -45,6 +48,9 @@
 - (void)initView
 {
     [super initView];
+    
+    // ヘッダーの背景色設定
+    self.headerView.backgroundColor = SSColorHeader;
     
     // ステージ選択通知
     [[NSNotificationCenter defaultCenter] addObserver:self

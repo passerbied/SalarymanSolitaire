@@ -40,7 +40,6 @@
     }
     image = [UIImage imageNamed:imageName];
     _backgroundImageView.image = image;
-    NSLog(@"Size is [%@]",NSStringFromCGSize(image.size));
 
     // タップ処理設定「閉じる」
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self
@@ -103,44 +102,3 @@
 }
 @end
 
-//// チュートリアル表示
-//- (void)showTutorialAtIndex:(NSInteger)index;
-//{
-//    // チェック
-//    if (index >= [_contents count]) {
-//        return;
-//    }
-//    
-//    // コンテンツ表示
-//    NSString *content = [_contents objectAtIndex:index];
-//    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:content];
-//    
-//    float spacing;
-//    if (index == 0) {
-//        spacing = 1.0f;
-//    } else {
-//        spacing = 3.6f;
-//    }
-//    [attributedString addAttribute:NSKernAttributeName
-//                             value:@(spacing)
-//                             range:NSMakeRange(0, [content length])];
-//    
-//    _labelContent.attributedText = attributedString;
-//    [_labelContent sizeToFit];
-//    
-//    // アニメーション
-//    if (index) {
-//        CGRect frame = _labelContent.frame;
-//        CGFloat x = frame.origin.x;
-//        
-//        _labelContent.frame = CGRectMake(320, frame.origin.y, frame.size.width, frame.size.height);
-//        NSTimeInterval duration = 0.7f;
-//        [UIView animateWithDuration:duration
-//                              delay:0
-//                            options:UIViewAnimationOptionCurveEaseOut
-//                         animations:^{
-//                             _labelContent.frame = CGRectMake(x, frame.origin.y, frame.size.width, frame.size.height);
-//                         }
-//                         completion:^(BOOL finished){}];
-//    }
-//}

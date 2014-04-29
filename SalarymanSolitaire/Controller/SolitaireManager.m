@@ -147,5 +147,28 @@
     return _sharedInterstitialAD;
 }
 
-
+//(instancetype)init
+//{
+//    self = [super init];
+//    if (self) {
+//        _wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:kUserInfoItemIdentifier accessGroup:kUserInfoItemGroupKey];
+//        NSData *data = [_wrapper objectForKey:(__bridge id)kSecValueData];
+//        NSDictionary *dictionary = (NSDictionary*) [NSKeyedUnarchiver unarchiveObjectWithData:data];
+//        NSLog(@"Dic [%@]",dictionary);
+//        _URL = [dictionary objectForKey:kUserInfoURL];
+//        _schoolID = [dictionary objectForKey:kUserInfoSchoolID];
+//        _userID = [dictionary objectForKey:kUserInfoUserID];
+//        
+//    }
+//    return self;
+//}
+//
+//- (void)save
+//{
+//    NSDictionary *dictionary = @{kUserInfoURL: _URL,
+//                                 kUserInfoSchoolID:_schoolID,
+//                                 kUserInfoUserID:_userID};
+//    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dictionary];
+//    [_wrapper setObject:data forKey:(__bridge id)kSecValueData];
+//}
 @end

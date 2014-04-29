@@ -14,7 +14,7 @@
 		348D99C118CB42810079D2EF /* SelectStageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 348D99BF18CB42810079D2EF /* SelectStageViewController.xib */; };
 		348D99CC18CB43090079D2EF /* StoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 348D99CA18CB43090079D2EF /* StoryViewController.m */; };
 		348D99CD18CB43090079D2EF /* StoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 348D99CB18CB43090079D2EF /* StoryViewController.xib */; };
-		348D99D218CB435A0079D2EF /* PlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 348D99D018CB435A0079D2EF /* PlayViewController.m */; };
+		348D99D218CB435A0079D2EF /* SSPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 348D99D018CB435A0079D2EF /* SSPlayViewController.m */; };
 		3493756718CB268A00D4BD54 /* SolitaireManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3493756618CB268A00D4BD54 /* SolitaireManager.m */; };
 		3493756A18CB3B9600D4BD54 /* WUProgressViewMask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3493756918CB3B9600D4BD54 /* WUProgressViewMask@2x.png */; };
 		3493756D18CB3BA300D4BD54 /* WUProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3493756C18CB3BA300D4BD54 /* WUProgressView.m */; };
@@ -389,6 +389,7 @@
 		E590F6B418F6C6420077E789 /* opening.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E590F6AD18F6C6420077E789 /* opening.mp3 */; };
 		E590F6B518F6C6420077E789 /* play.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E590F6AE18F6C6420077E789 /* play.mp3 */; };
 		E590F6B618F6C6420077E789 /* put_card.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E590F6AF18F6C6420077E789 /* put_card.mp3 */; };
+		E5A931B7190D3EBA00F8D82E /* bg_table-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5A931B6190D3EBA00F8D82E /* bg_table-568h@2x.png */; };
 		E5B466F31903E49A00F6813E /* PopupNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B466F21903E49A00F6813E /* PopupNotificationView.m */; };
 		E5B466F41903FEC900F6813E /* tutorial_howto@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5B466F61903FEC900F6813E /* tutorial_howto@2x.png */; };
 		E5B466FA1903FEE500F6813E /* tutorial_howto-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5B466FC1903FEE500F6813E /* tutorial_howto-568h@2x.png */; };
@@ -701,8 +702,8 @@
 		348D99C918CB43090079D2EF /* StoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoryViewController.h; sourceTree = "<group>"; };
 		348D99CA18CB43090079D2EF /* StoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryViewController.m; sourceTree = "<group>"; };
 		348D99CB18CB43090079D2EF /* StoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoryViewController.xib; sourceTree = "<group>"; };
-		348D99CF18CB435A0079D2EF /* PlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayViewController.h; sourceTree = "<group>"; };
-		348D99D018CB435A0079D2EF /* PlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayViewController.m; sourceTree = "<group>"; };
+		348D99CF18CB435A0079D2EF /* SSPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSPlayViewController.h; sourceTree = "<group>"; };
+		348D99D018CB435A0079D2EF /* SSPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSPlayViewController.m; sourceTree = "<group>"; };
 		348D99DA18CC036E0079D2EF /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		348D99DC18CC036E0079D2EF /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3493756518CB268A00D4BD54 /* SolitaireManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SolitaireManager.h; sourceTree = "<group>"; };
@@ -1102,6 +1103,7 @@
 		E590F6AD18F6C6420077E789 /* opening.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = opening.mp3; sourceTree = "<group>"; };
 		E590F6AE18F6C6420077E789 /* play.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = play.mp3; sourceTree = "<group>"; };
 		E590F6AF18F6C6420077E789 /* put_card.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = put_card.mp3; sourceTree = "<group>"; };
+		E5A931B6190D3EBA00F8D82E /* bg_table-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_table-568h@2x.png"; sourceTree = "<group>"; };
 		E5B466F11903E49A00F6813E /* PopupNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopupNotificationView.h; sourceTree = "<group>"; };
 		E5B466F21903E49A00F6813E /* PopupNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopupNotificationView.m; sourceTree = "<group>"; };
 		E5B466F51903FEC900F6813E /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/tutorial_howto@2x.png"; sourceTree = "<group>"; };
@@ -1581,8 +1583,8 @@
 		348D99D418CB435D0079D2EF /* 07_プレイ画面 */ = {
 			isa = PBXGroup;
 			children = (
-				348D99CF18CB435A0079D2EF /* PlayViewController.h */,
-				348D99D018CB435A0079D2EF /* PlayViewController.m */,
+				348D99CF18CB435A0079D2EF /* SSPlayViewController.h */,
+				348D99D018CB435A0079D2EF /* SSPlayViewController.m */,
 				E5E22E6418E7FA9D00897AC7 /* 対戦モード */,
 				E5E22E6518E800AA00897AC7 /* フリーモード */,
 			);
@@ -2212,6 +2214,7 @@
 				E5EA753518DCF361002E2BAF /* nutrient_enabled_on@2x.png */,
 				E5E0E76718D7A0E00047DE80 /* btn_shop@2x.png */,
 				E5E0E75E18D7A0E00047DE80 /* bg_table@2x.png */,
+				E5A931B6190D3EBA00F8D82E /* bg_table-568h@2x.png */,
 				E5E0E75C18D7A0E00047DE80 /* bg_physical_bar@2x.png */,
 				E5E0E76318D7A0E00047DE80 /* btn_giveup@2x.png */,
 				E5E0E79E18D7A0E00047DE80 /* nutrient_disabled@2x.png */,
@@ -3345,6 +3348,7 @@
 				E5E0E7EC18D7A0E00047DE80 /* physical_red@2x.png in Resources */,
 				E50BD9D018E31C700087C170 /* enemy_072_card@2x.png in Resources */,
 				E50BD9D818E31C700087C170 /* enemy_080_card@2x.png in Resources */,
+				E5A931B7190D3EBA00F8D82E /* bg_table-568h@2x.png in Resources */,
 				E5E737D718E1BD2900E5A40A /* stage_065_story@2x.png in Resources */,
 				E58F858B18DEACA400C3CDC3 /* enemy_053_not_clear@2x.png in Resources */,
 				E5EA752818DCF271002E2BAF /* btn_question@2x.png in Resources */,
@@ -3447,7 +3451,7 @@
 				E5E22E6318E7E8BA00897AC7 /* UIImage+ImageEffects.m in Sources */,
 				E5E4DD0618FA19EF006610C2 /* SSProductItemCell.m in Sources */,
 				3494F42818CC558A00B714F1 /* WUAlertView.m in Sources */,
-				348D99D218CB435A0079D2EF /* PlayViewController.m in Sources */,
+				348D99D218CB435A0079D2EF /* SSPlayViewController.m in Sources */,
 				E5F3D11D18E6DC0A00CBD281 /* SSExitAlertView.m in Sources */,
 				34C7509618CAB37F00BF3FC6 /* SSAppDelegate.m in Sources */,
 				348D99BA18CB42530079D2EF /* TutorialViewController.m in Sources */,

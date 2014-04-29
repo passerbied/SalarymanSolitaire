@@ -40,19 +40,20 @@ typedef enum
 
 typedef NS_ENUM(NSInteger, SSPokerSection)
 {
-    SSPokerSectionDeck,
-    SSPokerSectionPlaying1,
-    SSPokerSectionPlaying2,
-    SSPokerSectionPlaying3,
-    SSPokerSectionPlaying4,
-    SSPokerSectionPlaying5,
-    SSPokerSectionPlaying6,
-    SSPokerSectionPlaying7,
-    SSPokerSectionUsable,
-    SSPokerSectionFinishedHeart,
-    SSPokerSectionFinishedDiamond,
-    SSPokerSectionFinishedClub,
-    SSPokerSectionFinishedSpade,
+    SSPokerSectionDeck1,
+    SSPokerSectionDeck2,
+    SSPokerSectionDeck3,
+    SSPokerSectionDeck4,
+    SSPokerSectionDeck5,
+    SSPokerSectionDeck6,
+    SSPokerSectionDeck7,
+    SSPokerSectionYamafuda,
+    SSPokerSectionHeart,
+    SSPokerSectionDiamond,
+    SSPokerSectionClub,
+    SSPokerSectionSpade,
+    SSPokerSectionHidden,
+    SSPokerSectionRecycle,
     SSPokerSectionTotal
 };
 
@@ -82,8 +83,15 @@ typedef NS_ENUM(NSInteger, SSPokerSection)
 - (NSInteger)sectionForCurrentColor;
 
 // 移動可否チェック
-- (BOOL)canMoveToWithPoker:(SSPoker *)poker inSection:(SSPokerSection)section;
+//- (BOOL)canMoveToWithPoker:(SSPoker *)poker inSection:(SSPokerSection)section;
 
+// 移動可否チェック
+- (BOOL)isValidNeighbourToPoker:(SSPoker *)poker inSection:(SSPokerSection)section;
 
+// 初期化
++ (instancetype)pokerWithColor:(SSPokerColor)color name:(SSPokerName)name;
+
+// ダミーポーカー初期化
++ (instancetype)dummyPoker;
 
 @end

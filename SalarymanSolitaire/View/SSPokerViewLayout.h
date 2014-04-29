@@ -14,4 +14,10 @@
 // ポーカーサイズ
 @property (nonatomic) CGSize pokerSize;
 
+// 山札戻し枚数
+@property (nonatomic) NSInteger yamafudaMax;
+
+// 山札戻し位置
++ (CGRect)rectForYamafuda;
+
 @end

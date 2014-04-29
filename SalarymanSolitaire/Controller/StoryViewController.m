@@ -66,10 +66,25 @@
 {
     [super initView];
     
-    // ステージ番号およびタイトルを設定する
+    // ステージ番号&タイトル取得
     self.stage = [[SolitaireManager sharedManager] selectedStage];
-    self.labelStageID.text = [NSString stringWithFormat:@"STAGE %d", (int)self.stage.stageID];
-    self.labelStageTitle.text = self.stage.title;
+    
+    NSDictionary *attributes = nil;
+    NSString *text = nil;
+    
+    // ステージ番号設定
+    text = [NSString stringWithFormat:@"STAGE %d", (int)self.stage.stageID];
+    attributes = @{NSFontAttributeName:SSGothicProFont(26.0f),
+                   NSKernAttributeName:[NSNumber numberWithFloat:8.0f],
+                   NSStrokeColorAttributeName:[UIColor whiteColor]};
+    self.labelStageID.attributedText = [[NSAttributedString alloc] initWithString:text attributes:attributes];
+    
+    // ステージタイトル設定
+    text = self.stage.title;
+    attributes = @{NSFontAttributeName:SSGothicProFont(18.0f),
+                   NSKernAttributeName:[NSNumber numberWithFloat:4.0f],
+                   NSStrokeColorAttributeName:[UIColor whiteColor]};
+    self.labelStageTitle.attributedText = [[NSAttributedString alloc] initWithString:text attributes:attributes];
 }
 
 - (void)updateView

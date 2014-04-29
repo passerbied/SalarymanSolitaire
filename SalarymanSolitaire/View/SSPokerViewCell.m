@@ -40,25 +40,22 @@
 {
     CGFloat speed;
     switch (mode) {
-        case SSPokerAnimationModeFan:
-            speed = 15.0f;
-            break;
-        case SSPokerAnimationModeShuffle:
-            speed = 1.0f;
+        case SSPokerAnimationModeDistribute:
+            speed = 5.0f;
             break;
         case SSPokerAnimationModePlay:
-            speed = 0.10f;
+            speed = 1.0f;
             break;
         case SSPokerAnimationModeDone:
-            speed = 0.1f;
+            speed = 1.0f;
             break;
         default:
+            speed = 1.0f;
             break;
     }
-    if (speed > 0) {
-        self.layer.speed = speed;
-    }
+    self.layer.speed = speed;
 }
+
 - (void)setPoker:(SSPoker *)poker
 {
     // ポーカー情報退避
@@ -66,6 +63,7 @@
         return;
     }
     _poker = poker;
+    _faceUp = poker.faceUp;
     
     // ポーカーイメージ更新
     _pokerImageView.image = [_poker image];
@@ -82,3 +80,4 @@
     _pokerImageView.image = [_poker image];
 }
 @end
+

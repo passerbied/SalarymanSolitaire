@@ -11,16 +11,23 @@
 
 @interface SSPokerView : UICollectionView
 
+// 初期化
 + (instancetype)pokerView;
 
-//　ポーカーシャッフル
-//- (void)shuffle:(BOOL)retry;
+// 山札戻し枚数
+@property (nonatomic) NSInteger yamafudaMax;
+
+// カード引き枚数
+@property (nonatomic, getter = isSingleMode) BOOL singleMode;
+
+// フリーモード
+- (void)setFreeMode:(BOOL)freeMode;
+
+// 山札戻し利用可能回数
+- (void)setUsableYamafudas:(NSInteger)usableYamafudas;
 
 // ゲーム開始
 - (void)start;
-
-// リトライ
-- (void)retry;
 
 - (NSInteger)firstVisiblePokersInSection:(NSInteger)section;
 @end

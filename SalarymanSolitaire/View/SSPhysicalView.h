@@ -15,6 +15,9 @@
 @property (nonatomic) NSInteger maxPower;
 @property (nonatomic) NSInteger currentPower;
 
+// 時間
+@property (nonatomic) NSTimeInterval duration;
+
 // 体力値変化
-- (void)powerGrowthUp:(BOOL)up;
+- (void)powerUp:(BOOL)up;
 @end

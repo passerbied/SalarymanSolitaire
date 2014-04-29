@@ -41,7 +41,7 @@
 
 - (void)handleRefreshAD
 {
-    NSLog(@"Refresh");
+
 }
 
 @end

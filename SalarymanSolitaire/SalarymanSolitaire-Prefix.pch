@@ -29,6 +29,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 #define SSColorText                     UIColorFromRGB(0x81511c)
 #define SSColorBarBackground            UIColorFromRGB(0x141D3E)
 #define SSColorADBanner                 UIColorFromRGB(0x011C58)
+#define SSColorHeader                   UIColorFromRGB(0x02004C)
 
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>

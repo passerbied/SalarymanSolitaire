@@ -398,11 +398,6 @@
 
 @implementation UIPopupView
 
-- (void)awakeFromNib
-{
-    [super awakeFromNib];
-    NSLog(@"Popup View Awake From Nib File.");
-}
 //
 - (void)showInViewController:(UIViewController *)parentViewController;
 {

@@ -44,49 +44,6 @@ NSString *kReceiptInAppWebOrderLineItemID               = @"web_order_line_item_
 @implementation NSData (ReceiptValidation)
 
 
-//- (BOOL)isValidReceipt;
-//{
-//    // 收据取得
-//    NSDictionary *receipt = [self dictionaryWithAppStoreReceipt:self];
-//    
-//    // 检查BundleID是否相等
-//    NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
-//    if (![bundleIdentifier isEqualToString:[receipt objectForKey:kReceiptBundleIdentifier]]) {
-//        NSLog(@"收据检查：BundleID不一致");
-//        return NO;
-//    }
-//    
-//    // 检查Version是否相等
-//    NSString *bundleVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
-//    if (![bundleVersion isEqualToString:[receipt objectForKey:kReceiptVersion]]) {
-//        NSLog(@"收据检查：Version不一致");
-//        return NO;
-//    }
-//    
-//    // 检查哈希码是否相等
-//    unsigned char uuidBytes[16];
-//    NSUUID *vendorUUID = [[UIDevice currentDevice] identifierForVendor];
-//    [vendorUUID getUUIDBytes:uuidBytes];
-//    
-//    NSMutableData *input = [NSMutableData data];
-//    [input appendBytes:uuidBytes length:sizeof(uuidBytes)];
-//    [input appendData:[receipt objectForKey:kReceiptOpaqueValue]];
-//    [input appendData:[receipt objectForKey:kReceiptBundleIdentifierData]];
-//    
-//    NSMutableData *hash = [NSMutableData dataWithLength:SHA_DIGEST_LENGTH];
-//    SHA1([input bytes], [input length], [hash mutableBytes]);
-//    
-//    if (![hash isEqualToData:[receipt objectForKey:kReceiptHash]]) {
-//        NSLog(@"收据检查：HASH不一致");
-//        return NO;
-//    }
-//    
-//
-//    
-//    return YES;
-//}
-//
-
 
 static int POS(char c)
 {
@@ -203,14 +160,14 @@ void* base64_decode(const char* s, size_t* data_len_ptr)
     // Check the status of the verifyReceipt call
     id status = [response objectForKey:@"status"];
     if (!status) {
-        NSLog(@"Receipt Exception : Check the status of the verifyReceipt call");
+        DebugLog(@"Receipt Exception : Check the status of the verifyReceipt call");
         return NO;
     }
     
     int statusIntegerValue = (int)[status integerValue];
     if (0 != statusIntegerValue && 21006 != statusIntegerValue)
     {
-        NSLog(@"Receipt Exception : This receipt is valid but the subscription has expired.");
+        DebugLog(@"Receipt Exception : This receipt is valid but the subscription has expired.");
         return NO;
     }
     
@@ -659,14 +616,14 @@ NSData *appleRootCert(void)
     // 检查BundleID是否相等
     NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
     if (![bundleIdentifier isEqualToString:[self objectForKey:kReceiptBundleIdentifier]]) {
-        NSLog(@"收据检查：BundleID不一致");
+        DebugLog(@"收据检查：BundleID不一致");
         return NO;
     }
 
     // 检查Version是否相等
     NSString *bundleVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
     if (![bundleVersion isEqualToString:[self objectForKey:kReceiptVersion]]) {
-        NSLog(@"收据检查：Version不一致");
+        DebugLog(@"收据检查：Version不一致");
         return NO;
     }
 
@@ -684,7 +641,7 @@ NSData *appleRootCert(void)
     SHA1([input bytes], [input length], [hash mutableBytes]);
 
     if (![hash isEqualToData:[self objectForKey:kReceiptHash]]) {
-        NSLog(@"收据检查：HASH不一致");
+        DebugLog(@"收据检查：HASH不一致");
         return NO;
     }
     

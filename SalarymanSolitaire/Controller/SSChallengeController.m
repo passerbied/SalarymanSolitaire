@@ -56,6 +56,8 @@
     }
     _stage.stageID = 1;
     _stage.enemyID = 2;
+    [self.pokerView setUsableYamafudas:20];
+    [self.pokerView setFreeMode:NO];
     
     // 敵イメージ設定
     if ([UIDevice isPhone5]) {
@@ -88,6 +90,13 @@
     self.bottomBar.frame = rect;
 }
 
+// 経過時間タイマー
+- (void)handleUpdateTimer:(NSTimer *)timer;
+{
+    [super handleUpdateTimer:timer];
+    [self.physicalView setDuration:self.duration];
+}
+
 #pragma mark - 画面操作
 // ギブアップ
 - (IBAction)giveupAction:(id)sender;
@@ -103,8 +112,6 @@
 {
     // ボタン押下音声再生
     [AudioEngine playAudioWith:SolitaireAudioIDButtonClicked];
-
-    [self.pokerView retry];
 }
 
 // ショップ
