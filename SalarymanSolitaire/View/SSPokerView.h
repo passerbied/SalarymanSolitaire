@@ -17,9 +17,6 @@
 // 山札戻し枚数
 @property (nonatomic) NSInteger yamafudaMax;
 
-// カード引き枚数
-@property (nonatomic, getter = isSingleMode) BOOL singleMode;
-
 // フリーモード
 - (void)setFreeMode:(BOOL)freeMode;
 

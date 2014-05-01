@@ -181,7 +181,7 @@
         if (!attributes) {
             attributes = [self layoutAttributesForItemAtIndexPath:itemIndexPath];
         }
-        attributes.zIndex = itemIndexPath.item;
+        attributes.zIndex = itemIndexPath.item + 100;
     }
     
     return attributes;

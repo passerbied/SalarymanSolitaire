@@ -752,7 +752,12 @@
         [hiddenPokers removeObjectsInRange:range];
         
         // 山札を更新する
-        [self reloadSections:[NSIndexSet indexSetWithIndex:SSPokerSectionYamafuda]];
+        [self performBatchUpdates:^{
+            [self reloadSections:[NSIndexSet indexSetWithIndex:SSPokerSectionYamafuda]];
+        }completion:^(BOOL finished) {
+            
+        }];
+
     } else {
         DebugLog(@"ショップを表示する");
     }
