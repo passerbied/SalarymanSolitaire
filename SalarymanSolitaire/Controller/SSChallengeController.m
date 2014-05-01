@@ -32,6 +32,9 @@
 // ツールバー
 @property (nonatomic, weak) IBOutlet UIView *bottomBar;
 
+// ステージ情報取得
+- (void)loadStageInfo;
+
 // ギブアップ
 - (IBAction)giveupAction:(id)sender;
 
@@ -88,6 +91,12 @@
     rect = self.bottomBar.frame;
     rect.origin.y = y + self.pokerView.bounds.size.height;
     self.bottomBar.frame = rect;
+}
+
+// ステージ情報取得
+- (void)loadStageInfo;
+{
+    
 }
 
 // 経過時間タイマー
