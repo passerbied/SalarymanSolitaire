@@ -9,7 +9,6 @@
 #import "SSChallengeController.h"
 #import "WUProgressView.h"
 #import "SSPhysicalView.h"
-#import "SSPokerView.h"
 #import "PurchaseManager.h"
 #import "SSShopView.h"
 
@@ -48,19 +47,50 @@
 
 @implementation SSChallengeController
 
+// ゲーム初期化
+- (void)initGame;
+{
+    [super initGame];
+    
+    // 挑戦モード
+    self.freeMode = NO;
+    
+    // ステージIDによりステージ情報を取得する
+    [self loadStageInfo];
+}
+
+// ステージ情報取得
+- (void)loadStageInfo;
+{
+    SolitaireManager *manager = [SolitaireManager sharedManager];
+    [manager selectStageWithID:_stageID];
+    _stage = manager.currentStage;
+    if (_stage) {
+        // めくり枚数
+        self.numberOfPokers = _stage.numberOfPokers;
+        
+        // 山札戻し回数
+        self.maximumYamafuda = _stage.maximumYamafuda;
+        
+        // クリア回数
+        _minimalClearTimes = _stage.minimalClearTimes;
+        
+        // クリア済み回数
+        _currentClearTimes = _stage.currentClearTimes;
+    }
+}
+
 - (void)initView
 {
     [super initView];
     
     // ステージ情報取得
-    _stage = [[SolitaireManager sharedManager] selectedStage];
+    _stage = [[SolitaireManager sharedManager] currentStage];
     if (!_stage) {
         _stage = [[SSStage alloc] init];
     }
     _stage.stageID = 1;
     _stage.enemyID = 2;
-    [self.pokerView setUsableYamafudas:20];
-    [self.pokerView setFreeMode:NO];
     
     // 敵イメージ設定
     if ([UIDevice isPhone5]) {
@@ -68,9 +98,6 @@
         NSString *name = [NSString stringWithFormat:@"enemy_%03d_banner.png", (int)_stage.enemyID];
         [self.enemyView setImage:[UIImage temporaryImageNamed:name]];
     }
-    
-    // ゲームスタート
-    [self.pokerView start];
 }
 
 - (void)layoutSubviewsForPhone4
@@ -93,11 +120,6 @@
     self.bottomBar.frame = rect;
 }
 
-// ステージ情報取得
-- (void)loadStageInfo;
-{
-    
-}
 
 // 経過時間タイマー
 - (void)handleUpdateTimer:(NSTimer *)timer;
@@ -112,8 +134,9 @@
 {
     // ボタン押下音声再生
     [AudioEngine playAudioWith:SolitaireAudioIDButtonClicked];
-
-    [self.pokerView start];
+    
+    // リスタート
+    [self start];
 }
 
 // 栄養剤使用

@@ -150,7 +150,6 @@
 		E50BD9EC18E31C710087C170 /* enemy_100_card@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E50BD98718E31C700087C170 /* enemy_100_card@2x.png */; };
 		E50BD9ED18E31C710087C170 /* enemy_101_card@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E50BD98818E31C700087C170 /* enemy_101_card@2x.png */; };
 		E521788718D562E80035B628 /* SSPhysicalView.m in Sources */ = {isa = PBXBuildFile; fileRef = E521788618D562E80035B628 /* SSPhysicalView.m */; };
-		E58B01C318F12F89002623CB /* SSPokerViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = E58B01C218F12F89002623CB /* SSPokerViewLayout.m */; };
 		E58D46B018E86BCC006CCEEA /* story_back_btn_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E58D46AE18E86BCC006CCEEA /* story_back_btn_on@2x.png */; };
 		E58D46B118E86BCC006CCEEA /* story_back_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E58D46AF18E86BCC006CCEEA /* story_back_btn@2x.png */; };
 		E58D4B2218E86C19006CCEEA /* story_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E58D4B2118E86C19006CCEEA /* story_bg@2x.png */; };
@@ -376,7 +375,6 @@
 		E58F85C918DEACA400C3CDC3 /* enemy_074_clear@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E58F84F418DEACA400C3CDC3 /* enemy_074_clear@2x.png */; };
 		E58F85CA18DEACA500C3CDC3 /* enemy_074_not_clear@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E58F84F518DEACA400C3CDC3 /* enemy_074_not_clear@2x.png */; };
 		E590798818D57D9F008E2274 /* SSNutrientButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E590798718D57D9F008E2274 /* SSNutrientButton.m */; };
-		E5909E1B18EB5DE30006EFEF /* SSPokerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E5909E1A18EB5DE30006EFEF /* SSPokerViewCell.m */; };
 		E5909E2018EB70BE0006EFEF /* UIImage+MainBundleImage.m in Sources */ = {isa = PBXBuildFile; fileRef = E5909E1F18EB70BE0006EFEF /* UIImage+MainBundleImage.m */; };
 		E590F6A118F6C5500077E789 /* AudioEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = E590F69A18F6C5500077E789 /* AudioEngine.m */; };
 		E590F6A318F6C5500077E789 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = E590F6A018F6C5500077E789 /* KeychainItemWrapper.m */; };
@@ -394,8 +392,6 @@
 		E5B466F41903FEC900F6813E /* tutorial_howto@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5B466F61903FEC900F6813E /* tutorial_howto@2x.png */; };
 		E5B466FA1903FEE500F6813E /* tutorial_howto-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5B466FC1903FEE500F6813E /* tutorial_howto-568h@2x.png */; };
 		E5D6A30A190AA0F200800D23 /* bg_finished_area@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5D6A309190AA0F200800D23 /* bg_finished_area@2x.png */; };
-		E5DAFAD418E9AF5F00CB05F3 /* SSPokerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E5DAFAD318E9AF5F00CB05F3 /* SSPokerView.m */; };
-		E5DAFAD818E9B17500CB05F3 /* SSPoker.m in Sources */ = {isa = PBXBuildFile; fileRef = E5DAFAD718E9B17500CB05F3 /* SSPoker.m */; };
 		E5DC3D7219027C980093C35A /* PopupNotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5DC3D7119027C980093C35A /* PopupNotificationView.xib */; };
 		E5DC3D7519027D3F0093C35A /* PopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5DC3D7419027D3F0093C35A /* PopupViewController.m */; };
 		E5DCE32818E44D7C00B95064 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E5DCE32A18E44D7C00B95064 /* Localizable.strings */; };
@@ -491,7 +487,14 @@
 		E5E0E7EA18D7A0E00047DE80 /* physical_bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5E0E7A018D7A0E00047DE80 /* physical_bar@2x.png */; };
 		E5E0E7EB18D7A0E00047DE80 /* physical_gray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5E0E7A118D7A0E00047DE80 /* physical_gray@2x.png */; };
 		E5E0E7EC18D7A0E00047DE80 /* physical_red@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5E0E7A218D7A0E00047DE80 /* physical_red@2x.png */; };
-		E5E22E5718E7AAB800897AC7 /* UIButton+Solitaire.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E22E5618E7AAB800897AC7 /* UIButton+Solitaire.m */; };
+		E5E209711916711F00BB4E39 /* DraggableCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E209601916711F00BB4E39 /* DraggableCollectionViewFlowLayout.m */; };
+		E5E209721916711F00BB4E39 /* LSCollectionViewHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E209621916711F00BB4E39 /* LSCollectionViewHelper.m */; };
+		E5E209731916711F00BB4E39 /* LSCollectionViewLayoutHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E209641916711F00BB4E39 /* LSCollectionViewLayoutHelper.m */; };
+		E5E209741916711F00BB4E39 /* SSPoker.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E209661916711F00BB4E39 /* SSPoker.m */; };
+		E5E209751916711F00BB4E39 /* SSPokerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E209681916711F00BB4E39 /* SSPokerViewCell.m */; };
+		E5E209761916711F00BB4E39 /* SSPokerViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E2096A1916711F00BB4E39 /* SSPokerViewLayout.m */; };
+		E5E209771916711F00BB4E39 /* SSYamafudaButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E2096C1916711F00BB4E39 /* SSYamafudaButton.m */; };
+		E5E209781916711F00BB4E39 /* UICollectionView+Draggable.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E2096E1916711F00BB4E39 /* UICollectionView+Draggable.m */; };
 		E5E22E5A18E7D11D00897AC7 /* WUPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E22E5918E7D11D00897AC7 /* WUPopupView.m */; };
 		E5E22E5D18E7D32E00897AC7 /* UIView+Screenshot.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E22E5C18E7D32E00897AC7 /* UIView+Screenshot.m */; };
 		E5E22E6018E7D36C00897AC7 /* UIImage+BlurEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E22E5F18E7D36C00897AC7 /* UIImage+BlurEffect.m */; };
@@ -858,8 +861,6 @@
 		E50BD98818E31C700087C170 /* enemy_101_card@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "enemy_101_card@2x.png"; sourceTree = "<group>"; };
 		E521788518D562E80035B628 /* SSPhysicalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSPhysicalView.h; sourceTree = "<group>"; };
 		E521788618D562E80035B628 /* SSPhysicalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSPhysicalView.m; sourceTree = "<group>"; };
-		E58B01C118F12F89002623CB /* SSPokerViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSPokerViewLayout.h; sourceTree = "<group>"; };
-		E58B01C218F12F89002623CB /* SSPokerViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSPokerViewLayout.m; sourceTree = "<group>"; };
 		E58D46AE18E86BCC006CCEEA /* story_back_btn_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "story_back_btn_on@2x.png"; sourceTree = "<group>"; };
 		E58D46AF18E86BCC006CCEEA /* story_back_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "story_back_btn@2x.png"; sourceTree = "<group>"; };
 		E58D4B2118E86C19006CCEEA /* story_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "story_bg@2x.png"; sourceTree = "<group>"; };
@@ -1086,8 +1087,6 @@
 		E58F84F518DEACA400C3CDC3 /* enemy_074_not_clear@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "enemy_074_not_clear@2x.png"; sourceTree = "<group>"; };
 		E590798618D57D9F008E2274 /* SSNutrientButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSNutrientButton.h; sourceTree = "<group>"; };
 		E590798718D57D9F008E2274 /* SSNutrientButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSNutrientButton.m; sourceTree = "<group>"; };
-		E5909E1918EB5DE30006EFEF /* SSPokerViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSPokerViewCell.h; sourceTree = "<group>"; };
-		E5909E1A18EB5DE30006EFEF /* SSPokerViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSPokerViewCell.m; sourceTree = "<group>"; };
 		E5909E1E18EB70BE0006EFEF /* UIImage+MainBundleImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+MainBundleImage.h"; sourceTree = "<group>"; };
 		E5909E1F18EB70BE0006EFEF /* UIImage+MainBundleImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MainBundleImage.m"; sourceTree = "<group>"; };
 		E590F69918F6C5500077E789 /* AudioEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioEngine.h; sourceTree = "<group>"; };
@@ -1111,10 +1110,6 @@
 		E5B466FB1903FEE500F6813E /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/tutorial_howto-568h@2x.png"; sourceTree = "<group>"; };
 		E5B466FD1903FEE800F6813E /* ja */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ja; path = "ja.lproj/tutorial_howto-568h@2x.png"; sourceTree = "<group>"; };
 		E5D6A309190AA0F200800D23 /* bg_finished_area@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_finished_area@2x.png"; sourceTree = "<group>"; };
-		E5DAFAD218E9AF5F00CB05F3 /* SSPokerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSPokerView.h; sourceTree = "<group>"; };
-		E5DAFAD318E9AF5F00CB05F3 /* SSPokerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSPokerView.m; sourceTree = "<group>"; };
-		E5DAFAD618E9B17500CB05F3 /* SSPoker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSPoker.h; sourceTree = "<group>"; };
-		E5DAFAD718E9B17500CB05F3 /* SSPoker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSPoker.m; sourceTree = "<group>"; };
 		E5DC3D7119027C980093C35A /* PopupNotificationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopupNotificationView.xib; sourceTree = "<group>"; };
 		E5DC3D7319027D3F0093C35A /* PopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopupViewController.h; sourceTree = "<group>"; };
 		E5DC3D7419027D3F0093C35A /* PopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopupViewController.m; sourceTree = "<group>"; };
@@ -1214,8 +1209,24 @@
 		E5E0E7A018D7A0E00047DE80 /* physical_bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "physical_bar@2x.png"; sourceTree = "<group>"; };
 		E5E0E7A118D7A0E00047DE80 /* physical_gray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "physical_gray@2x.png"; sourceTree = "<group>"; };
 		E5E0E7A218D7A0E00047DE80 /* physical_red@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "physical_red@2x.png"; sourceTree = "<group>"; };
-		E5E22E5518E7AAB800897AC7 /* UIButton+Solitaire.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Solitaire.h"; sourceTree = "<group>"; };
-		E5E22E5618E7AAB800897AC7 /* UIButton+Solitaire.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Solitaire.m"; sourceTree = "<group>"; };
+		E5E2095F1916711F00BB4E39 /* DraggableCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DraggableCollectionViewFlowLayout.h; sourceTree = "<group>"; };
+		E5E209601916711F00BB4E39 /* DraggableCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DraggableCollectionViewFlowLayout.m; sourceTree = "<group>"; };
+		E5E209611916711F00BB4E39 /* LSCollectionViewHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSCollectionViewHelper.h; sourceTree = "<group>"; };
+		E5E209621916711F00BB4E39 /* LSCollectionViewHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSCollectionViewHelper.m; sourceTree = "<group>"; };
+		E5E209631916711F00BB4E39 /* LSCollectionViewLayoutHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSCollectionViewLayoutHelper.h; sourceTree = "<group>"; };
+		E5E209641916711F00BB4E39 /* LSCollectionViewLayoutHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSCollectionViewLayoutHelper.m; sourceTree = "<group>"; };
+		E5E209651916711F00BB4E39 /* SSPoker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSPoker.h; sourceTree = "<group>"; };
+		E5E209661916711F00BB4E39 /* SSPoker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSPoker.m; sourceTree = "<group>"; };
+		E5E209671916711F00BB4E39 /* SSPokerViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSPokerViewCell.h; sourceTree = "<group>"; };
+		E5E209681916711F00BB4E39 /* SSPokerViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSPokerViewCell.m; sourceTree = "<group>"; };
+		E5E209691916711F00BB4E39 /* SSPokerViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSPokerViewLayout.h; sourceTree = "<group>"; };
+		E5E2096A1916711F00BB4E39 /* SSPokerViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSPokerViewLayout.m; sourceTree = "<group>"; };
+		E5E2096B1916711F00BB4E39 /* SSYamafudaButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSYamafudaButton.h; sourceTree = "<group>"; };
+		E5E2096C1916711F00BB4E39 /* SSYamafudaButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSYamafudaButton.m; sourceTree = "<group>"; };
+		E5E2096D1916711F00BB4E39 /* UICollectionView+Draggable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UICollectionView+Draggable.h"; sourceTree = "<group>"; };
+		E5E2096E1916711F00BB4E39 /* UICollectionView+Draggable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UICollectionView+Draggable.m"; sourceTree = "<group>"; };
+		E5E2096F1916711F00BB4E39 /* UICollectionViewDataSource_Draggable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewDataSource_Draggable.h; sourceTree = "<group>"; };
+		E5E209701916711F00BB4E39 /* UICollectionViewLayout_Warpable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewLayout_Warpable.h; sourceTree = "<group>"; };
 		E5E22E5818E7D11D00897AC7 /* WUPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUPopupView.h; sourceTree = "<group>"; };
 		E5E22E5918E7D11D00897AC7 /* WUPopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUPopupView.m; sourceTree = "<group>"; };
 		E5E22E5B18E7D32D00897AC7 /* UIView+Screenshot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Screenshot.h"; sourceTree = "<group>"; };
@@ -1746,6 +1757,7 @@
 		34C750BC18CAB72F00BF3FC6 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E5E2095E1916711F00BB4E39 /* Poker */,
 				E5DC3D7019027C8B0093C35A /* Popup */,
 				E590798618D57D9F008E2274 /* SSNutrientButton.h */,
 				E590798718D57D9F008E2274 /* SSNutrientButton.m */,
@@ -1754,14 +1766,9 @@
 				E5EF2D4118DDB39A0029F928 /* SSStageCell.h */,
 				E5EF2D4218DDB39A0029F928 /* SSStageCell.m */,
 				E5EF2D4318DDB39A0029F928 /* SSStageCell.xib */,
-				E5E22E5518E7AAB800897AC7 /* UIButton+Solitaire.h */,
-				E5E22E5618E7AAB800897AC7 /* UIButton+Solitaire.m */,
 				E5F3D11018E687FA00CBD281 /* UIButton+UIImage.h */,
 				E5F3D11118E687FA00CBD281 /* UIButton+UIImage.m */,
-				E5E22E5E18E7D36C00897AC7 /* UIImage+BlurEffect.h */,
-				E5E22E5F18E7D36C00897AC7 /* UIImage+BlurEffect.m */,
-				E5E22E6118E7E8BA00897AC7 /* UIImage+ImageEffects.h */,
-				E5E22E6218E7E8BA00897AC7 /* UIImage+ImageEffects.m */,
+				E5E209791916713500BB4E39 /* Image */,
 				E5E22E5B18E7D32D00897AC7 /* UIView+Screenshot.h */,
 				E5E22E5C18E7D32E00897AC7 /* UIView+Screenshot.m */,
 				3494F42618CC558A00B714F1 /* WUAlertView.h */,
@@ -1772,9 +1779,6 @@
 				3493756C18CB3BA300D4BD54 /* WUProgressView.m */,
 				E521788518D562E80035B628 /* SSPhysicalView.h */,
 				E521788618D562E80035B628 /* SSPhysicalView.m */,
-				E5DAFAD518E9B16400CB05F3 /* ポーカー */,
-				E5909E1E18EB70BE0006EFEF /* UIImage+MainBundleImage.h */,
-				E5909E1F18EB70BE0006EFEF /* UIImage+MainBundleImage.m */,
 				E5E4DD0718FA19F6006610C2 /* アイテム購入 */,
 			);
 			path = View;
@@ -2005,21 +2009,6 @@
 			name = Effect;
 			sourceTree = "<group>";
 		};
-		E5DAFAD518E9B16400CB05F3 /* ポーカー */ = {
-			isa = PBXGroup;
-			children = (
-				E5DAFAD618E9B17500CB05F3 /* SSPoker.h */,
-				E5DAFAD718E9B17500CB05F3 /* SSPoker.m */,
-				E5DAFAD218E9AF5F00CB05F3 /* SSPokerView.h */,
-				E5DAFAD318E9AF5F00CB05F3 /* SSPokerView.m */,
-				E5909E1918EB5DE30006EFEF /* SSPokerViewCell.h */,
-				E5909E1A18EB5DE30006EFEF /* SSPokerViewCell.m */,
-				E58B01C118F12F89002623CB /* SSPokerViewLayout.h */,
-				E58B01C218F12F89002623CB /* SSPokerViewLayout.m */,
-			);
-			name = "ポーカー";
-			sourceTree = "<group>";
-		};
 		E5DC3D7019027C8B0093C35A /* Popup */ = {
 			isa = PBXGroup;
 			children = (
@@ -2053,6 +2042,45 @@
 				E5DCE36B18E45B1200B95064 /* SSItemAlertView.m */,
 			);
 			name = "01_アイテム警告";
+			sourceTree = "<group>";
+		};
+		E5E2095E1916711F00BB4E39 /* Poker */ = {
+			isa = PBXGroup;
+			children = (
+				E5E2095F1916711F00BB4E39 /* DraggableCollectionViewFlowLayout.h */,
+				E5E209601916711F00BB4E39 /* DraggableCollectionViewFlowLayout.m */,
+				E5E209611916711F00BB4E39 /* LSCollectionViewHelper.h */,
+				E5E209621916711F00BB4E39 /* LSCollectionViewHelper.m */,
+				E5E209631916711F00BB4E39 /* LSCollectionViewLayoutHelper.h */,
+				E5E209641916711F00BB4E39 /* LSCollectionViewLayoutHelper.m */,
+				E5E209651916711F00BB4E39 /* SSPoker.h */,
+				E5E209661916711F00BB4E39 /* SSPoker.m */,
+				E5E209671916711F00BB4E39 /* SSPokerViewCell.h */,
+				E5E209681916711F00BB4E39 /* SSPokerViewCell.m */,
+				E5E209691916711F00BB4E39 /* SSPokerViewLayout.h */,
+				E5E2096A1916711F00BB4E39 /* SSPokerViewLayout.m */,
+				E5E2096B1916711F00BB4E39 /* SSYamafudaButton.h */,
+				E5E2096C1916711F00BB4E39 /* SSYamafudaButton.m */,
+				E5E2096D1916711F00BB4E39 /* UICollectionView+Draggable.h */,
+				E5E2096E1916711F00BB4E39 /* UICollectionView+Draggable.m */,
+				E5E2096F1916711F00BB4E39 /* UICollectionViewDataSource_Draggable.h */,
+				E5E209701916711F00BB4E39 /* UICollectionViewLayout_Warpable.h */,
+			);
+			name = Poker;
+			path = SalarymanSolitaire/Poker;
+			sourceTree = SOURCE_ROOT;
+		};
+		E5E209791916713500BB4E39 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				E5E22E5E18E7D36C00897AC7 /* UIImage+BlurEffect.h */,
+				E5E22E5F18E7D36C00897AC7 /* UIImage+BlurEffect.m */,
+				E5E22E6118E7E8BA00897AC7 /* UIImage+ImageEffects.h */,
+				E5E22E6218E7E8BA00897AC7 /* UIImage+ImageEffects.m */,
+				E5909E1E18EB70BE0006EFEF /* UIImage+MainBundleImage.h */,
+				E5909E1F18EB70BE0006EFEF /* UIImage+MainBundleImage.m */,
+			);
+			name = Image;
 			sourceTree = "<group>";
 		};
 		E5E22E6418E7FA9D00897AC7 /* 対戦モード */ = {
@@ -3443,7 +3471,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E58B01C318F12F89002623CB /* SSPokerViewLayout.m in Sources */,
 				E5E9411018D8EF57009D71DD /* WebService.m in Sources */,
 				E5F3D16618E7115600CBD281 /* SSChallengeController.m in Sources */,
 				3493756718CB268A00D4BD54 /* SolitaireManager.m in Sources */,
@@ -3460,6 +3487,8 @@
 				E5EF2D4418DDB39A0029F928 /* SSStageCell.m in Sources */,
 				E5B466F31903E49A00F6813E /* PopupNotificationView.m in Sources */,
 				E5F3D13C18E6E68100CBD281 /* SSClearPopupView.m in Sources */,
+				E5E209781916711F00BB4E39 /* UICollectionView+Draggable.m in Sources */,
+				E5E209711916711F00BB4E39 /* DraggableCollectionViewFlowLayout.m in Sources */,
 				3493756D18CB3BA300D4BD54 /* WUProgressView.m in Sources */,
 				E5DCE36D18E45B1200B95064 /* SSItemAlertView.m in Sources */,
 				E5E9410E18D8EF57009D71DD /* WebRequest.m in Sources */,
@@ -3468,26 +3497,28 @@
 				34C750C318CAB81D00BF3FC6 /* TopViewController.m in Sources */,
 				34C750BF18CAB75700BF3FC6 /* SSViewController.m in Sources */,
 				348D99B418CB41040079D2EF /* SSRecommendViewController.m in Sources */,
+				E5E209771916711F00BB4E39 /* SSYamafudaButton.m in Sources */,
 				349DBE2E18D0A1CC00D7037C /* SSStage.m in Sources */,
 				E5E9411318D8EF57009D71DD /* XmlParserUtil.m in Sources */,
+				E5E209741916711F00BB4E39 /* SSPoker.m in Sources */,
 				E590F6A118F6C5500077E789 /* AudioEngine.m in Sources */,
 				E5E22E5D18E7D32E00897AC7 /* UIView+Screenshot.m in Sources */,
 				E5909E2018EB70BE0006EFEF /* UIImage+MainBundleImage.m in Sources */,
 				348D99CC18CB43090079D2EF /* StoryViewController.m in Sources */,
+				E5E209761916711F00BB4E39 /* SSPokerViewLayout.m in Sources */,
 				E5E9410F18D8EF57009D71DD /* WebResponse.m in Sources */,
-				E5DAFAD818E9B17500CB05F3 /* SSPoker.m in Sources */,
-				E5E22E5718E7AAB800897AC7 /* UIButton+Solitaire.m in Sources */,
 				E5E9410C18D8EF57009D71DD /* Reachability.m in Sources */,
-				E5DAFAD418E9AF5F00CB05F3 /* SSPokerView.m in Sources */,
 				E5E3747918FC2639007249D3 /* SSShopView.m in Sources */,
 				34C750CA18CAC43A00BF3FC6 /* HelpInfoViewController.m in Sources */,
 				34C7509218CAB37F00BF3FC6 /* main.m in Sources */,
 				E521788718D562E80035B628 /* SSPhysicalView.m in Sources */,
 				E5F3D11918E6CCA700CBD281 /* SSGiveupAlertView.m in Sources */,
+				E5E209731916711F00BB4E39 /* LSCollectionViewLayoutHelper.m in Sources */,
 				E590F6A318F6C5500077E789 /* KeychainItemWrapper.m in Sources */,
 				E5F3D12118E6DC8F00CBD281 /* SSRetryAlertView.m in Sources */,
+				E5E209721916711F00BB4E39 /* LSCollectionViewHelper.m in Sources */,
 				348D99C018CB42810079D2EF /* SelectStageViewController.m in Sources */,
-				E5909E1B18EB5DE30006EFEF /* SSPokerViewCell.m in Sources */,
+				E5E209751916711F00BB4E39 /* SSPokerViewCell.m in Sources */,
 				E5E3742318FC1EFC007249D3 /* PurchaseManager.m in Sources */,
 				3494F42518CC542C00B714F1 /* SSPopupView.m in Sources */,
 				E5F3D15E18E6F59100CBD281 /* SharingMessage.m in Sources */,

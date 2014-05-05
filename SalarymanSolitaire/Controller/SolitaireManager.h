@@ -33,7 +33,7 @@
 - (NSArray *)stageInfos;
 
 // ステージ情報
-@property (strong, nonatomic, readonly) SSStage *selectedStage;
+@property (strong, nonatomic, readonly) SSStage *currentStage;
 
 // ステージ選択
 - (void)selectStageWithID:(NSInteger)stageID;

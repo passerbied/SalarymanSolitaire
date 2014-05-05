@@ -67,7 +67,7 @@
     [super initView];
     
     // ステージ番号&タイトル取得
-    self.stage = [[SolitaireManager sharedManager] selectedStage];
+    self.stage = [[SolitaireManager sharedManager] currentStage];
     
     NSDictionary *attributes = nil;
     NSString *text = nil;

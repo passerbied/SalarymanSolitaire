@@ -1,25 +1,25 @@
 //
 //  SSPoker.h
-//  SalarymanSolitaire
+//  Poker
 //
-//  Created by IfelseGo on 14-3-31.
-//  Copyright (c) 2014年 IfelseGo.Inc. All rights reserved.
+//  Created by IfelseGo on 14-5-2.
+//
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
 // ポーカー種類
-typedef enum
+typedef NS_ENUM(NSInteger, SSPokerColor)
 {
     SSPokerColorHeart = 1,
     SSPokerColorDiamond,
     SSPokerColorClub,
     SSPokerColorSpade,
     SSPokerColorCount = SSPokerColorSpade
-} SSPokerColor;
+};
 
 // ポーカー名称
-typedef enum
+typedef NS_ENUM(NSInteger, SSPokerName)
 {
     SSPokerNameNone,
     SSPokerNameA = 1,
@@ -36,8 +36,9 @@ typedef enum
     SSPokerNameQ,
     SSPokerNameK,
     SSPokerNameCount = SSPokerNameK
-} SSPokerName;
+};
 
+// ポーカー所属位置
 typedef NS_ENUM(NSInteger, SSPokerSection)
 {
     SSPokerSectionDeck1,
@@ -57,9 +58,26 @@ typedef NS_ENUM(NSInteger, SSPokerSection)
     SSPokerSectionTotal
 };
 
+// 表示オプション
+typedef NS_ENUM(NSInteger, SSPokerOptions)
+{
+    SSPokerOptionAnimationDefault       = 1 << 0,
+    SSPokerOptionAnimationDistribution  = 1 << 1,
+    
+    SSPokerOptionSectionDeck            = 1 << 2,
+    SSPokerOptionSectionFinished        = 1 << 3,
+    SSPokerOptionSectionYamafuda        = 1 << 4,
+    SSPokerOptionSectionHidden          = 1 << 5,
+    
+    SSPokerOptionShowFaceUp             = 1 << 6
+};
+
 #define SSPokerTotalCount               SSPokerNameCount * SSPokerColorCount
 
 @interface SSPoker : NSObject
+
+// 初期化
++ (instancetype)pokerWithColor:(SSPokerColor)color name:(SSPokerName)name;
 
 // ポーカー種類
 @property (nonatomic) SSPokerColor color;
@@ -67,31 +85,28 @@ typedef NS_ENUM(NSInteger, SSPokerSection)
 // ポーカー名称
 @property (nonatomic) SSPokerName name;
 
-// 方向
-@property (nonatomic, getter = isFaceUp) BOOL faceUp;
+// 表示オプション
+@property (nonatomic, readonly) SSPokerOptions displayOptions;
 
-// 表示／非表示
-@property (nonatomic, getter = isVisible) BOOL visible;
+// 表示方向
+- (void)setFaceUp:(BOOL)faceUp;
 
-// 完了フラグ
-@property (nonatomic, getter = isFinished) BOOL finished;
+// 完了標識
+- (void)setFinished:(BOOL)finished;
+
+// 配布標識
+- (void)setDistributionMode:(BOOL)mode;
+
 
 // ポーカー画像
 - (UIImage *)image;
 
-// 色により所属セクションを取得
-- (NSInteger)sectionForCurrentColor;
-
-// 移動可否チェック
-//- (BOOL)canMoveToWithPoker:(SSPoker *)poker inSection:(SSPokerSection)section;
+// 色
+- (SSPokerSection)sectionForCurrentColor;
 
 // 移動可否チェック
 - (BOOL)isValidNeighbourToPoker:(SSPoker *)poker inSection:(SSPokerSection)section;
 
-// 初期化
-+ (instancetype)pokerWithColor:(SSPokerColor)color name:(SSPokerName)name;
-
-// ダミーポーカー初期化
-+ (instancetype)dummyPoker;
-
+// デバーグ情報出力
+- (NSString *)description;
 @end

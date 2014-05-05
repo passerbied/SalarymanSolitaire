@@ -61,7 +61,7 @@
     UIImageView *imageView = [[UIImageView alloc] init];
     UIButton *btnNext = [UIButton buttonWithImage:@"story_next_btn"];
     [btnNext addTarget:self action:@selector(nextAction:) forControlEvents:UIControlEventTouchUpInside];
-    UIImage *storyImage = [UIImage temporaryImageNamed:@"tutorial_story.png"];
+    UIImage *storyImage = [UIImage imageNamed:@"tutorial_story"];
     [imageView setImage:storyImage];
     [scrollView addSubview:imageView];
     [scrollView addSubview:btnNext];

@@ -37,7 +37,6 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     #import "SSViewController.h"
     #import "SolitaireManager.h"
     #import "UIButton+UIImage.h"
-    #import "UIButton+Solitaire.h"
     #import "UIImage+MainBundleImage.h"
 #endif
 

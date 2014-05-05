@@ -7,34 +7,52 @@
 //
 
 #import "SSViewController.h"
-#import "SSPokerView.h"
 #import "PurchaseManager.h"
 
 @interface SSPlayViewController : SSViewController
+{
+    
+}
+
+/**************************************************/
+// ポーカービュー
+/**************************************************/
+
+// ポーカービュー
+@property (nonatomic, weak) IBOutlet UICollectionView *pokerView;
+
+/**************************************************/
+// ゲーム設定
+/**************************************************/
 
 // フリーモード
 @property (nonatomic, getter = isFreeMode) BOOL freeMode;
 
-// カード引き枚数
-@property (nonatomic, getter = isSingleMode) BOOL singleMode;
+// めくり枚数
+@property (nonatomic) NSInteger numberOfPokers;
 
-// 山札戻し利用可能回数
-@property (nonatomic) NSInteger usableYamafudas;
+// 山札戻し回数
+@property (nonatomic) NSInteger maximumYamafuda;
 
-// ポーカービュー
-@property (nonatomic, weak) IBOutlet SSPokerView *pokerView;
+
+// ゲーム初期化
+- (void)initGame;
+
+/**************************************************/
+// ゲーム制御
+/**************************************************/
+
+// リトライ（新規にゲームスタート）
+- (void)start;
+
+// ゲーム終了（前画面へ遷移）
+- (void)end;
 
 //　ゲーム一時停止
 - (void)pause;
 
 // ゲーム再開
 - (void)resume;
-
-// ゲーム終了（前画面へ遷移）
-- (void)end;
-
-// リトライ（新規にゲームスタート）
-- (void)start;
 
 // タイマー
 @property (nonatomic, strong) NSTimer *updateTimer;

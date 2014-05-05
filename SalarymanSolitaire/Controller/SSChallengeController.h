@@ -11,4 +11,16 @@
 
 @interface SSChallengeController : SSPlayViewController
 
+// ステージID
+@property (nonatomic) NSInteger stageID;
+
+// クリア回数
+@property (nonatomic, readonly) NSInteger minimalClearTimes;
+
+// クリア済み回数
+@property (nonatomic, readonly) NSInteger currentClearTimes;
+
+// 再び遊ぶモード
+@property (nonatomic) BOOL playAgainMode;
+
 @end

@@ -14,8 +14,6 @@
 
 @interface SSFreePlayController ()
 {
-    // カード引き枚数
-    BOOL                                _singleMode;
 }
 
 // バー
@@ -54,11 +52,24 @@
     }
 }
 
+// ゲーム初期化
+- (void)initGame;
+{
+    [super initGame];
+    
+    // 挑戦モード
+    self.freeMode = YES;
+    
+    // めくり枚数
+    self.numberOfPokers = 1;
+    
+    // 山札戻し回数
+    self.maximumYamafuda = NSIntegerMax;
+}
+
 - (void)initView
 {
     [super initView];
-    
-    [self.pokerView setFreeMode:YES];
     
     // トップヘッダー
     self.topBar.backgroundColor = SSColorBarBackground;
@@ -192,15 +203,17 @@
 - (void)gameWillRetry;
 {
     // ゲームを新規にスタートさせる
-    [self.pokerView start];
+    [self start];
 }
 
 // モード選択
 - (void)toogleToSingleMode:(BOOL)singleMode;
 {
-    if (_singleMode == singleMode) {
-        return;
+    // めくり枚数リセット
+    if (singleMode) {
+        self.numberOfPokers = 1;
+    } else {
+        self.numberOfPokers = 3;
     }
-    _singleMode = singleMode;
 }
 @end

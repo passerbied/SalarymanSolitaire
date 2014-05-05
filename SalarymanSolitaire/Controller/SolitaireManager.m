@@ -61,9 +61,9 @@
             SSStage *stage = [[SSStage alloc] init];
             stage.stageID = [[dic objectForKey:@"StageID"] integerValue];
             stage.enemyID = [[dic objectForKey:@"EnemyID"] integerValue];
-            stage.minClearTimes = [[dic objectForKey:@"MinClearTimes"] integerValue];
+            stage.minimalClearTimes = [[dic objectForKey:@"MinClearTimes"] integerValue];
             stage.numberOfPokers = [[dic objectForKey:@"NumberOfPokers"] integerValue];
-            stage.returnTimes = [[dic objectForKey:@"ReturnTimes"] integerValue];
+            stage.maximumYamafuda = [[dic objectForKey:@"ReturnTimes"] integerValue];
             stage.title = [dic objectForKey:@"StageName"];
             [_stageInfos addObject:stage];
         }
@@ -82,14 +82,14 @@
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         _lastStageID = [userDefaults integerForKey:__USER_SELECTED_STAGEID_KEY];
         if (_lastStageID) {
-            _selectedStage = (SSStage *)[array objectAtIndex:_lastStageID];
-            _selectedStage.clearTimes = [userDefaults integerForKey:__USER_SELECTED_CLEARTIMES_KEY];
+            _currentStage = (SSStage *)[array objectAtIndex:_lastStageID - 1];
+            _currentStage.currentClearTimes = [userDefaults integerForKey:__USER_SELECTED_CLEARTIMES_KEY];
             if ([userDefaults boolForKey:__USER_SELECTED_STARTED_KEY]) {
-                _selectedStage.stage = SSStageStatePlaying;
+                _currentStage.stage = SSStageStatePlaying;
             }
         } else {
             _lastStageID = 1;
-            _selectedStage = (SSStage *)[array objectAtIndex:0];
+            _currentStage = (SSStage *)[array objectAtIndex:0];
         }
     }
     return _lastStageID;
@@ -98,9 +98,17 @@
 // ステージ選択
 - (void)selectStageWithID:(NSInteger)stageID;
 {
-    if (_lastStageID != stageID) {
-        _lastStageID = stageID;
-        _selectedStage = [_stageInfos objectAtIndex:stageID - 1];
+    if (_currentStage.stageID == stageID) {
+        return;
+    }
+    
+    NSArray *array = [self stageInfos];
+    for (NSInteger i = 0; i < [array count]; i++) {
+        SSStage *stage = [array objectAtIndex:i];
+        if (stage.stageID == stageID) {
+            _currentStage = stage;
+            break;
+        }
     }
 }
 
@@ -111,11 +119,6 @@
         return NO;
     }
     return YES;
-}
-
-- (void)setSelectedStage:(SSStage *)selectedStage
-{
-    _selectedStage = selectedStage;
 }
 
 // 初回起動設定

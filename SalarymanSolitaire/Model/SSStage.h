@@ -23,18 +23,21 @@ typedef enum
 // 敵ID
 @property (nonatomic) NSInteger enemyID;
 
-// クリア回数
-@property (nonatomic) NSInteger minClearTimes;
-@property (nonatomic) NSInteger clearTimes;
+// 最低クリア回数
+@property (nonatomic) NSInteger minimalClearTimes;
 
-// ポーカー枚数
+// クリア済み回数
+@property (nonatomic) NSInteger currentClearTimes;
+
+// めくり枚数
 @property (nonatomic) NSInteger numberOfPokers;
 
 // 山札戻し回数
-@property (nonatomic) NSInteger returnTimes;
+@property (nonatomic) NSInteger maximumYamafuda;
 
 // タイトル
 @property (nonatomic, strong) NSString *title;
+
 
 // 状態
 @property (nonatomic) SSStageState stage;

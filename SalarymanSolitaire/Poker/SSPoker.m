@@ -1,23 +1,17 @@
 //
 //  SSPoker.m
-//  SalarymanSolitaire
+//  Poker
 //
-//  Created by IfelseGo on 14-3-31.
-//  Copyright (c) 2014年 IfelseGo.Inc. All rights reserved.
+//  Created by IfelseGo on 14-5-2.
+//
 //
 
 #import "SSPoker.h"
+
 @interface SSPoker ()
 {
-
+    
 }
-
-// ダミー
-@property (nonatomic) BOOL dummyPoker;
-
-// 関連ポーカー
-//- (SSPokerName)nameForNextPoker;
-//- (SSPokerName)nameForPrePoker;
 
 // 次のポーカー名称
 - (SSPokerName)neighbourName;
@@ -31,64 +25,86 @@
 
 @implementation SSPoker
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _displayOptions = SSPokerOptionAnimationDistribution | SSPokerOptionShowFaceUp;
+    }
+    return self;
+}
 // 初期化
 + (instancetype)pokerWithColor:(SSPokerColor)color name:(SSPokerName)name;
 {
     SSPoker *poker = [[SSPoker alloc] init];
     poker.color = color;
     poker.name = name;
-    poker.faceUp = NO;
-    poker.visible = YES;
-    poker.finished = NO;
     return poker;
 }
 
-// ダミーポーカー初期化
-+ (instancetype)dummyPoker;
+// 表示方向
+- (void)setFaceUp:(BOOL)faceUp;
 {
-    SSPoker *poker = [[SSPoker alloc] init];
-    poker.visible = YES;
-    poker.dummyPoker = YES;
-    return poker;
+    if (faceUp) {
+        _displayOptions |= SSPokerOptionShowFaceUp;
+    } else {
+        _displayOptions &= (~SSPokerOptionShowFaceUp);
+    }
+}
+
+// 完了標識
+- (void)setFinished:(BOOL)finished;
+{
+    if (finished) {
+        _displayOptions |= SSPokerOptionSectionFinished;
+    } else {
+        _displayOptions &= (~SSPokerOptionSectionFinished);
+    }
+}
+
+// 配布標識
+- (void)setDistributionMode:(BOOL)mode;
+{
+    if (mode) {
+        _displayOptions |= SSPokerOptionAnimationDistribution;
+    } else {
+        _displayOptions &= (~SSPokerOptionAnimationDistribution);
+    }
 }
 
 // ポーカー画像
 - (UIImage *)image;
 {
     NSString *name;
-    if (_dummyPoker) {
-        name = @"bg_card_front";
+    if (_displayOptions & SSPokerOptionShowFaceUp) {
+        name = [NSString stringWithFormat:@"card_%d_%d.png", _color, _name];
     } else {
-        if (_faceUp) {
-            name = [NSString stringWithFormat:@"card_%d_%d", _color, _name];
-        } else {
-            name = @"bg_card_back";
-        }
+        name = @"bg_card_back.png";
     }
     return [UIImage imageNamed:name];;
 }
 
 // 色
-- (NSInteger)sectionForCurrentColor;
+- (SSPokerSection)sectionForCurrentColor;
 {
-    NSInteger section;
+    SSPokerSection section;
     switch (_color) {
         case SSPokerColorHeart:
             section = SSPokerSectionHeart;
             break;
-
+            
         case SSPokerColorDiamond:
             section = SSPokerSectionDiamond;
             break;
-
+            
         case SSPokerColorClub:
             section = SSPokerSectionClub;
             break;
-
+            
         case SSPokerColorSpade:
             section = SSPokerSectionSpade;
             break;
-
+            
         default:
             DebugLog(@"Section異常")
             break;
@@ -99,35 +115,20 @@
 // 次のポーカー名称
 - (SSPokerName)neighbourName;
 {
-    if (_finished) {
+    if (_displayOptions & SSPokerOptionSectionFinished) {
+        // 完了済み
         if (_name == SSPokerNameK) {
             return SSPokerNameNone;
         }
         return (_name + 1);
     } else {
+        // プレイン中
         if (_name == SSPokerNameA) {
             return SSPokerNameNone;
         }
         return (_name - 1);
     }
 }
-
-//// 関連ポーカー
-//- (SSPokerName)nameForNextPoker;
-//{
-//    if (_name == SSPokerNameK) {
-//        return SSPokerNameNone;
-//    }
-//    return (_name + 1);
-//}
-//
-//- (SSPokerName)nameForPrePoker;
-//{
-//    if (_name == SSPokerNameA) {
-//        return SSPokerNameNone;
-//    }
-//    return (_name - 1);
-//}
 
 // 色
 - (BOOL)isBlackPoker;
@@ -139,49 +140,7 @@
 }
 
 // 移動可否チェック
-//- (BOOL)canMoveToWithPoker:(SSPoker *)poker inSection:(SSPokerSection)section;
-//{
-//    // 仕上げチェック
-//    if (!poker) {
-//        if (section >= SSPokerSectionHeart && _name == SSPokerNameA) {
-//            return YES;
-//        }
-//        if (section <= SSPokerSectionDeck7 && _name == SSPokerNameK) {
-//            return YES;
-//        }
-//    }
-//    if (!poker && section >= SSPokerSectionHeart) {
-//        if (_name == SSPokerNameA) {
-//            return YES;
-//        }
-//        return NO;
-//    }
-//    
-//    if ([poker isFinished]) {
-//        // 色一致チェック
-//        if (poker.color != self.color) {
-//            return NO;
-//        }
-//        // 関連チェック
-//        if ([poker nameForNextPoker] != self.name) {
-//            return NO;
-//        }
-//        return YES;
-//    } else {
-//        // 色チェック
-//        if ([poker isBlackPoker] == [self isBlackPoker]) {
-//            return NO;
-//        }
-//        // 関連チェック
-//        if ([poker nameForPrePoker] != self.name) {
-//            return NO;
-//        }
-//        return YES;
-//    }
-//}
-
-// 移動可否チェック
-- (BOOL)isValidNeighbourToPoker:(SSPoker *)poker inSection:(SSPokerSection)section;
+- (BOOL)isValidNeighbourToPoker:(SSPoker *)poker inSection:(SSPokerSection)section
 {
     // 上へ移動の場合
     if (section > SSPokerSectionYamafuda) {
@@ -193,13 +152,19 @@
             }
         } else {
             // 以外の場合、隣ポーカーのみ移動可能と扱う
-            if ([poker neighbourName] == self.name) {
-                return YES;
+            // 名前チェック
+            if ([poker neighbourName] != self.name) {
+                return NO;
             }
+            
+            // 色チェック
+            if (poker.color != self.color) {
+                return NO;
+            }
+            
+            // 上記外の場合、移動可能と扱う
+            return YES;
         }
-        
-        // 上記外の場合、移動不可と扱う
-        return NO;
     }
     
     // 両側／下へ移動の場合
@@ -234,4 +199,30 @@
     return ([self isBlackPoker] == [poker isBlackPoker]);
 }
 
+// デバーグ情報出力
+- (NSString *)description;
+{
+    NSString *colorName;
+    if (_color == SSPokerColorHeart) {
+        colorName = @"♥️";
+    }
+    
+    switch (_color) {
+        case SSPokerColorHeart:
+            colorName = @"♥️";
+            break;
+        case SSPokerColorDiamond:
+            colorName = @"♦️";
+            break;
+        case SSPokerColorClub:
+            colorName = @"♣️";
+            break;
+        case SSPokerColorSpade:
+            colorName = @"♠️";
+            break;
+        default:
+            break;
+    }
+    return [NSString stringWithFormat:@"%@ %02d",colorName, _name];
+}
 @end
