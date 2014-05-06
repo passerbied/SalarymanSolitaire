@@ -216,4 +216,12 @@
         self.numberOfPokers = 3;
     }
 }
+
+// ゲーム完了処理
+- (void)willCompletSolitaire;
+{
+    [super willCompletSolitaire];
+    NSLog(@"完了しました");
+}
+
 @end

@@ -190,4 +190,10 @@
         [WUProgressView dismiss];
     }];
 }
+
+// ゲーム完了処理
+- (void)willCompletSolitaire;
+{
+    [super willCompletSolitaire];
+}
 @end

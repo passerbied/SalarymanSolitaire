@@ -59,6 +59,8 @@
 @property (nonatomic) NSTimeInterval duration;
 - (void)handleUpdateTimer:(NSTimer *)timer;
 
+// ゲーム完了処理
+- (void)willCompletSolitaire;
 @end
 
 extern NSString *const SolitaireWillResumeGameNotification;

@@ -42,6 +42,9 @@ NSString *const SolitaireWillPauseGameNotification = @"SolitaireWillPauseGameNot
     // ポーカー引き枚数変更フラグ
     BOOL                                _needReverse;
     NSMutableArray                      *_reversePokers;
+    
+    // 完了アニメーション
+    BOOL                                _completed;
 }
 
 - (SSYamafudaButton *)yamafudaButton;
@@ -222,73 +225,6 @@ NSString *const SolitaireWillPauseGameNotification = @"SolitaireWillPauseGameNot
     }
     
     // 山札エリア再表示
-    _needReverse = !_needReverse;
-    [_pokerView reloadSections:[NSIndexSet indexSetWithIndex:SSPokerSectionYamafuda]];
-}
-
-- (void)adjustYamafudaByReverse:(BOOL)reverse
-{
-    NSMutableArray *yamafudaPokers = [_allPokers objectAtIndex:SSPokerSectionYamafuda];
-    NSInteger count = [yamafudaPokers count];
-    if (count == 0) {
-        return;
-    }
-    
-    NSMutableArray *recyclePokers = nil;
-    NSMutableArray *hiddenPokers = nil;
-    
-    if (_needReverse) {
-        recyclePokers = [_allPokers objectAtIndex:SSPokerSectionHidden];
-        hiddenPokers = [_allPokers objectAtIndex:SSPokerSectionRecycle];
-        
-        if (count > _numberOfPokers) {
-            // 山札　ー＞　リサイクル
-            for (NSInteger i = count - 1; i >= _numberOfPokers; i--) {
-                SSPoker *poker = [yamafudaPokers objectAtIndex:i];
-                [recyclePokers addObject:poker];
-            }
-            NSRange range = NSMakeRange(_numberOfPokers, count - _numberOfPokers);
-            [yamafudaPokers removeObjectsInRange:range];
-        } else if (count < _numberOfPokers) {
-            // 非表示(リサイクル)　ー＞　山札
-            for (NSInteger i = count; i < _numberOfPokers; i++) {
-                SSPoker *poker = [hiddenPokers objectAtIndex:i];
-                [yamafudaPokers addObject:poker];
-            }
-            NSRange range = NSMakeRange(count, _numberOfPokers - count);
-            [hiddenPokers removeObjectsInRange:range];
-        } else {
-            // 一致する場合、何もしない。
-            return;
-        }
-    } else {
-        recyclePokers = [_allPokers objectAtIndex:SSPokerSectionRecycle];
-        hiddenPokers = [_allPokers objectAtIndex:SSPokerSectionHidden];
-        
-        if (count > _numberOfPokers) {
-            // 山札　ー＞　リサイクル
-            for (NSInteger i = _numberOfPokers; i < count; i++) {
-                SSPoker *poker = [yamafudaPokers objectAtIndex:i];
-                [recyclePokers addObject:poker];
-            }
-            NSRange range = NSMakeRange(_numberOfPokers, count - _numberOfPokers);
-            [yamafudaPokers removeObjectsInRange:range];
-        } else if (count < _numberOfPokers) {
-            // 非表示　ー＞　山札
-            for (NSInteger i = count; i < _numberOfPokers; i++) {
-                SSPoker *poker = [hiddenPokers objectAtIndex:i - count];
-                [yamafudaPokers addObject:poker];
-            }
-            NSRange range = NSMakeRange(count, _numberOfPokers - count);
-            [hiddenPokers removeObjectsInRange:range];
-        } else {
-            // 一致する場合、何もしない。
-            return;
-        }
-    }
-    
-    // 山札エリア再表示
-    _needReverse = !_needReverse;
     [_pokerView reloadSections:[NSIndexSet indexSetWithIndex:SSPokerSectionYamafuda]];
 }
 
@@ -488,6 +424,7 @@ NSString *const SolitaireWillPauseGameNotification = @"SolitaireWillPauseGameNot
                 [_pokerView reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(SSPokerSectionYamafuda, 1)]];
             } completion:^(BOOL finished) {
                 _pokerLayout.currentMode = SSPokerViewLayoutModeChallenge;
+                
             }];
         }
     }];
@@ -564,6 +501,9 @@ NSString *const SolitaireWillPauseGameNotification = @"SolitaireWillPauseGameNot
         [cell.poker setFaceUp:YES];
         [cell setNeedsLayout];
     }
+    
+    // ゲーム完了可否チェック
+    [self completGameIfNecessary];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView moveItemsFromSection:(NSInteger)section;
@@ -622,7 +562,10 @@ NSString *const SolitaireWillPauseGameNotification = @"SolitaireWillPauseGameNot
             [_pokerView moveItemAtIndexPath:from toIndexPath:to];
         }
     }completion:^(BOOL finished) {
+        NSMutableIndexSet *updateIndex = [NSMutableIndexSet indexSetWithIndex:fromSection];
+        [updateIndex addIndex:toSection];
         if (fromSection < SSPokerSectionYamafuda) {
+            // 次のポーカーを表示にする
             NSInteger item = [(NSIndexPath *)[fromIndexPaths objectAtIndex:0] item];
             if (item > 0) {
                 item--;
@@ -633,10 +576,39 @@ NSString *const SolitaireWillPauseGameNotification = @"SolitaireWillPauseGameNot
                     [cell setNeedsLayout];
                 }
             }
-            _pokerLayout.currentSection = toSection;
-            [_pokerView.collectionViewLayout invalidateLayout];
-            [_pokerView reloadSections:[NSIndexSet indexSetWithIndex:_pokerLayout.currentSection]];
+            
+        } else if (fromSection == SSPokerSectionYamafuda) {
+            // 山札補完
+            NSMutableArray *yamafudaPokers = [_allPokers objectAtIndex:SSPokerSectionYamafuda];
+            if ([yamafudaPokers count] == 0) {
+                // 補完要と扱う
+                NSMutableArray *hiddenPokers = [_allPokers objectAtIndex:SSPokerSectionHidden];
+                if ([hiddenPokers count] == 0) {
+                    NSMutableArray *recyclePokers = [_allPokers objectAtIndex:SSPokerSectionRecycle];
+                    [hiddenPokers addObjectsFromArray:recyclePokers];
+                    [recyclePokers removeAllObjects];
+                }
+                
+                if ([hiddenPokers count]) {
+                    NSInteger len = 0;
+                    for (NSInteger i = 0; i < [hiddenPokers count] && i < _numberOfPokers; i++) {
+                        SSPoker *poker = [hiddenPokers objectAtIndex:i];
+                        [yamafudaPokers addObject:poker];
+                        len++;
+                    }
+                    NSRange range = NSMakeRange(0, len);
+                    [hiddenPokers removeObjectsInRange:range];
+                }
+                [updateIndex addIndex:SSPokerSectionYamafuda];
+            }
         }
+        
+        _pokerLayout.currentSection = toSection;
+        [_pokerView.collectionViewLayout invalidateLayout];
+        [_pokerView reloadSections:updateIndex];
+
+        // ゲーム完了可否チェック
+        [self completGameIfNecessary];
     }];
 }
 
@@ -838,7 +810,8 @@ NSString *const SolitaireWillPauseGameNotification = @"SolitaireWillPauseGameNot
         [_pokerView performBatchUpdates:^{
             [_pokerView reloadSections:[NSIndexSet indexSetWithIndex:SSPokerSectionYamafuda]];
         }completion:^(BOOL finished) {
-            
+            // ゲーム完了可否チェック
+            [self completGameIfNecessary];
         }];
         
     } else {
@@ -852,4 +825,110 @@ NSString *const SolitaireWillPauseGameNotification = @"SolitaireWillPauseGameNot
     
 }
 
+// ゲーム完了可否チェック
+- (void)completGameIfNecessary;
+{
+    // カード引き枚数変更チェック
+    if ([self isFreeMode] && _needReverse) {
+        [_reversePokers removeAllObjects];
+        _needReverse = NO;
+    }
+    
+    // 完了チェック
+    if ([self isFinishedSolitaire]) {
+        [self willCompletSolitaire];
+    }
+}
+
+// 完了チェック
+- (BOOL)isFinishedSolitaire
+{
+    // 山札チェック
+    NSArray *yamafudaPokers = [_allPokers objectAtIndex:SSPokerSectionYamafuda];
+    if ([yamafudaPokers count]) {
+        return NO;
+    }
+
+    BOOL finished = YES;
+    
+    // 非表示ポーカー有無チェック
+    for (NSInteger section = SSPokerSectionHidden; section < SSPokerSectionTotal; section++) {
+        NSArray *pokers = [_allPokers objectAtIndex:section];
+        if ([pokers count]) {
+            finished = NO;
+            break;
+        }
+    }
+    if (!finished) {
+        return NO;
+    }
+    
+    for (NSInteger section = SSPokerSectionDeck1; section <= SSPokerSectionDeck7; section++) {
+        NSArray *pokers = [_allPokers objectAtIndex:section];
+        for (NSInteger i = 0; i < [pokers count]; i++) {
+            SSPoker *poker = [pokers objectAtIndex:i];
+            if (!(poker.displayOptions & SSPokerOptionShowFaceUp)) {
+                finished = NO;
+                break;
+            }
+        }
+        if (!finished) {
+            break;
+        }
+    }
+    return finished;
+}
+
+- (void)willCompletSolitaire;
+{
+    // タイマー停止
+    if ([self.updateTimer isValid]) {
+        [self.updateTimer invalidate];
+        self.updateTimer = nil;
+    }
+
+    // アニメーション表示
+    _completed = NO;
+    [self completeAnimation];
+}
+
+- (void)completeAnimation
+{
+    if (_completed) {
+        return;
+    }
+    
+    _completed = YES;
+    for (NSInteger section = SSPokerSectionDeck1; section <= SSPokerSectionDeck7; section++) {
+        // 最後のポーカーを取得する
+        NSMutableArray *pokers = [_allPokers objectAtIndex:section];
+        if (![pokers count]) {
+            continue;
+        }
+        
+        // 未完了と扱う
+        _completed = NO;
+        
+        // 移動可否チェック
+        SSPoker *lastPoker = [pokers lastObject];
+        NSInteger targetSection = [lastPoker sectionForCurrentColor];
+        NSMutableArray *targetPokers = [_allPokers objectAtIndex:targetSection];
+        SSPoker *targetPoker = [targetPokers lastObject];
+        if ([lastPoker isValidNeighbourToPoker:targetPoker inSection:targetSection]) {
+            // アニメーション表示
+            [targetPokers addObject:lastPoker];
+            [lastPoker setFinished:YES];
+            [pokers removeLastObject];
+            
+            [_pokerView performBatchUpdates:^{
+                NSIndexPath *from = [NSIndexPath indexPathForItem:[pokers count] inSection:section];
+                NSIndexPath *to = [NSIndexPath indexPathForItem:[targetPokers count] - 1 inSection:targetSection];
+                [_pokerView moveItemAtIndexPath:from toIndexPath:to];
+            }completion:^(BOOL finished) {
+                [self completeAnimation];
+            }];
+            break;
+        }
+    }
+}
 @end
