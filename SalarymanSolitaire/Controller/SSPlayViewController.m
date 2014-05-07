@@ -40,7 +40,6 @@ NSString *const SolitaireWillPauseGameNotification = @"SolitaireWillPauseGameNot
     SSYamafudaButton                    *_yamafudaButton;
     
     // ポーカー引き枚数変更フラグ
-    BOOL                                _needReverse;
     NSMutableArray                      *_reversePokers;
     
     // 完了アニメーション
@@ -70,6 +69,12 @@ NSString *const SolitaireWillPauseGameNotification = @"SolitaireWillPauseGameNot
                                              selector:@selector(gameWillPauseNotification:)
                                                  name:SolitaireWillPauseGameNotification
                                                object:nil];
+}
+
+// 山札戻し使用
+- (void)useYamafuda;
+{
+    // なにもしない
 }
 
 - (SSYamafudaButton *)yamafudaButton;
@@ -138,7 +143,6 @@ NSString *const SolitaireWillPauseGameNotification = @"SolitaireWillPauseGameNot
 - (void)setFreeMode:(BOOL)freeMode
 {
     _freeMode = freeMode;
-    [[self yamafudaButton] setFreeMode:freeMode];
 }
 
 - (void)setMaximumYamafuda:(NSInteger)maximumYamafuda
@@ -289,6 +293,13 @@ NSString *const SolitaireWillPauseGameNotification = @"SolitaireWillPauseGameNot
 {
     _duration = 0;
     [self setTimerEnabled:YES];
+    [_reversePokers removeAllObjects];
+    
+    if (_freeMode) {
+        [[self yamafudaButton] setDisplayMode:YamafudaDisplayModeFree];
+    } else {
+        [[self yamafudaButton] setDisplayMode:YamafudaDisplayModeUsable];
+    }
     
     [self distribute];
 }
@@ -759,63 +770,66 @@ NSString *const SolitaireWillPauseGameNotification = @"SolitaireWillPauseGameNot
 //  山札戻し実行
 - (void)willUseYamafuda;
 {
-    if (!_yamafudaButton.usable) {
-        return;
-    }
-    
     NSMutableArray *recyclePokers = [_allPokers objectAtIndex:SSPokerSectionRecycle];
     NSMutableArray *yamafudaPokers = [_allPokers objectAtIndex:SSPokerSectionYamafuda];
     NSMutableArray *hiddenPokers = [_allPokers objectAtIndex:SSPokerSectionHidden];
     
-    // 山札の枚数をチェックする
-    NSInteger count = [hiddenPokers count];
-    if (count == 0) {
-        // 山札がなくなると、山札戻しを行う
+    // 山札戻しの場合
+    if (_yamafudaButton.displayMode == YamafudaDisplayModeReturn) {
         [recyclePokers addObjectsFromArray:yamafudaPokers];
         [hiddenPokers addObjectsFromArray:recyclePokers];
         [recyclePokers removeAllObjects];
         [yamafudaPokers removeAllObjects];
         
-        // 残り枚数チェック
-        if ([hiddenPokers count] <= _numberOfPokers) {
-            _yamafudaButton.usable = NO;
-        }
+        // 山札戻し使用
+        [_yamafudaButton useYamafudaReturn];
     }
     
-    // 山札にトランプを追加する
-    count = [hiddenPokers count];
-    if (count) {
-        // 山札をリサイクルする
-        if ([yamafudaPokers count]) {
-            [recyclePokers addObjectsFromArray:yamafudaPokers];
-            [yamafudaPokers removeAllObjects];
-        }
-        
-        NSInteger index = 0;
-        NSInteger max;
-        if (_numberOfPokers > count) {
-            max = count;
-        } else {
-            max = _numberOfPokers;
-        }
-        while (index < max) {
-            SSPoker *poker = [hiddenPokers objectAtIndex:index];
-            [yamafudaPokers addObject:poker];
-            index++;
-        }
-        NSRange range = NSMakeRange(0, max);
-        [hiddenPokers removeObjectsInRange:range];
-        
-        // 山札を更新する
-        [_pokerView performBatchUpdates:^{
-            [_pokerView reloadSections:[NSIndexSet indexSetWithIndex:SSPokerSectionYamafuda]];
-        }completion:^(BOOL finished) {
-            // ゲーム完了可否チェック
-            [self completGameIfNecessary];
-        }];
-        
+    // 山札に残ったトランプをリサイクルする
+    if ([yamafudaPokers count]) {
+        [recyclePokers addObjectsFromArray:yamafudaPokers];
+        [yamafudaPokers removeAllObjects];
+    }
+    
+    // 山札へ新しいトランプを追加する
+    NSInteger count = [hiddenPokers count];
+    NSInteger index = 0;
+    NSInteger max;
+    if (_numberOfPokers > count) {
+        max = count;
     } else {
-        DebugLog(@"ショップを表示する");
+        max = _numberOfPokers;
+    }
+    while (index < max) {
+        SSPoker *poker = [hiddenPokers objectAtIndex:index];
+        [yamafudaPokers addObject:poker];
+        index++;
+    }
+    NSRange range = NSMakeRange(0, max);
+    [hiddenPokers removeObjectsInRange:range];
+    
+    // 山札を更新する
+    [_pokerView performBatchUpdates:^{
+        [_pokerView reloadSections:[NSIndexSet indexSetWithIndex:SSPokerSectionYamafuda]];
+    }completion:^(BOOL finished) {
+        // ゲーム完了可否チェック
+        [self completGameIfNecessary];
+    }];
+    
+    // 山札戻しボター表示状態更新
+    if (![self isFreeMode]) {
+        if (![hiddenPokers count]) {
+            if ([recyclePokers count]) {
+                // 山札戻し
+                _yamafudaButton.displayMode = YamafudaDisplayModeReturn;
+            } else {
+                // ショップ
+                _yamafudaButton.displayMode = YamafudaDisplayModeBuy;
+            }
+        } else {
+            // 山札にトランプがある場合
+            _yamafudaButton.displayMode = YamafudaDisplayModeUsable;
+        }
     }
 }
 
@@ -829,9 +843,8 @@ NSString *const SolitaireWillPauseGameNotification = @"SolitaireWillPauseGameNot
 - (void)completGameIfNecessary;
 {
     // カード引き枚数変更チェック
-    if ([self isFreeMode] && _needReverse) {
+    if ([self isFreeMode]) {
         [_reversePokers removeAllObjects];
-        _needReverse = NO;
     }
     
     // 完了チェック

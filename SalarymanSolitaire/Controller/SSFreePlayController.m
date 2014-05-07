@@ -221,7 +221,7 @@
 - (void)willCompletSolitaire;
 {
     [super willCompletSolitaire];
-    NSLog(@"完了しました");
+    DebugLog(@"完了しました");
 }
 
 @end

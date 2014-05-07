@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSInteger, YamafudaDisplayMode)
+{
+    YamafudaDisplayModeFree,
+    YamafudaDisplayModeUsable,
+    YamafudaDisplayModeReturn,
+    YamafudaDisplayModeBuy
+};
+
 @protocol SSYamafudaButtonDelegate <NSObject>
 @required
 //  山札戻し実行
@@ -18,13 +26,6 @@
 @end
 
 @interface SSYamafudaButton : UIView
-{
-    // 山札戻しの回数
-    UILabel                             *_numbersLabel;
-    
-    // 背景イメージ
-    UIImageView                         *_backgroundImageView;
-}
 
 // 委託対象
 @property (nonatomic, weak) id<SSYamafudaButtonDelegate> delegate;
@@ -32,13 +33,13 @@
 // 山札戻しの回数
 @property (nonatomic) NSInteger maximumYamafuda;
 
-// フリープレイモード
-@property (nonatomic, getter = isFreeMode) BOOL freeMode;
-
-// 利用可否（山札足りない場合、利用不可
-@property (nonatomic) BOOL usable;
+// 表示モード
+@property (nonatomic) YamafudaDisplayMode displayMode;
 
 // 初期化
 - (instancetype)initWithDelegate:(id<SSYamafudaButtonDelegate>)delegate;
+
+// 山札戻し使用
+- (void)useYamafudaReturn;
 
 @end

@@ -34,9 +34,11 @@
 // 山札戻し回数
 @property (nonatomic) NSInteger maximumYamafuda;
 
-
 // ゲーム初期化
 - (void)initGame;
+
+// 山札戻し使用
+- (void)useYamafuda;
 
 /**************************************************/
 // ゲーム制御

@@ -13,13 +13,10 @@
 
 #define __STAGE_CELL_IDENTIFIER         @"StageCell"
 
-@interface SelectStageViewController ()<ADInterstitialAdDelegate>
+@interface SelectStageViewController ()
 {
     // ステージ一覧
     NSArray                             *_stageList;
-    
-    // 選択済みステージID
-    NSInteger                           _selectedStageID;
 }
 
 // ヘッダー
@@ -111,16 +108,19 @@
     SSStageState state = (SSStageState)[[userInfo objectForKey:StageDidSelectNotificationStateKey] integerValue];
     if (state == SSStageStateLocked) {
         // 挑戦不可
-//        return;
+        DebugLog(@"該当ステージがロックされています")
+        return;
     }
     
-    // ステージID取得
-    _selectedStageID = [[userInfo objectForKey:StageDidSelectNotificationStageIDKey] integerValue];
+    // 選択済みステージID
+    NSInteger stageID = [[userInfo objectForKey:StageDidSelectNotificationStageIDKey] integerValue];
+    [[SolitaireManager sharedManager] selectStageWithID:stageID];
     
     // 広告表示要否チェック
     BOOL showAD = [[userInfo objectForKey:StageDidSelectNotificationADKey] boolValue];
     if (showAD) {
-        [self presentInterstitialAD];
+        // 広告表示不可
+        DebugLog(@"フルスクリーン広告はiPadでのみ利用できます");
     }
     
     // ストーリー画面表示
@@ -131,7 +131,6 @@
 - (void)presentStoryView;
 {
     StoryViewController *controller = [StoryViewController controller];
-    [[SolitaireManager sharedManager] selectStageWithID:_selectedStageID];
     [self.navigationController pushViewController:controller animated:YES];
 }
 
@@ -157,6 +156,7 @@
     cell.fromStageID = indexPath.row *SolitaireStageCellNumberPerRow + 1;
     return cell;
 }
+
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [cell setBackgroundColor:[UIColor clearColor]];
@@ -169,43 +169,10 @@
     return headerView;
 }
 
-#pragma mark - インタースティシャル広告
-
 // インタースティシャル広告表示
 - (void)presentInterstitialAD;
 {
-    self.interstitialAD = [[SolitaireManager sharedManager] sharedInterstitialAD];
-    self.interstitialAD.delegate = self;
-    DebugLog(@"interstitialAD");
-}
-
--(void)interstitialAdDidLoad:(ADInterstitialAd *)interstitialAd
-{
-    [interstitialAd presentInView:self.view];
-    DebugLog(@"インタースティシャル型広告請求成功");
-}
-
--(void)interstitialAdDidUnload:(ADInterstitialAd *)interstitialAd
-{
-    DebugLog(@"广告卸载");
-}
-
--(void)interstitialAd:(ADInterstitialAd *)interstitialAd didFailWithError:(NSError *)error
-{
-    DebugLog(@"インタースティシャル型広告請求失敗");
-}
-
--(BOOL)interstitialAdActionShouldBegin:(ADInterstitialAd *)interstitialAd willLeaveApplication:(BOOL)willLeave
-{
-    return YES;
-}
-
--(void)interstitialAdActionDidFinish:(ADInterstitialAd *)interstitialAd
-{
-    DebugLog(@"インタースティシャル型広告閉じる");
     
-    // ストーリー画面表示
-    [self presentStoryView];
 }
 @end
 

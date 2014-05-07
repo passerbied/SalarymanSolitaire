@@ -195,5 +195,7 @@
 - (void)willCompletSolitaire;
 {
     [super willCompletSolitaire];
+    
+    // ステージクリア条件
 }
 @end

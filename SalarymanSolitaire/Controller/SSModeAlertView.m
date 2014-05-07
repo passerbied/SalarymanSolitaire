@@ -23,7 +23,6 @@
 // ボタンタップ処理
 - (void)alertView:(WUAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
 {
-    NSLog(@"Button [%d]",buttonIndex);
     if (buttonIndex == SSAlertViewFirstButton) {
         // カード引き枚数＝１枚
         [self.delegate toogleToSingleMode:YES];

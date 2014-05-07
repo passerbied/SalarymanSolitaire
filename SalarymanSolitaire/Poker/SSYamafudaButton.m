@@ -9,6 +9,20 @@
 #import "SSYamafudaButton.h"
 #import "SSPokerViewLayout.h"
 
+@interface SSYamafudaButton ()
+{
+    // 山札戻しの回数
+    NSUInteger                          _usableTimes;
+    UILabel                             *_numbersLabel;
+    
+    // 背景イメージ
+    UIImageView                         *_backgroundImageView;
+    
+    // 山札戻しモード
+    BOOL                                _yamafudaModosi;
+}
+@end
+
 @implementation SSYamafudaButton
 
 - (instancetype)initWithDelegate:(id<SSYamafudaButtonDelegate>)delegate
@@ -16,8 +30,8 @@
     CGRect rect = [SSPokerViewLayout rectForYamafuda];
     self = [super initWithFrame:rect];
     if (self) {
-        _usable = YES;
         _delegate = delegate;
+        _displayMode = NSIntegerMax;
         
         // 背景イメージビュー作成
         rect.origin = CGPointMake(0.0f, 0.0f);
@@ -50,69 +64,75 @@
     return self;
 }
 
-- (void)setFreeMode:(BOOL)freeMode
+- (void)setDisplayMode:(YamafudaDisplayMode)displayMode
 {
-    _freeMode = freeMode;
-    if (_freeMode) {
-        _backgroundImageView.image = [UIImage imageNamed:@"free_icon_yamafuda.png"];
-        _numbersLabel.hidden = YES;
-    } else {
-        _backgroundImageView.image = [UIImage imageNamed:@"product_item.png"];
+    if (_displayMode == displayMode) {
+        return;
+    }
+    _displayMode = displayMode;
+    [self setNeedsLayout];
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    if (_displayMode == YamafudaDisplayModeReturn) {
+        // 山札戻しの場合
+        _numbersLabel.text = [NSString stringWithFormat:@"%d", _usableTimes];
         _numbersLabel.hidden = NO;
+        _backgroundImageView.image = [UIImage imageNamed:@"product_item.png"];
+        
+    } else if (_displayMode == YamafudaDisplayModeBuy) {
+        // 山札戻しの回数が０になった場合
+        _numbersLabel.hidden = YES;
+        _backgroundImageView.image = [UIImage imageNamed:@"btn_more_card.png"];
+        
+    } else {
+        // フリープレイ、または山札にトランプがある場合
+        _numbersLabel.hidden = YES;
+        _backgroundImageView.image = [UIImage imageNamed:@"bg_card_back.png"];
     }
 }
 
-- (void)setUsableYamafudas:(NSInteger)maximumYamafuda
+- (void)setMaximumYamafuda:(NSInteger)maximumYamafuda
 {
-    if (_maximumYamafuda == maximumYamafuda) {
-        return;
-    }
     _maximumYamafuda = maximumYamafuda;
+    _usableTimes = maximumYamafuda;
     
     // 山戻し回数表示
     if (_maximumYamafuda) {
         _numbersLabel.hidden = NO;
-        _numbersLabel.text = [NSString stringWithFormat:@"%d", _maximumYamafuda];
     } else {
         _numbersLabel.hidden = YES;
     }
-    
 }
 
 - (void)yamafudaDidTouched:(UITapGestureRecognizer *)tapGesture;
 {
-    // 利用可否チェック
-    if (!_usable) {
-        return;
-    }
-    
     // ステータスチェック
     if (tapGesture.state != UIGestureRecognizerStateEnded) {
         return;
     }
     
-    if (_freeMode) {
-        // フリープレイモードの場合、山札戻しを実行する
-        [_delegate willUseYamafuda];
+    if (_displayMode == YamafudaDisplayModeBuy) {
+        // ショップを表示する
+        [_delegate willPresentShop];
     } else {
-        // 山札戻し回数チェック
-        if (_maximumYamafuda) {
-            // 山札戻し回数更新
-            NSInteger count = _maximumYamafuda - 1;
-            self.maximumYamafuda = count;
-            
-            // 山札戻しの回数が「０」になった場合、追加ボタンの形で表示させる
-            if (count == 0) {
-                _maximumYamafuda = 0;
-                _backgroundImageView.image = [UIImage imageNamed:@"btn_more_card.png"];
-            }
-            
-            // 山札戻しを実行する
-            [_delegate willUseYamafuda];
-        } else {
-            // ショップを表示する
-            [_delegate willPresentShop];
-        }
+        // 山札を利用する
+        [_delegate willUseYamafuda];
+    }
+}
+
+// 山札戻し使用
+- (void)useYamafudaReturn;
+{
+    if (_displayMode == YamafudaDisplayModeFree) {
+        return;
+    }
+    _usableTimes--;
+    if (_usableTimes > 0) {
+        [self setNeedsLayout];
     }
 }
 @end
