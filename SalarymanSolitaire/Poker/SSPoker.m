@@ -77,7 +77,7 @@
 {
     NSString *name;
     if (_displayOptions & SSPokerOptionShowFaceUp) {
-        name = [NSString stringWithFormat:@"card_%d_%d.png", _color, _name];
+        name = [NSString stringWithFormat:@"card_%ld_%ld.png", (long)_color, (long)_name];
     } else {
         name = @"bg_card_back.png";
     }
@@ -223,6 +223,6 @@
         default:
             break;
     }
-    return [NSString stringWithFormat:@"%@ %02d",colorName, _name];
+    return [NSString stringWithFormat:@"%@ %02ld",colorName, (long)_name];
 }
 @end

@@ -12,7 +12,7 @@
 @interface SSYamafudaButton ()
 {
     // 山札戻しの回数
-    NSUInteger                          _usableTimes;
+    NSInteger                           _usableTimes;
     UILabel                             *_numbersLabel;
     
     // 背景イメージ
@@ -79,7 +79,7 @@
     
     if (_displayMode == YamafudaDisplayModeReturn) {
         // 山札戻しの場合
-        _numbersLabel.text = [NSString stringWithFormat:@"%d", _usableTimes];
+        _numbersLabel.text = [NSString stringWithFormat:@"%ld", (long)_usableTimes];
         _numbersLabel.hidden = NO;
         _backgroundImageView.image = [UIImage imageNamed:@"product_item.png"];
         

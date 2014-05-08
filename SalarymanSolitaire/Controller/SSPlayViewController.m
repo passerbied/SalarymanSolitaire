@@ -700,7 +700,7 @@ NSString *const SolitaireWillPauseGameNotification = @"SolitaireWillPauseGameNot
             // 移動可否チェック
             targetPoker = [self lastPokerInSection:deck];
             level = count - firstVisibleItem;
-            distance = abs(deck - section);
+            distance = (NSInteger)abs((int)(deck - section));
             for (NSInteger i = firstVisibleItem; i < count; i++) {
                 poker = [pokers objectAtIndex:i];
                 if ([poker isValidNeighbourToPoker:targetPoker inSection:deck]) {

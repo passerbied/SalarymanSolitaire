@@ -148,7 +148,7 @@
     NSInteger hour = duration  / (60*60);
     NSInteger minute = (duration - hour*60*60) / 60;
     NSInteger second = (duration - hour*60*60 - minute*60);
-    NSString *string = [NSString stringWithFormat:@"%02d:%02d:%02d", hour, minute, second];
+    NSString *string = [NSString stringWithFormat:@"%02ld:%02ld:%02ld", (long)hour, (long)minute, (long)second];
     [self.passedTimeLabel setText:string];
 }
 
