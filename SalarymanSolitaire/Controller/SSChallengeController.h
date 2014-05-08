@@ -23,4 +23,7 @@
 // 再び遊ぶモード
 @property (nonatomic) BOOL playAgainMode;
 
+// 体力
+@property (nonatomic) NSInteger power;
+
 @end

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -8,6 +8,7 @@
             <connections>
                 <outlet property="bottomBar" destination="PnJ-q6-KNM" id="RTT-kO-QhF"/>
                 <outlet property="enemyView" destination="H8o-Cj-iCg" id="Wlj-S8-yXH"/>
+                <outlet property="nutrientButton" destination="JBu-Ys-gru" id="aZc-Ea-s4u"/>
                 <outlet property="physicalView" destination="Kni-WZ-o6q" id="9Cv-ug-LGN"/>
                 <outlet property="pokerView" destination="7pz-DT-NSm" id="3Mt-z9-Nx1"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -48,7 +49,7 @@
                                 <action selector="giveupAction:" destination="-1" eventType="touchUpInside" id="J3M-5P-1qS"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="JBu-Ys-gru">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="JBu-Ys-gru" customClass="SSNutrientButton">
                             <rect key="frame" x="163" y="6" width="71" height="36"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" backgroundImage="nutrient_enabled.png">

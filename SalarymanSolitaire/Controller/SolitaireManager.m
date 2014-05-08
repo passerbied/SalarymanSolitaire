@@ -7,20 +7,42 @@
 //
 
 #import "SolitaireManager.h"
+#import "KeychainItemWrapper.h"
 #import "SSStage.h"
 
-// 初回起動フラグ
-#define __USER_FIRST_TIME_KEY           @"UserFirstRun"
+// アプリ情報（ルート）
+#define kUserInfoRootKey                @"SolitaireRootInfo"
 
-// ステージID
-#define __USER_SELECTED_STAGEID_KEY     @"UserSelectedStageID"
+// 初回実行フラグ
+#define kUserInfoFirstRunKey            @"IsFirstRun"
 
-// クリア回数
-#define __USER_SELECTED_CLEARTIMES_KEY  @"UserSelectedStageClearTimes"
+// 最大体力値
+#define kUserInfoMaxPower               @"MaxPower"
 
-// 挑戦開始
-#define __USER_SELECTED_STARTED_KEY     @"UserSelectedStageStarted"
+// 体力値
+#define kUserInfoCurrentPower           @"CurrentPower"
 
+// 最新ステージ
+#define kUserInfoLastStageID            @"LastStageID"
+
+// クリア済み回数
+#define kUserInfoClearTimes             @"ClearTimes"
+
+// アプリ内課金情報
+#define kUserInfoInAppPurchase          @"SolitaireIAP"
+
+// 基礎体力＋
+#define kPurchaseAdditionalPower        @"ItemAdditionalPower"
+
+// 栄養剤
+#define kPurchaseNutrients              @"ItemNutrients"
+
+// 山札戻し
+#define kPurchaseYamafudas              @"ItemYamafudas"
+
+// 栄養剤残り個数
+
+//numberOfNutrients
 
 @interface SolitaireManager () 
 
@@ -36,7 +58,15 @@
     
     // 最新ステージID
     NSInteger                           _lastStageID;
+    
+    // ユーザ情報
+    NSMutableDictionary                 *_userInfo;
+    
+    // アプリ内課金情報
+    KeychainItemWrapper                 *_productWrapper;
 }
+
+
 
 // 初期化
 + (instancetype)sharedManager;
@@ -49,6 +79,140 @@
     return _sharedManager;
 }
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        [self setup];
+    }
+    return self;
+}
+
+- (void)setup
+{
+    // アプリ情報取得
+    if (!_userInfo) {
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        _userInfo = [userDefaults objectForKey:kUserInfoRootKey];
+        if (!_userInfo) {
+            _userInfo = [NSMutableDictionary dictionary];
+            
+            // 初回実行フラグ
+            self.firstRun = YES;
+            
+            // 最大体力値
+            self.maxPower = 5;
+            
+            // 体力値
+            self.currentPower = 5;
+            
+            // 最新ステージ
+            self.lastStageID = 1;
+            
+            // クリア済み回数
+            self.clearTimes = 0;
+        } else {
+            _firstRun = [[_userInfo objectForKey:kUserInfoFirstRunKey] boolValue];
+            _maxPower = [[_userInfo objectForKey:kUserInfoMaxPower] integerValue];
+            _currentPower = [[_userInfo objectForKey:kUserInfoCurrentPower] integerValue];
+            _lastStageID = [[_userInfo objectForKey:kUserInfoLastStageID] integerValue];
+            _clearTimes = [[_userInfo objectForKey:kUserInfoClearTimes] integerValue];
+        }
+    }
+    
+    // アプリ内課金情報取得
+    if (!_productWrapper) {
+        _productWrapper = [[KeychainItemWrapper alloc] initWithIdentifier:kUserInfoInAppPurchase accessGroup:nil];
+        
+        NSData *data = [_productWrapper objectForKey:(__bridge id)kSecValueData];
+        NSDictionary *dictionary = (NSDictionary*) [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        if (dictionary) {
+            // 基礎体力＋
+            _additionalPower = [[dictionary objectForKey:kPurchaseAdditionalPower] integerValue];
+            
+            // 栄養剤
+            _nutrients = [[dictionary objectForKey:kPurchaseNutrients] integerValue];
+
+            // 山札戻し
+            _yamafudas = [[dictionary objectForKey:kPurchaseYamafudas] integerValue];
+        } else {
+            _additionalPower = 0;
+            _nutrients = 3;
+            _yamafudas = 4;
+        }
+    }
+    [self synchronize];
+}
+
+#pragma mark - ユーザ情報扱い
+// 初回実行フラグ
+- (void)setFirstRun:(BOOL)firstRun
+{
+    if (_firstRun == firstRun) {
+        return;
+    }
+    _firstRun = firstRun;
+    [_userInfo setObject:[NSNumber numberWithBool:_firstRun] forKey:kUserInfoFirstRunKey];
+    [self synchronize];
+}
+
+// 最大体力値
+- (void)setMaxPower:(NSInteger)maxPower
+{
+    if (_maxPower == maxPower) {
+        return;
+    }
+    _maxPower = maxPower;
+    [_userInfo setObject:[NSNumber numberWithInteger:_maxPower] forKey:kUserInfoMaxPower];
+}
+
+// 体力値
+- (void)setCurrentPower:(NSInteger)currentPower
+{
+    if (_currentPower == currentPower) {
+        return;
+    }
+    _currentPower = currentPower;
+    [_userInfo setObject:[NSNumber numberWithInteger:_currentPower] forKey:kUserInfoCurrentPower];
+}
+
+// 最新ステージ
+- (void)setLastStageID:(NSInteger)lastStageID
+{
+    if (_lastStageID == lastStageID) {
+        return;
+    }
+    _lastStageID = lastStageID;
+    [_userInfo setObject:[NSNumber numberWithInteger:_lastStageID] forKey:kUserInfoLastStageID];
+}
+
+// クリア済み回数
+- (void)setClearTimes:(NSInteger)clearTimes
+{
+    if (_clearTimes == clearTimes) {
+        return;
+    }
+    _clearTimes = clearTimes;
+    [_userInfo setObject:[NSNumber numberWithInteger:_clearTimes] forKey:kUserInfoClearTimes];
+}
+
+// ユーザ情報保存
+- (void)synchronize;
+{
+    // ユーザ情報保存
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:_userInfo forKey:kUserInfoRootKey];
+    [userDefaults synchronize];
+    
+    // アプリ内課金情報保存
+    NSDictionary *dictionary = @{kPurchaseAdditionalPower:[NSNumber numberWithInteger:_additionalPower],
+                                 kPurchaseNutrients:[NSNumber numberWithInteger:_nutrients],
+                                 kPurchaseYamafudas:[NSNumber numberWithInteger:_yamafudas]};
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dictionary];
+    [_productWrapper setObject:data forKey:(__bridge id)kSecValueData];
+}
+
+#pragma mark - ステージ情報
 // ステージ設定情報取得
 - (NSArray *)stageInfos;
 {
@@ -71,63 +235,22 @@
     return _stageInfos;
 }
 
-// 最新のステージID
-- (NSInteger)lastStageID
-{
-    if (!_lastStageID) {
-        
-        NSArray *array = [self stageInfos];
-        
-        // 最新のステージ取得
-        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-        _lastStageID = [userDefaults integerForKey:__USER_SELECTED_STAGEID_KEY];
-        if (_lastStageID) {
-            _currentStage = (SSStage *)[array objectAtIndex:_lastStageID - 1];
-            _currentStage.currentClearTimes = [userDefaults integerForKey:__USER_SELECTED_CLEARTIMES_KEY];
-            if ([userDefaults boolForKey:__USER_SELECTED_STARTED_KEY]) {
-                _currentStage.stage = SSStageStatePlaying;
-            }
-        } else {
-            _lastStageID = 1;
-            _currentStage = (SSStage *)[array objectAtIndex:0];
-        }
-    }
-    return _lastStageID;
-}
-
 // ステージ選択
 - (void)selectStageWithID:(NSInteger)stageID;
 {
-    if (_currentStage.stageID == stageID) {
-        return;
+    // 最新ステージ更新要否チェック
+    if (stageID > _lastStageID) {
+        self.lastStageID = stageID;
     }
     
+    // 該当ステージ情報取得
     NSArray *array = [self stageInfos];
-    for (NSInteger i = 0; i < [array count]; i++) {
-        SSStage *stage = [array objectAtIndex:i];
-        if (stage.stageID == stageID) {
-            _currentStage = stage;
-            break;
-        }
+    if (stageID <= [array count] && stageID) {
+        _currentStage = (SSStage *)[array objectAtIndex:stageID - 1];
     }
 }
 
-// 初回起動チェック
-- (BOOL)isFirstTime;
-{
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:__USER_FIRST_TIME_KEY]) {
-        return NO;
-    }
-    return YES;
-}
-
-// 初回起動設定
-- (void)setFirstTimePlay;
-{
-    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:__USER_FIRST_TIME_KEY];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
+#pragma mark - 広告展示関連
 // バナー広告
 - (ADBannerView *)sharedBannerAD;
 {
@@ -150,28 +273,5 @@
     return _sharedInterstitialAD;
 }
 
-//(instancetype)init
-//{
-//    self = [super init];
-//    if (self) {
-//        _wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:kUserInfoItemIdentifier accessGroup:kUserInfoItemGroupKey];
-//        NSData *data = [_wrapper objectForKey:(__bridge id)kSecValueData];
-//        NSDictionary *dictionary = (NSDictionary*) [NSKeyedUnarchiver unarchiveObjectWithData:data];
-//        NSLog(@"Dic [%@]",dictionary);
-//        _URL = [dictionary objectForKey:kUserInfoURL];
-//        _schoolID = [dictionary objectForKey:kUserInfoSchoolID];
-//        _userID = [dictionary objectForKey:kUserInfoUserID];
-//        
-//    }
-//    return self;
-//}
-//
-//- (void)save
-//{
-//    NSDictionary *dictionary = @{kUserInfoURL: _URL,
-//                                 kUserInfoSchoolID:_schoolID,
-//                                 kUserInfoUserID:_userID};
-//    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dictionary];
-//    [_wrapper setObject:data forKey:(__bridge id)kSecValueData];
-//}
+
 @end

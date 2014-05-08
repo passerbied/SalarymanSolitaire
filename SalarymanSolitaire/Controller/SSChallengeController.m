@@ -11,6 +11,7 @@
 #import "SSPhysicalView.h"
 #import "PurchaseManager.h"
 #import "SSShopView.h"
+#import "SSNutrientButton.h"
 
 @interface SSChallengeController ()
 {
@@ -30,6 +31,9 @@
 
 // ツールバー
 @property (nonatomic, weak) IBOutlet UIView *bottomBar;
+
+// 栄養剤ボタン
+@property (nonatomic, weak) IBOutlet SSNutrientButton *nutrientButton;
 
 // ステージ情報取得
 - (void)loadStageInfo;
@@ -77,6 +81,10 @@
         
         // クリア済み回数
         _currentClearTimes = _stage.currentClearTimes;
+        
+        // 体力
+        _physicalView.maxPower = manager.maxPower;
+        _physicalView.currentPower = manager.currentPower;
     }
 }
 

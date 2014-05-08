@@ -93,7 +93,7 @@
     [AudioEngine playAudioWith:SolitaireAudioIDButtonClicked];
 
     // 初回起動設定
-    [[SolitaireManager sharedManager] setFirstTimePlay];
+    [[SolitaireManager sharedManager] setFirstRun:NO];
     
     // ステージ選択画面に遷移する。
     SelectStageViewController *controller = [SelectStageViewController controller];

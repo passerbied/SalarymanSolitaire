@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SSNutrientButton : UIControl
+@interface SSNutrientButton : UIButton
 
 // 栄養剤残り個数
 @property (nonatomic) NSInteger numberOfNutrients;

@@ -17,11 +17,53 @@
 // 初期化
 + (instancetype)sharedManager;
 
-// 初回起動チェック
-- (BOOL)isFirstTime;
+/****************************************/
+/* ユーザ情報                             */
+/****************************************/
 
-// 初回起動設定
-- (void)setFirstTimePlay;
+// 初回実行フラグ
+@property (nonatomic, getter = isFirstRun) BOOL firstRun;
+
+// 最大体力値
+@property (nonatomic) NSInteger maxPower;
+
+// 体力値
+@property (nonatomic) NSInteger currentPower;
+
+// 最新ステージ
+@property (nonatomic) NSInteger lastStageID;
+
+// クリア済み回数
+@property (nonatomic) NSInteger clearTimes;
+
+// 基礎体力＋
+@property (nonatomic) NSInteger additionalPower;
+
+// 栄養剤個数
+@property (nonatomic) NSInteger nutrients;
+
+// 山札戻し個数
+@property (nonatomic) NSInteger yamafudas;
+
+// ユーザ情報保存
+- (void)synchronize;
+
+/****************************************/
+/* ステージ情報                           */
+/****************************************/
+
+// ステージ設定情報取得
+- (NSArray *)stageInfos;
+
+// ステージ選択
+- (void)selectStageWithID:(NSInteger)stageID;
+
+// ステージ情報
+@property (strong, nonatomic, readonly) SSStage *currentStage;
+
+/****************************************/
+/* 広告展示情報                           */
+/****************************************/
 
 // バナー広告
 - (ADBannerView *)sharedBannerAD;
@@ -29,15 +71,5 @@
 // インタースティシャル広告
 - (ADInterstitialAd *)sharedInterstitialAD;
 
-// ステージ設定情報取得
-- (NSArray *)stageInfos;
 
-// ステージ情報
-@property (strong, nonatomic, readonly) SSStage *currentStage;
-
-// ステージ選択
-- (void)selectStageWithID:(NSInteger)stageID;
-
-// 最新のステージID
-@property (nonatomic, readonly) NSInteger lastStageID;
 @end

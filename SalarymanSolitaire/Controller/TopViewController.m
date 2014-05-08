@@ -96,7 +96,9 @@
     [AudioEngine playAudioWith:SolitaireAudioIDButtonClicked];
 
     UIViewController *controller = nil;
-    if ([[SolitaireManager sharedManager] isFirstTime]) {
+    
+    // 初回起動チェック
+    if ([[SolitaireManager sharedManager] isFirstRun]) {
         // 初回起動時のみチュートリアル画面に遷移する
         controller = [TutorialViewController controller];
     } else {
