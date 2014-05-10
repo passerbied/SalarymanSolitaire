@@ -37,9 +37,6 @@ enum { SSAlertViewFirstButton = 1 };
 // 商品購入
 - (void)itemWillBuy;
 
-// ギブアップ
-- (void)gameWillGiveup;
-
 // リトライ
 - (void)gameWillRetry;
 

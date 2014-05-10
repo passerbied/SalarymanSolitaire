@@ -14,6 +14,7 @@
 #import "SSPokerViewLayout.h"
 #import "UICollectionView+Draggable.h"
 #import "SSYamafudaButton.h"
+#import "SelectStageViewController.h"
 
 #define kPokerViewCellIdentifier        @"PokerCell"
 
@@ -311,7 +312,23 @@ NSString *const SolitaireWillPauseGameNotification = @"SolitaireWillPauseGameNot
     [self setTimerEnabled:NO];
     
     // 前画面へ遷移する
-    [self.navigationController popViewControllerAnimated:YES];
+    if ([self isFreeMode]) {
+        // 前画面へ遷移する
+        [self.navigationController popViewControllerAnimated:YES];
+    } else {
+        // ステージ選択画面へ遷移する
+        SelectStageViewController *targetController;
+        for (UIViewController *controller in self.navigationController.viewControllers) {
+            if ([controller isKindOfClass:[SelectStageViewController class]]) {
+                targetController = (SelectStageViewController *)controller;
+                break;
+            }
+        }
+        if (targetController) {
+            [self.navigationController popToViewController:targetController animated:YES];
+        }
+    }
+    
 }
 
 //　ゲーム一時停止

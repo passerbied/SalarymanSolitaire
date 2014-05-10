@@ -10,41 +10,45 @@
 #import "KeychainItemWrapper.h"
 #import "SSStage.h"
 
-// アプリ情報（ルート）
-#define kUserInfoRootKey                @"SolitaireRootInfo"
+// デフォルト体力
+NSInteger const DefaultPower = 5;
+
+//
+// 下記情報をNSUserDefaultsに保存します。
+//
+// ルートキー
+NSString* const SolitaireUserInfo               = @"SolitaireUserInfo";
 
 // 初回実行フラグ
-#define kUserInfoFirstRunKey            @"IsFirstRun"
+NSString* const UserInfoFirstRunKey             = @"IsFirstRun";
 
-// 最大体力値
-#define kUserInfoMaxPower               @"MaxPower"
-
-// 体力値
-#define kUserInfoCurrentPower           @"CurrentPower"
+//
+// 下記情報をKeychainに保存します。
+//
+// ルートキー
+NSString* const SolitaireGameInfo               = @"SolitaireGameInfo";
 
 // 最新ステージ
-#define kUserInfoLastStageID            @"LastStageID"
+NSString* const GameInfoLastStageID             = @"LastStageID";
 
 // クリア済み回数
-#define kUserInfoClearTimes             @"ClearTimes"
-
-// アプリ内課金情報
-#define kUserInfoInAppPurchase          @"SolitaireIAP"
+NSString* const GameInfoLastStageClearTimes     = @"LastStageClearTimes";
 
 // 基礎体力＋
-#define kPurchaseAdditionalPower        @"ItemAdditionalPower"
+NSString* const GameInfoItemAdditionalPower     = @"ItemAdditionalPower";
 
 // 栄養剤
-#define kPurchaseNutrients              @"ItemNutrients"
+NSString* const GameInfoItemNutrients           = @"ItemNutrients";
 
 // 山札戻し
-#define kPurchaseYamafudas              @"ItemYamafudas"
+NSString* const GameInfoItemYamafudas           = @"ItemYamafudas";
 
 // 栄養剤残り個数
 
 //numberOfNutrients
 
 @interface SolitaireManager () 
+
 
 @end
 
@@ -59,13 +63,15 @@
     // 最新ステージID
     NSInteger                           _lastStageID;
     
+    // 最新ステージの残り体力
+    NSInteger                           _lastStagePower;
+    
     // ユーザ情報
     NSMutableDictionary                 *_userInfo;
     
     // アプリ内課金情報
-    KeychainItemWrapper                 *_productWrapper;
+    KeychainItemWrapper                 *_wrapper;
 }
-
 
 
 // 初期化
@@ -90,58 +96,62 @@
 
 - (void)setup
 {
-    // アプリ情報取得
+    // ユーザ情報取得
     if (!_userInfo) {
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-        _userInfo = [userDefaults objectForKey:kUserInfoRootKey];
+        _userInfo = [userDefaults objectForKey:SolitaireUserInfo];
         if (!_userInfo) {
             _userInfo = [NSMutableDictionary dictionary];
             
             // 初回実行フラグ
             self.firstRun = YES;
-            
-            // 最大体力値
-            self.maxPower = 5;
-            
-            // 体力値
-            self.currentPower = 5;
-            
-            // 最新ステージ
-            self.lastStageID = 1;
-            
-            // クリア済み回数
-            self.clearTimes = 0;
         } else {
-            _firstRun = [[_userInfo objectForKey:kUserInfoFirstRunKey] boolValue];
-            _maxPower = [[_userInfo objectForKey:kUserInfoMaxPower] integerValue];
-            _currentPower = [[_userInfo objectForKey:kUserInfoCurrentPower] integerValue];
-            _lastStageID = [[_userInfo objectForKey:kUserInfoLastStageID] integerValue];
-            _clearTimes = [[_userInfo objectForKey:kUserInfoClearTimes] integerValue];
+            _firstRun = [[_userInfo objectForKey:UserInfoFirstRunKey] boolValue];
         }
     }
     
-    // アプリ内課金情報取得
-    if (!_productWrapper) {
-        _productWrapper = [[KeychainItemWrapper alloc] initWithIdentifier:kUserInfoInAppPurchase accessGroup:nil];
+    // ゲーム情報取得
+    if (!_wrapper) {
+        _wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:SolitaireGameInfo accessGroup:nil];
         
-        NSData *data = [_productWrapper objectForKey:(__bridge id)kSecValueData];
-        NSDictionary *dictionary = (NSDictionary*) [NSKeyedUnarchiver unarchiveObjectWithData:data];
-        if (dictionary) {
-            // 基礎体力＋
-            _additionalPower = [[dictionary objectForKey:kPurchaseAdditionalPower] integerValue];
+        NSData *data = [_wrapper objectForKey:(__bridge id)kSecValueData];
+        
+        if ([data length]) {
+            NSDictionary *dictionary = (NSDictionary*) [NSKeyedUnarchiver unarchiveObjectWithData:data];
+            // 最新ステージ
+            _lastStageID = [[dictionary objectForKey:GameInfoLastStageID] integerValue];
             
-            // 栄養剤
-            _nutrients = [[dictionary objectForKey:kPurchaseNutrients] integerValue];
-
-            // 山札戻し
-            _yamafudas = [[dictionary objectForKey:kPurchaseYamafudas] integerValue];
+            // 最新ステージのクリア済み回数
+            _clearTimes = [[dictionary objectForKey:GameInfoLastStageClearTimes] integerValue];
+            
+            // 購入体力
+            _additionalPower = [[dictionary objectForKey:GameInfoItemAdditionalPower] integerValue];
+            
+            // 購入栄養剤
+            _nutrients = [[dictionary objectForKey:GameInfoItemNutrients] integerValue];
+            
+            // 購入山札戻し
+            _yamafudas = [[dictionary objectForKey:GameInfoItemYamafudas] integerValue];
         } else {
-            _additionalPower = 0;
-            _nutrients = 3;
-            _yamafudas = 4;
+            // 最新ステージ
+            self.lastStageID = 1;
+            
+            // 最新ステージのクリア済み回数
+            self.clearTimes = 0;
+            
+            // 購入体力
+            self.additionalPower = 0;
+            
+            // 購入栄養剤
+            self.nutrients = 0;
+            
+            // 購入山札戻し
+            self.yamafudas = 0;
+            
+            // 初期化
+            [self synchronize];
         }
     }
-    [self synchronize];
 }
 
 #pragma mark - ユーザ情報扱い
@@ -152,64 +162,45 @@
         return;
     }
     _firstRun = firstRun;
-    [_userInfo setObject:[NSNumber numberWithBool:_firstRun] forKey:kUserInfoFirstRunKey];
-    [self synchronize];
+    [_userInfo setObject:[NSNumber numberWithBool:_firstRun] forKey:UserInfoFirstRunKey];
+    
+    if (!firstRun) {
+        // ユーザ情報保存
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        [userDefaults setObject:_userInfo forKey:UserInfoFirstRunKey];
+        [userDefaults synchronize];
+    }
+}
+
+// 体力
+- (NSInteger)currentPower;
+{
+    if (_selectedStage.stageID == _lastStageID) {
+        // 前回に引き続き挑戦する場合
+        return _lastStagePower;
+    } else {
+        // クリア済みステージを再挑戦する場合
+        return (DefaultPower + _additionalPower);
+    }
 }
 
 // 最大体力値
-- (void)setMaxPower:(NSInteger)maxPower
+- (NSInteger)maxPower;
 {
-    if (_maxPower == maxPower) {
-        return;
-    }
-    _maxPower = maxPower;
-    [_userInfo setObject:[NSNumber numberWithInteger:_maxPower] forKey:kUserInfoMaxPower];
-}
-
-// 体力値
-- (void)setCurrentPower:(NSInteger)currentPower
-{
-    if (_currentPower == currentPower) {
-        return;
-    }
-    _currentPower = currentPower;
-    [_userInfo setObject:[NSNumber numberWithInteger:_currentPower] forKey:kUserInfoCurrentPower];
-}
-
-// 最新ステージ
-- (void)setLastStageID:(NSInteger)lastStageID
-{
-    if (_lastStageID == lastStageID) {
-        return;
-    }
-    _lastStageID = lastStageID;
-    [_userInfo setObject:[NSNumber numberWithInteger:_lastStageID] forKey:kUserInfoLastStageID];
-}
-
-// クリア済み回数
-- (void)setClearTimes:(NSInteger)clearTimes
-{
-    if (_clearTimes == clearTimes) {
-        return;
-    }
-    _clearTimes = clearTimes;
-    [_userInfo setObject:[NSNumber numberWithInteger:_clearTimes] forKey:kUserInfoClearTimes];
+    return (DefaultPower + _additionalPower);
 }
 
 // ユーザ情報保存
 - (void)synchronize;
 {
-    // ユーザ情報保存
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setObject:_userInfo forKey:kUserInfoRootKey];
-    [userDefaults synchronize];
-    
     // アプリ内課金情報保存
-    NSDictionary *dictionary = @{kPurchaseAdditionalPower:[NSNumber numberWithInteger:_additionalPower],
-                                 kPurchaseNutrients:[NSNumber numberWithInteger:_nutrients],
-                                 kPurchaseYamafudas:[NSNumber numberWithInteger:_yamafudas]};
+    NSDictionary *dictionary = @{GameInfoLastStageID:[NSNumber numberWithInteger:_lastStageID],
+                                 GameInfoLastStageClearTimes:[NSNumber numberWithInteger:_clearTimes],
+                                 GameInfoItemAdditionalPower:[NSNumber numberWithInteger:_additionalPower],
+                                 GameInfoItemNutrients:[NSNumber numberWithInteger:_nutrients],
+                                 GameInfoItemYamafudas:[NSNumber numberWithInteger:_yamafudas]};
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dictionary];
-    [_productWrapper setObject:data forKey:(__bridge id)kSecValueData];
+    [_wrapper setObject:data forKey:(__bridge id)kSecValueData];
 }
 
 #pragma mark - ステージ情報

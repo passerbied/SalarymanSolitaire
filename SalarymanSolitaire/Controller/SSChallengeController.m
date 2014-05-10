@@ -12,6 +12,7 @@
 #import "PurchaseManager.h"
 #import "SSShopView.h"
 #import "SSNutrientButton.h"
+#import "SSGiveupAlertView.h"
 
 @interface SSChallengeController ()
 {
@@ -80,7 +81,11 @@
         _minimalClearTimes = _stage.minimalClearTimes;
         
         // クリア済み回数
-        _currentClearTimes = _stage.currentClearTimes;
+        if (_stageID == manager.lastStageID) {
+            _currentClearTimes = manager.clearTimes;
+        } else {
+            _currentClearTimes = 0;
+        }
         
         // 体力
         _physicalView.maxPower = manager.maxPower;
@@ -143,8 +148,12 @@
     // ボタン押下音声再生
     [AudioEngine playAudioWith:SolitaireAudioIDButtonClicked];
     
-    // リスタート
-    [self start];
+    // ソリティアを一時停止する
+    [self pause];
+    
+    // モード選択警告画面表示
+    SSGiveupAlertView *alert = [SSGiveupAlertView alertWithDelegate:self];
+    [alert show];
 }
 
 // 栄養剤使用
@@ -158,7 +167,7 @@
 - (IBAction)presentShopAction:(id)sender;
 {
     // ボタン押下音声再生
-    [AudioEngine playAudioWith:SolitaireAudioIDCardDeal];
+    [AudioEngine playAudioWith:SolitaireAudioIDButtonClicked];
     
     // 待ち画面表示
     [WUProgressView showWithStatus:@"商品情報取得中..."];
@@ -205,5 +214,26 @@
     [super willCompletSolitaire];
     
     // ステージクリア条件
+}
+
+#pragma mark - 警告処理
+// 商品購入
+- (void)itemWillBuy;
+{
+    
+}
+
+// ゲーム終了
+- (void)gameWillExit;
+{
+    // ゲーム終了（前画面へ遷移）
+    [self end];
+}
+
+// リトライ
+- (void)gameWillRetry;
+{
+    // リトライ（新規にゲームスタート）
+    [self start];
 }
 @end

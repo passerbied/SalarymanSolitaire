@@ -21,14 +21,8 @@
 /* ユーザ情報                             */
 /****************************************/
 
-// 初回実行フラグ
+// 初回実行フラグ54123456
 @property (nonatomic, getter = isFirstRun) BOOL firstRun;
-
-// 最大体力値
-@property (nonatomic) NSInteger maxPower;
-
-// 体力値
-@property (nonatomic) NSInteger currentPower;
 
 // 最新ステージ
 @property (nonatomic) NSInteger lastStageID;
@@ -44,6 +38,12 @@
 
 // 山札戻し個数
 @property (nonatomic) NSInteger yamafudas;
+
+// 体力
+- (NSInteger)currentPower;
+
+// 最大体力値
+- (NSInteger)maxPower;
 
 // ユーザ情報保存
 - (void)synchronize;
