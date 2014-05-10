@@ -17,7 +17,6 @@
 @interface SSChallengeController ()
 {
     // ステージ情報
-    SSStage                             *_stage;
     PurchaseManager                     *_manager;
     
     // 商品リスト
@@ -69,16 +68,16 @@
 {
     SolitaireManager *manager = [SolitaireManager sharedManager];
     [manager selectStageWithID:_stageID];
-    _stage = manager.currentStage;
-    if (_stage) {
+    SSStage *stage = manager.currentStage;
+    if (stage) {
         // めくり枚数
-        self.numberOfPokers = _stage.numberOfPokers;
+        self.numberOfPokers = stage.numberOfPokers;
         
         // 山札戻し回数
-        self.maximumYamafuda = _stage.maximumYamafuda;
+        self.maximumYamafuda = stage.maximumYamafuda;
         
         // クリア回数
-        _minimalClearTimes = _stage.minimalClearTimes;
+        _minimalClearTimes = stage.minimalClearTimes;
         
         // クリア済み回数
         if (_stageID == manager.lastStageID) {
@@ -90,27 +89,19 @@
         // 体力
         _physicalView.maxPower = manager.maxPower;
         _physicalView.currentPower = manager.currentPower;
+        
+        // 敵イメージ設定
+        if ([UIDevice isPhone5]) {
+            // 敵のイメージを設定する
+            NSString *name = [NSString stringWithFormat:@"enemy_%03d_banner.png", (int)stage.enemyID];
+            [self.enemyView setImage:[UIImage temporaryImageNamed:name]];
+        }
     }
 }
 
 - (void)initView
 {
     [super initView];
-    
-    // ステージ情報取得
-    _stage = [[SolitaireManager sharedManager] currentStage];
-    if (!_stage) {
-        _stage = [[SSStage alloc] init];
-    }
-    _stage.stageID = 1;
-    _stage.enemyID = 2;
-    
-    // 敵イメージ設定
-    if ([UIDevice isPhone5]) {
-        // 敵のイメージを設定する
-        NSString *name = [NSString stringWithFormat:@"enemy_%03d_banner.png", (int)_stage.enemyID];
-        [self.enemyView setImage:[UIImage temporaryImageNamed:name]];
-    }
 }
 
 - (void)layoutSubviewsForPhone4
@@ -217,6 +208,13 @@
 }
 
 #pragma mark - 警告処理
+// 閉じるタップ処理
+- (void)closeAlertView;
+{
+    // ゲーム再開
+    [self resume];
+}
+
 // 商品購入
 - (void)itemWillBuy;
 {

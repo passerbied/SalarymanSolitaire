@@ -23,7 +23,9 @@
 // ボタンタップ処理
 - (void)alertView:(WUAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
 {
-    if (buttonIndex == SSAlertViewFirstButton) {
+    if (buttonIndex == 0) {
+        [self.delegate closeAlertView];
+    } else if (buttonIndex == SSAlertViewFirstButton) {
         // ゲーム終了
         [self.delegate gameWillExit];
     } else {
@@ -31,4 +33,5 @@
         [self.delegate gameWillRetry];
     }
 }
+
 @end

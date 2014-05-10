@@ -42,4 +42,7 @@ enum { SSAlertViewFirstButton = 1 };
 
 // モード選択
 - (void)toogleToSingleMode:(BOOL)singleMode;
+
+// 警告画面閉じる
+- (void)closeAlertView;
 @end

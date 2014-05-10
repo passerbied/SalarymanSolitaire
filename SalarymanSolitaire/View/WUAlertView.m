@@ -399,9 +399,9 @@ static const CGFloat AlertViewButtonMarginBottom = 15.0;
     
     CGFloat x,y;
     if (count) {
-        x = AlertViewWidth - 2*AlertViewContentMargin - AlertViewButtonMargin - button.bounds.size.width;
+        x = AlertViewWidth - AlertViewButtonMargin - button.bounds.size.width;
     } else {
-        x = AlertViewContentMargin + AlertViewButtonMargin;
+        x = AlertViewButtonMargin;
     }
     y = AlertViewHeight - AlertViewButtonMarginBottom - button.bounds.size.height;
     button.frame = CGRectMake(x, y, button.bounds.size.width, button.bounds.size.height);
@@ -414,7 +414,7 @@ static const CGFloat AlertViewButtonMarginBottom = 15.0;
 
 - (void)didTouchUpInsideOnButton:(UIButton *)button
 {
-    if (button.tag && [self.delegate respondsToSelector:@selector(alertView:clickedButtonAtIndex:)]) {
+    if ([self.delegate respondsToSelector:@selector(alertView:clickedButtonAtIndex:)]) {
         [self.delegate alertView:self clickedButtonAtIndex:button.tag];
         self.delegate = nil;
     }

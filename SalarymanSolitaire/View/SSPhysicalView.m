@@ -239,4 +239,13 @@
     
     [self showCurrentPower];
 }
+
+- (void)setCurrentPower:(NSInteger)currentPower
+{
+    if (_currentPower == currentPower) {
+        return;
+    }
+    _currentPower = currentPower;
+    [self showCurrentPower];
+}
 @end
