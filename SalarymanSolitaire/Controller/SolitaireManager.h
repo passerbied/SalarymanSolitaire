@@ -45,6 +45,15 @@
 // 最大体力値
 - (NSInteger)maxPower;
 
+// 山札戻し使用
+- (void)handleUseYamafuda;
+
+// 栄養剤使用
+- (void)handleUseNutrient;
+
+// ステージクリアチェック
+- (BOOL)canClearCurrentStage;
+
 // ユーザ情報保存
 - (void)synchronize;
 

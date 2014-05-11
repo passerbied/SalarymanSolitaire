@@ -206,22 +206,6 @@
             gagueView.hidden = YES;
         }
     }
-    
-    // 白いバー位置制御
-    if (_currentPower == kPowerValueMax) {
-        _physicalBarView.hidden = YES;
-    } else {
-        _physicalBarView.hidden = NO;
-        
-    }
-    CGRect rect = [[self viewWithTag:kGaugeTag + _currentPower] frame];
-    CGFloat dx = -3.0f;
-    CGFloat dy = -5.0f;
-    CGFloat x = rect.origin.x + kGaugeSizeWidth + dx;
-    CGFloat y = rect.origin.y + dy;
-    rect = _physicalBarView.frame;
-    rect.origin = CGPointMake(x, y);
-    _physicalBarView.frame = rect;
 }
 
 - (void)powerUp:(BOOL)up;
@@ -238,6 +222,30 @@
     _currentPower = power;
     
     [self showCurrentPower];
+}
+
+- (void)setMaxPower:(NSInteger)maxPower
+{
+    if (_maxPower == maxPower) {
+        return;
+    }
+    
+    _maxPower = maxPower;
+    // 白いバー位置制御
+    if (_maxPower == kPowerValueMax) {
+        _physicalBarView.hidden = YES;
+    } else {
+        _physicalBarView.hidden = NO;
+        
+    }
+    CGRect rect = [[self viewWithTag:kGaugeTag + _maxPower - 1] frame];
+    CGFloat dx = -3.0f;
+    CGFloat dy = -5.0f;
+    CGFloat x = rect.origin.x + kGaugeSizeWidth + dx;
+    CGFloat y = rect.origin.y + dy;
+    rect = _physicalBarView.frame;
+    rect.origin = CGPointMake(x, y);
+    _physicalBarView.frame = rect;
 }
 
 - (void)setCurrentPower:(NSInteger)currentPower

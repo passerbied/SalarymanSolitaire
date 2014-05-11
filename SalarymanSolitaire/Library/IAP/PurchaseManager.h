@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import <StoreKit/StoreKit.h>
-#import "KeychainItemWrapper.h"
 
 // 商品種類
 typedef enum
@@ -31,26 +30,6 @@ typedef enum
     PurchaseStatusRequestFailed,
     PurchaseStatusReceiptFailed
 } PurchaseStatus;
-
-@interface KeychainItemProduct : KeychainItemWrapper
-
-// 初期化
-- (instancetype)initWithProductIdentifier:(NSString *)productIdentifier;
-+ (instancetype)itemWithProductIdentifier:(NSString *)productIdentifier;
-
-// 商品数量
-@property (nonatomic, readonly) NSInteger count;
-
-// 有効チェック
-- (BOOL)isValid;
-
-// 商品の購入
-- (void)addProductWithCount:(NSInteger)count;
-
-// 商品使用
-- (void)consume;
-
-@end
 
 @interface PurchaseManager : NSObject<SKProductsRequestDelegate, SKPaymentTransactionObserver>
 

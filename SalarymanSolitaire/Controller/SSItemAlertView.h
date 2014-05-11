@@ -11,8 +11,8 @@
 
 typedef enum
 {
-    SSItemAlertDatasourcePutrient,
-    SSItemAlertDatasourceTalon,
+    SSItemAlertDatasourceNutrient,
+    SSItemAlertDatasourceYamafuda,
 } SSItemAlertType;
 
 @interface SSItemAlertView : SSAlertView

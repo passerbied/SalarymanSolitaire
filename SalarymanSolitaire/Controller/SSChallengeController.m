@@ -13,6 +13,7 @@
 #import "SSShopView.h"
 #import "SSNutrientButton.h"
 #import "SSGiveupAlertView.h"
+#import "SSItemAlertView.h"
 
 @interface SSChallengeController ()
 {
@@ -73,18 +74,20 @@
         // めくり枚数
         self.numberOfPokers = stage.numberOfPokers;
         
-        // 山札戻し回数
-        self.maximumYamafuda = stage.maximumYamafuda;
-        
         // クリア回数
         _minimalClearTimes = stage.minimalClearTimes;
         
         // クリア済み回数
         if (_stageID == manager.lastStageID) {
+            // 最新ステージを引き続き挑戦する場合
             _currentClearTimes = manager.clearTimes;
         } else {
+            // クリアしたステージを再び挑戦する場合
             _currentClearTimes = 0;
         }
+        
+        // 山札戻し回数
+        self.maximumYamafuda = stage.maximumYamafuda;
         
         // 体力
         _physicalView.maxPower = manager.maxPower;
@@ -97,6 +100,9 @@
             [self.enemyView setImage:[UIImage temporaryImageNamed:name]];
         }
     }
+    
+    // 栄養剤制御
+    _nutrientButton.numberOfNutrients = manager.nutrients;
 }
 
 - (void)initView
@@ -152,6 +158,15 @@
 {
     // ボタン押下音声再生
     [AudioEngine playAudioWith:SolitaireAudioIDButtonClicked];
+    
+    // ソリティアを一時停止する
+    [self pause];
+    
+    // 栄養剤使用＆購入画面を表示する
+    SSItemAlertView *alert = [SSItemAlertView alertWithDelegate:self];
+    alert.datasource = SSItemAlertDatasourceNutrient;
+    alert.numberOfItems = [[SolitaireManager sharedManager] nutrients];
+    [alert show];
 }
 
 // ショップ
@@ -159,6 +174,9 @@
 {
     // ボタン押下音声再生
     [AudioEngine playAudioWith:SolitaireAudioIDButtonClicked];
+    
+    // ソリティアを一時停止する
+    [self pause];
     
     // 待ち画面表示
     [WUProgressView showWithStatus:@"商品情報取得中..."];
@@ -234,4 +252,17 @@
     // リトライ（新規にゲームスタート）
     [self start];
 }
+
+// 山札戻し使用可否チェック
+- (BOOL)isYamafudaEnabled;
+{
+    return YES;
+}
+
+// 栄養剤使用可否チェック
+- (BOOL)isNutrientEnabled
+{
+    return YES;
+}
+
 @end

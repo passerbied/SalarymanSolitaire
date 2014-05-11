@@ -377,7 +377,6 @@
 		E590798818D57D9F008E2274 /* SSNutrientButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E590798718D57D9F008E2274 /* SSNutrientButton.m */; };
 		E5909E2018EB70BE0006EFEF /* UIImage+MainBundleImage.m in Sources */ = {isa = PBXBuildFile; fileRef = E5909E1F18EB70BE0006EFEF /* UIImage+MainBundleImage.m */; };
 		E590F6A118F6C5500077E789 /* AudioEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = E590F69A18F6C5500077E789 /* AudioEngine.m */; };
-		E590F6A318F6C5500077E789 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = E590F6A018F6C5500077E789 /* KeychainItemWrapper.m */; };
 		E590F6A518F6C5610077E789 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E590F6A418F6C5610077E789 /* Security.framework */; };
 		E590F6A718F6C5680077E789 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E590F6A618F6C5680077E789 /* AVFoundation.framework */; };
 		E590F6B018F6C6420077E789 /* button.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E590F6A918F6C6420077E789 /* button.mp3 */; };
@@ -392,6 +391,7 @@
 		E5B466F41903FEC900F6813E /* tutorial_howto@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5B466F61903FEC900F6813E /* tutorial_howto@2x.png */; };
 		E5B466FA1903FEE500F6813E /* tutorial_howto-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5B466FC1903FEE500F6813E /* tutorial_howto-568h@2x.png */; };
 		E5D6A30A190AA0F200800D23 /* bg_finished_area@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5D6A309190AA0F200800D23 /* bg_finished_area@2x.png */; };
+		E5D956F3191E780E00016635 /* FDKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D956F2191E780E00016635 /* FDKeychain.m */; };
 		E5DC3D7219027C980093C35A /* PopupNotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5DC3D7119027C980093C35A /* PopupNotificationView.xib */; };
 		E5DC3D7519027D3F0093C35A /* PopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5DC3D7419027D3F0093C35A /* PopupViewController.m */; };
 		E5DCE32818E44D7C00B95064 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E5DCE32A18E44D7C00B95064 /* Localizable.strings */; };
@@ -1091,8 +1091,6 @@
 		E5909E1F18EB70BE0006EFEF /* UIImage+MainBundleImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MainBundleImage.m"; sourceTree = "<group>"; };
 		E590F69918F6C5500077E789 /* AudioEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioEngine.h; sourceTree = "<group>"; };
 		E590F69A18F6C5500077E789 /* AudioEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioEngine.m; sourceTree = "<group>"; };
-		E590F69F18F6C5500077E789 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
-		E590F6A018F6C5500077E789 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
 		E590F6A418F6C5610077E789 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		E590F6A618F6C5680077E789 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		E590F6A918F6C6420077E789 /* button.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = button.mp3; sourceTree = "<group>"; };
@@ -1110,6 +1108,8 @@
 		E5B466FB1903FEE500F6813E /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/tutorial_howto-568h@2x.png"; sourceTree = "<group>"; };
 		E5B466FD1903FEE800F6813E /* ja */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ja; path = "ja.lproj/tutorial_howto-568h@2x.png"; sourceTree = "<group>"; };
 		E5D6A309190AA0F200800D23 /* bg_finished_area@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_finished_area@2x.png"; sourceTree = "<group>"; };
+		E5D956F1191E780E00016635 /* FDKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDKeychain.h; sourceTree = "<group>"; };
+		E5D956F2191E780E00016635 /* FDKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDKeychain.m; sourceTree = "<group>"; };
 		E5DC3D7119027C980093C35A /* PopupNotificationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopupNotificationView.xib; sourceTree = "<group>"; };
 		E5DC3D7319027D3F0093C35A /* PopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopupViewController.h; sourceTree = "<group>"; };
 		E5DC3D7419027D3F0093C35A /* PopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopupViewController.m; sourceTree = "<group>"; };
@@ -1971,8 +1971,8 @@
 		E590F69E18F6C5500077E789 /* Security */ = {
 			isa = PBXGroup;
 			children = (
-				E590F69F18F6C5500077E789 /* KeychainItemWrapper.h */,
-				E590F6A018F6C5500077E789 /* KeychainItemWrapper.m */,
+				E5D956F1191E780E00016635 /* FDKeychain.h */,
+				E5D956F2191E780E00016635 /* FDKeychain.m */,
 			);
 			path = Security;
 			sourceTree = "<group>";
@@ -3514,7 +3514,6 @@
 				E521788718D562E80035B628 /* SSPhysicalView.m in Sources */,
 				E5F3D11918E6CCA700CBD281 /* SSGiveupAlertView.m in Sources */,
 				E5E209731916711F00BB4E39 /* LSCollectionViewLayoutHelper.m in Sources */,
-				E590F6A318F6C5500077E789 /* KeychainItemWrapper.m in Sources */,
 				E5F3D12118E6DC8F00CBD281 /* SSRetryAlertView.m in Sources */,
 				E5E209721916711F00BB4E39 /* LSCollectionViewHelper.m in Sources */,
 				348D99C018CB42810079D2EF /* SelectStageViewController.m in Sources */,
@@ -3528,6 +3527,7 @@
 				E5F3D10F18E6730300CBD281 /* SSAlertView.m in Sources */,
 				E5F3D11218E687FA00CBD281 /* UIButton+UIImage.m in Sources */,
 				E5F3D12518E6DD1C00CBD281 /* SSModeAlertView.m in Sources */,
+				E5D956F3191E780E00016635 /* FDKeychain.m in Sources */,
 				E5E22E6018E7D36C00897AC7 /* UIImage+BlurEffect.m in Sources */,
 				34C29B5C18FA6FD000C0C058 /* SSProductCell.m in Sources */,
 			);

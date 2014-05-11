@@ -66,6 +66,8 @@
 
 - (void)setDisplayMode:(YamafudaDisplayMode)displayMode
 {
+    self.freeMode = NO;
+    
     if (_displayMode == displayMode) {
         return;
     }
@@ -125,14 +127,21 @@
 }
 
 // 山札戻し使用
-- (void)useYamafudaReturn;
+- (void)useYamafuda;
 {
-    if (_displayMode == YamafudaDisplayModeFree) {
+    if (_freeMode) {
         return;
     }
     _usableTimes--;
     if (_usableTimes > 0) {
         [self setNeedsLayout];
     }
+}
+
+// リセット(ソリティアをリトライするときに行う)
+- (void)reset;
+{
+    _usableTimes = _maximumYamafuda;
+    self.displayMode = YamafudaDisplayModeUsable;
 }
 @end

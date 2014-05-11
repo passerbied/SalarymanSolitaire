@@ -12,91 +12,11 @@
 #import <Security/Security.h>
 #import <CommonCrypto/CommonDigest.h>
 #import <CommonCrypto/CommonCryptor.h>
+#import "FDKeychain.h"
 
 
 #define kKeychainItemProductIdentifier  @"ProductIdentifier"
 #define kKeychainItemProductCount       @"Count"
-
-
-@interface KeychainItemProduct ()
-{
-    // 商品情報
-    NSMutableDictionary                 *_productData;
-    
-    // 商品ID
-    NSString                            *_productIdentifier;
-}
-@end
-
-@implementation KeychainItemProduct
-
-- (instancetype)initWithProductIdentifier:(NSString *)productIdentifier
-{
-    self = [super initWithIdentifier:productIdentifier accessGroup:nil];
-    if (self) {
-        _productIdentifier = productIdentifier;
-    }
-    return self;
-}
-
-+ (instancetype)itemWithProductIdentifier:(NSString *)productIdentifier;
-{
-    return [[self alloc] initWithProductIdentifier:productIdentifier];
-}
-
-- (NSMutableDictionary *)productData
-{
-    if (!_productData) {
-        _productData = (NSMutableDictionary *)[self objectForKey:(__bridge id)kSecValueData];
-    }
-    
-    return _productData;
-}
-
-// 有効チェック
-- (BOOL)isValid;
-{
-    NSDictionary *dictionary = [self productData];
-    
-    // 商品IDチェック
-    NSString *identifier = [dictionary objectForKey:kKeychainItemProductIdentifier];
-    if (![identifier isEqualToString:_productIdentifier]) {
-        return NO;
-    }
-        
-    // 商品数量チェック
-    _count = [[dictionary objectForKey:kKeychainItemProductCount] integerValue];
-    if (_count <= 0) {
-        return NO;
-    }
-    return YES;
-}
-
-// 商品の購入／使用
-- (void)addProductWithCount:(NSInteger)count;
-{
-    _count += count;
-    
-    [self synchronize];
-}
-
-// 商品使用
-- (void)consume;
-{
-    if (_count > 0) {
-        _count--;
-        
-        [self synchronize];
-    }
-}
-
-- (void)synchronize
-{
-    NSMutableDictionary *dictionary = [self productData];
-    [dictionary setObject:[NSNumber numberWithInteger:_count] forKey:kKeychainItemProductCount];
-}
-
-@end
 
 
 typedef void (^PresentProductsBlock)(NSArray *products, PurchaseStatus status);
@@ -188,9 +108,10 @@ typedef void (^ProvideContentBlock)(NSString *productIdentifier, BOOL succeed);
 
 - (BOOL)isPurchasedProductWith:(NSString *)identifier
 {
-    KeychainItemWrapper *keychain = [[KeychainItemWrapper alloc] initWithIdentifier:identifier accessGroup:nil];
-    keychain = nil;
-    return YES;
+    if ([FDKeychain itemForKey:identifier forService:nil error:nil]) {
+        return YES;
+    }
+    return NO;
 }
 
 #pragma mark - 商品情報リクエスト

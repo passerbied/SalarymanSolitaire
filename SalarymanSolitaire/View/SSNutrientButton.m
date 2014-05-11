@@ -58,8 +58,10 @@
     if (numberOfNutrients) {
         _numberLabel.text = [NSString stringWithFormat:@"%ld", (long)_numberOfNutrients];
         _numberLabel.hidden = NO;
+        self.enabled = YES;
     } else {
         _numberLabel.hidden = YES;
+        self.enabled = NO;
     }
 }
 

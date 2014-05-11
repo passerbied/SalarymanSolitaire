@@ -11,7 +11,7 @@
 
 @interface SSPlayViewController : SSViewController
 {
-    
+
 }
 
 /**************************************************/
@@ -39,6 +39,9 @@
 
 // 山札戻し使用
 - (void)useYamafuda;
+
+// 山札戻し使用可否チェック
+- (BOOL)isYamafudaEnabled;
 
 /**************************************************/
 // ゲーム制御

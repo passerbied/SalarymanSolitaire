@@ -7,8 +7,8 @@
 //
 
 #import "SolitaireManager.h"
-#import "KeychainItemWrapper.h"
 #import "SSStage.h"
+#import "FDKeychain.h"
 
 // デフォルト体力
 NSInteger const DefaultPower = 5;
@@ -31,8 +31,11 @@ NSString* const SolitaireGameInfo               = @"SolitaireGameInfo";
 // 最新ステージ
 NSString* const GameInfoLastStageID             = @"LastStageID";
 
-// クリア済み回数
+// 最新ステージのクリア済み回数
 NSString* const GameInfoLastStageClearTimes     = @"LastStageClearTimes";
+
+// 最新ステージの体力値
+NSString* const GameInfoLastStagePower          = @"LastStagePower";
 
 // 基礎体力＋
 NSString* const GameInfoItemAdditionalPower     = @"ItemAdditionalPower";
@@ -69,8 +72,8 @@ NSString* const GameInfoItemYamafudas           = @"ItemYamafudas";
     // ユーザ情報
     NSMutableDictionary                 *_userInfo;
     
-    // アプリ内課金情報
-    KeychainItemWrapper                 *_wrapper;
+    // ステージ個数
+    NSInteger                           _stageTotal;
 }
 
 
@@ -111,46 +114,48 @@ NSString* const GameInfoItemYamafudas           = @"ItemYamafudas";
     }
     
     // ゲーム情報取得
-    if (!_wrapper) {
-        _wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:SolitaireGameInfo accessGroup:nil];
+    NSData *data = [FDKeychain itemForKey:SolitaireGameInfo forService:SolitaireGameInfo error:nil];
+    
+    if ([data length]) {
+        NSDictionary *dictionary = (NSDictionary*) [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        // 最新ステージ
+        _lastStageID = [[dictionary objectForKey:GameInfoLastStageID] integerValue];
         
-        NSData *data = [_wrapper objectForKey:(__bridge id)kSecValueData];
+        // 最新ステージのクリア済み回数
+        _clearTimes = [[dictionary objectForKey:GameInfoLastStageClearTimes] integerValue];
         
-        if ([data length]) {
-            NSDictionary *dictionary = (NSDictionary*) [NSKeyedUnarchiver unarchiveObjectWithData:data];
-            // 最新ステージ
-            _lastStageID = [[dictionary objectForKey:GameInfoLastStageID] integerValue];
-            
-            // 最新ステージのクリア済み回数
-            _clearTimes = [[dictionary objectForKey:GameInfoLastStageClearTimes] integerValue];
-            
-            // 購入体力
-            _additionalPower = [[dictionary objectForKey:GameInfoItemAdditionalPower] integerValue];
-            
-            // 購入栄養剤
-            _nutrients = [[dictionary objectForKey:GameInfoItemNutrients] integerValue];
-            
-            // 購入山札戻し
-            _yamafudas = [[dictionary objectForKey:GameInfoItemYamafudas] integerValue];
-        } else {
-            // 最新ステージ
-            self.lastStageID = 1;
-            
-            // 最新ステージのクリア済み回数
-            self.clearTimes = 0;
-            
-            // 購入体力
-            self.additionalPower = 0;
-            
-            // 購入栄養剤
-            self.nutrients = 0;
-            
-            // 購入山札戻し
-            self.yamafudas = 0;
-            
-            // 初期化
-            [self synchronize];
-        }
+        // 最新ステージの体力値
+        _lastStagePower = [[dictionary objectForKey:GameInfoLastStagePower] integerValue];
+        
+        // 購入体力
+        _additionalPower = [[dictionary objectForKey:GameInfoItemAdditionalPower] integerValue];
+        
+        // 購入栄養剤
+        _nutrients = [[dictionary objectForKey:GameInfoItemNutrients] integerValue];
+        
+        // 購入山札戻し
+        _yamafudas = [[dictionary objectForKey:GameInfoItemYamafudas] integerValue];
+    } else {
+        // 最新ステージ
+        self.lastStageID = 1;
+        
+        // 最新ステージのクリア済み回数
+        self.clearTimes = 0;
+        
+        // 最新ステージの体力値
+        _lastStagePower = DefaultPower;
+        
+        // 購入体力
+        self.additionalPower = 0;
+        
+        // 購入栄養剤
+        self.nutrients = 0;
+        
+        // 購入山札戻し
+        self.yamafudas = 0;
+        
+        // 初期化
+        [self synchronize];
     }
 }
 
@@ -164,12 +169,10 @@ NSString* const GameInfoItemYamafudas           = @"ItemYamafudas";
     _firstRun = firstRun;
     [_userInfo setObject:[NSNumber numberWithBool:_firstRun] forKey:UserInfoFirstRunKey];
     
-    if (!firstRun) {
-        // ユーザ情報保存
-        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-        [userDefaults setObject:_userInfo forKey:UserInfoFirstRunKey];
-        [userDefaults synchronize];
-    }
+    // ユーザ情報保存
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:_userInfo forKey:SolitaireUserInfo];
+    [userDefaults synchronize];
 }
 
 // 体力
@@ -190,6 +193,47 @@ NSString* const GameInfoItemYamafudas           = @"ItemYamafudas";
     return (DefaultPower + _additionalPower);
 }
 
+// 山札戻し使用
+- (void)handleUseYamafuda;
+{
+    _yamafudas--;
+    [self synchronize];
+}
+
+// 栄養剤使用
+- (void)handleUseNutrient;
+{
+    _nutrients--;
+    _lastStagePower = DefaultPower + _additionalPower;
+    [self synchronize];
+}
+
+// ステージクリアチェック
+- (BOOL)canClearCurrentStage;
+{
+    SSStage *stage = [self currentStage];
+    if (stage.stageID == _lastStageID) {
+        // 最新ステージを挑戦する場合
+        _clearTimes++;
+        if (stage.minimalClearTimes > _clearTimes) {
+            [self synchronize];
+            return NO;
+        }
+        
+        // 次のステージへ
+        if (_lastStageID < _stageTotal) {
+            _lastStageID++;
+        }
+        _clearTimes = 0;
+        [self synchronize];
+        
+        return YES;
+    } else {
+        // クリアしたステージを再び挑戦する場合
+        return YES;
+    }
+}
+
 // ユーザ情報保存
 - (void)synchronize;
 {
@@ -200,9 +244,12 @@ NSString* const GameInfoItemYamafudas           = @"ItemYamafudas";
                                  GameInfoItemNutrients:[NSNumber numberWithInteger:_nutrients],
                                  GameInfoItemYamafudas:[NSNumber numberWithInteger:_yamafudas]};
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dictionary];
-    [_wrapper setObject:data forKey:(__bridge id)kSecValueData];
+    
+    [FDKeychain saveItem:data
+                  forKey:SolitaireGameInfo
+              forService:SolitaireGameInfo
+                   error:nil];
 }
-
 #pragma mark - ステージ情報
 // ステージ設定情報取得
 - (NSArray *)stageInfos;
@@ -211,7 +258,8 @@ NSString* const GameInfoItemYamafudas           = @"ItemYamafudas";
         NSString *path = [[NSBundle mainBundle] pathForResource:@"Stage" ofType:@"plist"];
         NSMutableDictionary *dict = [[NSDictionary dictionaryWithContentsOfFile:path] mutableCopy];
         NSArray *array = [dict objectForKey:@"StageList"];
-        _stageInfos = [NSMutableArray arrayWithCapacity:[array count]];
+        _stageTotal = [array count];
+        _stageInfos = [NSMutableArray arrayWithCapacity:_stageTotal];
         for (NSDictionary *dic in array) {
             SSStage *stage = [[SSStage alloc] init];
             stage.stageID = [[dic objectForKey:@"StageID"] integerValue];

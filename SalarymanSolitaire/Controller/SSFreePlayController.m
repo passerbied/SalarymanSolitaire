@@ -156,6 +156,12 @@
 // ゲーム終了
 - (IBAction)terminateAction:(id)sender;
 {
+    // ボタン押下音声再生
+    [AudioEngine playAudioWith:SolitaireAudioIDButtonClicked];
+    
+    // ソリティアを一時停止する
+    [self pause];
+    
     // ゲーム終了警告画面表示
     SSExitAlertView *alert = [SSExitAlertView alertWithDelegate:self];
     [alert show];
@@ -164,6 +170,12 @@
 // ゲームリトライ
 - (IBAction)retryAction:(id)sender;
 {
+    // ボタン押下音声再生
+    [AudioEngine playAudioWith:SolitaireAudioIDButtonClicked];
+    
+    // ソリティアを一時停止する
+    [self pause];
+    
     // ゲームリトライ警告画面表示
     SSRetryAlertView *alert = [SSRetryAlertView alertWithDelegate:self];
     [alert show];
@@ -172,6 +184,12 @@
 // モード選択
 - (IBAction)selectModeAction:(id)sender;
 {
+    // ボタン押下音声再生
+    [AudioEngine playAudioWith:SolitaireAudioIDButtonClicked];
+    
+    // ソリティアを一時停止する
+    [self pause];
+    
     // モード選択警告画面表示
     SSModeAlertView *alert = [SSModeAlertView alertWithDelegate:self];
     [alert show];
@@ -195,8 +213,8 @@
 // ゲーム終了
 - (void)gameWillExit;
 {
-    // ゲームを終了して前画面へ遷移する
-    [self.navigationController popViewControllerAnimated:YES];
+    // 前画面へ遷移する
+    [self end];
 }
 
 // リトライ
@@ -215,6 +233,9 @@
     } else {
         self.numberOfPokers = 3;
     }
+    
+    // ゲームを再開する
+    [self resume];
 }
 
 // ゲーム完了処理

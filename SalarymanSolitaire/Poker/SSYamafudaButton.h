@@ -10,7 +10,6 @@
 
 typedef NS_ENUM(NSInteger, YamafudaDisplayMode)
 {
-    YamafudaDisplayModeFree,
     YamafudaDisplayModeUsable,
     YamafudaDisplayModeReturn,
     YamafudaDisplayModeBuy
@@ -36,10 +35,16 @@ typedef NS_ENUM(NSInteger, YamafudaDisplayMode)
 // 表示モード
 @property (nonatomic) YamafudaDisplayMode displayMode;
 
+// フリーモード
+@property (nonatomic) BOOL freeMode;
+
 // 初期化
 - (instancetype)initWithDelegate:(id<SSYamafudaButtonDelegate>)delegate;
 
 // 山札戻し使用
-- (void)useYamafudaReturn;
+- (void)useYamafuda;
+
+// リセット(ソリティアをリトライするときに行う)
+- (void)reset;
 
 @end
