@@ -150,6 +150,7 @@
 		E50BD9EC18E31C710087C170 /* enemy_100_card@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E50BD98718E31C700087C170 /* enemy_100_card@2x.png */; };
 		E50BD9ED18E31C710087C170 /* enemy_101_card@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E50BD98818E31C700087C170 /* enemy_101_card@2x.png */; };
 		E521788718D562E80035B628 /* SSPhysicalView.m in Sources */ = {isa = PBXBuildFile; fileRef = E521788618D562E80035B628 /* SSPhysicalView.m */; };
+		E584725519224C1A0045C93C /* AppleIncRootCertificate.cer in Resources */ = {isa = PBXBuildFile; fileRef = E584725419224C1A0045C93C /* AppleIncRootCertificate.cer */; };
 		E58D46B018E86BCC006CCEEA /* story_back_btn_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E58D46AE18E86BCC006CCEEA /* story_back_btn_on@2x.png */; };
 		E58D46B118E86BCC006CCEEA /* story_back_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E58D46AF18E86BCC006CCEEA /* story_back_btn@2x.png */; };
 		E58D4B2218E86C19006CCEEA /* story_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E58D4B2118E86C19006CCEEA /* story_bg@2x.png */; };
@@ -392,6 +393,8 @@
 		E5B466FA1903FEE500F6813E /* tutorial_howto-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5B466FC1903FEE500F6813E /* tutorial_howto-568h@2x.png */; };
 		E5D6A30A190AA0F200800D23 /* bg_finished_area@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5D6A309190AA0F200800D23 /* bg_finished_area@2x.png */; };
 		E5D956F3191E780E00016635 /* FDKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D956F2191E780E00016635 /* FDKeychain.m */; };
+		E5DB4EAF19223AD70090FCAC /* PopupShopView.m in Sources */ = {isa = PBXBuildFile; fileRef = E5DB4EAD19223AD70090FCAC /* PopupShopView.m */; };
+		E5DB4EB019223AD70090FCAC /* PopupShopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5DB4EAE19223AD70090FCAC /* PopupShopView.xib */; };
 		E5DC3D7219027C980093C35A /* PopupNotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5DC3D7119027C980093C35A /* PopupNotificationView.xib */; };
 		E5DC3D7519027D3F0093C35A /* PopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5DC3D7419027D3F0093C35A /* PopupViewController.m */; };
 		E5DCE32818E44D7C00B95064 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E5DCE32A18E44D7C00B95064 /* Localizable.strings */; };
@@ -503,7 +506,6 @@
 		E5E3742418FC1EFC007249D3 /* ReceiptDataValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E3742218FC1EFC007249D3 /* ReceiptDataValidation.m */; };
 		E5E3742718FC1F48007249D3 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E5E3742518FC1F48007249D3 /* libcrypto.a */; };
 		E5E3742818FC1F48007249D3 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E5E3742618FC1F48007249D3 /* libssl.a */; };
-		E5E3747918FC2639007249D3 /* SSShopView.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E3747818FC2639007249D3 /* SSShopView.m */; };
 		E5E4DD0618FA19EF006610C2 /* SSProductItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E4DD0518FA19EF006610C2 /* SSProductItemCell.m */; };
 		E5E4DD0918FA1A10006610C2 /* SSProductItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5E4DD0818FA1A10006610C2 /* SSProductItemCell.xib */; };
 		E5E7379718E1BD2900E5A40A /* stage_001_story@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5E7373218E1BD2900E5A40A /* stage_001_story@2x.png */; };
@@ -861,6 +863,7 @@
 		E50BD98818E31C700087C170 /* enemy_101_card@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "enemy_101_card@2x.png"; sourceTree = "<group>"; };
 		E521788518D562E80035B628 /* SSPhysicalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSPhysicalView.h; sourceTree = "<group>"; };
 		E521788618D562E80035B628 /* SSPhysicalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSPhysicalView.m; sourceTree = "<group>"; };
+		E584725419224C1A0045C93C /* AppleIncRootCertificate.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = AppleIncRootCertificate.cer; sourceTree = "<group>"; };
 		E58D46AE18E86BCC006CCEEA /* story_back_btn_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "story_back_btn_on@2x.png"; sourceTree = "<group>"; };
 		E58D46AF18E86BCC006CCEEA /* story_back_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "story_back_btn@2x.png"; sourceTree = "<group>"; };
 		E58D4B2118E86C19006CCEEA /* story_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "story_bg@2x.png"; sourceTree = "<group>"; };
@@ -1110,6 +1113,9 @@
 		E5D6A309190AA0F200800D23 /* bg_finished_area@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_finished_area@2x.png"; sourceTree = "<group>"; };
 		E5D956F1191E780E00016635 /* FDKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDKeychain.h; sourceTree = "<group>"; };
 		E5D956F2191E780E00016635 /* FDKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDKeychain.m; sourceTree = "<group>"; };
+		E5DB4EAC19223AD70090FCAC /* PopupShopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopupShopView.h; sourceTree = "<group>"; };
+		E5DB4EAD19223AD70090FCAC /* PopupShopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopupShopView.m; sourceTree = "<group>"; };
+		E5DB4EAE19223AD70090FCAC /* PopupShopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopupShopView.xib; sourceTree = "<group>"; };
 		E5DC3D7119027C980093C35A /* PopupNotificationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopupNotificationView.xib; sourceTree = "<group>"; };
 		E5DC3D7319027D3F0093C35A /* PopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopupViewController.h; sourceTree = "<group>"; };
 		E5DC3D7419027D3F0093C35A /* PopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopupViewController.m; sourceTree = "<group>"; };
@@ -1316,8 +1322,6 @@
 		E5E3747318FC1F6A007249D3 /* x509.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x509.h; sourceTree = "<group>"; };
 		E5E3747418FC1F6A007249D3 /* x509_vfy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x509_vfy.h; sourceTree = "<group>"; };
 		E5E3747518FC1F6A007249D3 /* x509v3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x509v3.h; sourceTree = "<group>"; };
-		E5E3747718FC2639007249D3 /* SSShopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSShopView.h; path = ../Controller/SSShopView.h; sourceTree = "<group>"; };
-		E5E3747818FC2639007249D3 /* SSShopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSShopView.m; path = ../Controller/SSShopView.m; sourceTree = "<group>"; };
 		E5E4DD0418FA19EF006610C2 /* SSProductItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSProductItemCell.h; sourceTree = "<group>"; };
 		E5E4DD0518FA19EF006610C2 /* SSProductItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSProductItemCell.m; sourceTree = "<group>"; };
 		E5E4DD0818FA1A10006610C2 /* SSProductItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSProductItemCell.xib; sourceTree = "<group>"; };
@@ -1691,6 +1695,7 @@
 		34C7508C18CAB37F00BF3FC6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E584725419224C1A0045C93C /* AppleIncRootCertificate.cer */,
 				34C7508D18CAB37F00BF3FC6 /* SalarymanSolitaire-Info.plist */,
 				34C7508E18CAB37F00BF3FC6 /* InfoPlist.strings */,
 				34C7509118CAB37F00BF3FC6 /* main.m */,
@@ -1779,7 +1784,6 @@
 				3493756C18CB3BA300D4BD54 /* WUProgressView.m */,
 				E521788518D562E80035B628 /* SSPhysicalView.h */,
 				E521788618D562E80035B628 /* SSPhysicalView.m */,
-				E5E4DD0718FA19F6006610C2 /* アイテム購入 */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2009,14 +2013,34 @@
 			name = Effect;
 			sourceTree = "<group>";
 		};
+		E5DB4EAB192239B10090FCAC /* お知らせ */ = {
+			isa = PBXGroup;
+			children = (
+				E5B466F11903E49A00F6813E /* PopupNotificationView.h */,
+				E5B466F21903E49A00F6813E /* PopupNotificationView.m */,
+				E5DC3D7119027C980093C35A /* PopupNotificationView.xib */,
+			);
+			name = "お知らせ";
+			sourceTree = "<group>";
+		};
+		E5DB4EB119223ADC0090FCAC /* ショップ */ = {
+			isa = PBXGroup;
+			children = (
+				E5DB4EAC19223AD70090FCAC /* PopupShopView.h */,
+				E5DB4EAD19223AD70090FCAC /* PopupShopView.m */,
+				E5DB4EAE19223AD70090FCAC /* PopupShopView.xib */,
+				E5E4DD0718FA19F6006610C2 /* アイテム */,
+			);
+			name = "ショップ";
+			sourceTree = "<group>";
+		};
 		E5DC3D7019027C8B0093C35A /* Popup */ = {
 			isa = PBXGroup;
 			children = (
 				E5DC3D7319027D3F0093C35A /* PopupViewController.h */,
 				E5DC3D7419027D3F0093C35A /* PopupViewController.m */,
-				E5B466F11903E49A00F6813E /* PopupNotificationView.h */,
-				E5B466F21903E49A00F6813E /* PopupNotificationView.m */,
-				E5DC3D7119027C980093C35A /* PopupNotificationView.xib */,
+				E5DB4EAB192239B10090FCAC /* お知らせ */,
+				E5DB4EB119223ADC0090FCAC /* ショップ */,
 			);
 			name = Popup;
 			sourceTree = "<group>";
@@ -2194,11 +2218,9 @@
 			path = openssl;
 			sourceTree = "<group>";
 		};
-		E5E4DD0718FA19F6006610C2 /* アイテム購入 */ = {
+		E5E4DD0718FA19F6006610C2 /* アイテム */ = {
 			isa = PBXGroup;
 			children = (
-				E5E3747718FC2639007249D3 /* SSShopView.h */,
-				E5E3747818FC2639007249D3 /* SSShopView.m */,
 				E5E4DD0418FA19EF006610C2 /* SSProductItemCell.h */,
 				E5E4DD0518FA19EF006610C2 /* SSProductItemCell.m */,
 				E5E4DD0818FA1A10006610C2 /* SSProductItemCell.xib */,
@@ -2207,7 +2229,7 @@
 				34C29B5D18FA6FE700C0C058 /* SSProductCell.xib */,
 				E5EDB6A518FD78E800E2960B /* SSProductCellPower.xib */,
 			);
-			name = "アイテム購入";
+			name = "アイテム";
 			sourceTree = "<group>";
 		};
 		E5E940F818D8EF57009D71DD /* WebService */ = {
@@ -3141,6 +3163,7 @@
 				E50BD9A018E31C700087C170 /* enemy_024_card@2x.png in Resources */,
 				E5E0E7B518D7A0E00047DE80 /* card_1_4@2x.png in Resources */,
 				E58F856618DEACA400C3CDC3 /* enemy_041_clear@2x.png in Resources */,
+				E5DB4EB019223AD70090FCAC /* PopupShopView.xib in Resources */,
 				E58F859B18DEACA400C3CDC3 /* enemy_059_banner@2x.png in Resources */,
 				E58F851418DEACA400C3CDC3 /* enemy_014_banner@2x.png in Resources */,
 				E58F85A118DEACA400C3CDC3 /* enemy_061_banner@2x.png in Resources */,
@@ -3407,6 +3430,7 @@
 				E50BD9BD18E31C700087C170 /* enemy_053_card@2x.png in Resources */,
 				E5E0E7C918D7A0E00047DE80 /* card_2_11@2x.png in Resources */,
 				E50BD98918E31C700087C170 /* enemy_001_card@2x.png in Resources */,
+				E584725519224C1A0045C93C /* AppleIncRootCertificate.cer in Resources */,
 				E5EA752A18DCF271002E2BAF /* btn_start_on@2x.png in Resources */,
 				E5E0E7C218D7A0E00047DE80 /* card_2_4@2x.png in Resources */,
 				E50BD9CD18E31C700087C170 /* enemy_069_card@2x.png in Resources */,
@@ -3490,6 +3514,7 @@
 				E5E209781916711F00BB4E39 /* UICollectionView+Draggable.m in Sources */,
 				E5E209711916711F00BB4E39 /* DraggableCollectionViewFlowLayout.m in Sources */,
 				3493756D18CB3BA300D4BD54 /* WUProgressView.m in Sources */,
+				E5DB4EAF19223AD70090FCAC /* PopupShopView.m in Sources */,
 				E5DCE36D18E45B1200B95064 /* SSItemAlertView.m in Sources */,
 				E5E9410E18D8EF57009D71DD /* WebRequest.m in Sources */,
 				E5E22E5A18E7D11D00897AC7 /* WUPopupView.m in Sources */,
@@ -3508,7 +3533,6 @@
 				E5E209761916711F00BB4E39 /* SSPokerViewLayout.m in Sources */,
 				E5E9410F18D8EF57009D71DD /* WebResponse.m in Sources */,
 				E5E9410C18D8EF57009D71DD /* Reachability.m in Sources */,
-				E5E3747918FC2639007249D3 /* SSShopView.m in Sources */,
 				34C750CA18CAC43A00BF3FC6 /* HelpInfoViewController.m in Sources */,
 				34C7509218CAB37F00BF3FC6 /* main.m in Sources */,
 				E521788718D562E80035B628 /* SSPhysicalView.m in Sources */,

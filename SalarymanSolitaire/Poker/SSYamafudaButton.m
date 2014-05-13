@@ -12,7 +12,6 @@
 @interface SSYamafudaButton ()
 {
     // 山札戻しの回数
-    NSInteger                           _usableTimes;
     UILabel                             *_numbersLabel;
     
     // 背景イメージ
@@ -64,28 +63,17 @@
     return self;
 }
 
-- (void)setDisplayMode:(YamafudaDisplayMode)displayMode
-{
-    self.freeMode = NO;
-    
-    if (_displayMode == displayMode) {
-        return;
-    }
-    _displayMode = displayMode;
-    [self setNeedsLayout];
-}
-
 - (void)layoutSubviews
 {
     [super layoutSubviews];
     
-    if (_displayMode == YamafudaDisplayModeReturn) {
+    if (_displayMode == YamafudaButtonDisplayModeRestart) {
         // 山札戻しの場合
-        _numbersLabel.text = [NSString stringWithFormat:@"%ld", (long)_usableTimes];
+        _numbersLabel.text = [NSString stringWithFormat:@"%ld", (long)_numberOfYamafuda];
         _numbersLabel.hidden = NO;
         _backgroundImageView.image = [UIImage imageNamed:@"product_item.png"];
         
-    } else if (_displayMode == YamafudaDisplayModeBuy) {
+    } else if (_displayMode == YamafudaButtonDisplayModeMore) {
         // 山札戻しの回数が０になった場合
         _numbersLabel.hidden = YES;
         _backgroundImageView.image = [UIImage imageNamed:@"btn_more_card.png"];
@@ -100,7 +88,7 @@
 - (void)setMaximumYamafuda:(NSInteger)maximumYamafuda
 {
     _maximumYamafuda = maximumYamafuda;
-    _usableTimes = maximumYamafuda;
+    _numberOfYamafuda = maximumYamafuda;
     
     // 山戻し回数表示
     if (_maximumYamafuda) {
@@ -117,23 +105,33 @@
         return;
     }
     
-    if (_displayMode == YamafudaDisplayModeBuy) {
-        // ショップを表示する
-        [_delegate willPresentShop];
-    } else {
-        // 山札を利用する
-        [_delegate willUseYamafuda];
+    // 実行前のモード取得
+    _displayMode = [_delegate yamafudaDisplayMode];
+    
+    if (_displayMode == YamafudaButtonDisplayModeReload) {
+        // 新しいとランプをリロードする
+        [_delegate reloadTrump];
+    } else if (_displayMode == YamafudaButtonDisplayModeRestart) {
+        // 山札戻し利用
+        [_delegate willRestartYamafuda];
+    } else if (_displayMode == YamafudaButtonDisplayModeMore) {
+        // ショップ表示
+        [_delegate requireMoreYamafuda];
     }
+    
+    // 実行後のモード取得
+    _displayMode = [_delegate yamafudaDisplayMode];
+    [self setNeedsLayout];
 }
 
 // 山札戻し使用
-- (void)useYamafuda;
+- (void)restartYamafuda;
 {
     if (_freeMode) {
         return;
     }
-    _usableTimes--;
-    if (_usableTimes > 0) {
+    _numberOfYamafuda--;
+    if (_numberOfYamafuda > 0) {
         [self setNeedsLayout];
     }
 }
@@ -141,7 +139,9 @@
 // リセット(ソリティアをリトライするときに行う)
 - (void)reset;
 {
-    _usableTimes = _maximumYamafuda;
-    self.displayMode = YamafudaDisplayModeUsable;
+    _numberOfYamafuda = _maximumYamafuda;
+    
+    _displayMode = [_delegate yamafudaDisplayMode];
+    [self setNeedsLayout];
 }
 @end

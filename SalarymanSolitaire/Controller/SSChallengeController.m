@@ -10,10 +10,10 @@
 #import "WUProgressView.h"
 #import "SSPhysicalView.h"
 #import "PurchaseManager.h"
-#import "SSShopView.h"
 #import "SSNutrientButton.h"
 #import "SSGiveupAlertView.h"
 #import "SSItemAlertView.h"
+#import "PopupShopView.h"
 
 @interface SSChallengeController ()
 {
@@ -47,6 +47,9 @@
 
 // ショップ
 - (IBAction)presentShopAction:(id)sender;
+
+// ショップ表示
+- (void)handlePresentShop;
 
 @end
 
@@ -134,10 +137,58 @@
 // 経過時間タイマー
 - (void)handleUpdateTimer:(NSTimer *)timer;
 {
+    // 体力値更新
     [super handleUpdateTimer:timer];
     [self.physicalView setDuration:self.duration];
+    
+    // 栄養剤活性制御
+    if ([self.physicalView isPowerOFF]) {
+        self.nutrientButton.enabled = YES;
+    } else {
+        self.nutrientButton.enabled = NO;
+    }
 }
 
+// ショップ表示
+- (void)handlePresentShop;
+{
+    // 待ち画面表示
+    [WUProgressView showWithStatus:@"商品情報取得中..."];
+    
+    // 商品IDセット編集
+    if (!_productIdentifiers) {
+        _productIdentifiers = [NSSet setWithObjects:
+                               kProductIdentifierPowerUp1,
+                               kProductIdentifierPowerUp2,
+                               kProductIdentifierPowerUp3,
+                               kProductIdentifierPowerUp4,
+                               kProductIdentifierPowerUp5,
+                               kProductIdentifierYamafuda5,
+                               kProductIdentifierYamafuda30,
+                               kProductIdentifierYamafuda60,
+                               kProductIdentifierDrink3,
+                               kProductIdentifierDrink20,
+                               kProductIdentifierDrink50,
+                               nil];
+    }
+    if (!_manager) {
+        _manager = [PurchaseManager sharedManager];
+        _manager.productIdentifiers = _productIdentifiers;
+        _manager.sandboxMode = kIAPSandBoxMode;
+    }
+    
+    [_manager requestProductsWithCompletion:^(NSArray *products, PurchaseStatus status) {
+        // ステータスチェック
+        if (status == PurchaseStatusOK) {
+            // 請求成功の場合、取得した商品情報を画面に表示する。
+            PopupShopView *popopView = [[PopupShopView alloc] initWithProducts:products];
+            [popopView popupInViewController:self];
+        }
+        
+        // 待ち画面を隠す
+        [WUProgressView dismiss];
+    }];
+}
 #pragma mark - 画面操作
 // ギブアップ
 - (IBAction)giveupAction:(id)sender;
@@ -178,43 +229,8 @@
     // ソリティアを一時停止する
     [self pause];
     
-    // 待ち画面表示
-    [WUProgressView showWithStatus:@"商品情報取得中..."];
-    
-    // 商品IDセット編集
-    if (!_productIdentifiers) {
-        _productIdentifiers = [NSSet setWithObjects:
-                               kProductIdentifierPowerUp1,
-                               kProductIdentifierPowerUp2,
-                               kProductIdentifierPowerUp3,
-                               kProductIdentifierPowerUp4,
-                               kProductIdentifierPowerUp5,
-                               kProductIdentifierYamafuda5,
-                               kProductIdentifierYamafuda30,
-                               kProductIdentifierYamafuda60,
-                               kProductIdentifierDrink3,
-                               kProductIdentifierDrink20,
-                               kProductIdentifierDrink50,
-                               nil];
-    }
-    if (!_manager) {
-        _manager = [[PurchaseManager alloc ] initWithProductIdentifiers:_productIdentifiers];
-        _manager.sandboxMode = kIAPSandBoxMode;
-    }
-    
-    [_manager requestProductsWithCompletion:^(NSArray *products, PurchaseStatus status) {
-        // ステータスチェック
-        if (status == PurchaseStatusOK) {
-            // 請求成功の場合、取得した商品情報を画面に表示する。
-            SSShopView *popopView = [[SSShopView alloc] init];
-            popopView.products = products;
-            popopView.view.bounds = CGRectMake(0, 0, 280, 400);
-            [popopView showInViewController:self center:self.view.center];
-        }
-        
-        // 待ち画面を隠す
-        [WUProgressView dismiss];
-    }];
+    // ショップ表示
+    [self handlePresentShop];
 }
 
 // ゲーム完了処理
@@ -225,6 +241,18 @@
     // ステージクリア条件
 }
 
+#pragma mark - SSYamafudaButtonDelegate
+
+// ショップ表示
+- (void)requireMoreYamafuda;
+{
+    // 山札戻し使用＆購入画面を表示する
+    SSItemAlertView *alert = [SSItemAlertView alertWithDelegate:self];
+    alert.datasource = SSItemAlertDatasourceYamafuda;
+    alert.numberOfItems = [[SolitaireManager sharedManager] yamafudas];
+    [alert show];
+}
+
 #pragma mark - 警告処理
 // 閉じるタップ処理
 - (void)closeAlertView;
@@ -233,15 +261,56 @@
     [self resume];
 }
 
-// 商品購入
-- (void)itemWillBuy;
+// 山札戻しを使用する
+- (void)willUseYamafuda;
 {
+    // 該当ステージの山札戻しの利用回数をチェックする
+    if ([self.yamafudaButton numberOfYamafuda]) {
+        [self.yamafudaButton restartYamafuda];
+        return;
+    }
     
+    // 最大利用回数を超えた場合
+    SolitaireManager *manager = [SolitaireManager sharedManager];
+    [manager handleRestartYamafuda];
+    
+    // 山札戻し実行
+    [self handleRestartYamafuda];
+    
+    // ゲームを再開する
+    [self resume];
+}
+
+// 栄養剤を使用する
+- (void)willUseDrink;
+{
+    // 体力ゲージを全て回復する
+    [_physicalView recovery];
+    
+    // ゲームを再開する
+    [self resume];
+}
+
+// 山札戻しを購入する
+- (void)willBuyYamafuda;
+{
+    // ショップ表示
+    [self handlePresentShop];
+}
+
+// 栄養剤を購入する
+- (void)willBuyDrink;
+{
+    // ショップ表示
+    [self handlePresentShop];
 }
 
 // ゲーム終了
 - (void)gameWillExit;
 {
+    // 場合により体力減らす
+    [self reducePowerIfNecessary];
+
     // ゲーム終了（前画面へ遷移）
     [self end];
 }
@@ -249,20 +318,28 @@
 // リトライ
 - (void)gameWillRetry;
 {
+    // 場合により体力減らす
+    [self reducePowerIfNecessary];
+
     // リトライ（新規にゲームスタート）
     [self start];
-}
-
-// 山札戻し使用可否チェック
-- (BOOL)isYamafudaEnabled;
-{
-    return YES;
 }
 
 // 栄養剤使用可否チェック
 - (BOOL)isNutrientEnabled
 {
     return YES;
+}
+
+- (void)reducePowerIfNecessary
+{
+    // 再び挑戦する場合、処理を飛ばす。
+    if ([self playAgainMode]) {
+        return;
+    }
+    
+    // 体力値を減らす
+    [[SolitaireManager sharedManager] handleUsePower];
 }
 
 @end

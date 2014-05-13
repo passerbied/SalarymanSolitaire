@@ -13,6 +13,7 @@
         NSURL                               *_URL;
 }
 
+// ウェブビュー
 @property (nonatomic, weak) IBOutlet UIWebView *webView;
 
 @end

@@ -256,4 +256,19 @@
     _currentPower = currentPower;
     [self showCurrentPower];
 }
+
+// 体力値をすべて回復する
+- (void)recovery;
+{
+    self.currentPower = _maxPower;
+}
+
+// 体力有無チェック
+- (BOOL)isPowerOFF;
+{
+    if (_currentPower > 0) {
+        return NO;
+    }
+    return YES;
+}
 @end

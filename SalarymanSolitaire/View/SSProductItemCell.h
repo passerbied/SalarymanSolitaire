@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <StoreKit/StoreKit.h>
 #import "SSProductCell.h"
 
 
@@ -17,14 +18,10 @@
 // 商品種類
 @property (nonatomic) ProductItemType type;
 
-// 商品名称
-@property (nonatomic, strong) NSString *itemName;
 
-// 商品価格
-@property (nonatomic, strong) NSString *itemPrice;
 
-// 商品ID
-@property (nonatomic, strong) NSString *identifier;
+// 商品情報
+@property (nonatomic, strong) SKProduct *product;
 
 // 最後の行
 @property (nonatomic) BOOL lastRow;

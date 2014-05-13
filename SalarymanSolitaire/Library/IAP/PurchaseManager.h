@@ -34,7 +34,10 @@ typedef enum
 @interface PurchaseManager : NSObject<SKProductsRequestDelegate, SKPaymentTransactionObserver>
 
 // 初期化
-- (id)initWithProductIdentifiers:(NSSet *)productIdentifiers;
++ (instancetype)sharedManager;
+
+// 商品ID
+@property (nonatomic, strong) NSSet *productIdentifiers;
 
 // サンドボックス
 @property (nonatomic, getter = inSandboxMode) BOOL sandboxMode;
@@ -46,7 +49,7 @@ typedef enum
 - (void)requestProductsWithCompletion:(void (^)(NSArray *products, PurchaseStatus status))completion;
 
 // Step(2):商品購入
-- (void)buyProduct:(SKProduct *)product withQuantity:(NSInteger)quantity completion:(void (^)(NSString *productIdentifier, BOOL succeed))completion;
+- (void)buyProduct:(SKProduct *)product withQuantity:(NSInteger)quantity completion:(void (^)(NSArray *productIdentifiers, BOOL succeed))completion;
 @end
 
 @interface SKProduct (LocalizedPrice)

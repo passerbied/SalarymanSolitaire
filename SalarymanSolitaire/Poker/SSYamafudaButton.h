@@ -8,20 +8,29 @@
 
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSInteger, YamafudaDisplayMode)
+typedef NS_ENUM(NSInteger, YamafudaButtonDisplayMode)
 {
-    YamafudaDisplayModeUsable,
-    YamafudaDisplayModeReturn,
-    YamafudaDisplayModeBuy
+    YamafudaButtonDisplayModeDisable,
+    YamafudaButtonDisplayModeReload,
+    YamafudaButtonDisplayModeRestart,
+    YamafudaButtonDisplayModeMore
 };
 
 @protocol SSYamafudaButtonDelegate <NSObject>
 @required
-//  山札戻し実行
-- (void)willUseYamafuda;
 
+// 表示モード
+- (YamafudaButtonDisplayMode)yamafudaDisplayMode;
+
+// トランプ更新
+- (void)reloadTrump;
+
+// 山札戻し実行
+- (void)willRestartYamafuda;
+
+@optional
 // ショップ表示
-- (void)willPresentShop;
+- (void)requireMoreYamafuda;
 @end
 
 @interface SSYamafudaButton : UIView
@@ -32,8 +41,11 @@ typedef NS_ENUM(NSInteger, YamafudaDisplayMode)
 // 山札戻しの回数
 @property (nonatomic) NSInteger maximumYamafuda;
 
+// 山札戻しの残り回数
+@property (nonatomic, readonly) NSInteger numberOfYamafuda;
+
 // 表示モード
-@property (nonatomic) YamafudaDisplayMode displayMode;
+@property (nonatomic, readonly) YamafudaButtonDisplayMode displayMode;
 
 // フリーモード
 @property (nonatomic) BOOL freeMode;
@@ -42,7 +54,7 @@ typedef NS_ENUM(NSInteger, YamafudaDisplayMode)
 - (instancetype)initWithDelegate:(id<SSYamafudaButtonDelegate>)delegate;
 
 // 山札戻し使用
-- (void)useYamafuda;
+- (void)restartYamafuda;
 
 // リセット(ソリティアをリトライするときに行う)
 - (void)reset;

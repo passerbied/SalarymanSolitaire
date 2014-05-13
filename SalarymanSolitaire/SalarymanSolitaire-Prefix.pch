@@ -43,6 +43,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 // 商品ID定義
 //
 // 体力＋１
+#define kProductIdentifierPowerUp       @"SolitaireItemPowerUp"
 #define kProductIdentifierPowerUp1      @"SolitaireItemPowerUp1"
 #define kProductIdentifierPowerUp2      @"SolitaireItemPowerUp2"
 #define kProductIdentifierPowerUp3      @"SolitaireItemPowerUp3"
@@ -50,11 +51,13 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 #define kProductIdentifierPowerUp5      @"SolitaireItemPowerUp5"
 
 // 山札戻し
+#define kProductIdentifierYamafuda     @"SolitaireItemYamafuda"
 #define kProductIdentifierYamafuda5     @"SolitaireItemYamafuda5"
 #define kProductIdentifierYamafuda30    @"SolitaireItemYamafuda30"
 #define kProductIdentifierYamafuda60    @"SolitaireItemYamafuda60"
 
 // 栄養剤
+#define kProductIdentifierDrink         @"SolitaireItemDrink"
 #define kProductIdentifierDrink3        @"SolitaireItemDrink3"
 #define kProductIdentifierDrink20       @"SolitaireItemDrink20"
 #define kProductIdentifierDrink50       @"SolitaireItemDrink50"

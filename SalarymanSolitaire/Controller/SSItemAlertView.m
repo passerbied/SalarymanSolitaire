@@ -176,9 +176,23 @@ enum
 {
     if (buttonIndex == SSItemAlertButtonIndexUse) {
         // 商品利用
+        if (self.datasource == SSItemAlertDatasourceNutrient) {
+            // 栄養剤使用
+            [self.delegate willUseDrink];
+        } else {
+            // 山札戻し使用
+            [self.delegate willUseYamafuda];
+        }
         DebugLog(@"商品利用");
     } else if (buttonIndex == SSItemAlertButtonIndexBuy) {
         // 商品購入
+        if (self.datasource == SSItemAlertDatasourceNutrient) {
+            // 栄養剤購入
+            [self.delegate willBuyDrink];
+        } else {
+            // 山札戻し購入
+            [self.delegate willBuyYamafuda];
+        }
         DebugLog(@"商品購入");
     }
 }

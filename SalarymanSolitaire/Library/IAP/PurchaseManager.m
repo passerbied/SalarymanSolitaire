@@ -21,7 +21,7 @@
 
 typedef void (^PresentProductsBlock)(NSArray *products, PurchaseStatus status);
 
-typedef void (^ProvideContentBlock)(NSString *productIdentifier, BOOL succeed);
+typedef void (^ProvideContentBlock)(NSArray *productIdentifiers, BOOL succeed);
 
 @interface PurchaseManager ()<NSURLConnectionDelegate, NSURLConnectionDataDelegate>
 {
@@ -57,14 +57,20 @@ typedef void (^ProvideContentBlock)(NSString *productIdentifier, BOOL succeed);
 
 @implementation PurchaseManager
 
-- (id)initWithProductIdentifiers:(NSSet *)productIdentifiers;
++ (instancetype)sharedManager;
+{
+    static dispatch_once_t pred = 0;
+    __strong static id _sharedManager = nil;
+    dispatch_once(&pred, ^{
+        _sharedManager = [[self alloc] init];
+    });
+    return _sharedManager;
+}
+
+- (instancetype)init
 {
     self = [super init];
     if (self) {
-        _productIdentifiers = productIdentifiers;
-        [_productIdentifiers enumerateObjectsUsingBlock:^(NSString *productIdentifier, BOOL *stop) {
-        }];
-        
         // 支払いトランザクションのオブザーバー設定
         [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
     }
@@ -75,36 +81,6 @@ typedef void (^ProvideContentBlock)(NSString *productIdentifier, BOOL succeed);
 {
     [[SKPaymentQueue defaultQueue] removeTransactionObserver:self];
 }
-
-//    if ((self = [super init])) {
-//        
-//        // Store product identifiers
-//        _productIdentifiers = productIdentifiers;
-//        
-//        // Check for previously purchased products
-//        NSMutableSet * purchasedProducts = [NSMutableSet set];
-//        for (NSString * productIdentifier in _productIdentifiers) {
-//            
-//            BOOL productPurchased = NO;
-//            
-//            NSString* password = [SFHFKeychainUtils getPasswordForUsername:productIdentifier andServiceName:@"IAPHelper" error:nil];
-//            if([password isEqualToString:@"YES"])
-//            {
-//                productPurchased = YES;
-//            }
-//            
-//            if (productPurchased) {
-//                [purchasedProducts addObject:productIdentifier];
-//                
-//            }
-//        }
-//        
-//        [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
-//        
-//        self.purchasedProducts = purchasedProducts;
-//        
-//    }
-//}?
 
 - (BOOL)isPurchasedProductWith:(NSString *)identifier
 {
@@ -123,6 +99,7 @@ typedef void (^ProvideContentBlock)(NSString *productIdentifier, BOOL succeed);
     _presentProductsBlock = nil;
     _request.delegate = nil;
     _request = nil;
+    _products = nil;
     
     // 商品チェック
     if (![_productIdentifiers count]) {
@@ -181,7 +158,7 @@ typedef void (^ProvideContentBlock)(NSString *productIdentifier, BOOL succeed);
 
 #pragma mark - 商品購入
 // Step(2):商品購入
-- (void)buyProduct:(SKProduct *)product withQuantity:(NSInteger)quantity completion:(void (^)(NSString *productIdentifier, BOOL succeed))completion
+- (void)buyProduct:(SKProduct *)product withQuantity:(NSInteger)quantity completion:(void (^)(NSArray *productIdentifiers, BOOL succeed))completion
 {
     self.provideContentBlock = completion;
     if (quantity > 1) {
@@ -284,8 +261,9 @@ typedef void (^ProvideContentBlock)(NSString *productIdentifier, BOOL succeed);
 {
     [self _recordTransaction:transaction];
     [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+    
     if (_provideContentBlock) {
-        _provideContentBlock(transaction.payment.productIdentifier, YES);
+        _provideContentBlock(@[transaction.payment.productIdentifier], YES);
     }
 }
 
@@ -298,7 +276,7 @@ typedef void (^ProvideContentBlock)(NSString *productIdentifier, BOOL succeed);
     
     [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
     if (_provideContentBlock) {
-        _provideContentBlock(transaction.payment.productIdentifier, NO);
+        _provideContentBlock(@[transaction.payment.productIdentifier], NO);
     }
 }
 
@@ -337,12 +315,21 @@ typedef void (^ProvideContentBlock)(NSString *productIdentifier, BOOL succeed);
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection;
 {
-    [_receiveData isMatchToTransactions:_savedTransactionsReceipt];
+    if (_provideContentBlock) {
+        NSArray *products = [_receiveData matchedProductsWithTransactions:_savedTransactionsReceipt];
+        if ([products count]) {
+            _provideContentBlock(products, YES);
+        } else {
+            _provideContentBlock(nil, NO);
+        }
+    }
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error;
 {
-    
+    if (_provideContentBlock) {
+        _provideContentBlock(nil, NO);
+    }
 }
 
 @end
@@ -356,17 +343,20 @@ typedef void (^ProvideContentBlock)(NSString *productIdentifier, BOOL succeed);
     [numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
     [numberFormatter setLocale:self.priceLocale];
     NSMutableString *string = [NSMutableString stringWithString:[numberFormatter stringFromNumber:self.price]];
-    while ([string length]) {
-        NSInteger length = [string length];
-        NSRange range = NSMakeRange(length - 1, 1);
-        NSString *lastCharacter = [string substringWithRange:range];
-        if ([lastCharacter isEqualToString:@"0"]) {
-            [string deleteCharactersInRange:range];
-            continue;
-        } else if ([lastCharacter isEqualToString:@"."]) {
-            [string deleteCharactersInRange:range];
+    if ([string rangeOfString:@"."].location != NSNotFound) {
+        while ([string length]) {
+            NSInteger length = [string length];
+            NSRange range = NSMakeRange(length - 1, 1);
+            NSString *lastCharacter = [string substringWithRange:range];
+            if ([lastCharacter isEqualToString:@"0"]) {
+                [string deleteCharactersInRange:range];
+                continue;
+            } else if ([lastCharacter isEqualToString:@"."]) {
+                [string deleteCharactersInRange:range];
+                break;
+            }
+            break;
         }
-        break;
     }
     
     return string;

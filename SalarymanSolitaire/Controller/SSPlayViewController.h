@@ -8,6 +8,7 @@
 
 #import "SSViewController.h"
 #import "PurchaseManager.h"
+#import "SSYamafudaButton.h"
 
 @interface SSPlayViewController : SSViewController
 {
@@ -34,14 +35,15 @@
 // 山札戻し回数
 @property (nonatomic) NSInteger maximumYamafuda;
 
+// 山札戻しボタン
+@property (nonatomic, strong) SSYamafudaButton *yamafudaButton;
+
+// 山札戻し処理
+- (void)handleRestartYamafuda;
+
 // ゲーム初期化
 - (void)initGame;
 
-// 山札戻し使用
-- (void)useYamafuda;
-
-// 山札戻し使用可否チェック
-- (BOOL)isYamafudaEnabled;
 
 /**************************************************/
 // ゲーム制御

@@ -46,16 +46,32 @@
 - (NSInteger)maxPower;
 
 // 山札戻し使用
-- (void)handleUseYamafuda;
+- (void)handleRestartYamafuda;
 
 // 栄養剤使用
 - (void)handleUseNutrient;
+
+// 体力ゲージ使用
+- (void)handleUsePower;
 
 // ステージクリアチェック
 - (BOOL)canClearCurrentStage;
 
 // ユーザ情報保存
 - (void)synchronize;
+
+/****************************************/
+/* アイテム購入                           */
+/****************************************/
+
+// 栄養剤購入
+- (void)buyNutrientWithQuantity:(NSInteger)quantity;
+
+// 山札戻し購入
+- (void)buyYamafudaWithQuantity:(NSInteger)quantity;
+
+// 体力ゲージ購入
+- (void)buyPowerWithQuantity:(NSInteger)quantity;
 
 /****************************************/
 /* ステージ情報                           */

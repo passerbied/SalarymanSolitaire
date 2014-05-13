@@ -20,4 +20,10 @@
 
 // 体力値変化
 - (void)powerUp:(BOOL)up;
+
+// 体力値をすべて回復する
+- (void)recovery;
+
+// 体力有無チェック
+- (BOOL)isPowerOFF;
 @end

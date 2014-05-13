@@ -15,7 +15,7 @@
 @interface NSData (ReceiptValidation)
 
 - (NSData *)receiptJSONData;
-- (BOOL)isMatchToTransactions:(NSDictionary *)transactions;
+- (NSArray *)matchedProductsWithTransactions:(NSDictionary *)transactions;
 @end
 
 @interface NSDictionary (ReceiptValidation)

@@ -146,7 +146,7 @@ void* base64_decode(const char* s, size_t* data_len_ptr)
     return [receiptJSONString dataUsingEncoding:NSUTF8StringEncoding];
 }
 
-- (BOOL)isMatchToTransactions:(NSDictionary *)transactions;
+- (NSArray *)matchedProductsWithTransactions:(NSDictionary *)transactions;
 {
     NSError *error;
     NSDictionary *response = [NSJSONSerialization JSONObjectWithData:self
@@ -154,28 +154,29 @@ void* base64_decode(const char* s, size_t* data_len_ptr)
                                                                error:&error];
     
     if (error) {
-        return NO;
+        return nil;
     }
     
     // Check the status of the verifyReceipt call
     id status = [response objectForKey:@"status"];
     if (!status) {
         DebugLog(@"Receipt Exception : Check the status of the verifyReceipt call");
-        return NO;
+        return nil;
     }
     
     int statusIntegerValue = (int)[status integerValue];
     if (0 != statusIntegerValue && 21006 != statusIntegerValue)
     {
         DebugLog(@"Receipt Exception : This receipt is valid but the subscription has expired.");
-        return NO;
+        return nil;
     }
+    
+
     
     NSDictionary *receipt  = [response objectForKey:@"receipt"];
     NSArray *array = [receipt objectForKey:@"in_app"];
-    
-    BOOL succeed = YES;
-    
+
+    NSMutableArray *products = [NSMutableArray arrayWithCapacity:array.count];
     for (int i = 0; i < array.count; i++) {
         NSDictionary *receiptInfo = [array objectAtIndex:i];
         NSString *transactionId = [receiptInfo objectForKey:@"transaction_id"];
@@ -183,16 +184,14 @@ void* base64_decode(const char* s, size_t* data_len_ptr)
         // Get the transaction's receipt data from the transactionsReceiptStorageDictionary
         NSDictionary *transactionInfo = [transactions objectForKey:transactionId];
         if (!transactionInfo) {
-            succeed = NO;
-            break;
+            continue;
         }
         // Verify all the receipt specifics to ensure everything matches up as expected
         NSString *receiptBundleIdentifier = [receipt objectForKey:@"bundle_id"];
         NSString *savedBundleIdentifier = [transactionInfo objectForKey:@"bid"];
         if (![receiptBundleIdentifier isEqualToString:savedBundleIdentifier])
         {
-            succeed = NO;
-            break;
+            continue;
         }
         
         NSArray *purchaseInfoArray = [transactionInfo objectForKey:@"in-app"];
@@ -201,21 +200,21 @@ void* base64_decode(const char* s, size_t* data_len_ptr)
             NSString *savedProductId = [purchaseInfo objectForKey:@"product_id"];
             if (![receiptProductId isEqualToString:savedProductId])
             {
-                succeed = NO;
-                break;
+                continue;
             }
             
             NSString *quantityInapp = [NSString stringWithFormat:@"%@",[receiptInfo objectForKey:@"quantity"]];
             NSString *quantityPurchase = [NSString stringWithFormat:@"%@",[purchaseInfo objectForKey:@"quantity"]];
             if (![quantityInapp isEqualToString:quantityPurchase])
             {
-                succeed = NO;
-                break;
+                continue;
             }
+            [products addObject:receiptProductId];
+            break;
         }
     }
 
-    return succeed;
+    return products;
 }
 @end
 @implementation NSDictionary (ReceiptValidation)

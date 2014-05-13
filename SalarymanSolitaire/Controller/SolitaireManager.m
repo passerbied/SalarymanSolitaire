@@ -194,18 +194,31 @@ NSString* const GameInfoItemYamafudas           = @"ItemYamafudas";
 }
 
 // 山札戻し使用
-- (void)handleUseYamafuda;
+- (void)handleRestartYamafuda;
 {
-    _yamafudas--;
-    [self synchronize];
+    if (_yamafudas) {
+        _yamafudas--;
+        [self synchronize];
+    }
 }
 
 // 栄養剤使用
 - (void)handleUseNutrient;
 {
-    _nutrients--;
-    _lastStagePower = DefaultPower + _additionalPower;
-    [self synchronize];
+    if (_nutrients) {
+        _nutrients--;
+        _lastStagePower = DefaultPower + _additionalPower;
+        [self synchronize];        
+    }
+}
+
+// 体力ゲージ使用
+- (void)handleUsePower;
+{
+    if (_lastStagePower > 0) {
+        _lastStagePower--;
+        [self synchronize];
+    }
 }
 
 // ステージクリアチェック
@@ -312,5 +325,32 @@ NSString* const GameInfoItemYamafudas           = @"ItemYamafudas";
     return _sharedInterstitialAD;
 }
 
+#pragma mark - 商品購入
+// 栄養剤購入
+- (void)buyNutrientWithQuantity:(NSInteger)quantity;
+{
+    if (quantity > 0) {
+        _nutrients += quantity;
+        [self synchronize];
+    }
+}
+
+// 山札戻し購入
+- (void)buyYamafudaWithQuantity:(NSInteger)quantity;
+{
+    if (quantity > 0) {
+        _yamafudas += quantity;
+        [self synchronize];
+    }
+}
+
+// 体力ゲージ購入
+- (void)buyPowerWithQuantity:(NSInteger)quantity;
+{
+    if (quantity > 0) {
+        _additionalPower += quantity;
+        [self synchronize];
+    }
+}
 
 @end

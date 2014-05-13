@@ -1,39 +1,45 @@
 //
-//  SSShopView.m
+//  PopupShopView.m
 //  SalarymanSolitaire
 //
-//  Created by IfelseGo on 14-4-14.
+//  Created by IfelseGo on 14-5-13.
 //  Copyright (c) 2014年 IfelseGo.Inc. All rights reserved.
 //
 
-#import "SSShopView.h"
+#import "PopupShopView.h"
 #import "SSProductItemCell.h"
 #import "SSProductCell.h"
 #import <StoreKit/StoreKit.h>
 #import "PurchaseManager.h"
-
-@interface SSShopView ()
-{
-    UITableView                         *_shopView;
-    NSArray                             *_products;
-    NSMutableArray                      *_contents;
-}
-@end
 
 #define kShopViewCellItemIdentifier     @"SSProductItemCell"
 #define kShopViewTopCellIdentifier      @"SSProductCell"
 #define kShopViewTopPowerCellIdentifier @"SSProductCellPower"
 #define kShopViewFooterViewHeight       20.0f
 
-
 enum { ShopViewSectionDrink, ShopViewSectionPower, ShopViewSectionYamafuda, ShopViewSectionTotal };
-@implementation SSShopView
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+@interface PopupShopView ()<UITableViewDelegate, UITableViewDataSource>
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    // 商品アイテム情報
+    NSArray                             *_products;
+    
+    // 整形した商品データ
+    NSMutableArray                      *_contents;
+}
+
+// 商品リストビュー
+@property (nonatomic, weak) IBOutlet UITableView *shopView;
+@end
+
+@implementation PopupShopView
+
+// ショップ表示
+- (id)initWithProducts:(NSArray *)products;
+{
+    self = [self initPopupViewWithNibName:@"PopupShopView"];
     if (self) {
-        // Custom initialization
+        [self setProducts:products];
     }
     return self;
 }
@@ -43,7 +49,7 @@ enum { ShopViewSectionDrink, ShopViewSectionPower, ShopViewSectionYamafuda, Shop
     _products = products;
     _contents = [NSMutableArray arrayWithCapacity:3];
     NSMutableArray *array = nil;
-
+    
     // 栄養剤
     array = [NSMutableArray array];
     [array addObject:[self productWithIdentifier:kProductIdentifierDrink3]];
@@ -70,39 +76,36 @@ enum { ShopViewSectionDrink, ShopViewSectionPower, ShopViewSectionYamafuda, Shop
 
 - (SKProduct *)productWithIdentifier:(NSString *)identifier
 {
-    __block NSInteger index;
+    __block NSInteger index = -1;
     [_products enumerateObjectsUsingBlock:^(SKProduct *object, NSUInteger idx, BOOL *stop) {
         if ([object.productIdentifier isEqualToString:identifier]) {
             index = idx;
             *stop = YES;
         }
     }];
-    return [_products objectAtIndex:index];
+    if (index >= 0) {
+        return [_products objectAtIndex:index];
+    }
+    return nil;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    self.blurEffectEnabled = NO;
+    
     // ビュー作成
-    _shopView = [[UITableView alloc] initWithFrame:[self popupContentRect]];
     _shopView.backgroundColor = [UIColor clearColor];
     _shopView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    _shopView.delegate = self;
-    _shopView.dataSource = self;
     _shopView.rowHeight = 60.0f;
     UINib *nib = nil;
     nib = [UINib nibWithNibName:kShopViewCellItemIdentifier bundle:nil];
     [_shopView registerNib:nib forCellReuseIdentifier:kShopViewCellItemIdentifier];
-
+    
     nib = [UINib nibWithNibName:kShopViewTopPowerCellIdentifier bundle:nil];
     [_shopView registerNib:nib forCellReuseIdentifier:kShopViewTopPowerCellIdentifier];
     
     nib = [UINib nibWithNibName:kShopViewTopCellIdentifier bundle:nil];
     [_shopView registerNib:nib forCellReuseIdentifier:kShopViewTopCellIdentifier];
-
-    [self.popView addSubview:_shopView];
     
     // 商品表示
     [_shopView reloadData];
@@ -130,6 +133,13 @@ enum { ShopViewSectionDrink, ShopViewSectionPower, ShopViewSectionYamafuda, Shop
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
 {
     if (section == ShopViewSectionPower) {
+        SolitaireManager *manager = [SolitaireManager sharedManager];
+        if (manager.additionalPower == 5) {
+            // 既に最大体力である
+            return 0;
+        }
+        
+        // 体力購入可能の場合
         return 2;
     } else {
         return 4;
@@ -187,7 +197,13 @@ enum { ShopViewSectionDrink, ShopViewSectionPower, ShopViewSectionYamafuda, Shop
 {
     SSProductItemCell *cell = (SSProductItemCell *)[tableView dequeueReusableCellWithIdentifier:kShopViewCellItemIdentifier];
     NSArray *products = [_contents objectAtIndex:indexPath.section];
-    SKProduct *product = [products objectAtIndex:indexPath.row - 1];
+    SKProduct *product;
+    if (indexPath.section == ShopViewSectionPower) {
+        SolitaireManager *manager = [SolitaireManager sharedManager];
+        product = [products objectAtIndex:manager.additionalPower];
+    } else {
+        product = [products objectAtIndex:indexPath.row - 1];
+    }
     
     switch (indexPath.section) {
         case ShopViewSectionDrink:
@@ -202,10 +218,14 @@ enum { ShopViewSectionDrink, ShopViewSectionPower, ShopViewSectionYamafuda, Shop
         default:
             break;
     }
-    cell.identifier = [product productIdentifier];
-    cell.itemName = product.localizedTitle;
-    cell.itemPrice = [product localizedPrice];
-    cell.lastRow = ([products count] == indexPath.row);
+    
+    cell.product = product;
+    if (indexPath.section == ShopViewSectionPower) {
+        cell.lastRow = YES;
+    } else {
+        cell.lastRow = ([products count] == indexPath.row);
+    }
+    
     return cell;
 }
 

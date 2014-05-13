@@ -7,6 +7,8 @@
 //
 
 #import "SSProductItemCell.h"
+#import "PurchaseManager.h"
+#import "SolitaireManager.h"
 
 #define kProductItemImageMargin1        6.0f
 #define kProductItemImageMargin2        24.0f
@@ -17,6 +19,15 @@
     UIImageView                         *_topSeperatorView;
     UIImageView                         *_bottomSeperatorView;
 }
+
+// 商品名称
+@property (nonatomic, strong) NSString *itemName;
+
+// 商品価格
+@property (nonatomic, strong) NSString *itemPrice;
+
+// 商品ID
+@property (nonatomic, strong) NSString *identifier;
 
 // 商品画像
 @property (nonatomic, weak) IBOutlet UIImageView *itemImageView;
@@ -66,6 +77,18 @@
     _bottomSeperatorView.frame = CGRectMake(x, y, size.width, size.height);
     [self.contentView addSubview:_topSeperatorView];
     [self.contentView addSubview:_bottomSeperatorView];
+}
+
+- (void)setProduct:(SKProduct *)product
+{
+    if (_product == product) {
+        return;
+    }
+    
+    _product = product;
+    self.identifier = [product productIdentifier];
+    self.itemName = product.localizedTitle;
+    self.itemPrice = [product localizedPrice];
 }
 
 - (void)setType:(ProductItemType)type
@@ -154,6 +177,47 @@
 // 商品購入
 - (IBAction)purchaseAction:(id)sender;
 {
+    PurchaseManager *manager = [PurchaseManager sharedManager];
+    [manager buyProduct:_product withQuantity:1 completion:^(NSArray *productIdentifiers, BOOL succeed) {
+        if (succeed) {
+            for (NSString *identifier in productIdentifiers) {
+                [self provideContentWithProductIdentifier:identifier];
+            }
+        }
+    }];
+}
+
+- (void)provideContentWithProductIdentifier:(NSString *)identifier
+{
+    NSRange range;
+    NSInteger quantity;
+    SolitaireManager *manager = [SolitaireManager sharedManager];
     
+    // 基礎体力チェック
+    range = [identifier rangeOfString:kProductIdentifierPowerUp];
+    if (range.location != NSNotFound) {
+        quantity = [[identifier substringFromIndex:range.length] integerValue];
+        [manager buyPowerWithQuantity:quantity];
+        DebugLog(@"基礎体力:[%ld]", (long)quantity);
+        return;
+    }
+    
+    // 栄養剤チェック
+    range = [identifier rangeOfString:kProductIdentifierDrink];
+    if (range.location != NSNotFound) {
+        quantity = [[identifier substringFromIndex:range.length] integerValue];
+        [manager buyNutrientWithQuantity:quantity];
+        DebugLog(@"栄養剤:[%ld]", (long)quantity);
+        return;
+    }
+    
+    // 山札戻しチェック
+    range = [identifier rangeOfString:kProductIdentifierYamafuda];
+    if (range.location != NSNotFound) {
+        quantity = [[identifier substringFromIndex:range.length] integerValue];
+        [manager buyYamafudaWithQuantity:quantity];
+        DebugLog(@"山札戻し:[%ld]", (long)quantity);
+        return;
+    }
 }
 @end

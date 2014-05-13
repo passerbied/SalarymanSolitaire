@@ -34,8 +34,11 @@ enum { SSAlertViewFirstButton = 1 };
 // ゲーム終了
 - (void)gameWillExit;
 
-// 商品購入
-- (void)itemWillBuy;
+// 商品購入＆使用
+- (void)willUseYamafuda;
+- (void)willUseDrink;
+- (void)willBuyYamafuda;
+- (void)willBuyDrink;
 
 // リトライ
 - (void)gameWillRetry;
