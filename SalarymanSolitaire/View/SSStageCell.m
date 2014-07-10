@@ -104,7 +104,7 @@ NSString *const StageDidSelectNotificationADKey = @"StageDidSelectNotificationAD
     UIImageView                         *_enemyImageView;
     
     // ステージタイトル
-    UILabel                             *_stageLabel;
+//    UILabel                             *_stageLabel;
     
     // 最新の識別イメージ
     UIImageView                         *_hereImageView;
@@ -128,14 +128,14 @@ NSString *const StageDidSelectNotificationADKey = @"StageDidSelectNotificationAD
     }
     
     // ステージタイトル作成
-    if (!_stageLabel) {
-        _stageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 85.0f, 17.0f)];
-        _stageLabel.backgroundColor = [UIColor clearColor];
-        _stageLabel.textColor = [UIColor whiteColor];
-        _stageLabel.textAlignment = NSTextAlignmentCenter;
-        _stageLabel.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:12.0f];
-        [self addSubview:_stageLabel];
-    }
+//    if (!_stageLabel) {
+//        _stageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 85.0f, 17.0f)];
+//        _stageLabel.backgroundColor = [UIColor clearColor];
+//        _stageLabel.textColor = [UIColor whiteColor];
+//        _stageLabel.textAlignment = NSTextAlignmentCenter;
+//        _stageLabel.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:12.0f];
+//        [self addSubview:_stageLabel];
+//    }
     
     // ステージ選択処理
     [self addTarget:self
@@ -174,7 +174,7 @@ NSString *const StageDidSelectNotificationADKey = @"StageDidSelectNotificationAD
     }
     
     // タイトル設定
-    _stageLabel.text = [NSString stringWithFormat:@"STAGE %d", (int)_stageID];
+//    _stageLabel.text = [NSString stringWithFormat:@"STAGE %d", (int)_stageID];
     
     // 敵イメージ設定
     NSString *imageName = nil;
