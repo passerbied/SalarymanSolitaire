@@ -39,4 +39,22 @@
     _webView.backgroundColor = [UIColor clearColor];
     [_webView loadRequest:[NSURLRequest requestWithURL:_URL]];
 }
+
+- (void)viewWillLayoutSubviews
+{
+    [super viewWillLayoutSubviews];
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        if (![UIDevice isPhone5]) {
+            // レイアウト設定
+            [self layoutSubviewsForPhone4];
+        }
+    }
+}
+
+// レイアウト設定
+- (void)layoutSubviewsForPhone4;
+{
+    [_webView setFrame:CGRectMake(5, 70, 295, 345)];
+}
 @end

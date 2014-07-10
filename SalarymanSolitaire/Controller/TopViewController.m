@@ -98,7 +98,7 @@
     UIViewController *controller = nil;
     
     // 初回起動チェック
-    if ([[SolitaireManager sharedManager] isFirstRun]) {
+    if (![[SolitaireManager sharedManager] isFirstRun]) {
         // 初回起動時のみチュートリアル画面に遷移する
         controller = [TutorialViewController controller];
     } else {

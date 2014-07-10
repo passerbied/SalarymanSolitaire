@@ -71,8 +71,8 @@
 - (void)loadStageInfo;
 {
     SolitaireManager *manager = [SolitaireManager sharedManager];
-    [manager selectStageWithID:_stageID];
     SSStage *stage = manager.currentStage;
+    _stageID = stage.stageID;
     if (stage) {
         // めくり枚数
         self.numberOfPokers = stage.numberOfPokers;
@@ -95,6 +95,9 @@
         // 体力
         _physicalView.maxPower = manager.maxPower;
         _physicalView.currentPower = manager.currentPower;
+        
+        // 画面活性制御
+        [self modifySolitaireUserInteractionEnabledIfNecessary];
         
         // 敵イメージ設定
         if ([UIDevice isPhone5]) {
@@ -133,6 +136,21 @@
     self.bottomBar.frame = rect;
 }
 
+// 画面活性制御
+- (void)modifySolitaireUserInteractionEnabledIfNecessary
+{
+    // ポーカー活性制御
+    BOOL enabled = _physicalView.currentPower > 0;
+    self.pokerView.userInteractionEnabled = enabled;
+    self.yamafudaButton.userInteractionEnabled = enabled;
+    
+    // 栄養剤活性制御
+    if ([self.physicalView isPowerOFF]) {
+        self.nutrientButton.enabled = YES;
+    } else {
+        self.nutrientButton.enabled = NO;
+    }
+}
 
 // 経過時間タイマー
 - (void)handleUpdateTimer:(NSTimer *)timer;
@@ -141,12 +159,8 @@
     [super handleUpdateTimer:timer];
     [self.physicalView setDuration:self.duration];
     
-    // 栄養剤活性制御
-    if ([self.physicalView isPowerOFF]) {
-        self.nutrientButton.enabled = YES;
-    } else {
-        self.nutrientButton.enabled = NO;
-    }
+    // 画面活性制御
+    [self modifySolitaireUserInteractionEnabledIfNecessary];
 }
 
 // ショップ表示
@@ -187,6 +201,9 @@
         
         // 待ち画面を隠す
         [WUProgressView dismiss];
+        
+        // ゲームを再開する
+        [self resume];
     }];
 }
 #pragma mark - 画面操作
@@ -325,14 +342,11 @@
     [self start];
 }
 
-// 栄養剤使用可否チェック
-- (BOOL)isNutrientEnabled
-{
-    return YES;
-}
-
 - (void)reducePowerIfNecessary
 {
+    // 体力ビュー更新
+    [_physicalView powerUp:NO];
+    
     // 再び挑戦する場合、処理を飛ばす。
     if ([self playAgainMode]) {
         return;

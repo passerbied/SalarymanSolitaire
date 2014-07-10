@@ -43,7 +43,7 @@
         CGFloat width = 20.0f;
         _numberLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, -6, width, width)];
         _numberLabel.backgroundColor = UIColorFromRGB(0xE7C929);
-        _numberLabel.font = SSGothicProFont(15.0f);
+        _numberLabel.font = SSGothicProFont(8.0f);
         _numberLabel.textColor = SSColorWhite;
         _numberLabel.textAlignment = NSTextAlignmentCenter;
         _numberLabel.layer.cornerRadius = width/2.0f;

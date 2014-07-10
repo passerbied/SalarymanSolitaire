@@ -32,7 +32,6 @@
 		34C7509018CAB37F00BF3FC6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 34C7508E18CAB37F00BF3FC6 /* InfoPlist.strings */; };
 		34C7509218CAB37F00BF3FC6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 34C7509118CAB37F00BF3FC6 /* main.m */; };
 		34C7509618CAB37F00BF3FC6 /* SSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 34C7509518CAB37F00BF3FC6 /* SSAppDelegate.m */; };
-		34C7509E18CAB37F00BF3FC6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34C7509D18CAB37F00BF3FC6 /* Images.xcassets */; };
 		34C750A518CAB37F00BF3FC6 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34C750A418CAB37F00BF3FC6 /* XCTest.framework */; };
 		34C750A618CAB37F00BF3FC6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34C7508518CAB37F00BF3FC6 /* Foundation.framework */; };
 		34C750A718CAB37F00BF3FC6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34C7508918CAB37F00BF3FC6 /* UIKit.framework */; };
@@ -43,6 +42,10 @@
 		34C750C418CAB81D00BF3FC6 /* TopViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34C750C218CAB81D00BF3FC6 /* TopViewController.xib */; };
 		34C750CA18CAC43A00BF3FC6 /* HelpInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34C750C818CAC43A00BF3FC6 /* HelpInfoViewController.m */; };
 		34C750CB18CAC43A00BF3FC6 /* HelpInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34C750C918CAC43A00BF3FC6 /* HelpInfoViewController.xib */; };
+		48DBAC8D196D858D00134FE6 /* popup_base_568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 48DBAC8B196D858D00134FE6 /* popup_base_568h@2x.png */; };
+		48DBAC8E196D858D00134FE6 /* popup_base@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 48DBAC8C196D858D00134FE6 /* popup_base@2x.png */; };
+		48DBAC90196D90B100134FE6 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48DBAC8F196D90B100134FE6 /* Media.xcassets */; };
+		48DBAC92196D91B800134FE6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48DBAC91196D91B800134FE6 /* Images.xcassets */; };
 		E502380418FAA8710026D3FC /* deal_card.caf in Resources */ = {isa = PBXBuildFile; fileRef = E502380318FAA8710026D3FC /* deal_card.caf */; };
 		E50BD91D18E307690087C170 /* story_header_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E50BD91618E307690087C170 /* story_header_bg@2x.png */; };
 		E50BD92118E307690087C170 /* story_skip_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E50BD91A18E307690087C170 /* story_skip_btn@2x.png */; };
@@ -741,7 +744,6 @@
 		34C7509318CAB37F00BF3FC6 /* SalarymanSolitaire-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SalarymanSolitaire-Prefix.pch"; sourceTree = "<group>"; };
 		34C7509418CAB37F00BF3FC6 /* SSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSAppDelegate.h; sourceTree = "<group>"; };
 		34C7509518CAB37F00BF3FC6 /* SSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSAppDelegate.m; sourceTree = "<group>"; };
-		34C7509D18CAB37F00BF3FC6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		34C750A318CAB37F00BF3FC6 /* SalarymanSolitaireTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SalarymanSolitaireTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		34C750A418CAB37F00BF3FC6 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		34C750AC18CAB37F00BF3FC6 /* SalarymanSolitaireTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SalarymanSolitaireTests-Info.plist"; sourceTree = "<group>"; };
@@ -755,6 +757,10 @@
 		34C750C718CAC43A00BF3FC6 /* HelpInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpInfoViewController.h; sourceTree = "<group>"; };
 		34C750C818CAC43A00BF3FC6 /* HelpInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpInfoViewController.m; sourceTree = "<group>"; };
 		34C750C918CAC43A00BF3FC6 /* HelpInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HelpInfoViewController.xib; sourceTree = "<group>"; };
+		48DBAC8B196D858D00134FE6 /* popup_base_568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "popup_base_568h@2x.png"; sourceTree = "<group>"; };
+		48DBAC8C196D858D00134FE6 /* popup_base@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "popup_base@2x.png"; sourceTree = "<group>"; };
+		48DBAC8F196D90B100134FE6 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
+		48DBAC91196D91B800134FE6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		E502380318FAA8710026D3FC /* deal_card.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = deal_card.caf; sourceTree = "<group>"; };
 		E50BD91618E307690087C170 /* story_header_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "story_header_bg@2x.png"; sourceTree = "<group>"; };
 		E50BD91A18E307690087C170 /* story_skip_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "story_skip_btn@2x.png"; sourceTree = "<group>"; };
@@ -1679,15 +1685,15 @@
 		34C7508B18CAB37F00BF3FC6 /* SalarymanSolitaire */ = {
 			isa = PBXGroup;
 			children = (
-				E590F6B718F6C64F0077E789 /* Resource */,
 				3493AC9D18CDF2FB0042603C /* Library */,
 				34C750BB18CAB72F00BF3FC6 /* Model */,
 				34C750BC18CAB72F00BF3FC6 /* View */,
 				34C750BA18CAB72F00BF3FC6 /* Controller */,
 				34C7509418CAB37F00BF3FC6 /* SSAppDelegate.h */,
 				34C7509518CAB37F00BF3FC6 /* SSAppDelegate.m */,
-				34C7509D18CAB37F00BF3FC6 /* Images.xcassets */,
 				34C7508C18CAB37F00BF3FC6 /* Supporting Files */,
+				48DBAC8F196D90B100134FE6 /* Media.xcassets */,
+				48DBAC91196D91B800134FE6 /* Images.xcassets */,
 			);
 			path = SalarymanSolitaire;
 			sourceTree = "<group>";
@@ -1695,6 +1701,7 @@
 		34C7508C18CAB37F00BF3FC6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E590F6B718F6C64F0077E789 /* Resource */,
 				E584725419224C1A0045C93C /* AppleIncRootCertificate.cer */,
 				34C7508D18CAB37F00BF3FC6 /* SalarymanSolitaire-Info.plist */,
 				34C7508E18CAB37F00BF3FC6 /* InfoPlist.strings */,
@@ -2280,6 +2287,8 @@
 		E5EA751618DCF1C4002E2BAF /* 01_Top */ = {
 			isa = PBXGroup;
 			children = (
+				48DBAC8B196D858D00134FE6 /* popup_base_568h@2x.png */,
+				48DBAC8C196D858D00134FE6 /* popup_base@2x.png */,
 				3493756918CB3B9600D4BD54 /* WUProgressViewMask@2x.png */,
 				E5EA752D18DCF2DA002E2BAF /* btn_recommend@2x.png */,
 				E5EA751918DCF271002E2BAF /* bg_top_title@2x.png */,
@@ -2946,7 +2955,6 @@
 				E50BD9B918E31C700087C170 /* enemy_049_card@2x.png in Resources */,
 				E5E737D918E1BD2900E5A40A /* stage_067_story@2x.png in Resources */,
 				E58F856F18DEACA400C3CDC3 /* enemy_044_clear@2x.png in Resources */,
-				34C7509E18CAB37F00BF3FC6 /* Images.xcassets in Resources */,
 				E58F859618DEACA400C3CDC3 /* enemy_057_clear@2x.png in Resources */,
 				E58F856418DEACA400C3CDC3 /* enemy_040_not_clear@2x.png in Resources */,
 				E5E0E7A418D7A0E00047DE80 /* bg_card_back@2x.png in Resources */,
@@ -3032,6 +3040,7 @@
 				E5E0B4361905567E005B9B3C /* tutorial_story@2x.png in Resources */,
 				E50BD9C018E31C700087C170 /* enemy_056_card@2x.png in Resources */,
 				E5DCE34A18E455E900B95064 /* free_btn_fin_on@2x.png in Resources */,
+				48DBAC8E196D858D00134FE6 /* popup_base@2x.png in Resources */,
 				E58F85CA18DEACA500C3CDC3 /* enemy_074_not_clear@2x.png in Resources */,
 				E5E737CF18E1BD2900E5A40A /* stage_057_story@2x.png in Resources */,
 				E58D4B2618E86C6A006CCEEA /* story_next_btn@2x.png in Resources */,
@@ -3285,6 +3294,7 @@
 				E5E0E7EA18D7A0E00047DE80 /* physical_bar@2x.png in Resources */,
 				E5EA752E18DCF2DA002E2BAF /* btn_recommend@2x.png in Resources */,
 				E58F854918DEACA400C3CDC3 /* enemy_031_not_clear@2x.png in Resources */,
+				48DBAC90196D90B100134FE6 /* Media.xcassets in Resources */,
 				E5EA752518DCF271002E2BAF /* btn_freeplay_on@2x.png in Resources */,
 				E58F852518DEACA400C3CDC3 /* enemy_019_not_clear@2x.png in Resources */,
 				E590F6B618F6C6420077E789 /* put_card.mp3 in Resources */,
@@ -3423,6 +3433,7 @@
 				E58F85B418DEACA400C3CDC3 /* enemy_067_clear@2x.png in Resources */,
 				E50BD9E418E31C700087C170 /* enemy_092_card@2x.png in Resources */,
 				E58D4B2218E86C19006CCEEA /* story_bg@2x.png in Resources */,
+				48DBAC8D196D858D00134FE6 /* popup_base_568h@2x.png in Resources */,
 				E50BD9CF18E31C700087C170 /* enemy_071_card@2x.png in Resources */,
 				E58F858C18DEACA400C3CDC3 /* enemy_054_banner@2x.png in Resources */,
 				E58F857918DEACA400C3CDC3 /* enemy_047_not_clear@2x.png in Resources */,
@@ -3459,6 +3470,7 @@
 				E5E0E7E118D7A0E00047DE80 /* card_4_9@2x.png in Resources */,
 				E58F857A18DEACA400C3CDC3 /* enemy_048_banner@2x.png in Resources */,
 				E5E0E7DF18D7A0E00047DE80 /* card_4_7@2x.png in Resources */,
+				48DBAC92196D91B800134FE6 /* Images.xcassets in Resources */,
 				E50BD9A118E31C700087C170 /* enemy_025_card@2x.png in Resources */,
 				34C750CB18CAC43A00BF3FC6 /* HelpInfoViewController.xib in Resources */,
 				E5E737A218E1BD2900E5A40A /* stage_012_story@2x.png in Resources */,
@@ -3734,7 +3746,7 @@
 					"$(PROJECT_DIR)/SalarymanSolitaire/Library/IAP",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "BB4887EF-0694-48C9-B66A-87FC88AA7707";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -3761,7 +3773,7 @@
 					"$(PROJECT_DIR)/SalarymanSolitaire/Library/IAP",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "BB4887EF-0694-48C9-B66A-87FC88AA7707";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

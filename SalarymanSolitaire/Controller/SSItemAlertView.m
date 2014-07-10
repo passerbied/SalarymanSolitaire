@@ -13,8 +13,7 @@
 
 enum
 {
-    SSItemAlertButtonIndexCancel = SSAlertViewFirstButton,
-    SSItemAlertButtonIndexUse,
+    SSItemAlertButtonIndexUse = SSAlertViewFirstButton,
     SSItemAlertButtonIndexBuy
 };
 

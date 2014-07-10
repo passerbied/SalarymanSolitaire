@@ -184,7 +184,7 @@
             [self powerUp:YES];
         }
     }
-    [self showCurrentPower];
+    [self showCurrentPower];    
 }
 
 - (NSString *)currentTime
@@ -232,7 +232,7 @@
     
     _maxPower = maxPower;
     // 白いバー位置制御
-    if (_maxPower == kPowerValueMax) {
+    if (_maxPower >= kPowerValueMax) {
         _physicalBarView.hidden = YES;
     } else {
         _physicalBarView.hidden = NO;

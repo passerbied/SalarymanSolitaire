@@ -134,7 +134,7 @@ enum { ShopViewSectionDrink, ShopViewSectionPower, ShopViewSectionYamafuda, Shop
 {
     if (section == ShopViewSectionPower) {
         SolitaireManager *manager = [SolitaireManager sharedManager];
-        if (manager.additionalPower == 5) {
+        if (manager.additionalPower >= 5) {
             // 既に最大体力である
             return 0;
         }

@@ -60,9 +60,6 @@ NSString* const GameInfoItemYamafudas           = @"ItemYamafudas";
     // ステージ設定情報
     NSMutableArray                      *_stageInfos;
     
-    // 最新のステージ
-    SSStage                             *_selectedStage;
-    
     // 最新ステージID
     NSInteger                           _lastStageID;
     
@@ -178,7 +175,7 @@ NSString* const GameInfoItemYamafudas           = @"ItemYamafudas";
 // 体力
 - (NSInteger)currentPower;
 {
-    if (_selectedStage.stageID == _lastStageID) {
+    if (_currentStage.stageID == _lastStageID) {
         // 前回に引き続き挑戦する場合
         return _lastStagePower;
     } else {
@@ -253,6 +250,7 @@ NSString* const GameInfoItemYamafudas           = @"ItemYamafudas";
     // アプリ内課金情報保存
     NSDictionary *dictionary = @{GameInfoLastStageID:[NSNumber numberWithInteger:_lastStageID],
                                  GameInfoLastStageClearTimes:[NSNumber numberWithInteger:_clearTimes],
+                                 GameInfoLastStagePower:[NSNumber numberWithInteger:_lastStagePower],
                                  GameInfoItemAdditionalPower:[NSNumber numberWithInteger:_additionalPower],
                                  GameInfoItemNutrients:[NSNumber numberWithInteger:_nutrients],
                                  GameInfoItemYamafudas:[NSNumber numberWithInteger:_yamafudas]};
