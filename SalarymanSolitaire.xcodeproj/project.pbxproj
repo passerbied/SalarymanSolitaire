@@ -4052,7 +4052,7 @@
 					"$(SRCROOT)/SalarymanSolitaire/include/**",
 				);
 				INFOPLIST_FILE = "SalarymanSolitaire/SalarymanSolitaire-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SalarymanSolitaire/Library/IAP",
@@ -4079,7 +4079,7 @@
 					"$(SRCROOT)/SalarymanSolitaire/include/**",
 				);
 				INFOPLIST_FILE = "SalarymanSolitaire/SalarymanSolitaire-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SalarymanSolitaire/Library/IAP",

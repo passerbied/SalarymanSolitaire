@@ -70,7 +70,7 @@
     [super updateView];
     
     // ステージ一覧表示
-    NSInteger stageID = 3;//[[SolitaireManager sharedManager] lastStageID];
+    NSInteger stageID = 7;//[[SolitaireManager sharedManager] lastStageID];
     [SSStageCell setSelectedStageID:stageID];
     [self.stageListView reloadData];
     
