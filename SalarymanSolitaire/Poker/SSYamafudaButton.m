@@ -71,17 +71,17 @@
         // 山札戻しの場合
         _numbersLabel.text = [NSString stringWithFormat:@"%ld", (long)_numberOfYamafuda];
         _numbersLabel.hidden = NO;
-        _backgroundImageView.image = [UIImage imageNamed:@"product_item.png"];
+        _backgroundImageView.image = [UIImage imageNamed:@"product_item"];
         
     } else if (_displayMode == YamafudaButtonDisplayModeMore) {
         // 山札戻しの回数が０になった場合
         _numbersLabel.hidden = YES;
-        _backgroundImageView.image = [UIImage imageNamed:@"btn_more_card.png"];
+        _backgroundImageView.image = [UIImage imageNamed:@"btn_more_card"];
         
     } else {
         // フリープレイ、または山札にトランプがある場合
         _numbersLabel.hidden = YES;
-        _backgroundImageView.image = [UIImage imageNamed:@"bg_card_back.png"];
+        _backgroundImageView.image = [UIImage imageNamed:@"bg_card_back"];
     }
 }
 

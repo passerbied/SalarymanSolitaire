@@ -15,6 +15,8 @@
 #import "SSItemAlertView.h"
 #import "PopupShopView.h"
 
+#define kPokerOffsetY    86
+
 @interface SSChallengeController ()
 {
     // ステージ情報
@@ -102,8 +104,8 @@
         // 敵イメージ設定
         if ([UIDevice isPhone5]) {
             // 敵のイメージを設定する
-            NSString *name = [NSString stringWithFormat:@"enemy_%03d_banner.png", (int)stage.enemyID];
-            [self.enemyView setImage:[UIImage temporaryImageNamed:name]];
+            NSString *name = [NSString stringWithFormat:@"enemy_%03d_banner", (int)stage.enemyID];
+            [self.enemyView setImage:[UIImage imageNamed:name]];
         }
     }
     
@@ -123,11 +125,18 @@
     // 敵イメージを非表示にする
     [self.enemyView setHidden:YES];
     
+    CGRect rect = self.finishedPokerPane.frame;
+    rect.origin.y = rect.origin.y - kPokerOffsetY;
+    
+    self.pokerImageView.frame = rect;
+    
+    self.finishedPokerPane.frame = rect;
+    
     // ポーカー表示位置設定
     CGFloat height = self.view.bounds.size.height;
     CGFloat y = self.physicalView.bounds.size.height;
     height = height - y - self.bottomBar.bounds.size.height;
-    CGRect rect = CGRectMake(0.0f, y, self.view.bounds.size.width, height);
+    rect = CGRectMake(0.0f, y, self.view.bounds.size.width, height);
     self.pokerView.frame = rect;
 
     // ボタン表示位置設定

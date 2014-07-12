@@ -12,6 +12,8 @@
 	<dict>
 		<key>C0617311-9D0C-453B-823E-4673E3FB4B8E</key>
 		<string>ssh://bitbucket.org/i-chou/salarymansolitaire.git</string>
+		<key>D9F56C4F-1782-4341-B6F8-C983021CE705</key>
+		<string>https://bitbucket.org/ifelsego/solitaire.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>SalarymanSolitaire.xcodeproj/project.xcworkspace</string>
@@ -19,6 +21,8 @@
 	<dict>
 		<key>C0617311-9D0C-453B-823E-4673E3FB4B8E</key>
 		<string>../..</string>
+		<key>D9F56C4F-1782-4341-B6F8-C983021CE705</key>
+		<string>../../../../../Downloads/SalarymanSolitaire_seiri</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>ssh://bitbucket.org/i-chou/salarymansolitaire.git</string>
@@ -35,6 +39,14 @@
 			<string>C0617311-9D0C-453B-823E-4673E3FB4B8E</string>
 			<key>IDESourceControlWCCName</key>
 			<string>SalarymanSolitaire</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>D9F56C4F-1782-4341-B6F8-C983021CE705</string>
+			<key>IDESourceControlWCCName</key>
+			<string>SalarymanSolitaire_seiri</string>
 		</dict>
 	</array>
 </dict>

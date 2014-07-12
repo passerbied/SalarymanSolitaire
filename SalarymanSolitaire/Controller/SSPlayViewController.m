@@ -84,13 +84,13 @@ NSString *const SolitaireWillPauseGameNotification = @"SolitaireWillPauseGameNot
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[imageView]|" options:0 metrics: 0 views:viewsDictionary]];
     
     UIImage *pokerImage = [UIImage imageNamed:@"bg_finished_area"];
-    UIImageView *pokerImageView = [[UIImageView alloc] initWithImage:pokerImage];
+    _pokerImageView = [[UIImageView alloc] initWithImage:pokerImage];
     CGPoint point = self.pokerView.frame.origin;
     point.x += 3;
     point.y += 3;
     CGRect rect = CGRectMake(point.x, point.y, pokerImage.size.width, pokerImage.size.height);
-    pokerImageView.frame = rect;
-    [self.view insertSubview:pokerImageView belowSubview:self.pokerView];
+    _pokerImageView.frame = rect;
+    [self.view insertSubview:_pokerImageView belowSubview:self.pokerView];
     
     // 山札戻しボタン
     if (!_yamafudaButton) {
@@ -103,13 +103,13 @@ NSString *const SolitaireWillPauseGameNotification = @"SolitaireWillPauseGameNot
     self.pokerView.backgroundColor = [UIColor clearColor];
     
     UIImage *finishedPokerImage = [UIImage imageNamed:@"bg_finished_area"];
-    UIImageView *finishedPokerPane = [[UIImageView alloc] initWithImage:finishedPokerImage];
+    _finishedPokerPane = [[UIImageView alloc] initWithImage:finishedPokerImage];
     point = _pokerView.frame.origin;
     point.x += 3;
     point.y += 3;
     rect = CGRectMake(point.x, point.y, finishedPokerImage.size.width, finishedPokerImage.size.height);
-    finishedPokerPane.frame = rect;
-    [self.view insertSubview:finishedPokerPane belowSubview:_pokerView];
+    _finishedPokerPane.frame = rect;
+    [self.view insertSubview:_finishedPokerPane belowSubview:_pokerView];
     
     _pokerMaxCount = SSPokerColorCount * SSPokerNameCount;
     _pokerLayout = [[SSDraggblePokerViewLayout alloc] init];

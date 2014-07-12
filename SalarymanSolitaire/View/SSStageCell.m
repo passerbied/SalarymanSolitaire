@@ -9,7 +9,7 @@
 #import "SSStageCell.h"
 #import "SSStage.h"
 
-const NSInteger SolitaireStageCellMaxNumber = 101;
+const NSInteger SolitaireStageCellMaxNumber = 100;
 const NSInteger SolitaireStageCellNumberPerRow = 3;
 const CGFloat SolitaireStageCellHeight = 165.0f;
 const CGFloat SolitaireStageCellHeaderHeight = 15.0f;
@@ -179,11 +179,11 @@ NSString *const StageDidSelectNotificationADKey = @"StageDidSelectNotificationAD
     // 敵イメージ設定
     NSString *imageName = nil;
     if ([self isCleared]) {
-        imageName = [NSString stringWithFormat:@"enemy_%03d_clear.png", (int)_enemyID];
+        imageName = [NSString stringWithFormat:@"enemy_%03d_clear", (int)_enemyID];
     } else {
-        imageName = [NSString stringWithFormat:@"enemy_%03d_not_clear.png", (int)_enemyID];
+        imageName = [NSString stringWithFormat:@"enemy_%03d_not_clear", (int)_enemyID];
     }
-    UIImage *enemyImage = [UIImage temporaryImageNamed:imageName];
+    UIImage *enemyImage = [UIImage imageNamed:imageName];
     [_enemyImageView setImage:enemyImage];
     
     // HERE

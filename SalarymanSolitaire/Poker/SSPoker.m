@@ -77,9 +77,9 @@
 {
     NSString *name;
     if (_displayOptions & SSPokerOptionShowFaceUp) {
-        name = [NSString stringWithFormat:@"card_%ld_%ld.png", (long)_color, (long)_name];
+        name = [NSString stringWithFormat:@"card_%ld_%ld", (long)_color, (long)_name];
     } else {
-        name = @"bg_card_back.png";
+        name = @"bg_card_back";
     }
     return [UIImage imageNamed:name];;
 }

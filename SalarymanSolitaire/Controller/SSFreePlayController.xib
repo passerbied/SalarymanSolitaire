@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -74,7 +74,7 @@
                             <state key="normal" backgroundImage="free_btn_fin.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
-                            <state key="highlighted" backgroundImage="free_btn_fin_on.png"/>
+                            <state key="highlighted" backgroundImage="free_btn_fin_on"/>
                             <connections>
                                 <action selector="terminateAction:" destination="-1" eventType="touchUpInside" id="BEX-JY-5gd"/>
                             </connections>
@@ -86,7 +86,7 @@
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <state key="disabled" backgroundImage="nutrient_disabled.png"/>
-                            <state key="highlighted" backgroundImage="free_btn_retry_on.png"/>
+                            <state key="highlighted" backgroundImage="free_btn_retry_on"/>
                             <connections>
                                 <action selector="retryAction:" destination="-1" eventType="touchUpInside" id="epZ-nf-b7S"/>
                             </connections>
@@ -97,7 +97,7 @@
                             <state key="normal" backgroundImage="free_btn_mode.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
-                            <state key="highlighted" backgroundImage="free_btn_mode_on.png"/>
+                            <state key="highlighted" backgroundImage="free_btn_mode_on"/>
                             <connections>
                                 <action selector="selectModeAction:" destination="-1" eventType="touchUpInside" id="rdU-70-Jbt"/>
                             </connections>
@@ -111,11 +111,11 @@
     </objects>
     <resources>
         <image name="free_btn_fin.png" width="69" height="34"/>
-        <image name="free_btn_fin_on.png" width="69" height="34"/>
+        <image name="free_btn_fin_on" width="69" height="34"/>
         <image name="free_btn_mode.png" width="69" height="34"/>
-        <image name="free_btn_mode_on.png" width="69" height="34"/>
+        <image name="free_btn_mode_on" width="69" height="34"/>
         <image name="free_btn_retry.png" width="69" height="34"/>
-        <image name="free_btn_retry_on.png" width="69" height="34"/>
+        <image name="free_btn_retry_on" width="69" height="34"/>
         <image name="free_header_recomend" width="109" height="40"/>
         <image name="free_header_timeframe" width="146" height="40"/>
         <image name="nutrient_disabled.png" width="71" height="36"/>

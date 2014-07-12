@@ -22,6 +22,9 @@
 // ポーカービュー
 @property (nonatomic, weak) IBOutlet UICollectionView *pokerView;
 
+@property (nonatomic, strong) UIImageView *pokerImageView;
+@property (nonatomic, strong) UIImageView *finishedPokerPane;
+
 /**************************************************/
 // ゲーム設定
 /**************************************************/

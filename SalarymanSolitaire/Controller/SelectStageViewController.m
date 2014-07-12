@@ -70,7 +70,7 @@
     [super updateView];
     
     // ステージ一覧表示
-    NSInteger stageID = 7;//[[SolitaireManager sharedManager] lastStageID];
+    NSInteger stageID = [[SolitaireManager sharedManager] lastStageID];
     [SSStageCell setSelectedStageID:stageID];
     [self.stageListView reloadData];
     
@@ -147,7 +147,6 @@
     if (SolitaireStageCellMaxNumber % SolitaireStageCellNumberPerRow) {
         rows++;
     }
-    NSLog(@"%d",rows);
     return rows;
 }
 

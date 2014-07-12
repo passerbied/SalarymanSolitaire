@@ -109,7 +109,7 @@ NSString* const GameInfoItemYamafudas           = @"ItemYamafudas";
             _firstRun = [[_userInfo objectForKey:UserInfoFirstRunKey] boolValue];
         }
     }
-    
+//    [FDKeychain deleteItemForKey:SolitaireGameInfo forService:SolitaireGameInfo error:nil];
     // ゲーム情報取得
     NSData *data = [FDKeychain itemForKey:SolitaireGameInfo forService:SolitaireGameInfo error:nil];
     
@@ -132,6 +132,7 @@ NSString* const GameInfoItemYamafudas           = @"ItemYamafudas";
         
         // 購入山札戻し
         _yamafudas = [[dictionary objectForKey:GameInfoItemYamafudas] integerValue];
+        
     } else {
         // 最新ステージ
         self.lastStageID = 1;

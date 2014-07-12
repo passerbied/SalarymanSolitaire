@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -15,12 +15,12 @@
             <rect key="frame" x="0.0" y="0.0" width="308" height="419"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="popup_base_clear.png" translatesAutoresizingMaskIntoConstraints="NO" id="QPk-op-Ev9" userLabel="背景イメージ">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="popup_base_clear" translatesAutoresizingMaskIntoConstraints="NO" id="QPk-op-Ev9" userLabel="背景イメージ">
                     <rect key="frame" x="0.0" y="0.0" width="308" height="419"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="popup_title_clear.png" translatesAutoresizingMaskIntoConstraints="NO" id="4Rn-4y-FEi" userLabel="背景イメージ">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="popup_title_clear" translatesAutoresizingMaskIntoConstraints="NO" id="4Rn-4y-FEi" userLabel="背景イメージ">
                     <rect key="frame" x="20" y="40" width="268" height="86"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -33,10 +33,10 @@
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H3e-iq-VsK" userLabel="次へ">
                     <rect key="frame" x="56" y="155" width="196" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" backgroundImage="popup_btn_btn.png">
+                    <state key="normal" backgroundImage="popup_btn_btn">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="highlighted" backgroundImage="popup_btn_btn_on.png"/>
+                    <state key="highlighted" backgroundImage="popup_btn_btn_on"/>
                     <connections>
                         <action selector="nextStageAction:" destination="-1" eventType="touchUpInside" id="4FS-uu-XsN"/>
                     </connections>
@@ -44,7 +44,7 @@
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="efq-zK-WgV" userLabel="共有Mail">
                     <rect key="frame" x="30" y="230" width="60" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" image="popup_btn_mail.png">
+                    <state key="normal" image="popup_btn_mail">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -54,7 +54,7 @@
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="etJ-L1-IhY" userLabel="共有Facebook">
                     <rect key="frame" x="124" y="230" width="60" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" image="popup_btn_facebook.png">
+                    <state key="normal" image="popup_btn_facebook">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -64,7 +64,7 @@
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mLR-4J-dxb" userLabel="共有Twitter">
                     <rect key="frame" x="216" y="230" width="60" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" image="popup_btn_twitter.png">
+                    <state key="normal" image="popup_btn_twitter">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -74,7 +74,7 @@
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lmn-3J-Rcg" userLabel="新作アプリ">
                     <rect key="frame" x="69" y="325" width="168" height="62"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" backgroundImage="popup_btn_clear.png">
+                    <state key="normal" backgroundImage="popup_btn_clear">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <state key="highlighted" backgroundImage="popup_btn_clear_on.png"/>
@@ -88,14 +88,14 @@
         </view>
     </objects>
     <resources>
-        <image name="popup_base_clear.png" width="308" height="419"/>
-        <image name="popup_btn_btn.png" width="196" height="50"/>
-        <image name="popup_btn_btn_on.png" width="196" height="50"/>
-        <image name="popup_btn_clear.png" width="178" height="73"/>
+        <image name="popup_base_clear" width="308" height="419"/>
+        <image name="popup_btn_btn" width="196" height="50"/>
+        <image name="popup_btn_btn_on" width="196" height="50"/>
+        <image name="popup_btn_clear" width="178" height="73"/>
         <image name="popup_btn_clear_on.png" width="178" height="73"/>
-        <image name="popup_btn_facebook.png" width="22" height="36"/>
-        <image name="popup_btn_mail.png" width="36" height="32"/>
-        <image name="popup_btn_twitter.png" width="40" height="30"/>
-        <image name="popup_title_clear.png" width="268" height="86"/>
+        <image name="popup_btn_facebook" width="22" height="36"/>
+        <image name="popup_btn_mail" width="36" height="32"/>
+        <image name="popup_btn_twitter" width="40" height="30"/>
+        <image name="popup_title_clear" width="268" height="86"/>
     </resources>
 </document>

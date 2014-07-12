@@ -24,6 +24,9 @@
 // ツールバー
 @property (nonatomic, strong) IBOutlet UIView *topBar;
 
+// 条件画面
+@property (weak, nonatomic) IBOutlet UIImageView *termBackground;
+
 // 条件
 @property (nonatomic, strong) IBOutlet UIView *conditionView;
 
@@ -31,13 +34,13 @@
 @property (nonatomic, weak) IBOutlet UIImageView *enemyPhotoView;
 
 // 敵の肩書き
-@property (nonatomic, weak) IBOutlet UILabel *enemyTitleLabel;
+//@property (nonatomic, weak) IBOutlet UILabel *enemyTitleLabel;
 
 // 敵の名前
-@property (nonatomic, weak) IBOutlet UILabel *enemyNameLabel;
+//@property (nonatomic, weak) IBOutlet UILabel *enemyNameLabel;
 
 // クリア条件タイトル
-@property (nonatomic, weak) IBOutlet UILabel *conditionTitleLabel;
+//@property (nonatomic, weak) IBOutlet UILabel *conditionTitleLabel;
 
 // クリア条件
 @property (nonatomic, weak) IBOutlet UILabel *conditionLabel;
@@ -96,6 +99,12 @@
     [self.view sendSubviewToBack:bannerAD];
 }
 
+// レイアウト設定
+//- (void)layoutSubviewsForPhone4;
+//{
+//    self.termBackground.frame = CGRectMake(0, 0, 320, 900);
+//}
+
 // プレイ画面表示
 - (void)presentPlayView
 {
@@ -109,21 +118,21 @@
     [self.view addSubview:self.conditionView];
     
     // 敵の画像
-    NSString *imageName = [NSString stringWithFormat:@"enemy_%03d_poker.png", (int)self.stage.stageID];
-    UIImage *photoImage = [UIImage temporaryImageNamed:imageName];
+    NSString *imageName = [NSString stringWithFormat:@"stage_%03d_term", (int)self.stage.stageID];
+    UIImage *photoImage = [UIImage imageNamed:imageName];
     self.enemyPhotoView.image = photoImage;
     
     // 敵の肩書き
-    self.enemyTitleLabel.font = SSGothicProFont(15.0f);
-    self.enemyTitleLabel.textColor = SSColorWhite;
+//    self.enemyTitleLabel.font = SSGothicProFont(15.0f);
+//    self.enemyTitleLabel.textColor = SSColorWhite;
     
     // 敵の名前
-    self.enemyNameLabel.font = SSGothicProFont(24.0f);
-    self.enemyNameLabel.textColor = SSColorWhite;
+//    self.enemyNameLabel.font = SSGothicProFont(24.0f);
+//    self.enemyNameLabel.textColor = SSColorWhite;
     
     // クリア条件タイトル
-    self.conditionTitleLabel.font = SSGothicProFont(15.0f);
-    self.conditionTitleLabel.textColor = SSColorWhite;
+//    self.conditionTitleLabel.font = SSGothicProFont(15.0f);
+//    self.conditionTitleLabel.textColor = SSColorWhite;
     
     // クリア条件
     self.conditionLabel.font = SSGothicProFont(15.0f);
@@ -147,8 +156,8 @@
     UIImageView *imageView = [[UIImageView alloc] init];
     UIButton *btnNext = [UIButton buttonWithImage:@"story_next_btn"];
     [btnNext addTarget:self action:@selector(nextAction:) forControlEvents:UIControlEventTouchUpInside];
-    NSString *imageName = [NSString stringWithFormat:@"stage_%03d_story.png", (int)self.stage.stageID];
-    UIImage *storyImage = [UIImage temporaryImageNamed:imageName];
+    NSString *imageName = [NSString stringWithFormat:@"stage_%03d_story", (int)self.stage.stageID];
+    UIImage *storyImage = [UIImage imageNamed:imageName];
     [imageView setImage:storyImage];
     [scrollView addSubview:imageView];
     [scrollView addSubview:btnNext];
