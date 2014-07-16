@@ -24,26 +24,23 @@
 // ツールバー
 @property (nonatomic, strong) IBOutlet UIView *topBar;
 
-// 条件画面
-@property (weak, nonatomic) IBOutlet UIImageView *termBackground;
-
-// 条件
-@property (nonatomic, strong) IBOutlet UIView *conditionView;
+// 背景
+@property (strong, nonatomic) UIImageView *termBackground;
 
 // 敵の画像
-@property (nonatomic, weak) IBOutlet UIImageView *enemyPhotoView;
+@property (nonatomic, strong) UIImageView *enemyPhotoView;
 
-// 敵の肩書き
-//@property (nonatomic, weak) IBOutlet UILabel *enemyTitleLabel;
+// 条件
+@property (nonatomic, strong) UIImageView *conditionView;
 
-// 敵の名前
-//@property (nonatomic, weak) IBOutlet UILabel *enemyNameLabel;
-
-// クリア条件タイトル
-//@property (nonatomic, weak) IBOutlet UILabel *conditionTitleLabel;
+//プレイボタン
+@property (nonatomic, strong) UIButton *playButton;
 
 // クリア条件
-@property (nonatomic, weak) IBOutlet UILabel *conditionLabel;
+@property (nonatomic, strong) UILabel *conditionLabel;
+
+//広告
+@property (nonatomic, strong) ADBannerView *bannerAD;
 
 
 // ストーリー表示
@@ -59,7 +56,7 @@
 - (IBAction)nextAction:(id)sender;
 
 // ボタン「プレイ」タップ処理
-- (IBAction)playAction:(id)sender;
+//- (IBAction)playAction:(id)sender;
 
 @end
 
@@ -94,16 +91,29 @@
 {
     [super updateView];
     
-    // バナー広告非表示
-    ADBannerView *bannerAD = [[SolitaireManager sharedManager] sharedBannerAD];
-    [self.view sendSubviewToBack:bannerAD];
 }
 
 // レイアウト設定
-//- (void)layoutSubviewsForPhone4;
-//{
-//    self.termBackground.frame = CGRectMake(0, 0, 320, 900);
-//}
+- (void)layoutSubviewsForPhone4;
+{
+    NSString *imageName = [NSString stringWithFormat:@"stage_%03d_term", (int)self.stage.stageID];
+    UIImage *enemyImage = [UIImage imageNamed:imageName];
+    CGRect rect = CGRectMake(0, 36, 640, (344-38)*2);
+    
+    CGImageRef sourceImageRef = [enemyImage CGImage];
+    CGImageRef newImageRef = CGImageCreateWithImageInRect(sourceImageRef, rect);
+    UIImage *newImage = [UIImage imageWithCGImage:newImageRef];
+
+    self.enemyPhotoView.image = newImage;
+    self.enemyPhotoView.frame = CGRectMake(0, 0, 320, 344-38);
+    self.conditionView.frame = CGRectMake(0, 344-38, 320, 172);
+    self.conditionLabel.frame = CGRectMake(20, 405-38, 280, 45);
+    self.playButton.frame = CGRectMake(62, 460-38, 196, 50);
+    
+    self.bannerAD = [[SolitaireManager sharedManager] sharedBannerAD];
+    [self.view sendSubviewToBack:self.bannerAD];
+    
+}
 
 // プレイ画面表示
 - (void)presentPlayView
@@ -115,29 +125,54 @@
 // クリア条件画面表示
 - (void)presentConditionView;
 {
-    [self.view addSubview:self.conditionView];
+    //背景
+    UIImage *backgroundImage = [UIImage imageNamed:@"term_bg"];
+    self.termBackground = [[UIImageView alloc] initWithImage:backgroundImage];
+    self.termBackground.frame = CGRectMake(0, 0, 320, 568);
+    self.termBackground.userInteractionEnabled = YES;
+    [self.view addSubview:self.termBackground];
     
     // 敵の画像
     NSString *imageName = [NSString stringWithFormat:@"stage_%03d_term", (int)self.stage.stageID];
-    UIImage *photoImage = [UIImage imageNamed:imageName];
-    self.enemyPhotoView.image = photoImage;
-    
-    // 敵の肩書き
-//    self.enemyTitleLabel.font = SSGothicProFont(15.0f);
-//    self.enemyTitleLabel.textColor = SSColorWhite;
-    
-    // 敵の名前
-//    self.enemyNameLabel.font = SSGothicProFont(24.0f);
-//    self.enemyNameLabel.textColor = SSColorWhite;
-    
-    // クリア条件タイトル
-//    self.conditionTitleLabel.font = SSGothicProFont(15.0f);
-//    self.conditionTitleLabel.textColor = SSColorWhite;
+    UIImage *enemyImage = [UIImage imageNamed:imageName];
+    self.enemyPhotoView = [[UIImageView alloc] init];
+    self.enemyPhotoView.image = enemyImage;
+    self.enemyPhotoView.frame = CGRectMake(0, 0, 320, 344);
+    [self.termBackground addSubview:self.enemyPhotoView];
     
     // クリア条件
+    UIImage *conditionImage = [UIImage imageNamed:@"term_frame"];
+    self.conditionView = [[ UIImageView alloc] init];
+    self.conditionView.image = conditionImage;
+    self.conditionView.frame = CGRectMake(0, 344, 320, 172);
+    [self.termBackground addSubview:self.conditionView];
+    
+    self.conditionLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 405, 280, 45)];
     self.conditionLabel.font = SSGothicProFont(15.0f);
     self.conditionLabel.textColor = SSColorBlack;
+    self.conditionLabel.textAlignment = NSTextAlignmentCenter;
     self.conditionLabel.text = [self.stage condition];
+    [self.termBackground addSubview:self.conditionLabel];
+    
+    //プレイボタン
+    self.playButton = [[UIButton alloc] initWithFrame:CGRectMake(62, 460, 196, 50)];
+    [self.playButton setBackgroundImage:[UIImage imageNamed:@"term_play_btn"]
+                               forState:UIControlStateNormal];
+    [self.playButton setBackgroundImage:[UIImage imageNamed:@"term_play_btn_on"]
+                               forState:UIControlStateSelected];
+    [self.playButton addTarget:self action:@selector(playAction)
+              forControlEvents:UIControlEventTouchUpInside];
+    [self.termBackground addSubview:self.playButton];
+    
+    self.bannerAD = [[SolitaireManager sharedManager] sharedBannerAD];
+    [self.view bringSubviewToFront:self.bannerAD];
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        if (![UIDevice isPhone5]) {
+            // レイアウト設定
+            [self layoutSubviewsForPhone4];
+        }
+    }
 }
 
 #pragma mark - 画面操作
@@ -182,8 +217,8 @@
 
     
     // バナー広告表示
-    ADBannerView *bannerAD = [[SolitaireManager sharedManager] sharedBannerAD];
-    [self.view bringSubviewToFront:bannerAD];
+    self.bannerAD = [[SolitaireManager sharedManager] sharedBannerAD];
+    [self.view bringSubviewToFront:self.bannerAD];
 }
 
 // 戻る処理
@@ -213,7 +248,7 @@
 }
 
 // ボタン「プレイ」タップ処理
-- (IBAction)playAction:(id)sender;
+- (void)playAction
 {
     // ボタン押下音声再生
     [AudioEngine playAudioWith:SolitaireAudioIDButtonClicked];
