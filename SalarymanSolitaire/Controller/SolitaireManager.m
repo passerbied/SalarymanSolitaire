@@ -223,6 +223,7 @@ NSString* const GameInfoItemYamafudas           = @"ItemYamafudas";
 - (BOOL)canClearCurrentStage;
 {
     SSStage *stage = [self currentStage];
+    DebugLog(@"該当ステージの最小クリア回数は%d",stage.minimalClearTimes);
     if (stage.stageID == _lastStageID) {
         // 最新ステージを挑戦する場合
         _clearTimes++;
@@ -276,7 +277,7 @@ NSString* const GameInfoItemYamafudas           = @"ItemYamafudas";
             SSStage *stage = [[SSStage alloc] init];
             stage.stageID = [[dic objectForKey:@"StageID"] integerValue];
             stage.enemyID = [[dic objectForKey:@"EnemyID"] integerValue];
-            stage.minimalClearTimes = [[dic objectForKey:@"MinClearTimes"] integerValue];
+            stage.minimalClearTimes = [[dic objectForKey:@"MinClearTImes"] integerValue];
             stage.numberOfPokers = [[dic objectForKey:@"NumberOfPokers"] integerValue];
             stage.maximumYamafuda = [[dic objectForKey:@"ReturnTimes"] integerValue];
             stage.title = [dic objectForKey:@"StageName"];

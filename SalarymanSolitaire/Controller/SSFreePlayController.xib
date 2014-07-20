@@ -59,7 +59,7 @@
                     <color key="backgroundColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="6sj-06-jB7">
-                    <rect key="frame" x="0.0" y="50" width="320" height="429"/>
+                    <rect key="frame" x="0.0" y="60" width="320" height="419"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <collectionViewLayout key="collectionViewLayout" id="be5-tX-H37" customClass="SSDraggblePokerViewLayout"/>
                     <cells/>

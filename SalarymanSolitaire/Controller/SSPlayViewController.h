@@ -9,6 +9,7 @@
 #import "SSViewController.h"
 #import "PurchaseManager.h"
 #import "SSYamafudaButton.h"
+#import "SSClearPopupView.h"
 
 @interface SSPlayViewController : SSViewController
 {

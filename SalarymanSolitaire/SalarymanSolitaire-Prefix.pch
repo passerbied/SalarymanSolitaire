@@ -18,6 +18,7 @@
 
 #define LocalizedString(key)            NSLocalizedString(key, nil)
 #define SSGothicProFont(s)              [UIFont fontWithName:@"Hiragino Kaku Gothic ProN W6" size:s]
+#define SSProFont(s)                    [UIFont fontWithName:@"HiraKakuProN-W6" size:s]
 #define SSLCDProFont(s)                 [UIFont fontWithName:@"DBLCDTempBlack" size:s]
 #define UIColorFromRGB(rgbValue) [UIColor \
 colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \

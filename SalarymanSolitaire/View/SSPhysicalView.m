@@ -82,11 +82,11 @@
     } else {
         // iPhone4の場合
         _height = 29.0f;
-        _powerLabelFontSize = 10.0f;
-        _powerLabelOriginal = CGPointMake(6.0f, 10.0f);
+        _powerLabelFontSize = 12.0f;
+        _powerLabelOriginal = CGPointMake(2.5f, 6.5f);
         
         _timeLabelFontSize = 9.0f;
-        _timeLabelOriginal = CGPointMake(288.0f, 11.0f);
+        _timeLabelOriginal = CGPointMake(288.0f, 11.0f-kGaugeMarginTop);
         
         _gaugeOriginal = CGPointMake(27.0f, 1.0f);
     }
@@ -127,7 +127,7 @@
         size.width += 2.0f;
         CGRect timeLabelRect;
         if ([UIDevice isPhone5]) {
-            timeLabelRect = CGRectMake(rect.size.width - size.width - _timeLabelOriginal.x, _timeLabelOriginal.y - size.height, size.width, size.height);
+            timeLabelRect = CGRectMake((rect.size.width - size.width + _gaugeOriginal.x)/2, _timeLabelOriginal.y - size.height, size.width, size.height);
         } else {
             timeLabelRect = CGRectMake(_timeLabelOriginal.x, _timeLabelOriginal.y, size.width, size.height);
         }

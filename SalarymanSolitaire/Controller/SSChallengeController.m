@@ -249,14 +249,23 @@
 // ショップ
 - (IBAction)presentShopAction:(id)sender;
 {
-    // ボタン押下音声再生
-    [AudioEngine playAudioWith:SolitaireAudioIDButtonClicked];
-    
-    // ソリティアを一時停止する
-    [self pause];
-    
-    // ショップ表示
-    [self handlePresentShop];
+//    // ボタン押下音声再生
+//    [AudioEngine playAudioWith:SolitaireAudioIDButtonClicked];
+//    
+//    // ソリティアを一時停止する
+//    [self pause];
+//    
+//    // ショップ表示
+//    [self handlePresentShop];
+//
+    DebugLog(@"clear times= %d",[SolitaireManager sharedManager].clearTimes);
+    if ([[SolitaireManager sharedManager] canClearCurrentStage]) {
+        SSClearPopupView *clearPopupView = [[SSClearPopupView alloc] init];
+        if (![UIDevice isPhone5]) {
+            clearPopupView.top = 25.0f;
+        }
+        [clearPopupView show];
+    }
 }
 
 // ゲーム完了処理
@@ -264,7 +273,14 @@
 {
     [super willCompletSolitaire];
     
-    // ステージクリア条件
+    //クリア条件に合ったら、クリアポップアップ画面を表示
+    if ([[SolitaireManager sharedManager] canClearCurrentStage]) {
+        SSClearPopupView *clearPopupView = [[SSClearPopupView alloc] init];
+        if (![UIDevice isPhone5]) {
+            clearPopupView.top = 25.0f;
+        }
+        [clearPopupView show];
+    }
 }
 
 #pragma mark - SSYamafudaButtonDelegate

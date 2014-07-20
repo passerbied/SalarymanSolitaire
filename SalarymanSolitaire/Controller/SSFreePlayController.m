@@ -126,6 +126,20 @@
     rect = CGRectOffset(rect, dx, dy);
     self.recommandTitleLabel.frame = rect;
     
+    rect = self.finishedPokerPane.frame;
+    rect.origin.y = rect.origin.y - 20;
+    
+    self.pokerImageView.frame = rect;
+    
+    self.finishedPokerPane.frame = rect;
+    
+    // ポーカー表示位置設定
+    CGFloat height = self.view.bounds.size.height;
+    y = self.topBar.bounds.size.height;
+    height = height - y - self.bottomBar.bounds.size.height;
+    rect = CGRectMake(0.0f, y, self.view.bounds.size.width, height);
+    self.pokerView.frame = rect;
+    
     // ボタン
     rect = self.bottomBar.frame;
     y = self.view.bounds.size.height - rect.size.height;
