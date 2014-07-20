@@ -63,6 +63,10 @@
 // ボタン「次へ」押下した処理
 - (IBAction)nextStageAction:(id)sender;
 {
+    if ([self.delegate respondsToSelector:@selector(nextStageButtonDidTaped)]) {
+        [self.delegate nextStageButtonDidTaped];
+    }
+    [self dismiss];
 }
 
 // ボタン「Mail共有」押下した処理
@@ -101,6 +105,7 @@
 // ボタン「新作アプリ」押下した処理
 - (IBAction)newAppAction:(id)sender;
 {
+    //TODO:広告画面表示
     [self dismiss];
 }
 

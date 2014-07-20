@@ -39,6 +39,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     #import "SolitaireManager.h"
     #import "UIButton+UIImage.h"
     #import "UIImage+MainBundleImage.h"
+    #import "appCCloud.h"
 #endif
 
 // 商品ID定義
@@ -52,7 +53,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 #define kProductIdentifierPowerUp5      @"SolitaireItemPowerUp5"
 
 // 山札戻し
-#define kProductIdentifierYamafuda     @"SolitaireItemYamafuda"
+#define kProductIdentifierYamafuda      @"SolitaireItemYamafuda"
 #define kProductIdentifierYamafuda5     @"SolitaireItemYamafuda5"
 #define kProductIdentifierYamafuda30    @"SolitaireItemYamafuda30"
 #define kProductIdentifierYamafuda60    @"SolitaireItemYamafuda60"
@@ -64,4 +65,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 #define kProductIdentifierDrink50       @"SolitaireItemDrink50"
 
 #define kIAPSandBoxMode                 YES
+
+//appC cloud広告　メディアキー
+#define kAppCCloudMediaKey               @"c2d42e27574df7c023d6ade80cd5d99a89ea5c75"
 

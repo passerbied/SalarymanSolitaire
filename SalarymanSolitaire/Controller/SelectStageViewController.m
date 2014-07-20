@@ -13,7 +13,7 @@
 
 #define __STAGE_CELL_IDENTIFIER         @"StageCell"
 
-@interface SelectStageViewController ()
+@interface SelectStageViewController ()<appCDelegate>
 {
     // ステージ一覧
     NSArray                             *_stageList;
@@ -27,6 +27,9 @@
 
 // インタースティシャル広告
 @property (nonatomic, strong) ADInterstitialAd *interstitialAD;
+
+// appCCloud広告
+@property (nonatomic, strong) UIView *appCCloudView;
 
 // 閉じる処理
 - (IBAction)closeAction:(id)sender;
@@ -45,6 +48,10 @@
 - (void)initView
 {
     [super initView];
+    
+    [appCCloud setDelegate:self];
+    [appCCloud setupAppCWithMediaKey:kAppCCloudMediaKey
+                              option:APPC_CLOUD_AD];
     
     // ヘッダーの背景色設定
     self.headerView.backgroundColor = SSColorHeader;
@@ -117,13 +124,24 @@
     [[SolitaireManager sharedManager] selectStageWithID:stageID];
     
     // 広告表示要否チェック
-    BOOL showAD = [[userInfo objectForKey:StageDidSelectNotificationADKey] boolValue];
-    if (showAD) {
-        // 広告表示不可
-        DebugLog(@"フルスクリーン広告はiPadでのみ利用できます");
+//    BOOL showAD = [[userInfo objectForKey:StageDidSelectNotificationADKey] boolValue];
+    if (!([[SolitaireManager sharedManager] stageSelectedTimes] % 5)) {
+        
+        self.appCCloudView = [[appCCutinView alloc] initWithViewController:self
+                                                               closeTarget:self
+                                                               closeAction:@selector(closeCutin)];
+        
+        [self.view addSubview:self.appCCloudView];
+    } else {
+        // ストーリー画面表示
+        [self presentStoryView];
     }
-    
-    // ストーリー画面表示
+}
+
+- (void)closeCutin
+{
+    [self.appCCloudView removeFromSuperview];
+    self.appCCloudView = nil;
     [self presentStoryView];
 }
 

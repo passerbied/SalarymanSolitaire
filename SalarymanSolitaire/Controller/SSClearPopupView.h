@@ -9,7 +9,16 @@
 #import "SSViewController.h"
 #import "WUPopupView.h"
 
+@protocol SSClearPopupViewDelegate;
+
 @interface SSClearPopupView : WUPopupView
 
+@property (nonatomic, strong) NSObject <SSClearPopupViewDelegate> *delegate;
+
+@end
+
+@protocol SSClearPopupViewDelegate <NSObject>
+
+- (void)nextStageButtonDidTaped;
 
 @end

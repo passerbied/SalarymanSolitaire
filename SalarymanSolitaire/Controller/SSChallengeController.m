@@ -17,7 +17,7 @@
 
 #define kPokerOffsetY    86
 
-@interface SSChallengeController ()
+@interface SSChallengeController ()<SSClearPopupViewDelegate>
 {
     // ステージ情報
     PurchaseManager                     *_manager;
@@ -261,6 +261,7 @@
     DebugLog(@"clear times= %d",[SolitaireManager sharedManager].clearTimes);
     if ([[SolitaireManager sharedManager] canClearCurrentStage]) {
         SSClearPopupView *clearPopupView = [[SSClearPopupView alloc] init];
+        clearPopupView.delegate = self;
         if (![UIDevice isPhone5]) {
             clearPopupView.top = 25.0f;
         }
@@ -276,10 +277,23 @@
     //クリア条件に合ったら、クリアポップアップ画面を表示
     if ([[SolitaireManager sharedManager] canClearCurrentStage]) {
         SSClearPopupView *clearPopupView = [[SSClearPopupView alloc] init];
+        clearPopupView.delegate = self;
         if (![UIDevice isPhone5]) {
             clearPopupView.top = 25.0f;
         }
         [clearPopupView show];
+    }
+}
+
+#pragma mark - SSClearPopupViewDelegate
+
+- (void)nextStageButtonDidTaped
+{
+    //TODO:ホーム画面に遷移、５回に１回の割合でインタースティシャル型広告を表示
+    if ([[SolitaireManager sharedManager] clearPopupTimes]%5 == 0) {
+        NSLog(@"ok");
+    } else {
+        [self end];
     }
 }
 

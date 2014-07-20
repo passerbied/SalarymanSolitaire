@@ -227,6 +227,7 @@ NSString* const GameInfoItemYamafudas           = @"ItemYamafudas";
     if (stage.stageID == _lastStageID) {
         // 最新ステージを挑戦する場合
         _clearTimes++;
+        _clearPopupTimes++;
         if (stage.minimalClearTimes > _clearTimes) {
             [self synchronize];
             return NO;
@@ -242,6 +243,7 @@ NSString* const GameInfoItemYamafudas           = @"ItemYamafudas";
         return YES;
     } else {
         // クリアしたステージを再び挑戦する場合
+        _clearPopupTimes++;
         return YES;
     }
 }
@@ -300,6 +302,9 @@ NSString* const GameInfoItemYamafudas           = @"ItemYamafudas";
     if (stageID <= [array count] && stageID) {
         _currentStage = (SSStage *)[array objectAtIndex:stageID - 1];
     }
+    
+    // ステージ選択回数更新
+    self.stageSelectedTimes++;
 }
 
 #pragma mark - 広告展示関連

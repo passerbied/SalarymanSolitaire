@@ -220,14 +220,14 @@ NSString *const StageDidSelectNotificationADKey = @"StageDidSelectNotificationAD
     }
     NSNumber *objForState = [NSNumber numberWithInteger:stageState];
     
-    // 広告表示
-    BOOL showADView;
-    if (_stageID != 1 && !(_stageID % 5)) {
-        showADView = YES;
-    } else {
-        showADView = NO;
-    }
-    NSNumber *objForAd = [NSNumber numberWithBool:showADView];
+//    // 広告表示
+//    BOOL showADView;
+//    if (_stageID != 1 && !(_stageID % 5)) {
+//        showADView = YES;
+//    } else {
+//        showADView = NO;
+//    }
+//    NSNumber *objForAd = [NSNumber numberWithBool:showADView];
     
     // ステージ選択済み通知発送
     NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -235,7 +235,7 @@ NSString *const StageDidSelectNotificationADKey = @"StageDidSelectNotificationAD
                               StageDidSelectNotificationStageIDKey,
                               objForState,
                               StageDidSelectNotificationStateKey,
-                              objForAd,
+                              nil,
                               StageDidSelectNotificationADKey,
                               nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:StageDidSelectNotification object:nil userInfo:userInfo];

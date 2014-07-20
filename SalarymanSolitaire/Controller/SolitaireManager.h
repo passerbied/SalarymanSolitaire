@@ -39,6 +39,12 @@
 // 山札戻し個数
 @property (nonatomic) NSInteger yamafudas;
 
+// クリア画面表示回数
+@property (nonatomic) NSInteger clearPopupTimes;
+
+// ステージ選択回数
+@property (nonatomic) NSInteger stageSelectedTimes;
+
 // 体力
 - (NSInteger)currentPower;
 

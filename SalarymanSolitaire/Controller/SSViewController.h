@@ -10,6 +10,7 @@
 #import "UIButton+UIImage.h"
 #import "AudioEngine.h"
 #import "SSAlertView.h"
+#import "WUProgressView.h"
 
 @interface SSViewController : UIViewController<SSAlertViewDelegate>
 {
