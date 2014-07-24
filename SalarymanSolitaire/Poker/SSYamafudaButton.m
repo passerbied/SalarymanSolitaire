@@ -130,8 +130,9 @@
     if (_freeMode) {
         return;
     }
-    _numberOfYamafuda--;
+
     if (_numberOfYamafuda > 0) {
+        _numberOfYamafuda--;
         [self setNeedsLayout];
     }
 }

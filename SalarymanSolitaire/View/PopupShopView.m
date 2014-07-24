@@ -59,11 +59,11 @@ enum { ShopViewSectionDrink, ShopViewSectionPower, ShopViewSectionYamafuda, Shop
     
     // 体力＋１
     array = [NSMutableArray array];
-    [array addObject:[self productWithIdentifier:kProductIdentifierPowerUp1]];
-    [array addObject:[self productWithIdentifier:kProductIdentifierPowerUp2]];
-    [array addObject:[self productWithIdentifier:kProductIdentifierPowerUp3]];
-    [array addObject:[self productWithIdentifier:kProductIdentifierPowerUp4]];
-    [array addObject:[self productWithIdentifier:kProductIdentifierPowerUp5]];
+    [array addObject:[self productWithIdentifier:kProductIdentifierPowerUp]];
+//    [array addObject:[self productWithIdentifier:kProductIdentifierPowerUp2]];
+//    [array addObject:[self productWithIdentifier:kProductIdentifierPowerUp3]];
+//    [array addObject:[self productWithIdentifier:kProductIdentifierPowerUp4]];
+//    [array addObject:[self productWithIdentifier:kProductIdentifierPowerUp5]];
     [_contents addObject:array];
     
     // 山札戻し

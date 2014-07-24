@@ -181,11 +181,11 @@
     // 商品IDセット編集
     if (!_productIdentifiers) {
         _productIdentifiers = [NSSet setWithObjects:
-                               kProductIdentifierPowerUp1,
-                               kProductIdentifierPowerUp2,
-                               kProductIdentifierPowerUp3,
-                               kProductIdentifierPowerUp4,
-                               kProductIdentifierPowerUp5,
+                               kProductIdentifierPowerUp,
+//                               kProductIdentifierPowerUp2,
+//                               kProductIdentifierPowerUp3,
+//                               kProductIdentifierPowerUp4,
+//                               kProductIdentifierPowerUp5,
                                kProductIdentifierYamafuda5,
                                kProductIdentifierYamafuda30,
                                kProductIdentifierYamafuda60,
@@ -249,24 +249,28 @@
 // ショップ
 - (IBAction)presentShopAction:(id)sender;
 {
-//    // ボタン押下音声再生
-//    [AudioEngine playAudioWith:SolitaireAudioIDButtonClicked];
-//    
-//    // ソリティアを一時停止する
-//    [self pause];
-//    
-//    // ショップ表示
-//    [self handlePresentShop];
-//
-    DebugLog(@"clear times= %d",[SolitaireManager sharedManager].clearTimes);
+    // ボタン押下音声再生
+    [AudioEngine playAudioWith:SolitaireAudioIDButtonClicked];
+    
+    // ソリティアを一時停止する
+    [self pause];
+    
+    // ショップ表示
+    [self handlePresentShop];
+
+    //Test
+    /*
     if ([[SolitaireManager sharedManager] canClearCurrentStage]) {
         SSClearPopupView *clearPopupView = [[SSClearPopupView alloc] init];
         clearPopupView.delegate = self;
+        [clearPopupView setStageTitle:
+         [NSString stringWithFormat:@"STAGE %d",[[[SolitaireManager sharedManager] currentStage] stageID]]];
         if (![UIDevice isPhone5]) {
             clearPopupView.top = 25.0f;
         }
         [clearPopupView show];
     }
+     */
 }
 
 // ゲーム完了処理
@@ -278,6 +282,8 @@
     if ([[SolitaireManager sharedManager] canClearCurrentStage]) {
         SSClearPopupView *clearPopupView = [[SSClearPopupView alloc] init];
         clearPopupView.delegate = self;
+        [clearPopupView setStageTitle:
+         [NSString stringWithFormat:@"STAGE %d",[[[SolitaireManager sharedManager] currentStage] stageID]]];
         if (![UIDevice isPhone5]) {
             clearPopupView.top = 25.0f;
         }

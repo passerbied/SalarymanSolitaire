@@ -15,6 +15,8 @@
 
 @property (nonatomic, strong) NSObject <SSClearPopupViewDelegate> *delegate;
 
+- (void)setStageTitle:(NSString *)stageName;
+
 @end
 
 @protocol SSClearPopupViewDelegate <NSObject>

@@ -16,6 +16,7 @@
     // 共用メッセージ
     SharingMessage                      *_sharingMessage;
     UIWindow *_alertWindow;
+    NSString *_stageName;
 }
 
 // ステージタイトル
@@ -49,6 +50,17 @@
         self.top = 90.0f;
     }
     return self;
+}
+
+- (void)setStageTitle:(NSString *)stageName
+{
+    _stageName = stageName;
+}
+
+- (void)viewWillLayoutSubviews
+{
+    [super viewWillLayoutSubviews];
+    [self.stageLabel setText:_stageName];
 }
 
 // 共用メッセージ取得

@@ -125,7 +125,7 @@
     
     // 広告表示要否チェック
 //    BOOL showAD = [[userInfo objectForKey:StageDidSelectNotificationADKey] boolValue];
-    if (!([[SolitaireManager sharedManager] stageSelectedTimes] % 5)) {
+    if ([[SolitaireManager sharedManager] stageSelectedTimes] != 1 && !([[SolitaireManager sharedManager] stageSelectedTimes] % 5)) {
         
         self.appCCloudView = [[appCCutinView alloc] initWithViewController:self
                                                                closeTarget:self
