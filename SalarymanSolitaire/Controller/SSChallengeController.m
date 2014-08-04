@@ -258,8 +258,8 @@
     // ショップ表示
     [self handlePresentShop];
 
-    //Test
     /*
+    //Test
     if ([[SolitaireManager sharedManager] canClearCurrentStage]) {
         SSClearPopupView *clearPopupView = [[SSClearPopupView alloc] init];
         clearPopupView.delegate = self;
@@ -269,7 +269,9 @@
             clearPopupView.top = 25.0f;
         }
         [clearPopupView show];
-    }
+    } else {
+        [self initView];
+     }
      */
 }
 
@@ -288,6 +290,8 @@
             clearPopupView.top = 25.0f;
         }
         [clearPopupView show];
+    } else {
+        [self initView];
     }
 }
 
