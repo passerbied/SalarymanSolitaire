@@ -59,7 +59,7 @@ enum { ShopViewSectionDrink, ShopViewSectionPower, ShopViewSectionYamafuda, Shop
     
     // 体力＋１
     array = [NSMutableArray array];
-    [array addObject:[self productWithIdentifier:kProductIdentifierPowerUp]];
+    [array addObject:[self productWithIdentifier:kProductIdentifierPowerUp1]];
 //    [array addObject:[self productWithIdentifier:kProductIdentifierPowerUp2]];
 //    [array addObject:[self productWithIdentifier:kProductIdentifierPowerUp3]];
 //    [array addObject:[self productWithIdentifier:kProductIdentifierPowerUp4]];
@@ -199,8 +199,7 @@ enum { ShopViewSectionDrink, ShopViewSectionPower, ShopViewSectionYamafuda, Shop
     NSArray *products = [_contents objectAtIndex:indexPath.section];
     SKProduct *product;
     if (indexPath.section == ShopViewSectionPower) {
-        SolitaireManager *manager = [SolitaireManager sharedManager];
-        product = [products objectAtIndex:manager.additionalPower];
+        product = [products objectAtIndex:0];
     } else {
         product = [products objectAtIndex:indexPath.row - 1];
     }

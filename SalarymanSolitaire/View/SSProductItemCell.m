@@ -10,7 +10,7 @@
 #import "PurchaseManager.h"
 #import "SolitaireManager.h"
 
-#define kProductItemImageMargin1        6.0f
+#define kProductItemImageMargin1        4.0f
 #define kProductItemImageMargin2        24.0f
 #define kProductItemLabelEdgeInset      6.0f
 
@@ -60,12 +60,12 @@
 - (void)setup
 {
     // 表示設定
-    _itemLabel.font = SSGothicProFont(18.0f);
+//    _itemLabel.font = SSGothicProFont(18.0f);
     _itemLabel.textAlignment = NSTextAlignmentCenter;
     _itemLabel.textColor = SSColorBlack;
     
     // 区切り設定
-    UIImage *seperatorImage = [UIImage imageNamed:@"popup_btn_dot_line.png"];
+    UIImage *seperatorImage = [UIImage imageNamed:@"popup_btn_dot_line"];
     _topSeperatorView = [[UIImageView alloc] initWithImage:seperatorImage];
     _bottomSeperatorView = [[UIImageView alloc] initWithImage:seperatorImage];
     CGRect rect = self.contentView.bounds;

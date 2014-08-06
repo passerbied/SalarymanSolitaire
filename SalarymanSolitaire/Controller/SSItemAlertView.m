@@ -13,8 +13,8 @@
 
 enum
 {
-    SSItemAlertButtonIndexUse = SSAlertViewFirstButton,
-    SSItemAlertButtonIndexBuy
+    SSItemAlertButtonIndexDismiss = 1,
+    SSItemAlertButtonIndexUse = 2
 };
 
 @interface SSItemAlertView ()
@@ -183,16 +183,17 @@ enum
             [self.delegate willUseYamafuda];
         }
         DebugLog(@"商品利用");
-    } else if (buttonIndex == SSItemAlertButtonIndexBuy) {
-        // 商品購入
-        if (self.datasource == SSItemAlertDatasourceNutrient) {
-            // 栄養剤購入
-            [self.delegate willBuyDrink];
-        } else {
-            // 山札戻し購入
-            [self.delegate willBuyYamafuda];
-        }
-        DebugLog(@"商品購入");
+    } else if (buttonIndex == SSItemAlertButtonIndexDismiss) {
+//        // 商品購入
+//        if (self.datasource == SSItemAlertDatasourceNutrient) {
+//            // 栄養剤購入
+//            [self.delegate willBuyDrink];
+//        } else {
+//            // 山札戻し購入
+//            [self.delegate willBuyYamafuda];
+//        }
+//        DebugLog(@"商品購入");
+        [self dismiss];
     }
 }
 

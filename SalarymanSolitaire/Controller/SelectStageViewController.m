@@ -125,17 +125,19 @@
     
     // 広告表示要否チェック
 //    BOOL showAD = [[userInfo objectForKey:StageDidSelectNotificationADKey] boolValue];
-    if ([[SolitaireManager sharedManager] stageSelectedTimes] != 1 && !([[SolitaireManager sharedManager] stageSelectedTimes] % 5)) {
-        
-        self.appCCloudView = [[appCCutinView alloc] initWithViewController:self
-                                                               closeTarget:self
-                                                               closeAction:@selector(closeCutin)];
-        
-        [self.view addSubview:self.appCCloudView];
-    } else {
-        // ストーリー画面表示
-        [self presentStoryView];
-    }
+//    if ([[SolitaireManager sharedManager] stageSelectedTimes] != 1 && !([[SolitaireManager sharedManager] stageSelectedTimes] % 5)) {
+//        
+//        self.appCCloudView = [[appCCutinView alloc] initWithViewController:self
+//                                                               closeTarget:self
+//                                                               closeAction:@selector(closeCutin)];
+//        
+//        [self.view addSubview:self.appCCloudView];
+//    } else {
+//        // ストーリー画面表示
+//        [self presentStoryView];
+//    }
+    
+    [self presentStoryView];
 }
 
 - (void)closeCutin

@@ -17,7 +17,7 @@
 
 #define kPokerOffsetY    86
 
-@interface SSChallengeController ()<SSClearPopupViewDelegate>
+@interface SSChallengeController ()<SSClearPopupViewDelegate,SolitaireManagerDelegate,appCDelegate>
 {
     // ステージ情報
     PurchaseManager                     *_manager;
@@ -37,6 +37,9 @@
 
 // 栄養剤ボタン
 @property (nonatomic, weak) IBOutlet SSNutrientButton *nutrientButton;
+
+// appCCloud広告
+@property (nonatomic, strong) UIView *appCCloudView;
 
 // ステージ情報取得
 - (void)loadStageInfo;
@@ -116,6 +119,8 @@
 - (void)initView
 {
     [super initView];
+    
+    [SolitaireManager sharedManager].delegate = self;
 }
 
 - (void)layoutSubviewsForPhone4
@@ -181,7 +186,7 @@
     // 商品IDセット編集
     if (!_productIdentifiers) {
         _productIdentifiers = [NSSet setWithObjects:
-                               kProductIdentifierPowerUp,
+                               kProductIdentifierPowerUp1,
 //                               kProductIdentifierPowerUp2,
 //                               kProductIdentifierPowerUp3,
 //                               kProductIdentifierPowerUp4,
@@ -242,6 +247,7 @@
     // 栄養剤使用＆購入画面を表示する
     SSItemAlertView *alert = [SSItemAlertView alertWithDelegate:self];
     alert.datasource = SSItemAlertDatasourceNutrient;
+    alert.delegate = self;
     alert.numberOfItems = [[SolitaireManager sharedManager] nutrients];
     [alert show];
 }
@@ -295,13 +301,24 @@
     }
 }
 
+- (void)closeCutin
+{
+    [self.appCCloudView removeFromSuperview];
+    self.appCCloudView = nil;
+    [self end];
+}
+
 #pragma mark - SSClearPopupViewDelegate
 
 - (void)nextStageButtonDidTaped
 {
     //TODO:ホーム画面に遷移、５回に１回の割合でインタースティシャル型広告を表示
-    if ([[SolitaireManager sharedManager] clearPopupTimes]%5 == 0) {
-        NSLog(@"ok");
+    if ([[SolitaireManager sharedManager] clearPopupTimes] != 1 && [[SolitaireManager sharedManager] clearPopupTimes]%5 == 0) {
+        self.appCCloudView = [[appCCutinView alloc] initWithViewController:self
+                                                               closeTarget:self
+                                                               closeAction:@selector(closeCutin)];
+        
+        [self.view addSubview:self.appCCloudView];
     } else {
         [self end];
     }
@@ -384,11 +401,14 @@
 // リトライ
 - (void)gameWillRetry;
 {
-    // 場合により体力減らす
-    [self reducePowerIfNecessary];
-
-    // リトライ（新規にゲームスタート）
-    [self start];
+    //アニメ完了したら、リトライできる
+    if (self.animeCompleted) {
+        // 場合により体力減らす
+        [self reducePowerIfNecessary];
+        
+        // リトライ（新規にゲームスタート）
+        [self start];
+    }
 }
 
 - (void)reducePowerIfNecessary
@@ -403,6 +423,29 @@
     
     // 体力値を減らす
     [[SolitaireManager sharedManager] handleUsePower];
+}
+
+#pragma mark - SSProductItemCellDelegate
+
+// 購入成功したら、リロードする
+- (void)reloadYamafuda
+{
+    SolitaireManager *manager = [SolitaireManager sharedManager];
+    self.maximumYamafuda = manager.yamafudas;
+}
+
+- (void)reloadNutrient
+{
+    SolitaireManager *manager = [SolitaireManager sharedManager];
+    _nutrientButton.numberOfNutrients = manager.nutrients;
+}
+
+- (void)reloadPower
+{
+    SolitaireManager *manager = [SolitaireManager sharedManager];
+    // 体力
+    _physicalView.maxPower = manager.maxPower;
+    _physicalView.currentPower = manager.currentPower;
 }
 
 @end

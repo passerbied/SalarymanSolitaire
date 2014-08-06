@@ -46,7 +46,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 //
 // 体力＋１
 #define kProductIdentifierPowerUp       @"SolitaireItemPowerUp"
-#define kProductIdentifierPowerUp1      @"SolitaireItemPowerUp1"
+#define kProductIdentifierPowerUp1      @"SolitaireItemPowerUp01"
 #define kProductIdentifierPowerUp2      @"SolitaireItemPowerUp2"
 #define kProductIdentifierPowerUp3      @"SolitaireItemPowerUp3"
 #define kProductIdentifierPowerUp4      @"SolitaireItemPowerUp4"

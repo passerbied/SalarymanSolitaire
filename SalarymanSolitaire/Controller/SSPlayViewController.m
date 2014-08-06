@@ -391,6 +391,8 @@ NSString *const SolitaireWillPauseGameNotification = @"SolitaireWillPauseGameNot
 
 - (void)distributePoker
 {
+    self.animeCompleted = NO;
+    
     // ビリからポーカーを配布する
     SSPoker *lastPoker = [_randomPokers lastObject];
     NSMutableArray *pokersForDistributing = [_allPokers objectAtIndex:_currentSection];
@@ -441,7 +443,7 @@ NSString *const SolitaireWillPauseGameNotification = @"SolitaireWillPauseGameNot
                 [_pokerView reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(SSPokerSectionYamafuda, 1)]];
             } completion:^(BOOL finished) {
                 _pokerLayout.currentMode = SSPokerViewLayoutModeChallenge;
-                
+                self.animeCompleted = YES;
             }];
         }
     }];

@@ -65,6 +65,8 @@
 // ゲーム再開
 - (void)resume;
 
+@property (nonatomic,assign) BOOL animeCompleted;
+
 // タイマー
 @property (nonatomic, strong) NSTimer *updateTimer;
 @property (nonatomic) NSTimeInterval duration;

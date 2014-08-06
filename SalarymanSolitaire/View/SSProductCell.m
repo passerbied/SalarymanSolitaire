@@ -39,8 +39,8 @@
     self.backgroundColor = [UIColor clearColor];
     self.contentView.backgroundColor = [UIColor clearColor];
     
-    _nameLabel.font = SSGothicProFont(20.0f);
-    _titleLabel.font = SSGothicProFont(15.0f);
+//    _nameLabel.font = SSGothicProFont(20.0f);
+//    _titleLabel.font = SSGothicProFont(15.0f);
 }
 
 - (void)setType:(ProductItemType)type

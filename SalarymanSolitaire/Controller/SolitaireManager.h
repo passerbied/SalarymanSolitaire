@@ -12,6 +12,8 @@
 
 @class SSStage;
 
+@protocol SolitaireManagerDelegate;
+
 @interface SolitaireManager : NSObject
 
 // 初期化
@@ -44,6 +46,8 @@
 
 // ステージ選択回数
 @property (nonatomic) NSInteger stageSelectedTimes;
+
+@property (nonatomic, assign) NSObject<SolitaireManagerDelegate> *delegate;
 
 // 体力
 - (NSInteger)currentPower;
@@ -102,5 +106,13 @@
 // インタースティシャル広告
 - (ADInterstitialAd *)sharedInterstitialAD;
 
+
+@end
+
+@protocol SolitaireManagerDelegate <NSObject>
+
+- (void)reloadNutrient;
+- (void)reloadYamafuda;
+- (void)reloadPower;
 
 @end

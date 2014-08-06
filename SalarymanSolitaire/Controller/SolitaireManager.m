@@ -282,6 +282,10 @@ NSString* const GameInfoItemYamafudas           = @"ItemYamafudas";
             stage.minimalClearTimes = [[dic objectForKey:@"MinClearTImes"] integerValue];
             stage.numberOfPokers = [[dic objectForKey:@"NumberOfPokers"] integerValue];
             stage.maximumYamafuda = [[dic objectForKey:@"ReturnTimes"] integerValue];
+            NSData *data = [FDKeychain itemForKey:SolitaireGameInfo forService:SolitaireGameInfo error:nil];
+            if ([data length]) {
+                stage.maximumYamafuda = _yamafudas;
+            }
             stage.title = [dic objectForKey:@"StageName"];
             [_stageInfos addObject:stage];
         }
@@ -337,6 +341,9 @@ NSString* const GameInfoItemYamafudas           = @"ItemYamafudas";
     if (quantity > 0) {
         _nutrients += quantity;
         [self synchronize];
+        if ([self.delegate respondsToSelector:@selector(reloadNutrient)]) {
+            [self.delegate reloadNutrient];
+        }
     }
 }
 
@@ -346,6 +353,9 @@ NSString* const GameInfoItemYamafudas           = @"ItemYamafudas";
     if (quantity > 0) {
         _yamafudas += quantity;
         [self synchronize];
+        if ([self.delegate respondsToSelector:@selector(reloadYamafuda)]) {
+            [self.delegate reloadYamafuda];
+        }
     }
 }
 
@@ -355,6 +365,9 @@ NSString* const GameInfoItemYamafudas           = @"ItemYamafudas";
     if (quantity > 0) {
         _additionalPower += quantity;
         [self synchronize];
+        if ([self.delegate respondsToSelector:@selector(reloadPower)]) {
+            [self.delegate reloadPower];
+        }
     }
 }
 
