@@ -65,6 +65,7 @@
 // ゲーム再開
 - (void)resume;
 
+// 開始ポーカーのアニメ完成
 @property (nonatomic,assign) BOOL animeCompleted;
 
 // タイマー

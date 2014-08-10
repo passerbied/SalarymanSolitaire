@@ -231,6 +231,7 @@
     [self.view addSubview:self.appCCloudView];
 }
 
+// おすすめ画面を閉める
 - (void)closeCutin
 {
     [self.appCCloudView removeFromSuperview];
@@ -249,8 +250,10 @@
 // リトライ
 - (void)gameWillRetry;
 {
-    // ゲームを新規にスタートさせる
-    [self start];
+    if (self.animeCompleted) {
+        // ゲームを新規にスタートさせる
+        [self start];
+    }
 }
 
 // モード選択
