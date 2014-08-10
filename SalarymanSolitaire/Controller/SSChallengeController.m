@@ -373,6 +373,9 @@
     // 体力ゲージを全て回復する
     [_physicalView recovery];
     
+    // 栄養剤一つ減る
+    [[SolitaireManager sharedManager] handleUseNutrient];
+    [self.nutrientButton setNumberOfNutrients:self.nutrientButton.numberOfNutrients-1];
     // ゲームを再開する
     [self resume];
 }
