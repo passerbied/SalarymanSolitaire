@@ -112,7 +112,7 @@
 @protocol SolitaireManagerDelegate <NSObject>
 
 - (void)reloadNutrient;
-- (void)reloadYamafuda;
+- (void)plusYamafuda:(NSInteger)plusCount;
 - (void)reloadPower;
 
 @end

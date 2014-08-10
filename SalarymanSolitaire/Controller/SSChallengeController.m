@@ -24,6 +24,9 @@
     
     // 商品リスト
     NSSet                               *_productIdentifiers;
+    
+    //購入した山札数
+    NSInteger                           _plusYamafudas;
 }
 
 // 体力ビュー
@@ -406,6 +409,10 @@
         // 場合により体力減らす
         [self reducePowerIfNecessary];
         
+        // 購入した山札を増える
+        [self.yamafudaButton setMaximumYamafuda:self.yamafudaButton.maximumYamafuda+_plusYamafudas];
+        [self.yamafudaButton setNeedsLayout];
+        
         // リトライ（新規にゲームスタート）
         [self start];
     }
@@ -428,10 +435,14 @@
 #pragma mark - SSProductItemCellDelegate
 
 // 購入成功したら、リロードする
-- (void)reloadYamafuda
+- (void)plusYamafuda:(NSInteger)plusCount
 {
-    SolitaireManager *manager = [SolitaireManager sharedManager];
-    self.maximumYamafuda = manager.yamafudas;
+    //新購入山札数を「_plusYamafudas」中で保存する
+    _plusYamafudas = plusCount;
+    
+    //「山札ボタンの山札数」＝「残ってる山札数」＋「新購入した山札数」
+    self.yamafudaButton.numberOfYamafuda += plusCount;
+    [self.yamafudaButton setNeedsLayout];
 }
 
 - (void)reloadNutrient

@@ -269,7 +269,12 @@ NSString* const GameInfoItemYamafudas           = @"ItemYamafudas";
 // ステージ設定情報取得
 - (NSArray *)stageInfos;
 {
-    if (!_stageInfos) {
+    NSData *data = [FDKeychain itemForKey:SolitaireGameInfo forService:SolitaireGameInfo error:nil];
+    if (data.length) {
+        NSDictionary *dictionary = (NSDictionary*) [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        _yamafudas= [[dictionary objectForKey:GameInfoItemYamafudas] integerValue];
+    }
+    if (!_stageInfos || _yamafudas) {
         NSString *path = [[NSBundle mainBundle] pathForResource:@"Stage" ofType:@"plist"];
         NSMutableDictionary *dict = [[NSDictionary dictionaryWithContentsOfFile:path] mutableCopy];
         NSArray *array = [dict objectForKey:@"StageList"];
@@ -281,11 +286,7 @@ NSString* const GameInfoItemYamafudas           = @"ItemYamafudas";
             stage.enemyID = [[dic objectForKey:@"EnemyID"] integerValue];
             stage.minimalClearTimes = [[dic objectForKey:@"MinClearTImes"] integerValue];
             stage.numberOfPokers = [[dic objectForKey:@"NumberOfPokers"] integerValue];
-            stage.maximumYamafuda = [[dic objectForKey:@"ReturnTimes"] integerValue];
-            NSData *data = [FDKeychain itemForKey:SolitaireGameInfo forService:SolitaireGameInfo error:nil];
-            if ([data length]) {
-                stage.maximumYamafuda = _yamafudas;
-            }
+            stage.maximumYamafuda = [[dic objectForKey:@"ReturnTimes"] integerValue] + _yamafudas;
             stage.title = [dic objectForKey:@"StageName"];
             [_stageInfos addObject:stage];
         }
@@ -353,8 +354,8 @@ NSString* const GameInfoItemYamafudas           = @"ItemYamafudas";
     if (quantity > 0) {
         _yamafudas += quantity;
         [self synchronize];
-        if ([self.delegate respondsToSelector:@selector(reloadYamafuda)]) {
-            [self.delegate reloadYamafuda];
+        if ([self.delegate respondsToSelector:@selector(plusYamafuda:)]) {
+            [self.delegate plusYamafuda:quantity];
         }
     }
 }

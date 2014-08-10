@@ -42,7 +42,7 @@ typedef NS_ENUM(NSInteger, YamafudaButtonDisplayMode)
 @property (nonatomic) NSInteger maximumYamafuda;
 
 // 山札戻しの残り回数
-@property (nonatomic, readonly) NSInteger numberOfYamafuda;
+@property (nonatomic, assign) NSInteger numberOfYamafuda;
 
 // 表示モード
 @property (nonatomic, readonly) YamafudaButtonDisplayMode displayMode;
