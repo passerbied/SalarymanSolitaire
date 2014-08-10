@@ -257,7 +257,7 @@
 
 // ショップ
 - (IBAction)presentShopAction:(id)sender;
-{
+{/*
     // ボタン押下音声再生
     [AudioEngine playAudioWith:SolitaireAudioIDButtonClicked];
     
@@ -266,8 +266,8 @@
     
     // ショップ表示
     [self handlePresentShop];
-
-    /*
+*/
+    
     //Test
     if ([[SolitaireManager sharedManager] canClearCurrentStage]) {
         SSClearPopupView *clearPopupView = [[SSClearPopupView alloc] init];
@@ -281,7 +281,7 @@
     } else {
         [self initView];
      }
-     */
+  
 }
 
 // ゲーム完了処理

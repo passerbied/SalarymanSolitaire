@@ -38,6 +38,9 @@
 // モード選択
 - (IBAction)selectModeAction:(id)sender;
 
+// appCCloud広告
+@property (nonatomic, strong) UIView *appCCloudView;
+
 
 @end
 
@@ -218,8 +221,20 @@
     }
     
     // おすすめ画面へ遷移する
-    SSRecommendViewController *controller = [SSRecommendViewController controller];
-    [self.navigationController pushViewController:controller animated:YES];
+//    SSRecommendViewController *controller = [SSRecommendViewController controller];
+//    [self.navigationController pushViewController:controller animated:YES];
+    
+    self.appCCloudView = [[appCCutinView alloc] initWithViewController:self
+                                                           closeTarget:self
+                                                           closeAction:@selector(closeCutin)];
+    
+    [self.view addSubview:self.appCCloudView];
+}
+
+- (void)closeCutin
+{
+    [self.appCCloudView removeFromSuperview];
+    self.appCCloudView = nil;
 }
 
 #pragma mark - 警告委託処理

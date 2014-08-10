@@ -784,10 +784,10 @@ NSString *const SolitaireWillPauseGameNotification = @"SolitaireWillPauseGameNot
 
     // フリープレイモードの場合
     if ([self isFreeMode]) {
-        if ([recyclePokers count] || [hiddenPokers count]) {
+        if ([hiddenPokers count]) {
             return YamafudaButtonDisplayModeReload;
         } else {
-            return YamafudaButtonDisplayModeDisable;
+            return YamafudaButtonDisplayModeRestart;
         }
     }
 

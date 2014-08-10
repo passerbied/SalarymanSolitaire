@@ -70,7 +70,7 @@
     if (_displayMode == YamafudaButtonDisplayModeRestart) {
         // 山札戻しの場合
         _numbersLabel.text = [NSString stringWithFormat:@"%ld", (long)_numberOfYamafuda];
-        _numbersLabel.hidden = NO;
+        _numbersLabel.hidden = self.freeMode;
         _backgroundImageView.image = [UIImage imageNamed:@"product_item"];
         
     } else if (_displayMode == YamafudaButtonDisplayModeMore) {
