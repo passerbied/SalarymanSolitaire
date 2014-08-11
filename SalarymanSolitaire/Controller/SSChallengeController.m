@@ -257,7 +257,7 @@
 
 // ショップ
 - (IBAction)presentShopAction:(id)sender;
-{/*
+{
     // ボタン押下音声再生
     [AudioEngine playAudioWith:SolitaireAudioIDButtonClicked];
     
@@ -266,8 +266,8 @@
     
     // ショップ表示
     [self handlePresentShop];
-*/
-    
+
+    /*
     //Test
     if ([[SolitaireManager sharedManager] canClearCurrentStage]) {
         SSClearPopupView *clearPopupView = [[SSClearPopupView alloc] init];
@@ -281,7 +281,7 @@
     } else {
         [self initView];
      }
-  
+     */
 }
 
 // ゲーム完了処理
@@ -315,7 +315,7 @@
 
 - (void)nextStageButtonDidTaped
 {
-    //TODO:ホーム画面に遷移、５回に１回の割合でインタースティシャル型広告を表示
+    //ホーム画面に遷移、５回に１回の割合でインタースティシャル型広告を表示
     if ([[SolitaireManager sharedManager] clearPopupTimes] != 1 && [[SolitaireManager sharedManager] clearPopupTimes]%5 == 0) {
         self.appCCloudView = [[appCCutinView alloc] initWithViewController:self
                                                                closeTarget:self
@@ -325,6 +325,15 @@
     } else {
         [self end];
     }
+}
+
+- (void)newAppShow
+{
+    self.appCCloudView = [[appCCutinView alloc] initWithViewController:self
+                                                           closeTarget:self
+                                                           closeAction:@selector(closeCutin)];
+    
+    [self.view addSubview:self.appCCloudView];
 }
 
 #pragma mark - SSYamafudaButtonDelegate

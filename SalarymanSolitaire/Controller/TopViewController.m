@@ -55,6 +55,8 @@
     
     // お知らせチェックサービス実行
     [self performGetSystemInfoService];
+    
+    [appCCloud setupAppCWithMediaKey:kAppCCloudMediaKey option:APPC_CLOUD_AD];
 }
 
 #pragma mark - 画面操作
@@ -85,8 +87,12 @@
     // ボタン押下音声再生
     [AudioEngine playAudioWith:SolitaireAudioIDButtonClicked];
 
-    SSRecommendViewController *controller = [SSRecommendViewController controller];
-    [self.navigationController pushViewController:controller animated:YES];
+//    SSRecommendViewController *controller = [SSRecommendViewController controller];
+//    [self.navigationController pushViewController:controller animated:YES];
+    
+    if (![appCCloud showingWebView]) {
+        [appCCloud openWebView];
+    }
 }
 
 // プレイスタート

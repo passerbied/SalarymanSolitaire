@@ -118,6 +118,9 @@
 - (IBAction)newAppAction:(id)sender;
 {
     //TODO:広告画面表示
+    if ([self.delegate respondsToSelector:@selector(newAppShow)]) {
+        [self.delegate newAppShow];
+    }
     [self dismiss];
 }
 

@@ -23,4 +23,6 @@
 
 - (void)nextStageButtonDidTaped;
 
+- (void)newAppShow;
+
 @end

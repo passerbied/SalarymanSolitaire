@@ -87,6 +87,9 @@
                                                                                  action:@selector(handleRecommendGesture:)];
     self.recommandHeader.userInteractionEnabled = YES;
     [self.recommandHeader addGestureRecognizer:tapGesture];
+    
+    // おすすめ広告初期化
+    [appCCloud setupAppCWithMediaKey:kAppCCloudMediaKey option:APPC_CLOUD_AD];
 }
 
 // レイアウト設定
@@ -224,18 +227,9 @@
 //    SSRecommendViewController *controller = [SSRecommendViewController controller];
 //    [self.navigationController pushViewController:controller animated:YES];
     
-    self.appCCloudView = [[appCCutinView alloc] initWithViewController:self
-                                                           closeTarget:self
-                                                           closeAction:@selector(closeCutin)];
-    
-    [self.view addSubview:self.appCCloudView];
-}
-
-// おすすめ画面を閉める
-- (void)closeCutin
-{
-    [self.appCCloudView removeFromSuperview];
-    self.appCCloudView = nil;
+    if (![appCCloud showingWebView]) {
+        [appCCloud openWebView];
+    }
 }
 
 #pragma mark - 警告委託処理
