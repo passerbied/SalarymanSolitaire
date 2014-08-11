@@ -80,6 +80,7 @@
 		484E1195197BDBFB00D37DA1 /* appcc_web_splash_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 484E1165197BDBFA00D37DA1 /* appcc_web_splash_logo.png */; };
 		484E1196197BDBFB00D37DA1 /* libappCCloud.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 484E1170197BDBFA00D37DA1 /* libappCCloud.a */; };
 		484E1198197BDC2100D37DA1 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 484E1197197BDC2100D37DA1 /* CoreTelephony.framework */; };
+		48917B661998F2F900C41475 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48917B651998F2F900C41475 /* Crashlytics.framework */; };
 		48DBAC90196D90B100134FE6 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48DBAC8F196D90B100134FE6 /* Media.xcassets */; };
 		48DBAC92196D91B800134FE6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48DBAC91196D91B800134FE6 /* Images.xcassets */; };
 		48DCC11B1970DE87003C670D /* DEBUG.m in Sources */ = {isa = PBXBuildFile; fileRef = 48DCC11A1970DE87003C670D /* DEBUG.m */; };
@@ -277,6 +278,7 @@
 		484E116F197BDBFA00D37DA1 /* appCSimpleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = appCSimpleView.h; sourceTree = "<group>"; };
 		484E1170197BDBFA00D37DA1 /* libappCCloud.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libappCCloud.a; sourceTree = "<group>"; };
 		484E1197197BDC2100D37DA1 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		48917B651998F2F900C41475 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		48DBAC8F196D90B100134FE6 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		48DBAC91196D91B800134FE6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		48DCC1191970DE87003C670D /* DEBUG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEBUG.h; sourceTree = "<group>"; };
@@ -496,6 +498,7 @@
 				E5E9411518D8F0B9009D71DD /* libxml2.2.dylib in Frameworks */,
 				34AB266A18CF5D3600CE1598 /* iAd.framework in Frameworks */,
 				34AB266818CF393D00CE1598 /* QuartzCore.framework in Frameworks */,
+				48917B661998F2F900C41475 /* Crashlytics.framework in Frameworks */,
 				484E1196197BDBFB00D37DA1 /* libappCCloud.a in Frameworks */,
 				3493ACAF18CE01410042603C /* StoreKit.framework in Frameworks */,
 				34C7508818CAB37F00BF3FC6 /* CoreGraphics.framework in Frameworks */,
@@ -586,6 +589,7 @@
 		3493AC9D18CDF2FB0042603C /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				48917B651998F2F900C41475 /* Crashlytics.framework */,
 				484E113C197BDBFA00D37DA1 /* appCCloud */,
 				48DCC1181970DE74003C670D /* Utils */,
 				E5E3742918FC1F6A007249D3 /* include */,
@@ -1286,6 +1290,7 @@
 				34C7507E18CAB37F00BF3FC6 /* Sources */,
 				34C7507F18CAB37F00BF3FC6 /* Frameworks */,
 				34C7508018CAB37F00BF3FC6 /* Resources */,
+				48917B641998F2BD00C41475 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1438,6 +1443,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		48917B641998F2BD00C41475 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Crashlytics.framework/run 228b4d6fcd0f59614dbcc0bc20910913f81c6e0c b6457988cb6cacc6062338977fff072246e621318a8e7d442df7bc2664334601";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		34C7507E18CAB37F00BF3FC6 /* Sources */ = {
@@ -1673,6 +1694,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: MASAAKI YAMAGA (Z4PC7Q38SR)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: MASAAKI YAMAGA (Z4PC7Q38SR)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SalarymanSolitaire/Library",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SalarymanSolitaire/SalarymanSolitaire-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -1706,6 +1731,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: MASAAKI YAMAGA (PPCZF5V2SK)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: MASAAKI YAMAGA (PPCZF5V2SK)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SalarymanSolitaire/Library",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SalarymanSolitaire/SalarymanSolitaire-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -1722,7 +1751,7 @@
 					"$(PROJECT_DIR)/SalarymanSolitaire/Library/appCCloud",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "B211E821-EEB0-49F7-BA62-98A3163B82FE";
+				PROVISIONING_PROFILE = "3A1DA1AA-2109-49C5-B107-6B621A4122B6";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};

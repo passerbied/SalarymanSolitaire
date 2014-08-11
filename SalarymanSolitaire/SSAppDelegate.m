@@ -10,6 +10,7 @@
 #import "TopViewController.h"
 #import <iAd/iAd.h>
 #import "SSChallengeController.h"
+#import <Crashlytics/Crashlytics.h>
 @interface SSAppDelegate ()
 {
 }
@@ -28,6 +29,8 @@
     UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController:controller];
     self.window.rootViewController = navigation;
     [self.window makeKeyAndVisible];
+    
+    [Crashlytics startWithAPIKey:@"228b4d6fcd0f59614dbcc0bc20910913f81c6e0c"];
     
     // Override point for customization after application launch.
     return YES;
