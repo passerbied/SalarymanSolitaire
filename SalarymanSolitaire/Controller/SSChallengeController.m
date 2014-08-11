@@ -281,7 +281,7 @@
     } else {
         [self initView];
      }
-     */
+    */
 }
 
 // ゲーム完了処理
@@ -335,6 +335,7 @@
     
     [self.view addSubview:self.appCCloudView];
 }
+
 
 #pragma mark - SSYamafudaButtonDelegate
 

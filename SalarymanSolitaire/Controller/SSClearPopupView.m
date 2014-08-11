@@ -86,6 +86,7 @@
 {
     // 共有方式を「メール」で設定する
     SharingMessage *sharingMessage = [self sharingMessage];
+    
     sharingMessage.sharingType = SharingTypeMail;
     
     // メール送信画面表示
@@ -100,7 +101,7 @@
     sharingMessage.sharingType = SharingTypeFacebook;
     
     // Facebook送信画面表示
-    [self sendFacebook];
+    [self sendFacebook:sharingMessage.message];
 }
 
 // ボタン「twitter共有」押下した処理
@@ -111,13 +112,12 @@
     sharingMessage.sharingType = SharingTypeTwitter;
     
     // Twitter送信画面表示
-    [self sendTwitter];
+    [self sendTwitter:sharingMessage.message];
 }
 
 // ボタン「新作アプリ」押下した処理
 - (IBAction)newAppAction:(id)sender;
 {
-    //TODO:広告画面表示
     if ([self.delegate respondsToSelector:@selector(newAppShow)]) {
         [self.delegate newAppShow];
     }
@@ -173,15 +173,17 @@
     DebugLog(@"%@", msg);
 }
 
-- (void)sendTwitter
+- (void)sendTwitter:(NSString *)message
 {
     SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+    [controller setInitialText:message];
     [self presentViewController:controller animated:YES completion:nil];
 }
 
-- (void)sendFacebook
+- (void)sendFacebook:(NSString *)message
 {
     SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+    [controller setInitialText:message];
     [self presentViewController:controller animated:YES completion:nil];
 
 }

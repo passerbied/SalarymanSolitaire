@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict/>
+    <dict>
+        <key>Title</key>
+        <string>【ソリティア＋物語】のゲームアプリ</string>
+        <key>Mail</key>
+        <string>サラリーマンが主人公！波乱含みのストーリーをソリティアをクリアして解決していく！？http://goo.gl/CUNlXD</string>
+        <key>FaceBook</key>
+        <string>【ソリティア＋物語】のゲームアプリ。サラリーマンが主人公となって難題を解決！？http://goo.gl/CUNlXD</string>
+        <key>Twitter</key>
+        <string>【ソリティア＋物語】のゲームアプリ。サラリーマンが主人公となって難題を解決！？http://goo.gl/CUNlXD</string>
+    </dict>
 </plist>
