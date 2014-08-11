@@ -16,6 +16,6 @@
 // [サービス]お知らせ有無チェック
 #define __GET_NOTIFICATION_URL          @"http://myapp.500yun.pw/Solitaire/GetSystemInfo.php"
 #define __GET_NOTIFICATION_RESPONSE     @"GetSystemInfoResponse"
-#define __DEFAULT_HELP_URL              @"http://www.google.com"
+#define __DEFAULT_HELP_URL              @"http://www.google.co.jp" // TODO: to change a real url
 
 #endif
