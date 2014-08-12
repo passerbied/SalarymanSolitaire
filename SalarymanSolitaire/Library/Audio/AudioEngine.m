@@ -29,7 +29,7 @@
 
 - (AVAudioPlayer *)playerWithData:(NSData *)data engine:(AudioEngineType)engine
 {
-    return nil;
+//    return nil;
     [AudioEngine stopEngine:engine];
     
     AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithData:data error:nil];
