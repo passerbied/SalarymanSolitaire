@@ -1751,7 +1751,7 @@
 					"$(PROJECT_DIR)/SalarymanSolitaire/Library/appCCloud",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3A1DA1AA-2109-49C5-B107-6B621A4122B6";
+				PROVISIONING_PROFILE = "9375fa48-1139-45df-ad15-5a890ebc1c62";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};

@@ -109,7 +109,7 @@ NSString* const GameInfoItemYamafudas           = @"ItemYamafudas";
             _firstRun = [[_userInfo objectForKey:UserInfoFirstRunKey] boolValue];
         }
     }
-//    [FDKeychain deleteItemForKey:SolitaireGameInfo forService:SolitaireGameInfo error:nil];
+    [FDKeychain deleteItemForKey:SolitaireGameInfo forService:SolitaireGameInfo error:nil];
     // ゲーム情報取得
     NSData *data = [FDKeychain itemForKey:SolitaireGameInfo forService:SolitaireGameInfo error:nil];
     

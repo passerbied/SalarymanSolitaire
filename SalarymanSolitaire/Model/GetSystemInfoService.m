@@ -85,7 +85,7 @@
     if (![address length]) {
         address = __DEFAULT_HELP_URL;
     }
-    return [NSURL URLWithString:address];
+    return [NSURL URLWithString:__DEFAULT_HELP_URL];
 }
 
 // お知らせ情報退避
