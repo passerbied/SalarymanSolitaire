@@ -50,7 +50,8 @@
 // ヘルプ情報表示
 - (void)loadHelpInfo;
 {
-    NSURL *url = [[SolitaireManager sharedManager] helpURL];
+//    NSURL *url = [[SolitaireManager sharedManager] helpURL];
+    NSURL *url = [NSURL URLWithString:__DEFAULT_HELP_URL];
     [_webView loadRequest:[NSURLRequest requestWithURL:url]];
 }
 

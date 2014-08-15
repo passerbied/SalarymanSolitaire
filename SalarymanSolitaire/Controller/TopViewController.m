@@ -54,7 +54,7 @@
     [super updateView];
     
     // お知らせチェックサービス実行
-    [self performGetSystemInfoService];
+//    [self performGetSystemInfoService];
     
     [appCCloud setupAppCWithMediaKey:kAppCCloudMediaKey option:APPC_CLOUD_AD];
 }
