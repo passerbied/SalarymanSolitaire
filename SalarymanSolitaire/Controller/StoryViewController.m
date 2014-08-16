@@ -80,11 +80,11 @@
     self.labelStageID.attributedText = [[NSAttributedString alloc] initWithString:text attributes:attributes];
     
     // ステージタイトル設定
-    text = self.stage.title;
-    attributes = @{NSFontAttributeName:SSGothicProFont(18.0f),
-                   NSKernAttributeName:[NSNumber numberWithFloat:4.0f],
-                   NSStrokeColorAttributeName:[UIColor whiteColor]};
-    self.labelStageTitle.attributedText = [[NSAttributedString alloc] initWithString:text attributes:attributes];
+//    text = self.stage.title;
+//    attributes = @{NSFontAttributeName:SSGothicProFont(18.0f),
+//                   NSKernAttributeName:[NSNumber numberWithFloat:4.0f],
+//                   NSStrokeColorAttributeName:[UIColor whiteColor]};
+//    self.labelStageTitle.attributedText = [[NSAttributedString alloc] initWithString:text attributes:attributes];
 }
 
 - (void)updateView
@@ -147,9 +147,10 @@
     self.conditionView.frame = CGRectMake(0, 344, 320, 172);
     [self.termBackground addSubview:self.conditionView];
     
-    self.conditionLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 405, 280, 45)];
+    self.conditionLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 395, 280, 60)];
     self.conditionLabel.font = SSGothicProFont(15.0f);
     self.conditionLabel.textColor = SSColorBlack;
+    self.conditionLabel.numberOfLines = 2;
     self.conditionLabel.textAlignment = NSTextAlignmentCenter;
     self.conditionLabel.text = [self.stage condition];
     [self.termBackground addSubview:self.conditionLabel];
