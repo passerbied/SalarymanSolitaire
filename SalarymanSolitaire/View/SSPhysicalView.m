@@ -179,7 +179,7 @@
     _timeLabel.text = [self currentTime];
     
     // 残り体力表示
-    if (_duration >= 60*15) {
+    if ((long)_duration%(60*15) == 0) {
         if (_currentPower < _maxPower) {
             [self powerUp:YES];
         }

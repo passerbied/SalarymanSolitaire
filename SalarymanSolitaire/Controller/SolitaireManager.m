@@ -117,6 +117,7 @@ NSString* const GameInfoItemYamafudas           = @"ItemYamafudas";
         NSDictionary *dictionary = (NSDictionary*) [NSKeyedUnarchiver unarchiveObjectWithData:data];
         // 最新ステージ
         _lastStageID = [[dictionary objectForKey:GameInfoLastStageID] integerValue];
+//        _lastStageID　= 101;
         
         // 最新ステージのクリア済み回数
         _clearTimes = [[dictionary objectForKey:GameInfoLastStageClearTimes] integerValue];
