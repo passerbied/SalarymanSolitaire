@@ -11,6 +11,8 @@
 
 @interface SSChallengeController : SSPlayViewController
 
++ (instancetype)sharedChallengeController;
+
 // ステージID
 @property (nonatomic) NSInteger stageID;
 

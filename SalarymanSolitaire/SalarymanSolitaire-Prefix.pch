@@ -64,6 +64,9 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 #define kProductIdentifierDrink20       @"SolitaireItemDrink20"
 #define kProductIdentifierDrink50       @"SolitaireItemDrink50"
 
+// 体力ゲージ使用した時間
+#define kGameInfoPowerLastUsingTime     @"PowerLastUsingTime"
+
 // TODO: リリースする前、kIAPSandBoxModeをNOに設置する
 #define kIAPSandBoxMode                 YES
 

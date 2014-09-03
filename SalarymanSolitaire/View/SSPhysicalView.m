@@ -7,6 +7,7 @@
 //
 
 #import "SSPhysicalView.h"
+#import "SSChallengeController.h"
 
 #define kSecondPerMinute                60
 #define kPowerRecoveryTime              10
@@ -19,6 +20,7 @@
 #define kGaugeInnerSpacing              1.0
 #define kGaugeSizeWidth                 24.5
 #define kGaugeSizeHeight                18.0
+
 @interface SSPhysicalView ()
 {
     CGFloat                             _height;
@@ -35,6 +37,9 @@
     CGPoint                             _gaugeOriginal;
     
     UIImageView                         *_physicalBarView;
+    
+    NSTimeInterval                      _tempduration;
+    
 }
 
 // 体力
@@ -179,12 +184,64 @@
     _timeLabel.text = [self currentTime];
     
     // 残り体力表示
-    if ((long)_duration%(60*15) == 0) {
-        if (_currentPower < _maxPower) {
-            [self powerUp:YES];
+    if ([[NSUserDefaults standardUserDefaults] valueForKey:kGameInfoPowerLastUsingTime]) {
+        double savedTime = [[[NSUserDefaults standardUserDefaults] valueForKey:kGameInfoPowerLastUsingTime] doubleValue];
+        
+        NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
+        NSTimeInterval now = [dat timeIntervalSince1970]*1;
+        
+        double savedDuration = now - savedTime;
+        
+        if (savedDuration > 60*15) {
+            if (_currentPower < _maxPower) {
+                [self powerUp:YES];
+            }
+        }
+         [[NSUserDefaults standardUserDefaults] removeObjectForKey:kGameInfoPowerLastUsingTime];
+    } else {
+        
+        if ((long)_duration%(60*15) == 0) {
+            if (_currentPower < _maxPower) {
+                [self powerUp:YES];
+            }
         }
     }
+    
     [self showCurrentPower];    
+}
+
+- (void)setPowerUsedDuration:(NSTimeInterval)duration
+{
+    if (_powerUsedDuration == duration) {
+        return;
+    }
+    
+    _powerUsedDuration = duration;
+    
+    // 残り体力表示
+    if ([[NSUserDefaults standardUserDefaults] valueForKey:kGameInfoPowerLastUsingTime]) {
+        double savedTime = [[[NSUserDefaults standardUserDefaults] valueForKey:kGameInfoPowerLastUsingTime] doubleValue];
+        
+        NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
+        NSTimeInterval now = [dat timeIntervalSince1970]*1;
+        
+        double savedDuration = now - savedTime;
+        
+        if (savedDuration > 15) {
+            if (_currentPower < _maxPower) {
+                [self powerUp:YES];
+            }
+        }
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:kGameInfoPowerLastUsingTime];
+        [[SSChallengeController sharedChallengeController] setPowerUsedDuration:0];
+    } else {
+        
+        if ((long)_powerUsedDuration%(15) == 0) {
+            if (_currentPower < _maxPower) {
+                [self powerUp:YES];
+            }
+        }
+    }
 }
 
 - (NSString *)currentTime

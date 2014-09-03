@@ -22,6 +22,7 @@ NSString* const SolitaireUserInfo               = @"SolitaireUserInfo";
 // 初回実行フラグ
 NSString* const UserInfoFirstRunKey             = @"IsFirstRun";
 
+
 //
 // 下記情報をKeychainに保存します。
 //
@@ -214,6 +215,7 @@ NSString* const GameInfoItemYamafudas           = @"ItemYamafudas";
 // 体力ゲージ使用
 - (void)handleUsePower;
 {
+    
     if (_lastStagePower > 0) {
         _lastStagePower--;
         [self synchronize];

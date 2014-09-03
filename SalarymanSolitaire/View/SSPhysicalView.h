@@ -18,6 +18,8 @@
 // 時間
 @property (nonatomic) NSTimeInterval duration;
 
+@property (nonatomic,readwrite) NSTimeInterval powerUsedDuration;
+
 // 体力値変化
 - (void)powerUp:(BOOL)up;
 

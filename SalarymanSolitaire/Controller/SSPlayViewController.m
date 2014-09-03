@@ -275,6 +275,28 @@ NSString *const SolitaireWillPauseGameNotification = @"SolitaireWillPauseGameNot
     }
 }
 
+// 体力ゲージをアップ用タイマー
+- (void)setPowerUsedTimerEnabled:(BOOL)enabled
+{
+    if (enabled) {
+        // タイマー再開
+        if ([self.powerUsedTimer isValid]) {
+            [self.powerUsedTimer invalidate];
+        }
+        self.powerUsedTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f
+                                                            target:self
+                                                          selector:@selector(handlePowerUsedTimer:)
+                                                          userInfo:nil
+                                                           repeats:YES];
+    } else {
+        // タイマー停止
+        if ([self.powerUsedTimer isValid]) {
+            [self.powerUsedTimer invalidate];
+            self.powerUsedTimer = nil;
+        }
+    }
+}
+
 
 #pragma mark - ゲーム制御
 // リトライ（新規にゲームスタート）
@@ -336,6 +358,11 @@ NSString *const SolitaireWillPauseGameNotification = @"SolitaireWillPauseGameNot
 - (void)handleUpdateTimer:(NSTimer *)timer;
 {
     _duration++;
+}
+
+- (void)handlePowerUsedTimer:(NSTimer *)timer;
+{
+    _powerUsedDuration++;
 }
 
 - (void)distribute;

@@ -70,8 +70,12 @@
 
 // タイマー
 @property (nonatomic, strong) NSTimer *updateTimer;
+@property (nonatomic, strong) NSTimer *powerUsedTimer;
 @property (nonatomic) NSTimeInterval duration;
+@property (nonatomic,readwrite) NSTimeInterval powerUsedDuration;
 - (void)handleUpdateTimer:(NSTimer *)timer;
+- (void)handlePowerUsedTimer:(NSTimer *)timer;
+- (void)setPowerUsedTimerEnabled:(BOOL)enabled;
 
 // ゲーム完了処理
 - (void)willCompletSolitaire;

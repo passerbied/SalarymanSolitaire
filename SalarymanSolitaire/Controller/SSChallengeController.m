@@ -63,6 +63,17 @@
 
 @implementation SSChallengeController
 
++ (instancetype)sharedChallengeController;
+{
+    static dispatch_once_t pred = 0;
+    __strong static id _sharedChallengeController = nil;
+    dispatch_once(&pred, ^{
+        _sharedChallengeController = [[self alloc] init];
+    });
+    return _sharedChallengeController;
+}
+
+
 // ゲーム初期化
 - (void)initGame;
 {
@@ -175,6 +186,17 @@
     // 体力値更新
     [super handleUpdateTimer:timer];
     [self.physicalView setDuration:self.duration];
+    
+    // 画面活性制御
+    [self modifySolitaireUserInteractionEnabledIfNecessary];
+}
+
+// 体力使用から経過時間タイマー
+- (void)handlePowerUsedTimer:(NSTimer *)timer;
+{
+    // 体力値更新
+    [super handlePowerUsedTimer:timer];
+    [self.physicalView setPowerUsedDuration:self.powerUsedDuration];
     
     // 画面活性制御
     [self modifySolitaireUserInteractionEnabledIfNecessary];
@@ -443,6 +465,8 @@
     
     // 体力値を減らす
     [[SolitaireManager sharedManager] handleUsePower];
+    
+//    [super setPowerUsedTimerEnabled:YES];
 }
 
 #pragma mark - SSProductItemCellDelegate
